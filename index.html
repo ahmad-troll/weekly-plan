@@ -73,6 +73,15 @@
             text-align: center;
         }
 
+        .sync-indicator {
+            font-size: 0.8rem;
+            color: var(--primary);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            width: 60px;
+            text-align: right;
+        }
+
         /* --- Vollbild Menü / Monatskalender --- */
         .menu-overlay {
             position: fixed;
@@ -304,7 +313,7 @@
             transform: translateX(0);
         }
 
-        /* --- Wasser-Bubble Styles (Super Smooth) --- */
+        /* --- Wasser-Bubble Styles --- */
         .bubble {
             width: 60px;
             height: 60px;
@@ -317,7 +326,6 @@
             color: rgba(255,255,255,0.7);
             flex-shrink: 0;
             user-select: none;
-            /* Diese Zeile macht alle Farb- und Formwechsel extrem fließend und organisch */
             transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
             background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.3), rgba(100, 150, 255, 0.05) 60%, rgba(0, 50, 255, 0.1) 100%);
             box-shadow: inset -5px -5px 15px rgba(0,0,0,0.5), inset 5px 5px 15px rgba(255,255,255,0.1);
@@ -392,6 +400,18 @@
             75% { border-radius: 52% 48% 49% 51% / 49% 51% 48% 52%; }
         }
 
+        @keyframes splashSuccess {
+            0% { transform: scale(1); border-radius: 48% 52% 51% 49%; }
+            40% { transform: scale(1.25); background: var(--success); box-shadow: 0 0 30px var(--success-glow); border-radius: 50%; color: #000; }
+            100% { transform: scale(0.95); background: var(--success); box-shadow: 0 0 15px var(--success-glow); border-radius: 50%; color: #000; }
+        }
+
+        @keyframes splashSkip {
+            0% { transform: scale(1); border-radius: 48% 52% 51% 49%; }
+            40% { transform: scale(1.15) rotate(10deg); background: var(--skipped); box-shadow: 0 0 30px var(--skipped-glow); border-radius: 50%; color: #fff; }
+            100% { transform: scale(0.95) rotate(0deg); background: var(--skipped); box-shadow: 0 0 15px var(--skipped-glow); border-radius: 50%; color: #fff; }
+        }
+
         .day-finished {
             text-align: center;
             color: var(--success);
@@ -451,7 +471,7 @@
 <div class="app-bar">
     <button class="menu-btn" onclick="toggleMenu()">☰</button>
     <div class="current-day-title" id="currentDayTitle">Lädt...</div>
-    <div style="width: 30px;"></div>
+    <div class="sync-indicator" id="syncIndicator">Sync...</div>
 </div>
 
 <div class="menu-overlay" id="menuOverlay">
@@ -470,14 +490,19 @@
         <div class="calendar-grid" id="calendarGrid"></div>
     </div>
 
-    <button class="reset-btn" onclick="resetProgress()">Alle Daten löschen</button>
+    <button class="reset-btn" onclick="resetCloudData()">Alle Daten löschen</button>
 </div>
 
-<div id="checklistContainer" class="daily-checklist"></div>
+<div id="checklistContainer" class="daily-checklist" style="display: none;"></div>
 
 <div class="timeline-wrapper" id="timeline"></div>
 
 <script>
+    // JSONBin Konfiguration
+    const BIN_ID = "6abfebc9ac6210605a0d4333";
+    const API_KEY = "$2a$10$EbIBwUxZBO18uEgpi3fcSuxASTLvCtl/TO4xNS6FmvlNfwIcvj.ei";
+    const BIN_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
+
     const weeklySchedule = {
         "Montag": [
             "Arbeit e.solutions (inkl. Pendeln)",
@@ -554,17 +579,8 @@
     let currentDate = new Date();
     let calendarDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1); 
 
-    let rawProgress = JSON.parse(localStorage.getItem('monthlyTrackerData')) || {};
     let progress = {};
-    for (let key in rawProgress) {
-        if (typeof rawProgress[key] === 'number') {
-            progress[key] = Array(rawProgress[key]).fill('completed');
-        } else {
-            progress[key] = rawProgress[key];
-        }
-    }
-
-    let checklistProgress = JSON.parse(localStorage.getItem('dailyChecklistData')) || {};
+    let checklistProgress = {};
 
     function getDateKey(dateObj) {
         return `${dateObj.getFullYear()}-${String(dateObj.getMonth() + 1).padStart(2, '0')}-${String(dateObj.getDate()).padStart(2, '0')}`;
@@ -576,6 +592,69 @@
     const topTitle = document.getElementById('currentDayTitle');
     const monthYearTitle = document.getElementById('monthYearTitle');
     const checklistContainer = document.getElementById('checklistContainer');
+    const syncIndicator = document.getElementById('syncIndicator');
+
+    // --- Cloud Sync Funktionen ---
+    async function loadDataFromCloud() {
+        try {
+            const response = await fetch(BIN_URL, {
+                headers: { 'X-Master-Key': API_KEY }
+            });
+            if (!response.ok) throw new Error("Netzwerkfehler");
+            
+            const data = await response.json();
+            if (data.record) {
+                progress = data.record.monthlyTrackerData || {};
+                checklistProgress = data.record.dailyChecklistData || {};
+            }
+
+            // Migration alter Zahlen-Daten in Arrays (falls vorhanden)
+            for (let key in progress) {
+                if (typeof progress[key] === 'number') {
+                    progress[key] = Array(progress[key]).fill('completed');
+                }
+            }
+
+        } catch (error) {
+            console.error("Fehler beim Laden aus JSONBin:", error);
+            // Fallback auf lokale Daten bei Netzwerkfehler
+            progress = JSON.parse(localStorage.getItem('monthlyTrackerData')) || {};
+            checklistProgress = JSON.parse(localStorage.getItem('dailyChecklistData')) || {};
+        }
+
+        // UI nach dem Laden anzeigen
+        checklistContainer.style.display = 'flex';
+        updateAppTitle();
+        renderTasks();
+        buildCalendar();
+    }
+
+    async function saveDataToCloud() {
+        syncIndicator.style.opacity = '1'; // "Sync..." anzeigen
+        
+        // Lokales Backup (falls das Internet ausfällt)
+        localStorage.setItem('monthlyTrackerData', JSON.stringify(progress));
+        localStorage.setItem('dailyChecklistData', JSON.stringify(checklistProgress));
+
+        try {
+            await fetch(BIN_URL, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Master-Key': API_KEY
+                },
+                body: JSON.stringify({
+                    monthlyTrackerData: progress,
+                    dailyChecklistData: checklistProgress
+                })
+            });
+        } catch (error) {
+            console.error("Fehler beim Speichern in JSONBin:", error);
+        }
+
+        setTimeout(() => { syncIndicator.style.opacity = '0'; }, 500);
+    }
+    // -----------------------------
 
     function toggleMenu() {
         calendarDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1); 
@@ -681,9 +760,9 @@
     function toggleCheck(key, element) {
         const dateKey = getDateKey(currentDate);
         checklistProgress[dateKey][key] = !checklistProgress[dateKey][key];
-        localStorage.setItem('dailyChecklistData', JSON.stringify(checklistProgress));
         
-        // Sanftes visuelles Update ohne Neuladen
+        saveDataToCloud(); // In Cloud speichern
+        
         if (checklistProgress[dateKey][key]) {
             element.classList.add('checked');
             element.querySelector('.check-box').innerText = '✓';
@@ -778,17 +857,21 @@
     }
 
     function completeTaskInPlace(status, bubbleElement, containerElement, dateKey, index, totalTasks) {
-        // Daten aktualisieren
         progress[dateKey].push(status);
-        localStorage.setItem('monthlyTrackerData', JSON.stringify(progress));
+        
+        saveDataToCloud(); // In Cloud speichern
 
-        // Visuelles Update der aktuellen Blase durch reines CSS
         containerElement.classList.remove('active');
         containerElement.classList.add(status);
         bubbleElement.innerHTML = status === 'completed' ? '✓' : '✕';
-        bubbleElement.onclick = null; // Klick deaktivieren
+        bubbleElement.onclick = null; 
+        
+        if (status === 'skipped') {
+            bubbleElement.style.animation = "splashSkip 0.4s ease-out forwards";
+        } else {
+            bubbleElement.style.animation = "splashSuccess 0.4s ease-out forwards";
+        }
 
-        // Nächste Aufgabe aktivieren (falls vorhanden)
         const nextIndex = index + 1;
         if (nextIndex < totalTasks) {
             const nextContainer = document.getElementById('task-' + nextIndex);
@@ -802,7 +885,6 @@
                 }, 200);
             }
         } else {
-            // Tag beendet
             appendDayCompleteMessage();
             checkDayCompleteInPlace();
         }
@@ -824,7 +906,6 @@
         const dayProgress = progress[dateKey] || [];
         const tasks = weeklySchedule[dayNames[currentDate.getDay()]] || [];
         
-        // Update nur ausführen, wenn alle Aufgaben geklickt wurden
         if (dayProgress.length < tasks.length || tasks.length === 0) return;
 
         const checkData = checklistProgress[dateKey] || { prayers: false, noHarakat: false };
@@ -846,19 +927,20 @@
         }
     }
     
-    function resetProgress() {
-        if(confirm("Willst du wirklich ALLE gespeicherten Daten (Aufgaben & Checkliste) löschen?")) {
+    function resetCloudData() {
+        if(confirm("Willst du wirklich ALLE gespeicherten Daten (Aufgaben & Checkliste) in der Cloud löschen?")) {
             progress = {};
             checklistProgress = {};
-            localStorage.setItem('monthlyTrackerData', JSON.stringify(progress));
-            localStorage.setItem('dailyChecklistData', JSON.stringify(checklistProgress));
+            saveDataToCloud(); // Löschung in die Cloud schießen
             buildCalendar(); 
             renderTasks();
+            toggleMenu();
         }
     }
 
-    updateAppTitle();
-    renderTasks();
+    // App-Start
+    topTitle.innerText = "Lade Daten...";
+    loadDataFromCloud();
 </script>
 
 </body>
