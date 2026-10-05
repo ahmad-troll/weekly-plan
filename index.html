@@ -214,6 +214,39 @@
     .setup-summary .btn { min-width:190px; }
     .setup-exit { margin-top:13px; text-align:center; }
     @media(max-width:690px) { #onboardingDialog { padding:22px; } .character-options { grid-template-columns:repeat(2,minmax(0,1fr)); gap:9px; } .character-choice { min-height:210px; padding:12px 10px; } .character-choice svg { height:80px; margin:2px 0 12px; } .setup-summary { flex-direction:column; align-items:stretch; } .setup-summary .btn { width:100%; } .setup-summary p { text-align:center; } }
+    .leaderboard-hero { display:flex; align-items:center; gap:18px; padding:23px; background:radial-gradient(ellipse at 90% 0,#be9aff22,transparent 70%),linear-gradient(135deg,#202a23,#1b1f2a); border-color:#c3f75f38; }
+    .leaderboard-hero>.trophy { display:grid; place-items:center; width:56px; height:56px; flex-shrink:0; border:1px solid #c3f75f40; border-radius:15px; background:#c3f75f0c; color:var(--lime); }
+    .leaderboard-hero .trophy svg { width:30px; height:30px; }
+    .leaderboard-hero h2 { font-size:21px; margin:5px 0 8px; }
+    .leaderboard-hero p { color:var(--muted); line-height:1.6; font-size:12px; margin:0; }
+    .leaderboard-toolbar { display:flex; align-items:center; justify-content:space-between; gap:12px; margin:20px 0 14px; }
+    .leaderboard-toolbar span { color:var(--muted); font-size:11px; line-height:1.6; }
+    .leaderboard-columns { display:grid; grid-template-columns:42px minmax(0,1fr) 74px 83px; gap:12px; padding:15px 20px; border-bottom:1px solid var(--line); font:10px Consolas,monospace; letter-spacing:1px; color:var(--muted); }
+    .leaderboard-columns span:last-child { text-align:right; }
+    .leaderboard-list { list-style:none; margin:0; padding:0; }
+    .leaderboard-row { display:grid; grid-template-columns:42px minmax(0,1fr) 74px 83px; align-items:center; gap:12px; padding:16px 20px; border-bottom:1px solid var(--line); min-height:96px; }
+    .leaderboard-row:last-child { border-bottom:0; }
+    .leaderboard-row[data-self="true"] { background:linear-gradient(90deg,#c3f75f12,#c3f75f04); box-shadow:inset 3px 0 var(--lime); }
+    .leaderboard-place { font:700 18px Consolas,monospace; color:var(--muted); }
+    .leaderboard-row[data-rank="1"] .leaderboard-place { color:#ffcf72; }
+    .leaderboard-row[data-rank="2"] .leaderboard-place { color:#c8d4e8; }
+    .leaderboard-row[data-rank="3"] .leaderboard-place { color:#e2a578; }
+    .leaderboard-player { display:flex; align-items:center; gap:13px; min-width:0; }
+    .leaderboard-character { display:grid; place-items:center; flex-shrink:0; width:50px; height:64px; border-radius:10px; background:radial-gradient(ellipse at 50% 75%,color-mix(in srgb,var(--class-color) 15%,transparent),transparent 80%),#11151b; }
+    .leaderboard-character svg { width:42px; height:54px; }
+    .leaderboard-name { min-width:0; }
+    .leaderboard-name strong { display:block; font-size:13px; overflow-wrap:anywhere; line-height:1.5; }
+    .leaderboard-name small { display:block; margin-top:4px; font-size:10px; color:var(--muted); }
+    .you-tag { display:inline-block; margin-left:5px; font:9px Consolas,monospace; padding:2px 5px; border:1px solid #c3f75f45; border-radius:4px; color:var(--lime); vertical-align:middle; }
+    .leaderboard-level { font:700 13px Consolas,monospace; color:var(--cyan); }
+    .leaderboard-xp { text-align:right; font:700 13px Consolas,monospace; }
+    .leaderboard-xp small { display:block; margin-top:4px; color:var(--muted); font-size:9px; font-weight:400; }
+    .leaderboard-own { margin-bottom:15px; padding:14px 17px; border:1px solid #c3f75f35; border-radius:11px; background:#c3f75f08; font-size:12px; line-height:1.8; }
+    .leaderboard-own strong { color:var(--lime); }
+    .leaderboard-own small { display:block; color:var(--muted); font-size:11px; }
+    #leaderboardMoreBtn { margin:17px auto 0; display:flex; }
+    #leaderboardNote { min-height:20px; }
+    @media(max-width:660px) { .leaderboard-hero { padding:18px; gap:13px; } .leaderboard-hero h2 { font-size:18px; } .leaderboard-hero>.trophy { width:43px; height:43px; } .leaderboard-columns,.leaderboard-row { grid-template-columns:25px minmax(0,1fr) 49px 53px; gap:7px; padding-left:12px; padding-right:12px; } .leaderboard-player { gap:8px; } .leaderboard-character { width:34px; height:51px; } .leaderboard-character svg { width:31px; height:44px; } .leaderboard-name strong { font-size:11px; } .leaderboard-level,.leaderboard-xp { font-size:11px; } .leaderboard-place { font-size:15px; } .leaderboard-columns { font-size:9px; letter-spacing:0; } .leaderboard-toolbar .btn { padding:8px 10px; font-size:11px; } }
   </style>
 </head>
 <body>
@@ -224,6 +257,7 @@
         <button data-view="today" aria-current="page"><span data-icon="grid"></span>Heute</button>
         <button data-view="week"><span data-icon="calendar"></span>Diese Woche</button>
         <button data-view="quests"><span data-icon="layers"></span>Meine Quests</button>
+        <button data-view="leaderboard"><span data-icon="trophy"></span>Leaderboard</button>
       </nav></div>
       <div class="sidebar-note"><span data-icon="spark"></span><strong>Jeder Schritt zählt.</strong><p>Bis zu 10 XP pro Tag.<br>Dein Tempo. Dein Fortschritt.</p></div>
       <div class="account"><div class="avatar" id="avatar">P</div><div class="account-name"><strong id="playerName">Player 01</strong><span id="accountMode">Lokaler Demo-Modus</span></div><button class="icon-btn" id="accountBtn" aria-label="Konto öffnen"><span data-icon="logout"></span></button></div>
@@ -245,6 +279,15 @@
           </section>
           <section id="weekView" hidden><div class="view-controls"><strong id="weekLabel"></strong><div class="controls"><button class="icon-btn" id="prevWeekBtn" aria-label="Vorherige Woche"><span data-icon="left"></span></button><button class="icon-btn" id="nextWeekBtn" aria-label="Nächste Woche"><span data-icon="right"></span></button></div></div><div class="week-strip" id="weekStrip"></div><div class="card" id="weekDayCard"></div></section>
           <section id="questsView" hidden><div class="view-controls"><h2>Dein wiederkehrender Spielplan</h2><span class="muted" id="templateCount"></span></div><div class="card" id="templateList"></div><p class="hint">Tägliche Quests erscheinen jeden Tag. Wöchentliche Quests erscheinen an deinen ausgewählten Wochentagen.</p></section>
+          <section id="leaderboardView" aria-label="Globale Spieler-Rangliste" hidden>
+            <div class="card leaderboard-hero"><span class="trophy" data-icon="trophy"></span><div><span class="overline">PLAYER RANKINGS</span><h2>Jede Quest bringt dich weiter.</h2><p>Alle fünf Klassen. Gleiche XP-Regeln. Wer bleibt dran?</p></div></div>
+            <div class="leaderboard-toolbar"><span id="leaderboardStatus" role="status"></span><button class="btn secondary small" id="refreshLeaderboardBtn"><span data-icon="refresh"></span>Aktualisieren</button></div>
+            <div class="leaderboard-own" id="leaderboardOwn" hidden></div>
+            <p class="form-error" id="leaderboardError" role="alert" hidden></p>
+            <div class="card"><div class="leaderboard-columns" aria-hidden="true"><span>RANG</span><span>SPIELER / KLASSE</span><span>LEVEL</span><span>XP</span></div><ol class="leaderboard-list" id="leaderboardList" aria-label="Spieler nach Gesamt-XP"></ol><div id="leaderboardEmpty" class="empty" hidden></div></div>
+            <button class="btn secondary small" id="leaderboardMoreBtn" hidden>Weitere Spieler laden <span data-icon="down"></span></button>
+            <p class="hint" id="leaderboardNote" role="status"></p>
+          </section>
           <div class="demo-bar" id="demoBar"><span>Du spielst gerade im Demo-Modus. Fortschritt bleibt in diesem Browser.</span><button id="demoLoginBtn">Konto verbinden →</button></div>
         </div>
         <aside class="stack right-column" aria-label="Level und Kalender">
@@ -322,11 +365,32 @@
       return {classes,usernameKey,validUsername,validClass,validProfile,identity};
     })();
   </script>
+  <script id="leaderboard-core">
+    'use strict';
+    const LeaderboardCore = (() => {
+      const PAGE_SIZE = 50;
+      const validEntry = data => !!data && data.schemaVersion === 1 && PlayerCore.validUsername(data.username) && data.usernameKey === PlayerCore.usernameKey(data.username) && PlayerCore.validClass(data.characterClass) && Number.isInteger(data.recordedDays) && data.recordedDays >= 0 && data.recordedDays <= 36525 && Number.isInteger(data.totalXp) && data.totalXp >= 0 && data.totalXp <= data.recordedDays * 10 && data.level === QuestCore.level(data.totalXp).number;
+      const summary = (profile, days, today) => {
+        const totalXp = QuestCore.total(days, today);
+        return {username:profile.username, usernameKey:profile.usernameKey, characterClass:profile.characterClass, totalXp, level:QuestCore.level(totalXp).number, recordedDays:Object.keys(days).filter(date => date <= today).length, schemaVersion:1};
+      };
+      const same = (a,b) => !!a && ['username','usernameKey','characterClass','totalXp','level','recordedDays','schemaVersion'].every(key => a[key] === b[key]);
+      const ranked = entries => {
+        const unique = new Map();
+        entries.filter(entry => validEntry(entry) && typeof entry.uid === 'string').forEach(entry => unique.set(entry.uid, entry));
+        const sorted = [...unique.values()].sort((a,b) => b.totalXp - a.totalXp);
+        let rank = 0, previous = null;
+        return sorted.map((entry,index) => { if(entry.totalXp !== previous)rank = index + 1; previous = entry.totalXp; return {...entry,rank}; });
+      };
+      return {PAGE_SIZE,validEntry,summary,same,ranked};
+    })();
+  </script>
   <script>
     'use strict';
     const $ = id => document.getElementById(id);
     const C = QuestCore;
     const P = PlayerCore;
+    const L = LeaderboardCore;
     const icons = {
       bolt:'<path d="m13 2-9 12h7l-1 8 10-13h-7z"/>',
       plus:'<path d="M12 5v14M5 12h14"/>',
@@ -343,7 +407,10 @@
       clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
       edit:'<path d="m16 3 5 5-12 12-6 1 1-6ZM14 5l5 5"/>',
       trash:'<path d="M3 6h18M9 6V3h6v3M5 6l1 15h12l1-15M10 10v7M14 10v7"/>',
-      logout:'<path d="M9 5H4v14h5m6-14 7 7-7 7M8 12h14"/>'
+      logout:'<path d="M9 5H4v14h5m6-14 7 7-7 7M8 12h14"/>',
+      trophy:'<path d="M8 3h8v5a4 4 0 0 1-8 0ZM8 5H4v2a4 4 0 0 0 4 4m8-6h4v2a4 4 0 0 1-4 4M12 12v6m-4 3h8m-7-3h6v3H9"/>',
+      refresh:'<path d="M20 7v5h-5M4 17v-5h5M6 7a7 7 0 0 1 12-2l2 2M4 17l2 2a7 7 0 0 0 12-2"/>',
+      down:'<path d="m5 9 7 7 7-7"/>'
     };
     const icon = name => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${icons[name] || icons.spark}</svg>`;
     document.querySelectorAll('[data-icon]').forEach(el => el.innerHTML = icon(el.dataset.icon));
@@ -359,6 +426,9 @@
     let playerProfile = null, profileLoaded = false, pendingUsername = '', selectedCharacter = null, onboardingBusy = false, authBusy = false;
     let registerMode = false, editId = null, archiveId = null, questType = 'daily', selectedWeekdays = new Set([5]);
     let toastTimer;
+    let leaderboard = {entries:[],cursor:null,hasMore:false,loaded:false,loading:false,error:'',request:0,loadedAt:null};
+    let publication = {running:false,pending:false,promise:null,lastKey:'',error:'',confirmed:false};
+    let publicationTimer;
 
     // Editable SVG characters keep the complete frontend in one HTML file.
     function characterArt(classId) {
@@ -467,19 +537,120 @@
     }
     function enterDemo() {
       session++; unsubscribers.forEach(fn=>fn()); unsubscribers=[];
+      resetLeaderboard();
       mode='demo'; currentUser=null; cloudReady=false; state=loadDemo(); playerProfile=demoProfile(); profileLoaded=true;
       $('onboardingDialog').close();
       $('cloudError').hidden=true; $('syncStatus').dataset.error='false';
       selected=today; month=today.slice(0,7); weekStart=C.monday(today);
       render();
     }
+    function resetLeaderboard() {
+      clearTimeout(publicationTimer);
+      publication = {running:false,pending:false,promise:null,lastKey:'',error:'',confirmed:false};
+      leaderboard = {entries:[],cursor:null,hasMore:false,loaded:false,loading:false,error:'',request:0,loadedAt:null};
+    }
+    function demoLeaderboard() {
+      const samples = [
+        ['ByteKnight','warrior',730],['ArcaneCoder','mage',550],['PixelScout','ranger',470],
+        ['NightShift','rogue',340],['BuildWizard','engineer',320],['DailyQuest','warrior',240],['DebugMage','mage',180]
+      ].map(([username,characterClass,totalXp],index) => ({uid:`demo-${index}`,username,usernameKey:P.usernameKey(username),characterClass,totalXp,level:C.level(totalXp).number,recordedDays:Math.ceil(totalXp/10),schemaVersion:1}));
+      return L.ranked([...samples,{uid:'local-demo',...L.summary(playerProfile,state.days,today)}]);
+    }
+    function leaderboardKey(summary, date) { return `${date}|${summary.totalXp}|${summary.recordedDays}|${summary.usernameKey}|${summary.characterClass}`; }
+    function scheduleLeaderboardSync() {
+      if(mode !== 'cloud' || !cloudReady || !publication.confirmed)return;
+      const desired=L.summary(playerProfile,state.days,today);
+      if(publication.lastKey === leaderboardKey(desired,today))return;
+      publication.pending=true;
+      clearTimeout(publicationTimer);
+      const work=publication;
+      publicationTimer=setTimeout(()=>syncOwnLeaderboard(work),120);
+    }
+    function syncOwnLeaderboard(work=publication) {
+      if(work!==publication || mode!=='cloud' || !cloudReady || !work.confirmed)return Promise.resolve();
+      if(work.running)return work.promise;
+      work.running=true;work.pending=false;
+      const owner=currentUser.uid, token=session, date=C.key(), history=structuredClone(state.days);
+      const playerRef=sdk.doc(sdk.db,'players',owner),dayRef=sdk.doc(sdk.db,'users',owner,'days',date),scoreRef=sdk.doc(sdk.db,'leaderboard',owner);
+      work.promise=(async()=>{
+        try {
+          const result=await sdk.runTransaction(sdk.db,async tx=>{
+            const player=await tx.get(playerRef),day=await tx.get(dayRef),previous=await tx.get(scoreRef);
+            if(token!==session || work!==publication || C.key()!==date)return null;
+            if(!player.exists())throw new Error('Dein öffentliches Spielerprofil fehlt. Prüfe den players-Eintrag in Firebase.');
+            // Past days are read-only in the app. Read today's record again inside
+            // the transaction so another device's latest quest status wins.
+            const days={...history};delete days[date];
+            if(day.exists())days[date]={date,tasks:day.data().tasks};
+            if(!validState({quests:[],days}))throw new Error('Dein Fortschritt kann nicht für die Rangliste gelesen werden.');
+            const summary=L.summary(player.data(),days,date);
+            if(!L.validEntry(summary))throw new Error('Dein Ranglisten-Profil hat ein ungültiges Format.');
+            const changed=!L.same(previous.exists()?previous.data():null,summary);
+            if(changed)tx.set(scoreRef,{...summary,updatedAt:sdk.serverTimestamp()});
+            return {summary,changed};
+          });
+          if(!result || token!==session || work!==publication)return;
+          work.lastKey=leaderboardKey(result.summary,date);work.error='';
+          if(result.changed){leaderboard.loaded=false;if(view==='leaderboard'&&!leaderboard.loading)queueMicrotask(()=>loadLeaderboard());}
+        } catch(error) {
+          if(token===session && work===publication)work.error=`Dein Ranglistenwert konnte noch nicht gespeichert werden. ${errorMessage(error)}`;
+        } finally {
+          work.running=false;
+          if(token===session && work===publication){renderLeaderboard();if(work.pending)scheduleLeaderboardSync();}
+        }
+      })();
+      return work.promise;
+    }
+    async function loadLeaderboard(reset=true) {
+      if(mode==='demo'){renderLeaderboard();return;}
+      if(!cloudReady || leaderboard.loading)return;
+      const board=leaderboard,token=session,request=++board.request;
+      board.loading=true;board.error='';renderLeaderboard();
+      try {
+        if(reset)await syncOwnLeaderboard();
+        if(token!==session || board!==leaderboard)return;
+        const constraints=[sdk.orderBy('totalXp','desc')];
+        if(!reset && board.cursor)constraints.push(sdk.startAfter(board.cursor));
+        constraints.push(sdk.limit(L.PAGE_SIZE));
+        const snapshot=await sdk.getDocsFromServer(sdk.query(sdk.collection(sdk.db,'leaderboard'),...constraints));
+        if(token!==session || board!==leaderboard || request!==board.request)return;
+        const docs=snapshot.docs,entries=docs.map(doc=>({uid:doc.id,...doc.data()}));
+        if(entries.some(entry=>!L.validEntry(entry)))throw new Error('Ein Ranglisten-Eintrag hat ein ungültiges Format. Bitte prüfe die leaderboard-Collection.');
+        board.entries=reset?entries:[...board.entries,...entries];
+        board.cursor=docs.at(-1)||null;board.hasMore=docs.length===L.PAGE_SIZE;board.loaded=true;board.loadedAt=new Date();
+      } catch(error) {
+        if(token===session && board===leaderboard)board.error=errorMessage(error);
+      } finally {
+        if(token===session && board===leaderboard){board.loading=false;renderLeaderboard();}
+      }
+    }
+    function renderLeaderboard() {
+      const demo=mode==='demo',entries=demo?demoLeaderboard():L.ranked(leaderboard.entries),uid=demo?'local-demo':currentUser?.uid;
+      const self=entries.find(entry=>entry.uid===uid),own=playerProfile?L.summary(playerProfile,state.days,today):null;
+      const matchingSelf=self&&own&&self.totalXp===own.totalXp;
+      $('leaderboardStatus').textContent=demo?'Demo · Beispielspieler':leaderboard.loading?'Rangliste wird geladen …':leaderboard.loaded?`${entries.length} Spieler geladen · ${leaderboard.loadedAt.toLocaleTimeString('de-DE',{hour:'2-digit',minute:'2-digit'})}`:'Globale Rangliste · angemeldete Spieler';
+      $('refreshLeaderboardBtn').disabled=!demo&&(!cloudReady||leaderboard.loading);
+      $('leaderboardOwn').hidden=!own || (mode==='cloud'&&!cloudReady);
+      if(own)$('leaderboardOwn').innerHTML=`<strong>${matchingSelf?`Dein Platz: #${self.rank}`:'Dein Spieler'}</strong> · ${esc(own.username)} · Level ${own.level} · ${own.totalXp.toLocaleString('de-DE')} XP<small>${demo?'Dein Demo-Spieler nimmt nur an dieser Beispielrangliste teil.':matchingSelf?'Bei gleichen Gesamt-XP teilen sich Spieler einen Rang.':self?'Deine XP haben sich geändert. Aktualisiere die Liste, um deinen neuen Platz zu sehen.':leaderboard.hasMore?'Lade weitere Spieler, um deinen Platz zu sehen.':'Dein Eintrag erscheint nach der Synchronisierung und dem Aktualisieren.'}</small>`;
+      formError('leaderboardError',leaderboard.error);
+      $('leaderboardList').innerHTML=entries.map(entry=>{
+        const cls=P.classes.find(cls=>cls.id===entry.characterClass),self=entry.uid===uid;
+        return `<li class="leaderboard-row" data-rank="${entry.rank}" data-self="${self}" data-player="${esc(entry.uid)}"><span class="leaderboard-place" aria-label="Rang ${entry.rank}">#${entry.rank}</span><div class="leaderboard-player"><span class="leaderboard-character" style="--class-color:${cls.color}">${characterArt(cls.id)}</span><div class="leaderboard-name"><strong>${esc(entry.username)}${self?'<span class="you-tag">DU</span>':''}</strong><small>${cls.name}</small></div></div><span class="leaderboard-level" aria-label="Level ${entry.level}">LVL ${entry.level}</span><span class="leaderboard-xp">${entry.totalXp.toLocaleString('de-DE')}<small>GESAMT-XP</small></span></li>`;
+      }).join('');
+      $('leaderboardEmpty').hidden=entries.length>0;
+      $('leaderboardEmpty').innerHTML=leaderboard.loading?`${icon('clock')}<h3>Die Spieler werden geladen …</h3><p>Gleich siehst du die Rangliste.</p>`:leaderboard.error?`${icon('refresh')}<h3>Rangliste gerade nicht erreichbar.</h3><p>Dein Quest-Fortschritt bleibt erhalten. Versuche es mit „Aktualisieren“ erneut.</p>`:`${icon('trophy')}<h3>${mode==='cloud'&&!cloudReady?'Richte zuerst deinen Charakter ein.':'Die erste Quest wartet.'}</h3><p>${mode==='cloud'&&!cloudReady?'Nach der Einrichtung wird dein Spieler in die Rangliste aufgenommen.':'Noch kein Spieler gelistet. Nach dem Login erscheint jeder eingerichtete Charakter automatisch.'}</p>`;
+      $('leaderboardMoreBtn').hidden=demo||!leaderboard.hasMore;$('leaderboardMoreBtn').disabled=leaderboard.loading;
+      $('leaderboardNote').textContent=demo?'Beispielrangliste · Echte Spieler siehst du nach dem Login.':publication.error||'Sortierung nach Gesamt-XP · 100 XP pro Level · maximal 10 XP pro Tag. Mit „Aktualisieren“ lädst du den aktuellen Stand.';
+    }
     function setView(next) {
       view=next;
       document.querySelectorAll('[data-view]').forEach(el => { if(el.dataset.view===view) el.setAttribute('aria-current','page'); else el.removeAttribute('aria-current'); });
-      $('todayView').hidden=view!=='today'; $('weekView').hidden=view!=='week'; $('questsView').hidden=view!=='quests';
-      const titles={today:['Ready, player?','Dein Alltag. Dein nächstes Level.','Kleine Schritte werden zu großen Erfolgen. Starte deine Quests.'],week:['Dein Wochenplan','Eine Woche. Viele Möglichkeiten.','Deine Routinen und wiederkehrenden Quests auf einen Blick.'],quests:['Dein Spielplan','Gute Gewohnheiten beginnen hier.','Stell dir einen Alltag zusammen, der zu dir passt.']};
+      $('todayView').hidden=view!=='today'; $('weekView').hidden=view!=='week'; $('questsView').hidden=view!=='quests';$('leaderboardView').hidden=view!=='leaderboard';
+      document.querySelector('.stats').hidden=view==='leaderboard';
+      const titles={today:['Ready, player?','Dein Alltag. Dein nächstes Level.','Kleine Schritte werden zu großen Erfolgen. Starte deine Quests.'],week:['Dein Wochenplan','Eine Woche. Viele Möglichkeiten.','Deine Routinen und wiederkehrenden Quests auf einen Blick.'],quests:['Dein Spielplan','Gute Gewohnheiten beginnen hier.','Stell dir einen Alltag zusammen, der zu dir passt.'],leaderboard:['Globales Leaderboard','Gemeinsam auf das nächste Level.','Entdecke die Charaktere und den Fortschritt der QuestLog-Community.']};
       const [label,title,text]=titles[view]; $('introLabel').textContent=label; $('introTitle').textContent=title; $('introText').textContent=text;
       render();
+      if(view==='leaderboard'&&mode==='cloud'&&!leaderboard.loaded)loadLeaderboard();
     }
     function render() {
       const currentTasks=C.tasksAt(state,today,today), dailyXp=C.xp(currentTasks), totalXp=C.total(state.days,today), level=C.level(totalXp);
@@ -509,7 +680,7 @@
       $('selectedDateLabel').textContent=format(selected,{weekday:'long',day:'numeric',month:'long'});
       $('dayCard').innerHTML=dayMarkup(selected);
       $('weekDayCard').innerHTML=dayMarkup(selected);
-      renderWeek(); renderTemplates(); renderCalendar(); renderUpcoming();
+      renderWeek(); renderTemplates(); renderCalendar(); renderUpcoming();renderLeaderboard();
     }
     function dayMarkup(value) {
       if(mode==='cloud'&&!cloudReady) return profileLoaded&&!playerProfile?`<div class="empty">${icon('spark')}<h3>Dein Charakter wartet.</h3><p>Wähle deinen Namen und deine Klasse, um dein Abenteuer zu beginnen.</p><button class="btn" data-action="onboarding">Profil einrichten</button></div>`:`<div class="empty">${icon('clock')}<h3>Deine Quests werden geladen …</h3><p>Verbinde deinen Spielplan mit der Cloud.</p></div>`;
@@ -640,16 +811,20 @@
     function connectCloud(user) {
       if(!user)return;
       unsubscribers.forEach(fn=>fn()); unsubscribers=[]; const token=++session;
+      resetLeaderboard();
       currentUser=user; mode='cloud'; cloudReady=false; state={quests:[],days:{}};playerProfile=null;profileLoaded=false;
       $('authDialog').close(); $('cloudError').hidden=true; $('syncStatus').dataset.error='false';
       $('syncStatus').lastElementChild.textContent='Verbinde …'; render();
-      let planLoaded=false,daysLoaded=false,planCache=true,daysCache=true,failed=false;
+      let planLoaded=false,daysLoaded=false,planCache=true,daysCache=true,daysPending=true,failed=false;
       const fail=error=>{ if(token!==session)return; failed=true; cloudReady=false; $('syncStatus').lastElementChild.textContent='Cloud prüfen'; showError(errorMessage(error)); render(); };
       const ready=()=>{
         if(token!==session)return;
         cloudReady=planLoaded&&daysLoaded&&profileLoaded&&P.validProfile(playerProfile)&&!failed;
         if(cloudReady) $('syncStatus').lastElementChild.textContent=planCache||daysCache?'Cache · verbinde':'Cloud · synchron';
+        publication.confirmed=cloudReady&&!daysCache&&!daysPending&&!planCache;
         render();
+        scheduleLeaderboardSync();
+        if(view==='leaderboard'&&cloudReady&&!leaderboard.loaded&&!leaderboard.loading)loadLeaderboard();
       };
       unsubscribers.push(sdk.onSnapshot(sdk.doc(sdk.db,'users',user.uid,'settings','plan'),{includeMetadataChanges:true},snap=>{
         if(token!==session)return;
@@ -661,7 +836,7 @@
         if(token!==session)return;
         const days={}; snap.forEach(d=>days[d.id]={date:d.id,tasks:d.data().tasks});
         if(!validState({quests:[],days})) { fail(new Error('Dein Cloud-Fortschritt hat ein ungültiges Format.'));return; }
-        state.days=days; daysLoaded=true; daysCache=snap.metadata.fromCache; ready();
+        state.days=days; daysLoaded=true; daysCache=snap.metadata.fromCache;daysPending=!!snap.metadata.hasPendingWrites; ready();
       },fail));
       unsubscribers.push(sdk.onSnapshot(sdk.doc(sdk.db,'users',user.uid),{includeMetadataChanges:true},snap=>{
         if(token!==session)return;
@@ -711,6 +886,8 @@
     }
     document.querySelectorAll('[data-view]').forEach(el=>el.onclick=()=>{ if(el.dataset.view==='today')selected=today; if(el.dataset.view==='week'){weekStart=C.monday(today);selected=today;} setView(el.dataset.view); });
     $('addTopBtn').onclick=()=>openQuest(); $('accountBtn').onclick=accountAction; $('demoLoginBtn').onclick=accountAction;
+    $('refreshLeaderboardBtn').onclick=()=>loadLeaderboard(true);
+    $('leaderboardMoreBtn').onclick=()=>loadLeaderboard(false);
     $('closeQuestBtn').onclick=()=>$('questDialog').close();
     $('closeAuthBtn').onclick=()=>$('authDialog').close(); $('startDemoBtn').onclick=()=>$('authDialog').close();
     $('previewCharacterBtn').onclick=()=>openOnboarding();
@@ -804,7 +981,7 @@
       finally{authBusy=false;$('authSubmitBtn').disabled=false;$('authSwitchBtn').disabled=false;}
     };
     window.addEventListener('storage',event=>{if(event.key===DEMO_KEY&&mode==='demo'&&!busy){state=loadDemo();render();}});
-    setInterval(()=>{const next=C.key();if(next!==today){today=next;selected=next;weekStart=C.monday(next);month=next.slice(0,7);render();toast('Ein neuer Tag. Deine Quests warten auf dich.');}},30000);
+    setInterval(()=>{const next=C.key();if(next!==today){today=next;selected=next;weekStart=C.monday(next);month=next.slice(0,7);render();scheduleLeaderboardSync();toast('Ein neuer Tag. Deine Quests warten auf dich.');}},30000);
     enterDemo();
     if(new URLSearchParams(location.search).get('demo')!=='1'){openAuth();ensureFirebase().catch(error=>formError('authError',errorMessage(error)));}
     else if(new URLSearchParams(location.search).get('onboarding')==='1')openOnboarding(true);
