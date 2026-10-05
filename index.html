@@ -537,7 +537,7 @@
     </main>
   </div>
   <dialog id="questDialog" aria-labelledby="questDialogTitle"><form id="questForm"><div class="dialog-head"><h2 id="questDialogTitle">Neue Quest</h2><button type="button" class="icon-btn" id="closeQuestBtn" aria-label="Schließen"><span data-icon="close"></span></button></div><p class="dialog-desc">Ein kleines Ziel. Ein klarer Plan. Dein nächster Schritt.</p><div class="field"><label for="questName">Was möchtest du schaffen?</label><input id="questName" name="title" placeholder="z. B. 20 Minuten programmieren" maxlength="100" required></div><span class="field-label" id="typeLabel">Wie oft?</span><div class="type-picker" role="group" aria-labelledby="typeLabel"><button type="button" data-type="daily" aria-pressed="true"><span data-icon="sun"></span>Täglich</button><button type="button" data-type="weekly" aria-pressed="false"><span data-icon="calendar"></span>Wöchentlich</button></div><div id="weekdayField" hidden><span class="field-label" id="weekdayLabel">An welchen Tagen?</span><div class="weekday-picker" id="weekdayPicker" role="group" aria-labelledby="weekdayLabel"></div></div><p class="hint" id="questStartHint"></p><p class="form-error" id="questError" role="alert" hidden></p><button type="submit" class="btn full" id="saveQuestBtn"><span data-icon="plus"></span>Quest erstellen</button></form></dialog>
-  <dialog id="authDialog" aria-labelledby="authTitle"><div class="brand auth-brand"><span class="logo" data-icon="bolt"></span>QuestLog<span class="lime">.</span></div><form id="authForm"><div class="dialog-head"><h2 id="authTitle">Dein Abenteuer beginnt.</h2></div><p class="dialog-desc" id="authDesc">Melde dich mit E-Mail oder Username an und nimm deinen Fortschritt auf alle Geräte mit.</p><div class="field" id="registerUsernameField" hidden><label for="registerUsernameInput">Dein Username</label><input id="registerUsernameInput" autocomplete="nickname" placeholder="z. B. CodeKnight" minlength="3" maxlength="20" pattern="[A-Za-z][A-Za-z0-9_]{2,19}" aria-describedby="usernameFormatHint"><span class="hint" id="usernameFormatHint">3–20 Zeichen: Buchstaben, Zahlen und _. Beginnt mit einem Buchstaben.</span></div><div class="field"><label for="emailInput" id="loginIdentifierLabel">E-Mail oder Username</label><input type="text" id="emailInput" autocomplete="username" placeholder="CodeKnight oder name@example.com" required></div><div class="field"><label for="passwordInput">Passwort</label><input type="password" id="passwordInput" autocomplete="current-password" minlength="6" maxlength="256" required></div><p class="form-error" id="authError" role="alert" hidden></p><button class="btn full" id="authSubmitBtn" type="submit">Einloggen <span data-icon="right"></span></button><div class="auth-switch"><button class="text-btn" id="authSwitchBtn" type="button">Noch keinen Account? Registrieren</button></div><p class="hint">Deine Quests und dein Charakter werden in deinem Konto gespeichert.</p></form></dialog>
+  <dialog id="authDialog" aria-labelledby="authTitle"><div class="brand auth-brand"><span class="logo" data-icon="bolt"></span>QuestLog<span class="lime">.</span></div><form id="authForm"><div class="dialog-head"><h2 id="authTitle">Dein Abenteuer beginnt.</h2></div><p class="dialog-desc" id="authDesc">Melde dich mit E-Mail und Passwort an und nimm deinen Fortschritt auf alle Geräte mit.</p><div class="field" id="registerUsernameField" hidden><label for="registerUsernameInput">Dein Spielername</label><input id="registerUsernameInput" autocomplete="nickname" placeholder="z. B. CodeKnight" minlength="3" maxlength="20" pattern="[A-Za-z][A-Za-z0-9_]{2,19}" aria-describedby="usernameFormatHint"><span class="hint" id="usernameFormatHint">3–20 Zeichen: Buchstaben, Zahlen und _. Beginnt mit einem Buchstaben.</span></div><div class="field"><label for="emailInput" id="loginIdentifierLabel">E-Mail-Adresse</label><input type="email" id="emailInput" autocomplete="email" inputmode="email" placeholder="name@example.com" required></div><div class="field"><label for="passwordInput">Passwort</label><input type="password" id="passwordInput" autocomplete="current-password" minlength="6" maxlength="256" required></div><p class="form-error" id="authError" role="alert" hidden></p><button class="btn full" id="authSubmitBtn" type="submit">Einloggen <span data-icon="right"></span></button><div class="auth-switch"><button class="text-btn" id="authSwitchBtn" type="button">Noch keinen Account? Registrieren</button></div><p class="hint">Deine Quests und dein Charakter werden in deinem Konto gespeichert.</p></form></dialog>
   <dialog id="onboardingDialog" aria-labelledby="onboardingTitle"><form id="onboardingForm"><div class="setup-header"><span class="logo" data-icon="bolt"></span><span class="overline">QuestLog // Create your character</span></div><div class="dialog-head"><h2 id="onboardingTitle">Wähle deinen Start-Charakter.</h2></div><p class="dialog-desc" id="onboardingDesc">Dein Konto steht. Jetzt beginnt dein Abenteuer: Gib deinem Spieler einen Namen und wähle deine Klasse.</p><div class="field setup-name"><label for="onboardingUsername">01 · Dein Spielername</label><input id="onboardingUsername" autocomplete="nickname" maxlength="20" minlength="3" pattern="[A-Za-z][A-Za-z0-9_]{2,19}" placeholder="CodeKnight" required><span class="hint">3–20 Zeichen · Buchstaben, Zahlen, _ · Groß- und Kleinschreibung gelten als derselbe Name.</span></div><fieldset class="character-grid"><legend class="field-label">02 · Deine Klasse</legend><div class="character-options" id="characterOptions"></div></fieldset><p class="form-error" id="onboardingError" role="alert" hidden></p><div class="setup-summary"><p id="characterSummary">Wähle eine Klasse für dein Abenteuer.<br>Alle starten mit den gleichen XP-Regeln.</p><button class="btn" id="savePlayerBtn" type="submit" disabled>Abenteuer starten <span data-icon="right"></span></button></div><div class="setup-exit"><button class="text-btn" id="exitOnboardingBtn" type="button">Später einrichten · Abmelden</button></div></form></dialog>
   <dialog id="archiveDialog" aria-labelledby="archiveTitle"><div class="dialog-head"><h2 id="archiveTitle">Quest entfernen?</h2><button class="icon-btn" id="closeArchiveBtn" aria-label="Schließen"><span data-icon="close"></span></button></div><p class="dialog-desc" id="archiveDesc"></p><button class="btn full" id="confirmArchiveBtn">Quest entfernen</button><button class="btn secondary full" id="cancelArchiveBtn" style="margin-top:10px">Behalten</button></dialog>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
@@ -1380,9 +1380,9 @@
     function errorMessage(error) {
       const code=error?.code||'';
       const messages={
-        'auth/invalid-credential':'E-Mail, Username oder Passwort stimmt nicht.',
-        'auth/wrong-password':'E-Mail, Username oder Passwort stimmt nicht.',
-        'auth/user-not-found':'E-Mail, Username oder Passwort stimmt nicht.',
+        'auth/invalid-credential':'E-Mail oder Passwort stimmt nicht.',
+        'auth/wrong-password':'E-Mail oder Passwort stimmt nicht.',
+        'auth/user-not-found':'E-Mail oder Passwort stimmt nicht.',
         'auth/email-already-in-use':'Für diese E-Mail-Adresse gibt es bereits ein Konto.',
         'auth/weak-password':'Wähle ein Passwort mit mindestens 6 Zeichen.',
         'auth/invalid-email':'Bitte gib eine gültige E-Mail-Adresse ein.',
@@ -1392,12 +1392,6 @@
         'auth/unauthorized-domain':'Diese Domain muss in Firebase Authentication freigegeben werden.',
         'permission-denied':'Firestore verweigert den Zugriff. Bitte prüfe die Regeln für dein Konto im Firebase-Projekt.',
         'unavailable':'Die Cloud ist nicht erreichbar. Bitte versuche es mit Internetverbindung erneut.',
-        'functions/unauthenticated':'E-Mail, Username oder Passwort stimmt nicht.',
-        'functions/resource-exhausted':'Zu viele Login-Versuche. Bitte warte 10 Minuten und versuche es erneut.',
-        'functions/not-found':'Der Username-Login ist noch nicht eingerichtet. Veröffentliche die mitgelieferte Firebase-Funktion oder melde dich mit deiner E-Mail an.',
-        'functions/internal':'Der Username-Login konnte nicht erreicht werden. Prüfe, ob die Firebase-Funktion veröffentlicht ist. E-Mail-Login ist ebenfalls möglich.',
-        'functions/unavailable':'Der Username-Login ist gerade nicht erreichbar. Bitte versuche es erneut.',
-        'functions/invalid-argument':'Bitte gib einen gültigen Usernamen und dein Passwort ein.'
       };
       if(messages[code])return messages[code];
       if(error instanceof TypeError)return 'Die Anmeldung konnte nicht geladen werden. Prüfe deine Internetverbindung und versuche es erneut.';
@@ -1496,32 +1490,24 @@
     $('authSwitchBtn').onclick=()=>{
       registerMode=!registerMode;
       $('authTitle').textContent=registerMode?'Dein erster Schritt.':'Dein Abenteuer beginnt.';
-      $('authDesc').textContent=registerMode?'Erstelle dein Konto. Danach wählst du einen der fünf Start-Charaktere.':'Melde dich mit E-Mail oder Username an und nimm deinen Fortschritt auf alle Geräte mit.';
+      $('authDesc').textContent=registerMode?'Erstelle dein Konto. Danach wählst du einen der fünf Start-Charaktere.':'Melde dich mit E-Mail und Passwort an und nimm deinen Fortschritt auf alle Geräte mit.';
       $('registerUsernameField').hidden=!registerMode;$('registerUsernameInput').required=registerMode;
-      $('emailInput').type=registerMode?'email':'text';$('emailInput').autocomplete=registerMode?'email':'username';
-      $('emailInput').placeholder=registerMode?'name@example.com':'CodeKnight oder name@example.com';
-      $('loginIdentifierLabel').textContent=registerMode?'E-Mail-Adresse':'E-Mail oder Username';
+      $('emailInput').type='email';$('emailInput').autocomplete='email';
+      $('emailInput').placeholder='name@example.com';
+      $('loginIdentifierLabel').textContent='E-Mail-Adresse';
       $('authSubmitBtn').innerHTML=(registerMode?'Account erstellen':'Einloggen')+icon('right');
       $('authSwitchBtn').textContent=registerMode?'Bereits einen Account? Einloggen':'Noch keinen Account? Registrieren';
       $('passwordInput').autocomplete=registerMode?'new-password':'current-password';formError('authError','');
     };
     $('authForm').onsubmit=async event=>{
-      event.preventDefault();if(authBusy)return;authBusy=true;$('authSubmitBtn').disabled=true; $('authSwitchBtn').disabled=true;formError('authError','');
+      event.preventDefault();if(authBusy||!$('authForm').reportValidity())return;authBusy=true;$('authSubmitBtn').disabled=true; $('authSwitchBtn').disabled=true;formError('authError','');
       try{
-        const f=await ensureFirebase(),identifier=$('emailInput').value.trim(),password=$('passwordInput').value;
+        const f=await ensureFirebase(),email=$('emailInput').value.trim(),password=$('passwordInput').value;
         if(registerMode){
           pendingUsername=$('registerUsernameInput').value.trim();
           if(!P.validUsername(pendingUsername))throw new Error('Bitte wähle einen Usernamen mit 3–20 Zeichen.');
-          await f.createUserWithEmailAndPassword(f.auth,identifier,password);
-        }else if(identifier.includes('@'))await f.signInWithEmailAndPassword(f.auth,identifier,password);
-        else {
-          if(!P.validUsername(identifier))throw new Error('Bitte gib eine E-Mail-Adresse oder einen gültigen Usernamen ein.');
-          const functionsModule=await import('https://www.gstatic.com/firebasejs/10.8.0/firebase-functions.js');
-          const call=functionsModule.httpsCallable(functionsModule.getFunctions(f.app,'europe-west1'),'signInWithUsername');
-          const result=await call({username:P.usernameKey(identifier),password});
-          if(typeof result.data?.email!=='string')throw new Error('Der Username-Login hat keine gültige Antwort geliefert.');
-          await f.signInWithEmailAndPassword(f.auth,result.data.email,password);
-        }
+          await f.createUserWithEmailAndPassword(f.auth,email,password);
+        }else await f.signInWithEmailAndPassword(f.auth,email,password);
         $('passwordInput').value='';
       }catch(error){formError('authError',errorMessage(error));}
       finally{authBusy=false;$('authSubmitBtn').disabled=false;$('authSwitchBtn').disabled=false;}
