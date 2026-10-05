@@ -142,8 +142,6 @@
     .template-actions { display:flex; gap:7px; }
     .banner { border:1px solid #f3bb6750; background:#f3bb6710; color:var(--amber); border-radius:10px; padding:12px 15px; margin:18px 0; font-size:12px; line-height:1.6; }
     .banner button { background:transparent; border:0; text-decoration:underline; padding:3px 0; color:inherit; }
-    .demo-bar { display:flex; justify-content:space-between; gap:12px; align-items:center; color:var(--muted); font-size:11px; margin-top:22px; line-height:1.5; }
-    .demo-bar button { background:transparent; border:0; color:var(--lime); padding:5px 0; font-weight:600; }
     .page-footer { color:#777f8b; font-size:10px; margin-top:24px; display:flex; justify-content:space-between; gap:12px; line-height:1.6; }
     dialog { color:var(--text); background:var(--panel); border:1px solid #39424d; border-radius:18px; width:calc(100% - 32px); max-width:460px; padding:28px; box-shadow:0 30px 100px #0008; }
     dialog::backdrop { background:#080b10cf; backdrop-filter:blur(6px); }
@@ -476,7 +474,7 @@
   </style>
 </head>
 <body>
-  <div class="shell">
+  <div class="shell" id="appShell" hidden>
     <aside class="sidebar">
       <div class="brand"><span class="logo" data-icon="bolt"></span>QuestLog<span class="lime">.</span></div>
       <div><p class="overline">Dein Spielplan</p><nav class="nav" aria-label="Hauptnavigation">
@@ -488,10 +486,10 @@
         <button data-view="shop"><span data-icon="bag"></span>Shop</button>
       </nav></div>
       <div class="sidebar-note"><span data-icon="spark"></span><strong>Jeder Schritt zählt.</strong><p>Quests geben XP. Fokus gibt Coins.<br>Dein Abenteuer wächst mit dir.</p></div>
-      <div class="account"><div class="avatar" id="avatar">P</div><div class="account-name"><strong id="playerName">Player 01</strong><span id="accountMode">Lokaler Demo-Modus</span></div><button class="icon-btn" id="accountBtn" aria-label="Konto öffnen"><span data-icon="logout"></span></button></div>
+      <div class="account"><div class="avatar" id="avatar">P</div><div class="account-name"><strong id="playerName">Dein Spieler</strong><span id="accountMode">Firebase-Konto</span></div><button class="icon-btn" id="accountBtn" aria-label="Konto öffnen"><span data-icon="logout"></span></button></div>
     </aside>
     <main>
-      <header class="topbar"><span class="overline">Persönliches Quest-Dashboard</span><div class="brand topbar-brand"><span class="logo" data-icon="bolt"></span>QuestLog<span class="lime">.</span></div><div class="topbar-right"><button class="coin-hud" id="walletBtn" aria-label="Coins und Shop öffnen"><span data-icon="coin"></span><strong id="coinBalance">0</strong></button><span class="status" id="syncStatus" role="status"><i class="status-dot"></i><span>Demo · lokal</span></span><button class="btn" id="addTopBtn"><span data-icon="plus"></span>Neue Quest</button></div></header>
+      <header class="topbar"><span class="overline">Persönliches Quest-Dashboard</span><div class="brand topbar-brand"><span class="logo" data-icon="bolt"></span>QuestLog<span class="lime">.</span></div><div class="topbar-right"><button class="coin-hud" id="walletBtn" aria-label="Coins und Shop öffnen"><span data-icon="coin"></span><strong id="coinBalance">0</strong></button><span class="status" id="syncStatus" role="status"><i class="status-dot"></i><span>Verbinde …</span></span><button class="btn" id="addTopBtn"><span data-icon="plus"></span>Neue Quest</button></div></header>
       <div class="banner" id="cloudError" role="alert" hidden></div>
       <section class="intro"><div><span class="overline" id="introLabel">Ready, player?</span><h1 id="introTitle">Dein Alltag. Dein nächstes Level.</h1><p id="introText">Kleine Schritte werden zu großen Erfolgen. Starte deine Quests.</p></div><span class="date-chip" id="dateChip"></span></section>
       <section class="adventure-hero" id="adventureHero" aria-label="Dein Abenteuer">
@@ -528,10 +526,9 @@
             <div class="focus-summary" id="focusSummary" role="status"></div><div id="focusList"></div>
           </section>
           <section id="shopView" hidden aria-label="Kosmetik-Shop"><div class="shop-banner"><div><span class="overline">THE LOOT ROOM</span><h2>Dein Fortschritt. Dein Look.</h2><p>Looks und Begleiter für alle fünf Klassen. Einmal kaufen, behalten.</p></div><div class="shop-wallet"><span data-icon="coin"></span><strong id="shopBalance">0</strong><small>verfügbar</small></div></div><p class="shop-note" id="shopPending" role="status"></p><div class="shop-tabs" role="group" aria-label="Shop-Kategorien"><button data-shop-filter="all" aria-pressed="true">Alles</button><button data-shop-filter="cosmetics" aria-pressed="false">Looks</button><button data-shop-filter="buddy" aria-pressed="false">Begleiter</button></div><div class="shop-grid" id="shopGrid"></div><p class="hint">Coins bringen dir neue Looks. Dein Level wächst durch Quests. Deine gekauften Looks bleiben in deinem Inventar. Kombiniere Aura, Rahmen, Kulisse und Begleiter. Dein Look ist auch in beiden Ranglisten sichtbar.</p></section>
-          <div class="demo-bar" id="demoBar"><span>Du spielst gerade im Demo-Modus. Fortschritt bleibt in diesem Browser.</span><button id="demoLoginBtn">Konto verbinden →</button></div>
         </div>
         <aside class="stack right-column" aria-label="Level und Kalender">
-          <section class="card level-card" id="levelCard"><div class="level-top"><div><span class="overline">Dein Charakter</span><h2 id="levelTitle">Level 1</h2></div><div class="level-badge" id="levelBadge">1</div></div><div class="character-stage" id="characterStage"></div><p class="rank" id="rankName">Rookie · Das Abenteuer beginnt</p><div class="progress-track" role="progressbar" id="levelProgress" aria-label="Fortschritt zum nächsten Level" aria-valuemin="0" aria-valuemax="20" aria-valuenow="0"><div class="progress-fill" id="levelFill"></div></div><div class="xp-caption"><span id="levelXp">0 / 20 XP</span><span id="nextLevel">LEVEL 2</span></div><div class="level-bottom"><span id="totalXp">0 XP insgesamt</span><span data-icon="spark"></span></div><div class="upgrade-hint" id="upgradeHint"></div><button class="character-preview-btn" id="previewCharacterBtn">Charakter-Auswahl testen →</button></section>
+          <section class="card level-card" id="levelCard"><div class="level-top"><div><span class="overline">Dein Charakter</span><h2 id="levelTitle">Level 1</h2></div><div class="level-badge" id="levelBadge">1</div></div><div class="character-stage" id="characterStage"></div><p class="rank" id="rankName">Rookie · Das Abenteuer beginnt</p><div class="progress-track" role="progressbar" id="levelProgress" aria-label="Fortschritt zum nächsten Level" aria-valuemin="0" aria-valuemax="20" aria-valuenow="0"><div class="progress-fill" id="levelFill"></div></div><div class="xp-caption"><span id="levelXp">0 / 20 XP</span><span id="nextLevel">LEVEL 2</span></div><div class="level-bottom"><span id="totalXp">0 XP insgesamt</span><span data-icon="spark"></span></div><div class="upgrade-hint" id="upgradeHint"></div><button class="character-preview-btn" id="previewCharacterBtn">Profil einrichten →</button></section>
           <section class="card card-pad"><div class="calendar-head"><h2 id="monthLabel"></h2><div class="calendar-controls"><button class="icon-btn" id="prevMonthBtn" aria-label="Vorheriger Monat"><span data-icon="left"></span></button><button class="icon-btn" id="nextMonthBtn" aria-label="Nächster Monat"><span data-icon="right"></span></button></div></div><div class="calendar-grid" id="calendarGrid"></div><div class="legend"><span><i></i>Alles geschafft</span><span><i></i>Teilweise</span></div></section>
           <section class="card card-pad"><div class="card-heading"><h2>Als Nächstes</h2><span data-icon="right"></span></div><div id="upcomingList"></div></section>
         </aside>
@@ -540,7 +537,7 @@
     </main>
   </div>
   <dialog id="questDialog" aria-labelledby="questDialogTitle"><form id="questForm"><div class="dialog-head"><h2 id="questDialogTitle">Neue Quest</h2><button type="button" class="icon-btn" id="closeQuestBtn" aria-label="Schließen"><span data-icon="close"></span></button></div><p class="dialog-desc">Ein kleines Ziel. Ein klarer Plan. Dein nächster Schritt.</p><div class="field"><label for="questName">Was möchtest du schaffen?</label><input id="questName" name="title" placeholder="z. B. 20 Minuten programmieren" maxlength="100" required></div><span class="field-label" id="typeLabel">Wie oft?</span><div class="type-picker" role="group" aria-labelledby="typeLabel"><button type="button" data-type="daily" aria-pressed="true"><span data-icon="sun"></span>Täglich</button><button type="button" data-type="weekly" aria-pressed="false"><span data-icon="calendar"></span>Wöchentlich</button></div><div id="weekdayField" hidden><span class="field-label" id="weekdayLabel">An welchen Tagen?</span><div class="weekday-picker" id="weekdayPicker" role="group" aria-labelledby="weekdayLabel"></div></div><p class="hint" id="questStartHint"></p><p class="form-error" id="questError" role="alert" hidden></p><button type="submit" class="btn full" id="saveQuestBtn"><span data-icon="plus"></span>Quest erstellen</button></form></dialog>
-  <dialog id="authDialog" aria-labelledby="authTitle"><div class="brand auth-brand"><span class="logo" data-icon="bolt"></span>QuestLog<span class="lime">.</span></div><form id="authForm"><div class="dialog-head"><h2 id="authTitle">Dein Abenteuer beginnt.</h2><button type="button" class="icon-btn" id="closeAuthBtn" aria-label="Zur Demo"><span data-icon="close"></span></button></div><p class="dialog-desc" id="authDesc">Melde dich mit E-Mail oder Username an und nimm deinen Fortschritt auf alle Geräte mit.</p><div class="field" id="registerUsernameField" hidden><label for="registerUsernameInput">Dein Username</label><input id="registerUsernameInput" autocomplete="nickname" placeholder="z. B. CodeKnight" minlength="3" maxlength="20" pattern="[A-Za-z][A-Za-z0-9_]{2,19}" aria-describedby="usernameFormatHint"><span class="hint" id="usernameFormatHint">3–20 Zeichen: Buchstaben, Zahlen und _. Beginnt mit einem Buchstaben.</span></div><div class="field"><label for="emailInput" id="loginIdentifierLabel">E-Mail oder Username</label><input type="text" id="emailInput" autocomplete="username" placeholder="CodeKnight oder name@example.com" required></div><div class="field"><label for="passwordInput">Passwort</label><input type="password" id="passwordInput" autocomplete="current-password" minlength="6" maxlength="256" required></div><p class="form-error" id="authError" role="alert" hidden></p><button class="btn full" id="authSubmitBtn" type="submit">Einloggen <span data-icon="right"></span></button><div class="auth-switch"><button class="text-btn" id="authSwitchBtn" type="button">Noch keinen Account? Registrieren</button></div><div class="auth-separator">ERST MAL UMSCHAUEN</div><button class="btn secondary full" id="startDemoBtn" type="button">Demo ausprobieren</button><p class="hint">Demo-Daten und dein Konto haben ihren eigenen Fortschritt.</p></form></dialog>
+  <dialog id="authDialog" aria-labelledby="authTitle"><div class="brand auth-brand"><span class="logo" data-icon="bolt"></span>QuestLog<span class="lime">.</span></div><form id="authForm"><div class="dialog-head"><h2 id="authTitle">Dein Abenteuer beginnt.</h2></div><p class="dialog-desc" id="authDesc">Melde dich mit E-Mail oder Username an und nimm deinen Fortschritt auf alle Geräte mit.</p><div class="field" id="registerUsernameField" hidden><label for="registerUsernameInput">Dein Username</label><input id="registerUsernameInput" autocomplete="nickname" placeholder="z. B. CodeKnight" minlength="3" maxlength="20" pattern="[A-Za-z][A-Za-z0-9_]{2,19}" aria-describedby="usernameFormatHint"><span class="hint" id="usernameFormatHint">3–20 Zeichen: Buchstaben, Zahlen und _. Beginnt mit einem Buchstaben.</span></div><div class="field"><label for="emailInput" id="loginIdentifierLabel">E-Mail oder Username</label><input type="text" id="emailInput" autocomplete="username" placeholder="CodeKnight oder name@example.com" required></div><div class="field"><label for="passwordInput">Passwort</label><input type="password" id="passwordInput" autocomplete="current-password" minlength="6" maxlength="256" required></div><p class="form-error" id="authError" role="alert" hidden></p><button class="btn full" id="authSubmitBtn" type="submit">Einloggen <span data-icon="right"></span></button><div class="auth-switch"><button class="text-btn" id="authSwitchBtn" type="button">Noch keinen Account? Registrieren</button></div><p class="hint">Deine Quests und dein Charakter werden in deinem Konto gespeichert.</p></form></dialog>
   <dialog id="onboardingDialog" aria-labelledby="onboardingTitle"><form id="onboardingForm"><div class="setup-header"><span class="logo" data-icon="bolt"></span><span class="overline">QuestLog // Create your character</span></div><div class="dialog-head"><h2 id="onboardingTitle">Wähle deinen Start-Charakter.</h2></div><p class="dialog-desc" id="onboardingDesc">Dein Konto steht. Jetzt beginnt dein Abenteuer: Gib deinem Spieler einen Namen und wähle deine Klasse.</p><div class="field setup-name"><label for="onboardingUsername">01 · Dein Spielername</label><input id="onboardingUsername" autocomplete="nickname" maxlength="20" minlength="3" pattern="[A-Za-z][A-Za-z0-9_]{2,19}" placeholder="CodeKnight" required><span class="hint">3–20 Zeichen · Buchstaben, Zahlen, _ · Groß- und Kleinschreibung gelten als derselbe Name.</span></div><fieldset class="character-grid"><legend class="field-label">02 · Deine Klasse</legend><div class="character-options" id="characterOptions"></div></fieldset><p class="form-error" id="onboardingError" role="alert" hidden></p><div class="setup-summary"><p id="characterSummary">Wähle eine Klasse für dein Abenteuer.<br>Alle starten mit den gleichen XP-Regeln.</p><button class="btn" id="savePlayerBtn" type="submit" disabled>Abenteuer starten <span data-icon="right"></span></button></div><div class="setup-exit"><button class="text-btn" id="exitOnboardingBtn" type="button">Später einrichten · Abmelden</button></div></form></dialog>
   <dialog id="archiveDialog" aria-labelledby="archiveTitle"><div class="dialog-head"><h2 id="archiveTitle">Quest entfernen?</h2><button class="icon-btn" id="closeArchiveBtn" aria-label="Schließen"><span data-icon="close"></span></button></div><p class="dialog-desc" id="archiveDesc"></p><button class="btn full" id="confirmArchiveBtn">Quest entfernen</button><button class="btn secondary full" id="cancelArchiveBtn" style="margin-top:10px">Behalten</button></dialog>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
@@ -779,12 +776,8 @@
     const shortDays = ['So','Mo','Di','Mi','Do','Fr','Sa'];
     const longDays = ['Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag'];
     const format = (value, options) => new Intl.DateTimeFormat('de-DE', { timeZone:'UTC', ...options }).format(C.date(value));
-    const DEMO_KEY = 'questlog.demo.v1';
-    const DEMO_PROFILE_KEY = 'questlog.demo.profile.v1';
-    const DEMO_FOCUS_KEY = 'questlog.demo.focus.v1';
-    const DEMO_SHOP_KEY = 'questlog.demo.shop.v1';
     let today = C.key(), selected = today, weekStart = C.monday(today), month = today.slice(0,7);
-    let view = 'today', mode = 'demo', state = {quests:[],days:{}}, busy = false;
+    let view = 'today', mode = 'signed-out', state = {quests:[],days:{}}, busy = false;
     let cloudReady = false, currentUser = null, sdk = null, firebasePromise = null, unsubscribers = [], session = 0;
     let playerProfile = null, profileLoaded = false, pendingUsername = '', selectedCharacter = null, onboardingBusy = false, authBusy = false;
     let registerMode = false, editId = null, archiveId = null, questType = 'daily', selectedWeekdays = new Set([5]);
@@ -813,18 +806,14 @@
       };
       return `<svg class="player-art" viewBox="0 0 64 76" role="img" aria-label="${cls.name} · Level ${level} · Evolution ${evolution}" shape-rendering="crispEdges">${aura}${cape}<ellipse cx="32" cy="70" rx="22" ry="3" fill="${tone}" opacity=".18"/><path d="M21 40h22v18H21zM15 41h6v14h-6zm28 0h6v14h-6" fill="${color}"/><path d="M22 58h8v10h-8zm12 0h8v10h-8" fill="#364253"/><path d="M19 67h12v4H19zm14 0h12v4H33" fill="#1b2330"/><path d="M22 23h20v16H22z" fill="#dfb69a"/><path d="M25 28h3v3h-3zm11 0h3v3h-3" fill="#24202d"/><path d="M29 35h6v2h-6" fill="#a47464"/>${gear[cls.id]}${upgrade}${crest}</svg>`;
     }
-    function demoProfile() {
-      try { const data=JSON.parse(localStorage.getItem(DEMO_PROFILE_KEY));if(P.validProfile(data))return data; } catch {}
-      return P.identity('Player01','engineer');
-    }
-    function openOnboarding(demo=mode==='demo') {
+    function openOnboarding() {
       if(onboardingBusy)return;
-      if(!demo && (!currentUser || !profileLoaded))return;
-      if(!demo && P.validProfile(playerProfile))return;
-      selectedCharacter=demo?(playerProfile?.characterClass||'engineer'):null;
-      $('onboardingUsername').value=demo?(playerProfile?.username||'Player01'):(pendingUsername||currentUser?.displayName||'');
-      $('onboardingDesc').textContent=demo?'Teste die fünf Start-Charaktere. Dein Demo-Spieler wird nur in diesem Browser gespeichert.':'Dein Konto steht. Wähle deinen Usernamen und einen Start-Charakter. Dein bisheriger Quest-Fortschritt bleibt erhalten.';
-      $('exitOnboardingBtn').textContent=demo?'Zurück zur Demo':'Später einrichten · Abmelden';
+      if(!currentUser || !profileLoaded)return;
+      if(P.validProfile(playerProfile))return;
+      selectedCharacter=null;
+      $('onboardingUsername').value=pendingUsername||currentUser.displayName||'';
+      $('onboardingDesc').textContent='Dein Konto steht. Wähle deinen Usernamen und einen Start-Charakter.';
+      $('exitOnboardingBtn').textContent='Später einrichten · Abmelden';
       formError('onboardingError','');renderCharacterOptions();
       if(!$('onboardingDialog').open)$('onboardingDialog').showModal();
       $('onboardingUsername').focus();
@@ -840,11 +829,6 @@
     }
     async function completeOnboarding(username,characterClass) {
       const identity=P.identity(username,characterClass);
-      if(mode==='demo') {
-        playerProfile=identity;
-        try { localStorage.setItem(DEMO_PROFILE_KEY,JSON.stringify(identity)); } catch { showError('Dein Demo-Charakter bleibt nur bis zum Schließen dieser Seite gespeichert.'); }
-        return identity;
-      }
       const owner=currentUser?.uid;if(!owner)throw new Error('Melde dich zuerst an.');
       const userRef=sdk.doc(sdk.db,'users',owner),playerRef=sdk.doc(sdk.db,'players',owner),nameRef=sdk.doc(sdk.db,'usernames',identity.usernameKey);
       const result=await sdk.runTransaction(sdk.db,async tx=>{
@@ -875,49 +859,11 @@
       if ($('retryCloudBtn')) $('retryCloudBtn').onclick = () => { if(!onboardingBusy)connectCloud(currentUser); };
     }
     function formError(id, message) { $(id).textContent = message; $(id).hidden = !message; }
-    function saveDemo() {
-      try { localStorage.setItem(DEMO_KEY,JSON.stringify(state)); }
-      catch { showError('Der Browser kann die Demo gerade nicht speichern. Dieser Fortschritt bleibt nur bis zum Schließen der Seite.'); }
-    }
-    function seedDemo() {
-      const first = C.shift(today,-30);
-      const quests = [
-        {id:'demo-code',title:'20 Minuten programmieren',type:'daily',weekdays:[],startDate:first},
-        {id:'demo-read',title:'10 Seiten lesen',type:'daily',weekdays:[],startDate:first},
-        {id:'demo-walk',title:'Eine Runde an die frische Luft',type:'daily',weekdays:[],startDate:first},
-        {id:'demo-plan',title:'Meine Wochenziele planen',type:'weekly',weekdays:[1],startDate:first},
-        {id:'demo-friday',title:'Programmieren lernen · Neues Kapitel',type:'weekly',weekdays:[5],startDate:first},
-        {id:'demo-gym',title:'Training im Gym',type:'weekly',weekdays:[2,4],startDate:first}
-      ];
-      const days = {};
-      for (let n=1;n<=9;n++) { const d=C.shift(today,-n); days[d]={date:d,tasks:C.due(quests,d).map(t=>({...t,status:'done'}))}; }
-      const d=C.shift(today,-10);
-      days[d]={date:d,tasks:Array.from({length:5},(_,n)=>({id:`sample-${n}`,title:'Beispielquest',type:'daily',status:n<3?'done':'open'}))};
-      days[today]={date:today,tasks:C.due(quests,today).map((t,n)=>({...t,status:n===0?'done':'open'}))};
-      return {quests,days};
-    }
     function validState(data) {
       if (!data || !Array.isArray(data.quests) || !data.days || Array.isArray(data.days) || typeof data.days !== 'object') return false;
       const validTask = t => t && typeof t.id === 'string' && typeof t.title === 'string' && ['daily','weekly'].includes(t.type);
       return data.quests.length <= 50 && data.quests.every(q => validTask(q) && Array.isArray(q.weekdays) && /^\d{4}-\d{2}-\d{2}$/.test(q.startDate) && q.weekdays.every(d => Number.isInteger(d) && d>=0 && d<=6)) && Object.entries(data.days).every(([d,day]) => /^\d{4}-\d{2}-\d{2}$/.test(d) && Array.isArray(day?.tasks) && day.tasks.length<=50 && day.tasks.every(t => validTask(t) && ['open','done','skipped'].includes(t.status)));
     }
-    function loadDemo() {
-      try { const data=JSON.parse(localStorage.getItem(DEMO_KEY)); if(validState(data)) return data; } catch {}
-      const data=seedDemo(); try { localStorage.setItem(DEMO_KEY,JSON.stringify(data)); } catch {}
-      return data;
-    }
-    function loadDemoFocus() {
-      try{const data=JSON.parse(localStorage.getItem(DEMO_FOCUS_KEY));if(F.validState(data))return data;}catch{}
-      return {timers:[],days:{}};
-    }
-    function saveDemoFocus() {
-      try{localStorage.setItem(DEMO_FOCUS_KEY,JSON.stringify(focusState));}catch{showError('Deine Timer bleiben nur bis zum Schließen dieser Seite gespeichert.');}
-    }
-    function loadDemoShop() {
-      try{const data=JSON.parse(localStorage.getItem(DEMO_SHOP_KEY));if(S.valid(data))return S.normalize(data);}catch{}
-      return S.empty();
-    }
-    function saveDemoShop() {try{localStorage.setItem(DEMO_SHOP_KEY,JSON.stringify(shopState));}catch{showError('Deine Shop-Käufe bleiben nur bis zum Schließen dieser Seite gespeichert.');}}
     function updateFocusPlan(timers,days,operation,date=today,now=Date.now()) {
       const normalized=timers.map(t=>F.normalize(t,days,date)),latest={timers:normalized,days};
       if(operation.kind==='reset') {
@@ -938,10 +884,6 @@
     }
     async function mutateFocusPlan(operation) {
       const date=C.key(),now=Date.now(),token=session;
-      if(mode==='demo') {
-        const result=updateFocusPlan(focusState.timers,focusState.days,operation,date,now);
-        focusState.timers=result.timers;if(result.day)focusState.days[date]=result.day;saveDemoFocus();return result;
-      }
       const owner=currentUser?.uid;if(!owner||!cloudReady)throw new Error('Dein Konto ist noch nicht verbunden.');
       const planRef=sdk.doc(sdk.db,'users',owner,'settings','focus'),dayRef=sdk.doc(sdk.db,'users',owner,'focusDays',date);
       const result=await sdk.runTransaction(sdk.db,async tx=>{
@@ -955,11 +897,10 @@
       if(token===session){focusState.timers=result.timers;if(result.day)focusState.days[date]=result.day;}return result;
     }
     async function setFocusStatus(id,status) {
-      if(focusBusy||busy||(mode==='cloud'&&!cloudReady))return;
+      if(focusBusy||busy||(!cloudReady))return;
       const date=C.key(),token=session,previous=F.coinReward(focusState.days[date]);focusBusy=true;render();
       try {
-        if(mode==='demo'){focusState.days[date]=F.changeStatus(focusState,date,id,status,date);saveDemoFocus();}
-        else {
+        {
           const owner=currentUser.uid,planRef=sdk.doc(sdk.db,'users',owner,'settings','focus'),dayRef=sdk.doc(sdk.db,'users',owner,'focusDays',date);
           const record=await sdk.runTransaction(sdk.db,async tx=>{
             const plan=await tx.get(planRef),day=await tx.get(dayRef);
@@ -977,7 +918,7 @@
       finally{if(token===session){focusBusy=false;render();}}
     }
     async function resetFocus(id) {
-      if(focusBusy||busy)return;const token=session;focusBusy=true;render();
+      if(!currentUser||!cloudReady||focusBusy||busy)return;const token=session;focusBusy=true;render();
       try {await mutateFocusPlan({kind:'reset',id});if(token===session)toast('Neustart ab jetzt. Heute keine Coins, morgen eine neue Chance.');}
       catch(error){if(token===session)toast(errorMessage(error));}
       finally{if(token===session){focusBusy=false;render();}}
@@ -995,12 +936,12 @@
       });
     }
     function renderFocus() {
-      const blocked=focusBusy||busy||(mode==='cloud'&&!cloudReady),timers=F.tasksAt(focusState,today),done=timers.filter(t=>t.status==='done').length,failed=timers.some(t=>t.status==='failed'),coins=F.coinReward(focusState.days[today]);
+      const blocked=focusBusy||busy||(!cloudReady),timers=F.tasksAt(focusState,today),done=timers.filter(t=>t.status==='done').length,failed=timers.some(t=>t.status==='failed'),coins=F.coinReward(focusState.days[today]);
       $('startFocusBtn').disabled=blocked;
       $('focusStartHint').textContent=focusState.days[today]?'Heutige Coin-Stufe festgelegt. Neue und entfernte Timer zählen ab morgen.':'Bis zu 10 Timer. Alle zusammen geben eine Tagesbelohnung.';
       const record=focusState.days[today],point=record?.rewardVersion===2?record.rewardAt:Date.now(),oldestStart=timers.length?Math.max(...timers.map(t=>F.started(t,focusState.days,today))):point,stage=F.tier(Math.max(0,point-oldestStart));
       $('focusSummary').innerHTML=coins?'<strong>+'+coins+' '+(coins===1?'Coin':'Coins')+' geschafft!</strong><span>Morgen verfügbar. Alle Timer heute bestätigt.</span>':failed?'<strong>Heute 0 Coins.</strong><span>Ein Timer wurde zurückgesetzt. Morgen geht’s weiter.</span>':'<strong>'+done+' / '+timers.length+' bestätigt</strong><span>'+(timers.length?'Alle geschafft = gemeinsam '+stage+' '+(stage===1?'Coin':'Coins')+'. Bestätige jeden Tag.':'Gib deiner Gewohnheit einen Namen und starte.')+'</span>';
-      if(mode==='cloud'&&!cloudReady){$('focusList').innerHTML='<div class="card empty"><p>Deine privaten Timer werden geladen …</p></div>';return;}
+      if(!cloudReady){$('focusList').innerHTML='<div class="card empty"><p>Deine privaten Timer werden geladen …</p></div>';return;}
       const cards=[...timers,...focusState.timers.filter(t=>t.startDate>today&&!timers.some(x=>x.id===t.id)).map(t=>({...t,status:'open'}))];
       $('focusList').innerHTML=cards.length?cards.map((timer,index)=>{
         const p=F.progress(timerDisplay(timer),focusState.days,today),future=timer.startDate>today,planned=focusState.timers.some(t=>t.id===timer.id),disabled=blocked||future||timer.status==='failed',percent=p.next?Math.min(100,100*p.completed/p.next):100;
@@ -1026,7 +967,7 @@
       const token=session;buddyReactionTimer=setTimeout(()=>{if(token!==session)return;buddyReactionUntil=0;document.querySelectorAll('.buddy.is-cheering').forEach(el=>el.classList.remove('is-cheering'));},1800);
     }
     function renderShop() {
-      const balance=S.balance(shopState,focusState.days,today),pending=F.coinReward(focusState.days[today]),blocked=shopBusy||focusBusy||busy||(mode==='cloud'&&(!cloudReady||!publication.confirmed||!shopLoaded));
+      const balance=S.balance(shopState,focusState.days,today),pending=F.coinReward(focusState.days[today]),blocked=shopBusy||focusBusy||busy||!cloudReady||!publication.confirmed||!shopLoaded;
       $('coinBalance').textContent=balance;$('shopBalance').textContent=balance;
       $('walletBtn').title=balance+' Coins verfügbar'+(pending?' · '+pending+' morgen':'');
       $('shopPending').textContent=pending?'Heute verdient: +'+pending+' '+(pending===1?'Coin':'Coins')+' · morgen ab 00:00 verfügbar.':'Bestätige deine Fokus-Timer täglich und sammle Coins für neue Looks.';
@@ -1038,11 +979,10 @@
       }).join('');
     }
     async function shopAction(action,id) {
-      if(shopBusy||focusBusy||busy)return;const token=session,date=C.key();shopBusy=true;renderShop();
+      if(!currentUser||!cloudReady||shopBusy||focusBusy||busy)return;const token=session,date=C.key();shopBusy=true;renderShop();
       try {
         let next;
-        if(mode==='demo'){next=S.mutate(shopState,focusState.days,date,action,id);shopState=next;saveDemoShop();}
-        else {
+        {
           if(!cloudReady||!publication.confirmed||!shopLoaded)throw new Error('Warte kurz, bis dein Inventar mit der Cloud verbunden ist.');
           const owner=currentUser.uid,ref=sdk.doc(sdk.db,'users',owner,'settings','shop'),history=structuredClone(focusState.days);
           next=await sdk.runTransaction(sdk.db,async tx=>{
@@ -1064,14 +1004,20 @@
       const burst=document.createElement('div');burst.className='reward-burst';burst.setAttribute('aria-hidden','true');
       burst.innerHTML=Array.from({length:16},(_,i)=>'<i style="--x:'+((i-7.5)*22)+'px;--y:'+(-90-Math.random()*140)+'px;--rotate:'+(i*43)+'deg;--delay:'+(i%4)*35+'ms">'+(kind==='coin'?'✦':'')+'</i>').join('');document.body.append(burst);setTimeout(()=>burst.remove(),1400);
     }
-    function enterDemo() {
-      buddyReactionUntil=0;clearTimeout(buddyReactionTimer);session++; unsubscribers.forEach(fn=>fn()); unsubscribers=[];
-      resetLeaderboard();
-      mode='demo'; currentUser=null; cloudReady=false; state=loadDemo();focusState=loadDemoFocus();shopState=loadDemoShop();shopLoaded=true;shopBusy=false;focusBusy=false;busy=false; playerProfile=demoProfile(); profileLoaded=true;
-      $('onboardingDialog').close();
-      $('cloudError').hidden=true; $('syncStatus').dataset.error='false';
-      selected=today; month=today.slice(0,7); weekStart=C.monday(today);
-      render();
+    function enterSignedOut() {
+      buddyReactionUntil=0;clearTimeout(buddyReactionTimer);session++;
+      unsubscribers.forEach(fn=>fn());unsubscribers=[];resetLeaderboard();
+      mode='signed-out';currentUser=null;cloudReady=false;
+      state={quests:[],days:{}};focusState={timers:[],days:{}};shopState=S.empty();
+      shopLoaded=false;shopBusy=false;focusBusy=false;busy=false;
+      playerProfile=null;profileLoaded=false;pendingUsername='';selectedCharacter=null;
+      editId=null;archiveId=null;shopFilter='all';
+      for(const id of ['onboardingDialog','questDialog','archiveDialog'])$(id).close();
+      for(const id of ['passwordInput','emailInput','registerUsernameInput','questName','focusName','onboardingUsername'])$(id).value='';
+      $('archiveDesc').textContent='';$('characterOptions').innerHTML='';
+      $('cloudError').hidden=true;$('syncStatus').dataset.error='false';
+      selected=today;month=today.slice(0,7);weekStart=C.monday(today);
+      setView('today');openAuth();
     }
     function resetLeaderboard() {
       clearTimeout(publicationTimer);
@@ -1088,14 +1034,6 @@
     function selectRanking(kind) {
       if(!['total','week'].includes(kind)||leaderboard.kind===kind)return;
       leaderboard=newLeaderboard(kind);renderLeaderboard();if(mode==='cloud')loadLeaderboard();
-    }
-    function demoLeaderboard() {
-      const samples = [
-        ['ByteKnight','warrior',730],['ArcaneCoder','mage',550],['PixelScout','ranger',470],
-        ['NightShift','rogue',340],['BuildWizard','engineer',320],['DailyQuest','warrior',240],['DebugMage','mage',180]
-      ].map(([username,characterClass,totalXp],index) => ({uid:`demo-${index}`,username,usernameKey:P.usernameKey(username),characterClass,totalXp,questXp:totalXp,bonusXp:0,bonusDays:0,level:C.level(totalXp).number,recordedDays:Math.ceil(totalXp/10),schemaVersion:2,weekStart:C.monday(today),weekQuestXp:[43,64,17,28,62,9,35][index],weekBonusXp:0,weekXp:[43,64,17,28,62,9,35][index],equipped:[{aura:'aura-ember',frame:'frame-gold',scene:'scene-forest',buddy:'buddy-dragon'},{aura:'aura-void',frame:'frame-neon',scene:'scene-nebula',buddy:'buddy-robot'},{aura:'',frame:'frame-neon',scene:'scene-forest',buddy:'buddy-fox'},S.defaultEquipment(),{aura:'aura-void',frame:'',scene:'scene-nebula',buddy:'buddy-robot'},S.defaultEquipment(),S.defaultEquipment()][index]}));
-      const own=leaderboard.kind==='week'?ownWeekly():ownSummary();
-      return L.ranked([...samples,{uid:'local-demo',...own}],scoreField());
     }
     function leaderboardKey(summary,date) { return JSON.stringify([date,C.monday(date),summary.questXp,summary.bonusXp,summary.recordedDays,summary.bonusDays,summary.usernameKey,summary.characterClass,...S.slots.map(slot=>summary.equipped[slot])]); }
     function scheduleLeaderboardSync() {
@@ -1149,7 +1087,6 @@
       return work.promise;
     }
     async function loadLeaderboard(reset=true) {
-      if(mode==='demo'){renderLeaderboard();return;}
       if(!cloudReady || leaderboard.loading)return;
       const board=leaderboard,token=session,request=++board.request;
       board.loading=true;board.error='';renderLeaderboard();
@@ -1187,14 +1124,14 @@
       board.ownRank=count.data().count+1;board.rankScore=score;
     }
     function renderLeaderboard() {
-      const demo=mode==='demo',weekly=leaderboard.kind==='week',field=scoreField(),entries=demo?demoLeaderboard():L.ranked(leaderboard.entries,field),uid=demo?'local-demo':currentUser?.uid;
-      const self=entries.find(entry=>entry.uid===uid),own=weekly?ownWeekly():ownSummary();
-      const ownRank=demo?self?.rank:leaderboard.ownRank,matchingOwn=own&&ownRank&&(demo||leaderboard.rankScore===own[field]);
+      const weekly=leaderboard.kind==='week',field=scoreField(),entries=L.ranked(leaderboard.entries,field),uid=currentUser?.uid;
+      const own=weekly?ownWeekly():ownSummary();
+      const ownRank=leaderboard.ownRank,matchingOwn=own&&ownRank&&leaderboard.rankScore===own[field];
       document.querySelectorAll('[data-ranking]').forEach(button=>button.setAttribute('aria-pressed',button.dataset.ranking===leaderboard.kind));
-      $('leaderboardStatus').textContent=demo?'Demo · Beispielspieler':leaderboard.loading?'Rangliste wird geladen …':leaderboard.loaded?`${entries.length} Spieler geladen · ${leaderboard.loadedAt.toLocaleTimeString('de-DE',{hour:'2-digit',minute:'2-digit'})}`:'Globale Rangliste · angemeldete Spieler';
-      $('refreshLeaderboardBtn').disabled=!demo&&(!cloudReady||leaderboard.loading);
-      $('leaderboardOwn').hidden=!own || (mode==='cloud'&&!cloudReady);
-      if(own)$('leaderboardOwn').innerHTML=`<div class="own-appearance">${cosmeticFigure(own.characterClass,own.level,own.equipped)}</div><div class="own-details"><strong>${matchingOwn?`Dein Platz: #${ownRank}`:'Dein Spieler'}</strong> · ${esc(own.username)} · Level ${own.level} · ${own[field].toLocaleString('de-DE')} ${weekly?'Wochen-XP':'XP'}<small>${demo?'Dein Demo-Spieler nimmt nur an dieser Beispielrangliste teil.':leaderboard.rankError|| (matchingOwn?'Dein Rang zählt alle Spieler – auch auf noch nicht geladenen Seiten.':'Dein Rang erscheint nach der Synchronisierung und dem Aktualisieren.')}</small></div>`;
+      $('leaderboardStatus').textContent=leaderboard.loading?'Rangliste wird geladen …':leaderboard.loaded?`${entries.length} Spieler geladen · ${leaderboard.loadedAt.toLocaleTimeString('de-DE',{hour:'2-digit',minute:'2-digit'})}`:'Globale Rangliste · angemeldete Spieler';
+      $('refreshLeaderboardBtn').disabled=!cloudReady||leaderboard.loading;
+      $('leaderboardOwn').hidden=!own || (!cloudReady);
+      if(own)$('leaderboardOwn').innerHTML=`<div class="own-appearance">${cosmeticFigure(own.characterClass,own.level,own.equipped)}</div><div class="own-details"><strong>${matchingOwn?`Dein Platz: #${ownRank}`:'Dein Spieler'}</strong> · ${esc(own.username)} · Level ${own.level} · ${own[field].toLocaleString('de-DE')} ${weekly?'Wochen-XP':'XP'}<small>${leaderboard.rankError|| (matchingOwn?'Dein Rang zählt alle Spieler – auch auf noch nicht geladenen Seiten.':'Dein Rang erscheint nach der Synchronisierung und dem Aktualisieren.')}</small></div>`;
       formError('leaderboardError',leaderboard.error);
       $('leaderboardPodium').innerHTML=entries.slice(0,3).map(entry=>{const cls=P.classes.find(cls=>cls.id===entry.characterClass);return `<div class="podium-player" style="--class-color:${cls.color}"><span class="overline">RANG #${entry.rank}</span>${cosmeticFigure(cls.id,entry.level,entry.equipped)}<strong>${esc(entry.username)}</strong><small>LEVEL ${entry.level} · ${cls.name}<br>${entry[field].toLocaleString('de-DE')} ${weekly?'WOCHEN-XP':'XP'}</small></div>`;}).join('');
       $('leaderboardList').innerHTML=entries.map(entry=>{
@@ -1203,8 +1140,8 @@
       }).join('');
       $('leaderboardEmpty').hidden=entries.length>0;
       $('leaderboardEmpty').innerHTML=leaderboard.loading?`${icon('clock')}<h3>Die Spieler werden geladen …</h3><p>Gleich siehst du die Rangliste.</p>`:leaderboard.error?`${icon('refresh')}<h3>Rangliste gerade nicht erreichbar.</h3><p>Dein Quest-Fortschritt bleibt erhalten. Versuche es mit „Aktualisieren“ erneut.</p>`:`${icon('trophy')}<h3>${mode==='cloud'&&!cloudReady?'Richte zuerst deinen Charakter ein.':'Die erste Quest wartet.'}</h3><p>${mode==='cloud'&&!cloudReady?'Nach der Einrichtung wird dein Spieler in die Rangliste aufgenommen.':'Noch kein Spieler gelistet. Nach dem Login erscheint jeder eingerichtete Charakter automatisch.'}</p>`;
-      $('leaderboardMoreBtn').hidden=demo||!leaderboard.hasMore;$('leaderboardMoreBtn').disabled=leaderboard.loading;
-      $('leaderboardNote').textContent=demo?'Beispielrangliste · Echte Spieler siehst du nach dem Login.':publication.error||(weekly?`Woche ${format(leaderboard.week,{day:'numeric',month:'short'})} – ${format(C.shift(leaderboard.week,6),{day:'numeric',month:'short'})} · bis zu 70 neue Quest-XP pro Woche. Frühere Fokus-XP bleiben erhalten. Das Charakter-Level bleibt bestehen.`:'Gesamt-XP inklusive früherer Fokus-XP · Coins zählen separat · bei gleichen XP gleicher Rang. „Aktualisieren“ lädt den aktuellen Stand.');
+      $('leaderboardMoreBtn').hidden=!leaderboard.hasMore;$('leaderboardMoreBtn').disabled=leaderboard.loading;
+      $('leaderboardNote').textContent=publication.error||(weekly?`Woche ${format(leaderboard.week,{day:'numeric',month:'short'})} – ${format(C.shift(leaderboard.week,6),{day:'numeric',month:'short'})} · bis zu 70 neue Quest-XP pro Woche. Frühere Fokus-XP bleiben erhalten. Das Charakter-Level bleibt bestehen.`:'Gesamt-XP inklusive früherer Fokus-XP · Coins zählen separat · bei gleichen XP gleicher Rang. „Aktualisieren“ lädt den aktuellen Stand.');
     }
     function setView(next) {
       view=next;
@@ -1217,6 +1154,7 @@
       if(view==='leaderboard'&&mode==='cloud'&&!leaderboard.loaded)loadLeaderboard();
     }
     function render() {
+      $('appShell').hidden=mode!=='cloud';
       const currentTasks=C.tasksAt(state,today,today),dailyXp=C.xp(currentTasks),totalXp=combinedXp(),level=C.level(totalXp),bonus=F.coinReward(focusState.days[today]);
       $('dateChip').textContent=format(today,{weekday:'short',day:'2-digit',month:'short',year:'numeric'});
       $('todayXp').innerHTML=`${dailyXp} <span>/ 10 XP</span><small class="daily-bonus">${bonus?'+'+bonus+' Fokus-Coins heute':'Quests bringen dich weiter'}</small>`;
@@ -1242,21 +1180,19 @@
       $('heroProgressFill').style.width=(currentTasks.length?100*completed/currentTasks.length:0)+'%';
       $('characterStage').style.setProperty('--class-color',cls?.color||'#7edbff');
       $('characterStage').innerHTML=cls?`${cosmeticFigure(cls.id,level.number,shopState.equipped,true)}<div><span class="overline">${evolution?`EVOLUTION ${evolution}`:'START-CHARAKTER'}</span><strong>${cls.name}</strong><small>${esc(playerProfile.username)}<br>${cls.description}${shopState.equipped.buddy?'<br><span class="buddy-caption">Mit '+esc(S.catalog.find(item=>item.id===shopState.equipped.buddy).name)+'</span>':''}</small></div>`:`${icon('spark')}<div><strong>Dein Charakter wartet.</strong><small>Wähle deine Klasse nach dem Login.</small></div>`;
-      $('previewCharacterBtn').hidden=mode!=='demo'&&!!cls;
-      $('previewCharacterBtn').textContent=mode==='demo'?'Charakter-Auswahl testen →':'Profil einrichten →';
-      $('accountMode').textContent=mode==='demo'?'Lokaler Demo-Modus':'Firebase-Konto';
-      $('accountBtn').setAttribute('aria-label',mode==='demo'?'Konto verbinden':'Abmelden');
-      $('demoLoginBtn').textContent=mode==='demo'?'Konto verbinden →':'Abmelden →';
-      $('demoBar').firstElementChild.textContent=mode==='demo'?'Demo mit Beispieldaten · Fortschritt bleibt in diesem Browser.':`Angemeldet als ${playerProfile?.username || currentUser?.email || 'Spieler'}`;
-      $('addTopBtn').disabled=busy || (mode==='cloud'&&!cloudReady);
-      if(mode==='demo') $('syncStatus').lastElementChild.textContent='Demo · lokal';
+      $('previewCharacterBtn').hidden=!!cls;
+      $('previewCharacterBtn').textContent='Profil einrichten →';
+      $('accountMode').textContent='Firebase-Konto';
+      $('accountBtn').setAttribute('aria-label','Abmelden');
+      $('addTopBtn').disabled=busy || (!cloudReady);
+      if(mode!=='cloud')$('syncStatus').lastElementChild.textContent='Anmelden';
       $('selectedDateLabel').textContent=format(selected,{weekday:'long',day:'numeric',month:'long'});
       $('dayCard').innerHTML=dayMarkup(selected);
       $('weekDayCard').innerHTML=dayMarkup(selected);
       renderWeek(); renderTemplates(); renderCalendar(); renderUpcoming();renderLeaderboard();renderFocus();renderShop();
     }
     function dayMarkup(value) {
-      if(mode==='cloud'&&!cloudReady) return profileLoaded&&!playerProfile?`<div class="empty">${icon('spark')}<h3>Dein Charakter wartet.</h3><p>Wähle deinen Namen und deine Klasse, um dein Abenteuer zu beginnen.</p><button class="btn" data-action="onboarding">Profil einrichten</button></div>`:`<div class="empty">${icon('clock')}<h3>Deine Quests werden geladen …</h3><p>Verbinde deinen Spielplan mit der Cloud.</p></div>`;
+      if(!cloudReady) return profileLoaded&&!playerProfile?`<div class="empty">${icon('spark')}<h3>Dein Charakter wartet.</h3><p>Wähle deinen Namen und deine Klasse, um dein Abenteuer zu beginnen.</p><button class="btn" data-action="onboarding">Profil einrichten</button></div>`:`<div class="empty">${icon('clock')}<h3>Deine Quests werden geladen …</h3><p>Verbinde deinen Spielplan mit der Cloud.</p></div>`;
       const tasks=C.tasksAt(state,value,today), done=tasks.filter(t=>t.status==='done').length, xp=C.xp(tasks), isToday=value===today;
       const title=isToday?'Deine Quests für heute':format(value,{weekday:'long',day:'numeric',month:'short'});
       const note=value>today?'Vorschau · Hier siehst du deinen geplanten Spieltag.':value<today?'Rückblick · Dein gespeicherter Fortschritt.':tasks.length&&done===tasks.length?'Alles geschafft! Deine 10 XP sind verdient.':`${done} von ${tasks.length} erledigt · Jeder Schritt zählt.`;
@@ -1280,7 +1216,7 @@
     }
     function renderTemplates() {
       $('templateCount').textContent=`${state.quests.length} / 50`;
-      if(mode==='cloud'&&!cloudReady) { $('templateList').innerHTML='<div class="empty"><p>Spielplan wird geladen …</p></div>'; return; }
+      if(!cloudReady) { $('templateList').innerHTML='<div class="empty"><p>Spielplan wird geladen …</p></div>'; return; }
       $('templateList').innerHTML=state.quests.length?state.quests.map(q=>`<div class="template"><div class="template-icon">${icon(q.type==='daily'?'sun':'calendar')}</div><div class="quest-copy"><div class="quest-title">${esc(q.title)}</div><div class="quest-meta">${q.type==='daily'?'Täglich':q.weekdays.slice().sort((a,b)=>(a+6)%7-(b+6)%7).map(d=>longDays[d]).join(', ')}${q.startDate>today?' · Ab morgen':''}</div></div><div class="template-actions"><button class="icon-btn" data-action="edit" data-id="${esc(q.id)}" aria-label="Quest bearbeiten: ${esc(q.title)}" ${busy?'disabled':''}>${icon('edit')}</button><button class="icon-btn" data-action="archive" data-id="${esc(q.id)}" aria-label="Quest entfernen: ${esc(q.title)}" ${busy?'disabled':''}>${icon('trash')}</button></div></div>`).join(''):`<div class="empty">${icon('spark')}<h3>Dein Spielplan beginnt mit einer Quest.</h3><p>Was willst du täglich oder jede Woche schaffen?</p><button class="btn" data-action="new">Quest erstellen</button></div>`;
     }
     function renderCalendar() {
@@ -1298,7 +1234,7 @@
       $('upcomingList').innerHTML=upcoming.length?upcoming.map(q=>`<div class="next-quest"><span>${esc(format(q.value,{weekday:'short',day:'numeric',month:'short'}))}</span><strong>${esc(q.title)}</strong></div>`).join(''):'<p class="hint">Deine nächsten Wochen-Quests erscheinen hier.</p>';
     }
     function openQuest(id=null) {
-      if(busy || (mode==='cloud'&&!cloudReady))return;
+      if(busy || (!cloudReady))return;
       editId=id; const q=state.quests.find(q=>q.id===id); questType=q?.type||'daily'; selectedWeekdays=new Set(q?.weekdays.length?q.weekdays:[5]);
       $('questDialogTitle').textContent=id?'Quest bearbeiten':'Neue Quest'; $('questName').value=q?.title||'';
       $('saveQuestBtn').innerHTML=icon(id?'check':'plus')+(id?'Änderungen speichern':'Quest erstellen');
@@ -1325,7 +1261,6 @@
       return {quests:[...quests,entry],startDate};
     }
     async function mutatePlan(operation) {
-      if(mode==='demo') { const result=updatePlan(state.quests,state.days,operation); state.quests=result.quests; saveDemo(); return result; }
       const owner=currentUser?.uid;
       if(!owner||!cloudReady)throw new Error('Dein Konto ist noch nicht verbunden.');
       const planRef=sdk.doc(sdk.db,'users',owner,'settings','plan'), dayRef=sdk.doc(sdk.db,'users',owner,'days',today);
@@ -1338,13 +1273,12 @@
       return result;
     }
     async function setStatus(value,id,status) {
-      if(busy || (mode==='cloud'&&!cloudReady))return;
+      if(busy || (!cloudReady))return;
       const token=session,oldTasks=C.tasksAt(state,value,today),oldStatus=oldTasks.find(task=>task.id===id)?.status,oldLevel=C.level(combinedXp()).number,oldXp=C.xp(oldTasks);
       let questCompleted=false;
       busy=true; render();
       try {
-        if(mode==='demo') { state.days[value]=C.changeStatus(state,value,id,status,today);questCompleted=status==='done'&&oldStatus!=='done';saveDemo(); }
-        else {
+        {
           const owner=currentUser.uid, planRef=sdk.doc(sdk.db,'users',owner,'settings','plan'), dayRef=sdk.doc(sdk.db,'users',owner,'days',value);
           const result=await sdk.runTransaction(sdk.db,async tx=>{
             const plan=await tx.get(planRef), day=await tx.get(dayRef);
@@ -1380,7 +1314,7 @@
         ]);
         const app=appModule.initializeApp(firebaseConfig), auth=authModule.getAuth(app), db=dbModule.getFirestore(app);
         sdk={...authModule,...dbModule,app,auth,db};
-        authModule.onAuthStateChanged(auth,user=>{ if(user)connectCloud(user); else if(currentUser)enterDemo(); });
+        authModule.onAuthStateChanged(auth,user=>{if(user)connectCloud(user);else if(mode==='cloud'||currentUser)enterSignedOut();});
         return sdk;
       })();
       try { return await firebasePromise; } catch(error) { firebasePromise=null; throw error; }
@@ -1466,14 +1400,15 @@
         'functions/invalid-argument':'Bitte gib einen gültigen Usernamen und dein Passwort ein.'
       };
       if(messages[code])return messages[code];
-      if(error instanceof TypeError)return 'Firebase konnte nicht geladen werden. Prüfe die Verbindung oder probiere die lokale Demo.';
+      if(error instanceof TypeError)return 'Die Anmeldung konnte nicht geladen werden. Prüfe deine Internetverbindung und versuche es erneut.';
       return error?.message || 'Das hat gerade nicht funktioniert. Bitte versuche es erneut.';
     }
-    function openAuth() { formError('authError',''); $('authDialog').showModal(); }
+    function openAuth() { formError('authError','');if(!$('authDialog').open)$('authDialog').showModal(); }
     async function accountAction() {
       if(busy||focusBusy||onboardingBusy||authBusy)return;
-      if(mode==='demo')openAuth();
-      else { try { await sdk.signOut(sdk.auth); enterDemo(); toast('Abgemeldet. Du bist jetzt in der lokalen Demo.'); } catch(error) { toast(errorMessage(error)); } }
+      if(!currentUser){openAuth();return;}
+      try {await sdk.signOut(sdk.auth);if(mode!=='signed-out')enterSignedOut();toast('Abgemeldet. Bis zum nächsten Abenteuer!');}
+      catch(error){toast(errorMessage(error));}
     }
     function selectDate(value, nextView) {
       selected=value; month=value.slice(0,7); weekStart=C.monday(value);
@@ -1481,7 +1416,7 @@
     }
     document.querySelectorAll('[data-view]').forEach(el=>el.onclick=()=>{ if(el.dataset.view==='today')selected=today; if(el.dataset.view==='week'){weekStart=C.monday(today);selected=today;} setView(el.dataset.view); });
     $('walletBtn').onclick=()=>setView('shop');$('heroQuestBtn').onclick=()=>{setView('today');$('dayCard').scrollIntoView({behavior:'smooth',block:'center'});};$('heroFocusBtn').onclick=()=>setView('focus');
-    $('addTopBtn').onclick=()=>openQuest(); $('accountBtn').onclick=accountAction; $('demoLoginBtn').onclick=accountAction;
+    $('addTopBtn').onclick=()=>openQuest(); $('accountBtn').onclick=accountAction;
     $('refreshLeaderboardBtn').onclick=()=>loadLeaderboard(true);
     $('leaderboardMoreBtn').onclick=()=>loadLeaderboard(false);
     document.querySelectorAll('[data-ranking]').forEach(button=>button.onclick=()=>selectRanking(button.dataset.ranking));
@@ -1493,15 +1428,14 @@
       finally{focusBusy=false;render();}
     };
     $('closeQuestBtn').onclick=()=>$('questDialog').close();
-    $('closeAuthBtn').onclick=()=>$('authDialog').close(); $('startDemoBtn').onclick=()=>$('authDialog').close();
+    $('authDialog').addEventListener('cancel',event=>event.preventDefault());
     $('previewCharacterBtn').onclick=()=>openOnboarding();
     $('onboardingDialog').addEventListener('cancel',event=>{if(mode==='cloud'||onboardingBusy)event.preventDefault();});
     $('onboardingUsername').addEventListener('input',updateCharacterSummary);
     $('characterOptions').addEventListener('change',event=>{if(event.target.name==='characterClass'){selectedCharacter=event.target.value;updateCharacterSummary();}});
     $('exitOnboardingBtn').onclick=async()=>{
       if(onboardingBusy)return;
-      if(mode==='demo'){$('onboardingDialog').close();return;}
-      try{await sdk.signOut(sdk.auth);pendingUsername='';enterDemo();toast('Dein Konto bleibt erhalten. Richte deinen Charakter beim nächsten Login ein.');}
+      try{await sdk.signOut(sdk.auth);pendingUsername='';if(mode!=='signed-out')enterSignedOut();toast('Dein Konto bleibt erhalten. Richte deinen Charakter beim nächsten Login ein.');}
       catch(error){formError('onboardingError',errorMessage(error));}
     };
     $('onboardingForm').onsubmit=async event=>{
@@ -1592,12 +1526,10 @@
       }catch(error){formError('authError',errorMessage(error));}
       finally{authBusy=false;$('authSubmitBtn').disabled=false;$('authSwitchBtn').disabled=false;}
     };
-    window.addEventListener('storage',event=>{if(mode!=='demo'||busy||focusBusy)return;if(event.key===DEMO_KEY)state=loadDemo();if(event.key===DEMO_FOCUS_KEY)focusState=loadDemoFocus();if(event.key===DEMO_PROFILE_KEY)playerProfile=demoProfile();if(event.key===DEMO_SHOP_KEY)shopState=loadDemoShop();render();});
     setInterval(tickFocus,1000);
     setInterval(()=>{const next=C.key();if(next!==today){today=next;selected=next;weekStart=C.monday(next);month=next.slice(0,7);if(leaderboard.week!==C.monday(next))leaderboard=newLeaderboard(leaderboard.kind);render();scheduleLeaderboardSync();if(view==='leaderboard'&&mode==='cloud')loadLeaderboard();toast('Ein neuer Tag. Deine Quests warten auf dich.');}},30000);
-    enterDemo();
-    if(new URLSearchParams(location.search).get('demo')!=='1'){openAuth();ensureFirebase().catch(error=>formError('authError',errorMessage(error)));}
-    else if(new URLSearchParams(location.search).get('onboarding')==='1')openOnboarding(true);
+    enterSignedOut();
+    ensureFirebase().catch(error=>{if(mode==='signed-out')formError('authError',errorMessage(error));});
   </script>
 </body>
 </html>
