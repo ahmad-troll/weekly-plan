@@ -178,6 +178,42 @@
     @media(max-width:660px) { main { padding:20px 18px 105px; } .grid { grid-template-columns:1fr; gap:20px; } .right-column { display:grid; grid-template-columns:1fr; gap:20px; } .intro { margin-top:27px; align-items:flex-start; } .intro h1 { font-size:27px; } .intro p { font-size:12px; } .date-chip { display:none; } .topbar { padding-bottom:20px; } .topbar-right { gap:8px; } #addTopBtn { padding:10px 12px; font-size:11px; } #addTopBtn svg { width:15px; } .status { font-size:10px; } .stat { padding:15px 10px; } .stat-label { gap:5px; font-size:9px; } .stat-value { font-size:24px; } .stat-value span { font-size:11px; } .stats { gap:8px; } .quest-group,.day-summary { padding-left:17px; padding-right:17px; } .quest { gap:10px; } .quest-title { font-size:13px; } .skip-btn { font-size:10px; } .template { padding:16px; gap:10px; } .template-icon { display:none; } .template-actions { gap:5px; } dialog { padding:24px; } }
     @media(prefers-reduced-motion:reduce) { *,*::before,*::after { animation:none!important; transition:none!important; scroll-behavior:auto!important; } }
     @media(max-width:900px) { .sidebar p.overline { display:none; } }
+    body { background:radial-gradient(ellipse at 85% 0,#4835681a,transparent 48%),var(--bg); }
+    .btn { box-shadow:0 0 20px #c3f75f12; }
+    .btn:hover { box-shadow:0 0 28px #c3f75f2e; }
+    .avatar svg { width:32px; height:36px; }
+    .character-stage { --class-color:var(--cyan); display:flex; align-items:center; gap:17px; min-height:115px; margin:17px 0; padding:12px 17px; border:1px solid color-mix(in srgb,var(--class-color) 30%,transparent); border-radius:12px; background:radial-gradient(ellipse at 26% 60%,color-mix(in srgb,var(--class-color) 16%,transparent),transparent 65%),#11161a; }
+    .character-stage svg { width:76px; height:90px; filter:drop-shadow(0 0 12px color-mix(in srgb,var(--class-color) 30%,transparent)); }
+    .character-stage strong { font-size:15px; display:block; margin:7px 0; }
+    .character-stage .overline { color:var(--class-color); font-size:9px; }
+    .character-stage small { font-size:10px; color:var(--muted); line-height:1.6; display:block; }
+    .character-preview-btn { color:var(--cyan); border:0; padding:9px 0 0; background:none; font-size:11px; }
+    #onboardingDialog { max-width:840px; padding:30px; max-height:calc(100dvh - 28px); overflow-y:auto; }
+    .setup-header { display:flex; align-items:center; gap:11px; margin-bottom:20px; }
+    .setup-header .overline { color:var(--cyan); }
+    .setup-header .logo { width:30px; height:30px; }
+    .setup-name { max-width:420px; margin:22px 0; }
+    .setup-name .hint { margin:0; font-size:10px; }
+    .character-grid { border:0; padding:0; margin:0; }
+    .character-grid legend { margin-bottom:14px; }
+    .character-options { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:10px; }
+    .character-option { position:relative; cursor:pointer; min-width:0; }
+    .character-option input { position:absolute; opacity:0; width:1px; height:1px; padding:0; margin:0; }
+    .character-choice { --class-color:var(--cyan); position:relative; display:flex; align-items:center; flex-direction:column; min-height:235px; padding:18px 12px 15px; border:1px solid var(--line); border-radius:13px; background:linear-gradient(160deg,#222733,#14181e); text-align:center; transition:border-color .2s,transform .2s,box-shadow .2s; }
+    .character-choice svg { width:85px; height:98px; margin:5px 0 17px; filter:drop-shadow(0 0 8px color-mix(in srgb,var(--class-color) 24%,transparent)); }
+    .character-choice .class-code { color:var(--class-color); font:9px Consolas,monospace; letter-spacing:1px; }
+    .character-choice strong { font-size:14px; margin:7px 0; }
+    .character-choice small { color:var(--muted); font-size:10px; line-height:1.6; }
+    .character-choice:hover { border-color:var(--class-color); transform:translateY(-3px); }
+    .character-option input:checked + .character-choice { border-color:var(--class-color); background:linear-gradient(150deg,color-mix(in srgb,var(--class-color) 12%,#191c22),#14181e); box-shadow:0 0 25px color-mix(in srgb,var(--class-color) 15%,transparent); }
+    .character-option input:checked + .character-choice::after { content:'✓'; position:absolute; top:9px; right:9px; color:var(--class-color); font-size:13px; }
+    .character-option input:focus-visible + .character-choice { outline:2px solid var(--class-color); outline-offset:4px; }
+    .setup-summary { display:flex; align-items:center; justify-content:space-between; gap:18px; margin-top:23px; padding-top:20px; border-top:1px solid var(--line); }
+    .setup-summary p { font-size:12px; color:var(--muted); line-height:1.6; margin:0; }
+    .setup-summary p strong { color:var(--text); }
+    .setup-summary .btn { min-width:190px; }
+    .setup-exit { margin-top:13px; text-align:center; }
+    @media(max-width:690px) { #onboardingDialog { padding:22px; } .character-options { grid-template-columns:repeat(2,minmax(0,1fr)); gap:9px; } .character-choice { min-height:210px; padding:12px 10px; } .character-choice svg { height:80px; margin:2px 0 12px; } .setup-summary { flex-direction:column; align-items:stretch; } .setup-summary .btn { width:100%; } .setup-summary p { text-align:center; } }
   </style>
 </head>
 <body>
@@ -212,7 +248,7 @@
           <div class="demo-bar" id="demoBar"><span>Du spielst gerade im Demo-Modus. Fortschritt bleibt in diesem Browser.</span><button id="demoLoginBtn">Konto verbinden →</button></div>
         </div>
         <aside class="stack right-column" aria-label="Level und Kalender">
-          <section class="card level-card" id="levelCard"><div class="level-top"><div><span class="overline">Dein Charakter</span><h2 id="levelTitle">Level 1</h2></div><div class="level-badge" id="levelBadge">1</div></div><p class="rank" id="rankName">Rookie · Das Abenteuer beginnt</p><div class="progress-track" role="progressbar" id="levelProgress" aria-label="Fortschritt zum nächsten Level" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-fill" id="levelFill"></div></div><div class="xp-caption"><span id="levelXp">0 / 100 XP</span><span id="nextLevel">LEVEL 2</span></div><div class="level-bottom"><span id="totalXp">0 XP insgesamt</span><span data-icon="spark"></span></div></section>
+          <section class="card level-card" id="levelCard"><div class="level-top"><div><span class="overline">Dein Charakter</span><h2 id="levelTitle">Level 1</h2></div><div class="level-badge" id="levelBadge">1</div></div><div class="character-stage" id="characterStage"></div><p class="rank" id="rankName">Rookie · Das Abenteuer beginnt</p><div class="progress-track" role="progressbar" id="levelProgress" aria-label="Fortschritt zum nächsten Level" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-fill" id="levelFill"></div></div><div class="xp-caption"><span id="levelXp">0 / 100 XP</span><span id="nextLevel">LEVEL 2</span></div><div class="level-bottom"><span id="totalXp">0 XP insgesamt</span><span data-icon="spark"></span></div><button class="character-preview-btn" id="previewCharacterBtn">Charakter-Auswahl testen →</button></section>
           <section class="card card-pad"><div class="calendar-head"><h2 id="monthLabel"></h2><div class="calendar-controls"><button class="icon-btn" id="prevMonthBtn" aria-label="Vorheriger Monat"><span data-icon="left"></span></button><button class="icon-btn" id="nextMonthBtn" aria-label="Nächster Monat"><span data-icon="right"></span></button></div></div><div class="calendar-grid" id="calendarGrid"></div><div class="legend"><span><i></i>Alles geschafft</span><span><i></i>Teilweise</span></div></section>
           <section class="card card-pad"><div class="card-heading"><h2>Als Nächstes</h2><span data-icon="right"></span></div><div id="upcomingList"></div></section>
         </aside>
@@ -221,7 +257,8 @@
     </main>
   </div>
   <dialog id="questDialog" aria-labelledby="questDialogTitle"><form id="questForm"><div class="dialog-head"><h2 id="questDialogTitle">Neue Quest</h2><button type="button" class="icon-btn" id="closeQuestBtn" aria-label="Schließen"><span data-icon="close"></span></button></div><p class="dialog-desc">Ein kleines Ziel. Ein klarer Plan. Dein nächster Schritt.</p><div class="field"><label for="questName">Was möchtest du schaffen?</label><input id="questName" name="title" placeholder="z. B. 20 Minuten programmieren" maxlength="100" required></div><span class="field-label" id="typeLabel">Wie oft?</span><div class="type-picker" role="group" aria-labelledby="typeLabel"><button type="button" data-type="daily" aria-pressed="true"><span data-icon="sun"></span>Täglich</button><button type="button" data-type="weekly" aria-pressed="false"><span data-icon="calendar"></span>Wöchentlich</button></div><div id="weekdayField" hidden><span class="field-label" id="weekdayLabel">An welchen Tagen?</span><div class="weekday-picker" id="weekdayPicker" role="group" aria-labelledby="weekdayLabel"></div></div><p class="hint" id="questStartHint"></p><p class="form-error" id="questError" role="alert" hidden></p><button type="submit" class="btn full" id="saveQuestBtn"><span data-icon="plus"></span>Quest erstellen</button></form></dialog>
-  <dialog id="authDialog" aria-labelledby="authTitle"><div class="brand auth-brand"><span class="logo" data-icon="bolt"></span>QuestLog<span class="lime">.</span></div><form id="authForm"><div class="dialog-head"><h2 id="authTitle">Dein Abenteuer beginnt.</h2><button type="button" class="icon-btn" id="closeAuthBtn" aria-label="Zur Demo"><span data-icon="close"></span></button></div><p class="dialog-desc" id="authDesc">Melde dich an und nimm deinen Fortschritt auf alle Geräte mit.</p><div class="field"><label for="emailInput">E-Mail-Adresse</label><input type="email" id="emailInput" autocomplete="email" placeholder="name@example.com" required></div><div class="field"><label for="passwordInput">Passwort</label><input type="password" id="passwordInput" autocomplete="current-password" minlength="6" required></div><p class="form-error" id="authError" role="alert" hidden></p><button class="btn full" id="authSubmitBtn" type="submit">Einloggen <span data-icon="right"></span></button><div class="auth-switch"><button class="text-btn" id="authSwitchBtn" type="button">Noch keinen Account? Registrieren</button></div><div class="auth-separator">ERST MAL UMSCHAUEN</div><button class="btn secondary full" id="startDemoBtn" type="button">Demo ausprobieren</button><p class="hint">Demo-Daten und dein Konto haben ihren eigenen Fortschritt.</p></form></dialog>
+  <dialog id="authDialog" aria-labelledby="authTitle"><div class="brand auth-brand"><span class="logo" data-icon="bolt"></span>QuestLog<span class="lime">.</span></div><form id="authForm"><div class="dialog-head"><h2 id="authTitle">Dein Abenteuer beginnt.</h2><button type="button" class="icon-btn" id="closeAuthBtn" aria-label="Zur Demo"><span data-icon="close"></span></button></div><p class="dialog-desc" id="authDesc">Melde dich mit E-Mail oder Username an und nimm deinen Fortschritt auf alle Geräte mit.</p><div class="field" id="registerUsernameField" hidden><label for="registerUsernameInput">Dein Username</label><input id="registerUsernameInput" autocomplete="nickname" placeholder="z. B. CodeKnight" minlength="3" maxlength="20" pattern="[A-Za-z][A-Za-z0-9_]{2,19}" aria-describedby="usernameFormatHint"><span class="hint" id="usernameFormatHint">3–20 Zeichen: Buchstaben, Zahlen und _. Beginnt mit einem Buchstaben.</span></div><div class="field"><label for="emailInput" id="loginIdentifierLabel">E-Mail oder Username</label><input type="text" id="emailInput" autocomplete="username" placeholder="CodeKnight oder name@example.com" required></div><div class="field"><label for="passwordInput">Passwort</label><input type="password" id="passwordInput" autocomplete="current-password" minlength="6" maxlength="256" required></div><p class="form-error" id="authError" role="alert" hidden></p><button class="btn full" id="authSubmitBtn" type="submit">Einloggen <span data-icon="right"></span></button><div class="auth-switch"><button class="text-btn" id="authSwitchBtn" type="button">Noch keinen Account? Registrieren</button></div><div class="auth-separator">ERST MAL UMSCHAUEN</div><button class="btn secondary full" id="startDemoBtn" type="button">Demo ausprobieren</button><p class="hint">Demo-Daten und dein Konto haben ihren eigenen Fortschritt.</p></form></dialog>
+  <dialog id="onboardingDialog" aria-labelledby="onboardingTitle"><form id="onboardingForm"><div class="setup-header"><span class="logo" data-icon="bolt"></span><span class="overline">QuestLog // Create your character</span></div><div class="dialog-head"><h2 id="onboardingTitle">Wähle deinen Start-Charakter.</h2></div><p class="dialog-desc" id="onboardingDesc">Dein Konto steht. Jetzt beginnt dein Abenteuer: Gib deinem Spieler einen Namen und wähle deine Klasse.</p><div class="field setup-name"><label for="onboardingUsername">01 · Dein Spielername</label><input id="onboardingUsername" autocomplete="nickname" maxlength="20" minlength="3" pattern="[A-Za-z][A-Za-z0-9_]{2,19}" placeholder="CodeKnight" required><span class="hint">3–20 Zeichen · Buchstaben, Zahlen, _ · Groß- und Kleinschreibung gelten als derselbe Name.</span></div><fieldset class="character-grid"><legend class="field-label">02 · Deine Klasse</legend><div class="character-options" id="characterOptions"></div></fieldset><p class="form-error" id="onboardingError" role="alert" hidden></p><div class="setup-summary"><p id="characterSummary">Wähle eine Klasse für dein Abenteuer.<br>Alle starten mit den gleichen XP-Regeln.</p><button class="btn" id="savePlayerBtn" type="submit" disabled>Abenteuer starten <span data-icon="right"></span></button></div><div class="setup-exit"><button class="text-btn" id="exitOnboardingBtn" type="button">Später einrichten · Abmelden</button></div></form></dialog>
   <dialog id="archiveDialog" aria-labelledby="archiveTitle"><div class="dialog-head"><h2 id="archiveTitle">Quest entfernen?</h2><button class="icon-btn" id="closeArchiveBtn" aria-label="Schließen"><span data-icon="close"></span></button></div><p class="dialog-desc" id="archiveDesc"></p><button class="btn full" id="confirmArchiveBtn">Quest entfernen</button><button class="btn secondary full" id="cancelArchiveBtn" style="margin-top:10px">Behalten</button></dialog>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <script id="quest-core">
@@ -262,10 +299,34 @@
       return { TIMEZONE,key,date,shift,weekday,monday,xp,level,due,tasksAt,total,streak,startDate,changeStatus };
     })();
   </script>
+  <script id="player-core">
+    'use strict';
+    const PlayerCore = (() => {
+      const classes = [
+        {id:'warrior',name:'Krieger',code:'VANGUARD',color:'#ffbb66',description:'Mutig voran. Schritt für Schritt.'},
+        {id:'mage',name:'Magier',code:'ARCANIST',color:'#be9aff',description:'Neugierig bleiben. Wissen sammeln.'},
+        {id:'ranger',name:'Waldläufer',code:'RANGER',color:'#70e5c0',description:'Dein Ziel im Blick. Dein Weg voraus.'},
+        {id:'rogue',name:'Schurke',code:'SHADOW',color:'#ff8dc6',description:'Flexibel denken. Neue Wege gehen.'},
+        {id:'engineer',name:'Tüftler',code:'ENGINEER',color:'#7edbff',description:'Ideen bauen. Probleme lösen.'}
+      ];
+      const usernameKey = value => String(value || '').trim().toLowerCase();
+      const validUsername = value => /^[A-Za-z][A-Za-z0-9_]{2,19}$/.test(String(value || '').trim());
+      const validClass = id => classes.some(c => c.id === id);
+      const validProfile = data => !!data && data.schemaVersion === 2 && data.onboardingCompleted === true && validUsername(data.username) && data.usernameKey === usernameKey(data.username) && validClass(data.characterClass);
+      const identity = (username, characterClass) => {
+        username = String(username || '').trim();
+        if (!validUsername(username)) throw new Error('Der Username braucht 3–20 Zeichen und muss mit einem Buchstaben beginnen. Erlaubt sind Buchstaben, Zahlen und _.');
+        if (!validClass(characterClass)) throw new Error('Wähle einen der fünf Charaktere.');
+        return {username,usernameKey:usernameKey(username),characterClass,onboardingCompleted:true,schemaVersion:2};
+      };
+      return {classes,usernameKey,validUsername,validClass,validProfile,identity};
+    })();
+  </script>
   <script>
     'use strict';
     const $ = id => document.getElementById(id);
     const C = QuestCore;
+    const P = PlayerCore;
     const icons = {
       bolt:'<path d="m13 2-9 12h7l-1 8 10-13h-7z"/>',
       plus:'<path d="M12 5v14M5 12h14"/>',
@@ -291,11 +352,76 @@
     const longDays = ['Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag'];
     const format = (value, options) => new Intl.DateTimeFormat('de-DE', { timeZone:'UTC', ...options }).format(C.date(value));
     const DEMO_KEY = 'questlog.demo.v1';
+    const DEMO_PROFILE_KEY = 'questlog.demo.profile.v1';
     let today = C.key(), selected = today, weekStart = C.monday(today), month = today.slice(0,7);
     let view = 'today', mode = 'demo', state = {quests:[],days:{}}, busy = false;
     let cloudReady = false, currentUser = null, sdk = null, firebasePromise = null, unsubscribers = [], session = 0;
+    let playerProfile = null, profileLoaded = false, pendingUsername = '', selectedCharacter = null, onboardingBusy = false, authBusy = false;
     let registerMode = false, editId = null, archiveId = null, questType = 'daily', selectedWeekdays = new Set([5]);
     let toastTimer;
+
+    // Editable SVG characters keep the complete frontend in one HTML file.
+    function characterArt(classId) {
+      const cls=P.classes.find(c=>c.id===classId)||P.classes[4], color=cls.color;
+      const gear={
+        warrior:'<path d="M17 19h28v6H17zm-3 6h34v6H14zm4 6h8v7h-8zm20 0h8v7h-8" fill="#9faec5"/><path d="M25 13h14v6H25z" fill="#ffbb66"/><path d="M51 30h4v27h-4zm-5 24h14v4H46z" fill="#c4d4e9"/><path d="M50 58h6v9h-6z" fill="#986547"/><path d="m3 40 13-3v20l-6 6-7-6z" fill="#ffbb66"/><path d="M8 43h3v15H8z" fill="#9a632f"/>',
+        mage:'<path d="m13 25 12-19h12l11 19z" fill="#8c67cf"/><path d="M19 21h28v5H13v-5z" fill="#be9aff"/><path d="m21 45-9 18h40L43 45z" fill="#6c4da7"/><path d="M31 43h4v20h-4z" fill="#be9aff"/><path d="M6 26h4v41H6z" fill="#9a7461"/><path d="m8 13 7 9-7 9-7-9z" fill="#be9aff"/><path d="M5 19h6v6H5z" fill="#e2d2ff"/>',
+        ranger:'<path d="M17 17h28v19h-5V23H23v13h-6z" fill="#315d4f"/><path d="M12 35h7v29h-7zm31 0h7v29h-7" fill="#315d4f"/><path d="M21 38h21v5H21z" fill="#70e5c0"/><path d="m51 27 9 9v20l-9 9" fill="none" stroke="#c4a479" stroke-width="4"/><path d="M52 28v36m-4-20h15" stroke="#70e5c0" stroke-width="2"/><path d="M16 23h5v8h-5" fill="#70e5c0"/>',
+        rogue:'<path d="M17 16h28v23h-7V24H24v15h-7z" fill="#57354e"/><path d="M23 29h17v9H23z" fill="#3b2738"/><path d="M12 38h7v24h-7zm31 0h7v24h-7" fill="#57354e"/><path d="m4 38 5-3 9 21-5 3zm46 20-4-3 9-20 5 3" fill="#ff8dc6"/><path d="M24 43h16v4H24z" fill="#ff8dc6"/>',
+        engineer:'<path d="M18 17h26v9H18z" fill="#475874"/><path d="M20 24h24v8H20z" fill="#1b2837"/><path d="M22 25h7v5h-7zm12 0h7v5h-7" fill="#7edbff"/><path d="M22 40h20v5H22z" fill="#d7eaf9"/><path d="M27 37h10v15H27z" fill="#304a65"/><path d="M52 30h5v30h-5zm-5 0h5v9h-5zm10 0h5v9h-5zm-5 24h5v7h-5" fill="#8faac4"/><path d="M9 43h9v13H9z" fill="#7edbff"/><path d="M11 46h5v7h-5z" fill="#304a65"/>'
+      };
+      return `<svg viewBox="0 0 64 76" role="img" aria-label="${cls.name} · Start-Charakter" shape-rendering="crispEdges"><ellipse cx="32" cy="70" rx="22" ry="3" fill="${color}" opacity=".12"/><path d="M21 40h22v18H21zM15 41h6v14h-6zm28 0h6v14h-6" fill="${color}"/><path d="M22 58h8v10h-8zm12 0h8v10h-8" fill="#364253"/><path d="M19 67h12v4H19zm14 0h12v4H33" fill="#1b2330"/><path d="M22 23h20v16H22z" fill="#dfb69a"/><path d="M25 28h3v3h-3zm11 0h3v3h-3" fill="#24202d"/><path d="M29 35h6v2h-6" fill="#a47464"/>${gear[cls.id]}</svg>`;
+    }
+    function demoProfile() {
+      try { const data=JSON.parse(localStorage.getItem(DEMO_PROFILE_KEY));if(P.validProfile(data))return data; } catch {}
+      return P.identity('Player01','engineer');
+    }
+    function openOnboarding(demo=mode==='demo') {
+      if(onboardingBusy)return;
+      if(!demo && (!currentUser || !profileLoaded))return;
+      if(!demo && P.validProfile(playerProfile))return;
+      selectedCharacter=demo?(playerProfile?.characterClass||'engineer'):null;
+      $('onboardingUsername').value=demo?(playerProfile?.username||'Player01'):(pendingUsername||currentUser?.displayName||'');
+      $('onboardingDesc').textContent=demo?'Teste die fünf Start-Charaktere. Dein Demo-Spieler wird nur in diesem Browser gespeichert.':'Dein Konto steht. Wähle deinen Usernamen und einen Start-Charakter. Dein bisheriger Quest-Fortschritt bleibt erhalten.';
+      $('exitOnboardingBtn').textContent=demo?'Zurück zur Demo':'Später einrichten · Abmelden';
+      formError('onboardingError','');renderCharacterOptions();
+      if(!$('onboardingDialog').open)$('onboardingDialog').showModal();
+      $('onboardingUsername').focus();
+    }
+    function renderCharacterOptions() {
+      $('characterOptions').innerHTML=P.classes.map(cls=>`<label class="character-option"><input type="radio" name="characterClass" value="${cls.id}" ${cls.id===selectedCharacter?'checked':''} required><span class="character-choice" style="--class-color:${cls.color}">${characterArt(cls.id)}<span class="class-code">${cls.code}</span><strong>${cls.name}</strong><small>${cls.description}</small></span></label>`).join('');
+      updateCharacterSummary();
+    }
+    function updateCharacterSummary() {
+      const cls=P.classes.find(c=>c.id===selectedCharacter);
+      $('characterSummary').innerHTML=cls?`<strong>${cls.name}</strong> · ${cls.description}<br>Alle Klassen starten mit den gleichen XP-Regeln.`:'Wähle eine Klasse für dein Abenteuer.<br>Alle starten mit den gleichen XP-Regeln.';
+      $('savePlayerBtn').disabled=onboardingBusy||!cls||!P.validUsername($('onboardingUsername').value);
+    }
+    async function completeOnboarding(username,characterClass) {
+      const identity=P.identity(username,characterClass);
+      if(mode==='demo') {
+        playerProfile=identity;
+        try { localStorage.setItem(DEMO_PROFILE_KEY,JSON.stringify(identity)); } catch { showError('Dein Demo-Charakter bleibt nur bis zum Schließen dieser Seite gespeichert.'); }
+        return identity;
+      }
+      const owner=currentUser?.uid;if(!owner)throw new Error('Melde dich zuerst an.');
+      const userRef=sdk.doc(sdk.db,'users',owner),playerRef=sdk.doc(sdk.db,'players',owner),nameRef=sdk.doc(sdk.db,'usernames',identity.usernameKey);
+      const result=await sdk.runTransaction(sdk.db,async tx=>{
+        const existing=await tx.get(userRef),name=await tx.get(nameRef),publicPlayer=await tx.get(playerRef);
+        if(existing.exists()) {
+          if(P.validProfile(existing.data()))return existing.data();
+          throw new Error('Dieses Konto hat bereits ein Profil in einem anderen Format. Bitte prüfe den users-Eintrag in Firebase.');
+        }
+        if(name.exists()&&name.data().uid!==owner)throw new Error('Dieser Username ist bereits vergeben. Wähle einen anderen Namen.');
+        if(publicPlayer.exists())throw new Error('Dein öffentliches Profil existiert bereits. Bitte prüfe den players-Eintrag in Firebase.');
+        tx.set(userRef,{...identity,createdAt:sdk.serverTimestamp(),updatedAt:sdk.serverTimestamp()});
+        tx.set(playerRef,{username:identity.username,usernameKey:identity.usernameKey,characterClass:identity.characterClass,schemaVersion:2,joinedAt:sdk.serverTimestamp()});
+        if(!name.exists())tx.set(nameRef,{uid:owner,createdAt:sdk.serverTimestamp()});
+        return identity;
+      });
+      if(currentUser?.uid===owner)playerProfile=result;
+      return result;
+    }
 
     function toast(message) {
       $('toast').textContent = message; $('toast').classList.add('show');
@@ -305,7 +431,7 @@
       $('cloudError').innerHTML = `${esc(message)}${mode === 'cloud' ? ' <button id="retryCloudBtn">Erneut verbinden</button>' : ''}`;
       $('cloudError').hidden = false;
       $('syncStatus').dataset.error = 'true';
-      if ($('retryCloudBtn')) $('retryCloudBtn').onclick = () => connectCloud(currentUser);
+      if ($('retryCloudBtn')) $('retryCloudBtn').onclick = () => { if(!onboardingBusy)connectCloud(currentUser); };
     }
     function formError(id, message) { $(id).textContent = message; $(id).hidden = !message; }
     function saveDemo() {
@@ -341,7 +467,8 @@
     }
     function enterDemo() {
       session++; unsubscribers.forEach(fn=>fn()); unsubscribers=[];
-      mode='demo'; currentUser=null; cloudReady=false; state=loadDemo();
+      mode='demo'; currentUser=null; cloudReady=false; state=loadDemo(); playerProfile=demoProfile(); profileLoaded=true;
+      $('onboardingDialog').close();
       $('cloudError').hidden=true; $('syncStatus').dataset.error='false';
       selected=today; month=today.slice(0,7); weekStart=C.monday(today);
       render();
@@ -366,11 +493,17 @@
       $('rankName').textContent=level.number>=20?'Legend · Dein Weg ist dein Erfolg':level.number>=10?'Veteran · Dranbleiben zahlt sich aus':level.number>=5?'Adventurer · Du bist auf Kurs':'Rookie · Das Abenteuer beginnt';
       $('levelFill').style.width=`${level.progress}%`; $('levelProgress').setAttribute('aria-valuenow',level.progress);
       $('levelXp').textContent=`${level.progress} / 100 XP`; $('nextLevel').textContent=`LEVEL ${level.number+1}`; $('totalXp').textContent=`${totalXp} XP insgesamt`;
-      $('playerName').textContent=currentUser?.email || 'Player 01'; $('avatar').textContent=(currentUser?.email || 'P').slice(0,1).toUpperCase();
+      const cls=P.classes.find(c=>c.id===playerProfile?.characterClass);
+      $('playerName').textContent=playerProfile?.username || 'Profil einrichten';
+      $('avatar').innerHTML=cls?characterArt(cls.id):icon('spark');
+      $('characterStage').style.setProperty('--class-color',cls?.color||'#7edbff');
+      $('characterStage').innerHTML=cls?`${characterArt(cls.id)}<div><span class="overline">START-CHARAKTER</span><strong>${cls.name}</strong><small>${esc(playerProfile.username)}<br>${cls.description}</small></div>`:`${icon('spark')}<div><strong>Dein Charakter wartet.</strong><small>Wähle deine Klasse nach dem Login.</small></div>`;
+      $('previewCharacterBtn').hidden=mode!=='demo'&&!!cls;
+      $('previewCharacterBtn').textContent=mode==='demo'?'Charakter-Auswahl testen →':'Profil einrichten →';
       $('accountMode').textContent=mode==='demo'?'Lokaler Demo-Modus':'Firebase-Konto';
       $('accountBtn').setAttribute('aria-label',mode==='demo'?'Konto verbinden':'Abmelden');
       $('demoLoginBtn').textContent=mode==='demo'?'Konto verbinden →':'Abmelden →';
-      $('demoBar').firstElementChild.textContent=mode==='demo'?'Demo mit Beispieldaten · Fortschritt bleibt in diesem Browser.':`Angemeldet als ${currentUser?.email || 'Spieler'}`;
+      $('demoBar').firstElementChild.textContent=mode==='demo'?'Demo mit Beispieldaten · Fortschritt bleibt in diesem Browser.':`Angemeldet als ${playerProfile?.username || currentUser?.email || 'Spieler'}`;
       $('addTopBtn').disabled=busy || (mode==='cloud'&&!cloudReady);
       if(mode==='demo') $('syncStatus').lastElementChild.textContent='Demo · lokal';
       $('selectedDateLabel').textContent=format(selected,{weekday:'long',day:'numeric',month:'long'});
@@ -379,7 +512,7 @@
       renderWeek(); renderTemplates(); renderCalendar(); renderUpcoming();
     }
     function dayMarkup(value) {
-      if(mode==='cloud'&&!cloudReady) return `<div class="empty">${icon('clock')}<h3>Deine Quests werden geladen …</h3><p>Verbinde deinen Spielplan mit der Cloud.</p></div>`;
+      if(mode==='cloud'&&!cloudReady) return profileLoaded&&!playerProfile?`<div class="empty">${icon('spark')}<h3>Dein Charakter wartet.</h3><p>Wähle deinen Namen und deine Klasse, um dein Abenteuer zu beginnen.</p><button class="btn" data-action="onboarding">Profil einrichten</button></div>`:`<div class="empty">${icon('clock')}<h3>Deine Quests werden geladen …</h3><p>Verbinde deinen Spielplan mit der Cloud.</p></div>`;
       const tasks=C.tasksAt(state,value,today), done=tasks.filter(t=>t.status==='done').length, xp=C.xp(tasks), isToday=value===today;
       const title=isToday?'Deine Quests für heute':format(value,{weekday:'long',day:'numeric',month:'short'});
       const note=value>today?'Vorschau · Hier siehst du deinen geplanten Spieltag.':value<today?'Rückblick · Dein gespeicherter Fortschritt.':tasks.length&&done===tasks.length?'Alles geschafft! Deine 10 XP sind verdient.':`${done} von ${tasks.length} erledigt · Jeder Schritt zählt.`;
@@ -498,7 +631,7 @@
           import('https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js')
         ]);
         const app=appModule.initializeApp(firebaseConfig), auth=authModule.getAuth(app), db=dbModule.getFirestore(app);
-        sdk={...authModule,...dbModule,auth,db};
+        sdk={...authModule,...dbModule,app,auth,db};
         authModule.onAuthStateChanged(auth,user=>{ if(user)connectCloud(user); else if(currentUser)enterDemo(); });
         return sdk;
       })();
@@ -507,14 +640,14 @@
     function connectCloud(user) {
       if(!user)return;
       unsubscribers.forEach(fn=>fn()); unsubscribers=[]; const token=++session;
-      currentUser=user; mode='cloud'; cloudReady=false; state={quests:[],days:{}};
+      currentUser=user; mode='cloud'; cloudReady=false; state={quests:[],days:{}};playerProfile=null;profileLoaded=false;
       $('authDialog').close(); $('cloudError').hidden=true; $('syncStatus').dataset.error='false';
       $('syncStatus').lastElementChild.textContent='Verbinde …'; render();
       let planLoaded=false,daysLoaded=false,planCache=true,daysCache=true,failed=false;
       const fail=error=>{ if(token!==session)return; failed=true; cloudReady=false; $('syncStatus').lastElementChild.textContent='Cloud prüfen'; showError(errorMessage(error)); render(); };
       const ready=()=>{
         if(token!==session)return;
-        cloudReady=planLoaded&&daysLoaded&&!failed;
+        cloudReady=planLoaded&&daysLoaded&&profileLoaded&&P.validProfile(playerProfile)&&!failed;
         if(cloudReady) $('syncStatus').lastElementChild.textContent=planCache||daysCache?'Cache · verbinde':'Cloud · synchron';
         render();
       };
@@ -530,13 +663,22 @@
         if(!validState({quests:[],days})) { fail(new Error('Dein Cloud-Fortschritt hat ein ungültiges Format.'));return; }
         state.days=days; daysLoaded=true; daysCache=snap.metadata.fromCache; ready();
       },fail));
+      unsubscribers.push(sdk.onSnapshot(sdk.doc(sdk.db,'users',user.uid),{includeMetadataChanges:true},snap=>{
+        if(token!==session)return;
+        if(!snap.exists()&&snap.metadata.fromCache)return;
+        if(snap.exists()&&!P.validProfile(snap.data())){fail(new Error('Dein Spielerprofil hat ein ungültiges Format. Bitte prüfe den users-Eintrag in Firebase.'));return;}
+        playerProfile=snap.exists()?snap.data():null;profileLoaded=true;
+        if(playerProfile){pendingUsername='';$('onboardingDialog').close();}
+        else openOnboarding(false);
+        ready();
+      },fail));
     }
     function errorMessage(error) {
       const code=error?.code||'';
       const messages={
-        'auth/invalid-credential':'E-Mail oder Passwort stimmt nicht.',
-        'auth/wrong-password':'E-Mail oder Passwort stimmt nicht.',
-        'auth/user-not-found':'E-Mail oder Passwort stimmt nicht.',
+        'auth/invalid-credential':'E-Mail, Username oder Passwort stimmt nicht.',
+        'auth/wrong-password':'E-Mail, Username oder Passwort stimmt nicht.',
+        'auth/user-not-found':'E-Mail, Username oder Passwort stimmt nicht.',
         'auth/email-already-in-use':'Für diese E-Mail-Adresse gibt es bereits ein Konto.',
         'auth/weak-password':'Wähle ein Passwort mit mindestens 6 Zeichen.',
         'auth/invalid-email':'Bitte gib eine gültige E-Mail-Adresse ein.',
@@ -545,7 +687,13 @@
         'auth/network-request-failed':'Keine Verbindung. Bitte prüfe dein Internet.',
         'auth/unauthorized-domain':'Diese Domain muss in Firebase Authentication freigegeben werden.',
         'permission-denied':'Firestore verweigert den Zugriff. Bitte prüfe die Regeln für dein Konto im Firebase-Projekt.',
-        'unavailable':'Die Cloud ist nicht erreichbar. Bitte versuche es mit Internetverbindung erneut.'
+        'unavailable':'Die Cloud ist nicht erreichbar. Bitte versuche es mit Internetverbindung erneut.',
+        'functions/unauthenticated':'E-Mail, Username oder Passwort stimmt nicht.',
+        'functions/resource-exhausted':'Zu viele Login-Versuche. Bitte warte 10 Minuten und versuche es erneut.',
+        'functions/not-found':'Der Username-Login ist noch nicht eingerichtet. Veröffentliche die mitgelieferte Firebase-Funktion oder melde dich mit deiner E-Mail an.',
+        'functions/internal':'Der Username-Login konnte nicht erreicht werden. Prüfe, ob die Firebase-Funktion veröffentlicht ist. E-Mail-Login ist ebenfalls möglich.',
+        'functions/unavailable':'Der Username-Login ist gerade nicht erreichbar. Bitte versuche es erneut.',
+        'functions/invalid-argument':'Bitte gib einen gültigen Usernamen und dein Passwort ein.'
       };
       if(messages[code])return messages[code];
       if(error instanceof TypeError)return 'Firebase konnte nicht geladen werden. Prüfe die Verbindung oder probiere die lokale Demo.';
@@ -553,7 +701,7 @@
     }
     function openAuth() { formError('authError',''); $('authDialog').showModal(); }
     async function accountAction() {
-      if(busy)return;
+      if(busy||onboardingBusy||authBusy)return;
       if(mode==='demo')openAuth();
       else { try { await sdk.signOut(sdk.auth); enterDemo(); toast('Abgemeldet. Du bist jetzt in der lokalen Demo.'); } catch(error) { toast(errorMessage(error)); } }
     }
@@ -565,6 +713,23 @@
     $('addTopBtn').onclick=()=>openQuest(); $('accountBtn').onclick=accountAction; $('demoLoginBtn').onclick=accountAction;
     $('closeQuestBtn').onclick=()=>$('questDialog').close();
     $('closeAuthBtn').onclick=()=>$('authDialog').close(); $('startDemoBtn').onclick=()=>$('authDialog').close();
+    $('previewCharacterBtn').onclick=()=>openOnboarding();
+    $('onboardingDialog').addEventListener('cancel',event=>{if(mode==='cloud'||onboardingBusy)event.preventDefault();});
+    $('onboardingUsername').addEventListener('input',updateCharacterSummary);
+    $('characterOptions').addEventListener('change',event=>{if(event.target.name==='characterClass'){selectedCharacter=event.target.value;updateCharacterSummary();}});
+    $('exitOnboardingBtn').onclick=async()=>{
+      if(onboardingBusy)return;
+      if(mode==='demo'){$('onboardingDialog').close();return;}
+      try{await sdk.signOut(sdk.auth);pendingUsername='';enterDemo();toast('Dein Konto bleibt erhalten. Richte deinen Charakter beim nächsten Login ein.');}
+      catch(error){formError('onboardingError',errorMessage(error));}
+    };
+    $('onboardingForm').onsubmit=async event=>{
+      event.preventDefault();if(onboardingBusy)return;
+      onboardingBusy=true;$('exitOnboardingBtn').disabled=true;updateCharacterSummary();formError('onboardingError','');
+      try{const result=await completeOnboarding($('onboardingUsername').value,selectedCharacter);pendingUsername='';$('onboardingDialog').close();toast(`Willkommen, ${result.username}! Dein Charakter ist bereit.`);}
+      catch(error){formError('onboardingError',errorMessage(error));}
+      finally{onboardingBusy=false;$('exitOnboardingBtn').disabled=false;updateCharacterSummary();render();}
+    };
     $('closeArchiveBtn').onclick=()=>$('archiveDialog').close(); $('cancelArchiveBtn').onclick=()=>$('archiveDialog').close();
     $('prevDayBtn').onclick=()=>selectDate(C.shift(selected,-1)); $('nextDayBtn').onclick=()=>selectDate(C.shift(selected,1)); $('goTodayBtn').onclick=()=>selectDate(today);
     $('prevWeekBtn').onclick=()=>{weekStart=C.shift(weekStart,-7);selected=weekStart;render();}; $('nextWeekBtn').onclick=()=>{weekStart=C.shift(weekStart,7);selected=weekStart;render();};
@@ -576,6 +741,7 @@
       const button=event.target.closest('[data-action]'); if(!button||button.disabled)return;
       const {action,id,date,status}=button.dataset;
       if(action==='new')openQuest();
+      if(action==='onboarding')openOnboarding(false);
       if(action==='status')setStatus(date,id,status);
       if(action==='select-calendar')selectDate(date,'today');
       if(action==='select-week'){selected=date;render();}
@@ -607,24 +773,41 @@
     $('authSwitchBtn').onclick=()=>{
       registerMode=!registerMode;
       $('authTitle').textContent=registerMode?'Dein erster Schritt.':'Dein Abenteuer beginnt.';
-      $('authDesc').textContent=registerMode?'Erstelle dein Konto und starte mit deinem eigenen Spielplan.':'Melde dich an und nimm deinen Fortschritt auf alle Geräte mit.';
+      $('authDesc').textContent=registerMode?'Erstelle dein Konto. Danach wählst du einen der fünf Start-Charaktere.':'Melde dich mit E-Mail oder Username an und nimm deinen Fortschritt auf alle Geräte mit.';
+      $('registerUsernameField').hidden=!registerMode;$('registerUsernameInput').required=registerMode;
+      $('emailInput').type=registerMode?'email':'text';$('emailInput').autocomplete=registerMode?'email':'username';
+      $('emailInput').placeholder=registerMode?'name@example.com':'CodeKnight oder name@example.com';
+      $('loginIdentifierLabel').textContent=registerMode?'E-Mail-Adresse':'E-Mail oder Username';
       $('authSubmitBtn').innerHTML=(registerMode?'Account erstellen':'Einloggen')+icon('right');
       $('authSwitchBtn').textContent=registerMode?'Bereits einen Account? Einloggen':'Noch keinen Account? Registrieren';
       $('passwordInput').autocomplete=registerMode?'new-password':'current-password';formError('authError','');
     };
     $('authForm').onsubmit=async event=>{
-      event.preventDefault(); $('authSubmitBtn').disabled=true; $('authSwitchBtn').disabled=true;formError('authError','');
+      event.preventDefault();if(authBusy)return;authBusy=true;$('authSubmitBtn').disabled=true; $('authSwitchBtn').disabled=true;formError('authError','');
       try{
-        const f=await ensureFirebase(),email=$('emailInput').value.trim(),password=$('passwordInput').value;
-        if(registerMode)await f.createUserWithEmailAndPassword(f.auth,email,password);else await f.signInWithEmailAndPassword(f.auth,email,password);
+        const f=await ensureFirebase(),identifier=$('emailInput').value.trim(),password=$('passwordInput').value;
+        if(registerMode){
+          pendingUsername=$('registerUsernameInput').value.trim();
+          if(!P.validUsername(pendingUsername))throw new Error('Bitte wähle einen Usernamen mit 3–20 Zeichen.');
+          await f.createUserWithEmailAndPassword(f.auth,identifier,password);
+        }else if(identifier.includes('@'))await f.signInWithEmailAndPassword(f.auth,identifier,password);
+        else {
+          if(!P.validUsername(identifier))throw new Error('Bitte gib eine E-Mail-Adresse oder einen gültigen Usernamen ein.');
+          const functionsModule=await import('https://www.gstatic.com/firebasejs/10.8.0/firebase-functions.js');
+          const call=functionsModule.httpsCallable(functionsModule.getFunctions(f.app,'europe-west1'),'signInWithUsername');
+          const result=await call({username:P.usernameKey(identifier),password});
+          if(typeof result.data?.email!=='string')throw new Error('Der Username-Login hat keine gültige Antwort geliefert.');
+          await f.signInWithEmailAndPassword(f.auth,result.data.email,password);
+        }
         $('passwordInput').value='';
       }catch(error){formError('authError',errorMessage(error));}
-      finally{$('authSubmitBtn').disabled=false;$('authSwitchBtn').disabled=false;}
+      finally{authBusy=false;$('authSubmitBtn').disabled=false;$('authSwitchBtn').disabled=false;}
     };
     window.addEventListener('storage',event=>{if(event.key===DEMO_KEY&&mode==='demo'&&!busy){state=loadDemo();render();}});
     setInterval(()=>{const next=C.key();if(next!==today){today=next;selected=next;weekStart=C.monday(next);month=next.slice(0,7);render();toast('Ein neuer Tag. Deine Quests warten auf dich.');}},30000);
     enterDemo();
     if(new URLSearchParams(location.search).get('demo')!=='1'){openAuth();ensureFirebase().catch(error=>formError('authError',errorMessage(error)));}
+    else if(new URLSearchParams(location.search).get('onboarding')==='1')openOnboarding(true);
   </script>
 </body>
 </html>
