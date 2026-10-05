@@ -417,6 +417,62 @@
     @media(max-width:600px) { #focusList { grid-template-columns:1fr; }.focus-card-head h3 { font-size:14px; }.focus-days { font-size:40px; }.focus-orb { display:grid; }.focus-next { font-size:10px; }.focus-confirm { font-size:12px; }.focus-card { padding:21px; } }
     @media(max-width:390px) { .hero-copy h2 { font-size:28px; } }
     @media(prefers-reduced-motion:reduce) { *,*::before,*::after { animation:none!important;transition:none!important;scroll-behavior:auto!important; }.reward-burst { display:none; } }
+
+    .shop-tabs { display:flex; gap:8px; margin:0 0 17px; }
+    .shop-tabs button { flex:1; padding:10px 14px; color:var(--muted); background:#ffffff04; border:1px solid var(--line); border-radius:10px; font-size:12px; }
+    .shop-tabs button[aria-pressed=true] { color:var(--cyan); border-color:#73ebdf60; background:#73ebdf0b; }
+    .buddy { position:absolute; display:block; right:2%; bottom:5%; width:34%; aspect-ratio:1; z-index:3; }
+    .buddy svg.buddy-art { width:100%; height:100%; margin:0; filter:drop-shadow(0 3px 0 #0003); }
+    .cosmetic-figure:not([data-buddy=""])>svg.player-art { transform:translateX(-9%); }
+    .buddy .buddy-body { animation:buddy-bob 2.8s ease-in-out infinite; transform-box:fill-box; transform-origin:center; }
+    .buddy .buddy-eyes { animation:buddy-blink 5s infinite; }
+    .buddy .buddy-tail { animation:tail-wag 2s ease-in-out infinite; transform-box:fill-box; transform-origin:20% 90%; }
+    .buddy .buddy-wing { animation:wing-flap 1.7s ease-in-out infinite; transform-box:fill-box; }
+    .buddy .wing-left { transform-origin:90% 90%; }.buddy .wing-right { transform-origin:10% 90%; animation-direction:reverse; }
+    .buddy .buddy-signal { animation:antenna-glow 2s ease-in-out infinite; }
+    .buddy-heart { position:absolute; top:-15%; left:40%; color:#ffaccc; font-size:21px; opacity:0; text-shadow:0 0 12px #ff83a966; }
+    .buddy[data-companion=buddy-robot] .buddy-heart { color:var(--lime); }
+    .buddy.is-cheering>svg { animation:buddy-jump .6s ease-in-out 3; }
+    .buddy.is-cheering .buddy-heart { animation:buddy-love .9s ease-out 2; }
+    .buddy.is-cheering .buddy-arm { animation:robot-wave .35s ease-in-out 5; transform-box:fill-box; transform-origin:20% 20%; }
+    .buddy.is-cheering .buddy-tail { animation-duration:.3s; }.buddy.is-cheering .buddy-wing { animation-duration:.4s; }
+    .buddy-caption { color:var(--cyan); display:inline-block; margin-top:5px; }
+    .hero-figure .buddy { width:72px; right:2px; bottom:15px; }
+    .hero-figure .buddy svg { width:72px; height:72px; }
+    .character-stage .buddy { width:38px; right:0; bottom:6px; }
+    .character-stage .buddy svg { width:38px; height:38px; }
+    .companion-preview { width:130px; height:140px; display:grid; place-items:center; }
+    .companion-preview>svg.buddy-art { width:112px; height:112px; filter:drop-shadow(0 0 14px color-mix(in srgb,var(--item-color) 25%,transparent)); }
+    .companion-preview .buddy-body { animation:buddy-bob 2.8s ease-in-out infinite; transform-box:fill-box; }
+    .companion-preview .buddy-tail { animation:tail-wag 2s ease-in-out infinite; transform-box:fill-box; transform-origin:20% 90%; }
+    .companion-preview .buddy-wing { animation:wing-flap 1.7s ease-in-out infinite; transform-box:fill-box; transform-origin:center; }
+    .companion-preview .buddy-eyes { animation:buddy-blink 5s infinite; }
+    .leaderboard-character { width:66px; height:76px; background:transparent; }
+    .leaderboard-character>.cosmetic-figure { width:66px; height:76px; background-color:#11151b; }
+    .leaderboard-character .player-art { width:42px; height:54px; }
+    .leaderboard-character .buddy { width:26px; right:0; bottom:3px; }
+    .leaderboard-character svg.buddy-art { width:26px; height:26px; }
+    .leaderboard-character .buddy-heart { display:none; }
+    .podium-player>.cosmetic-figure { width:122px; height:138px; margin:8px auto 12px; max-width:100%; }
+    .podium-player .player-art { width:75px; height:98px; margin:0; }
+    .podium-player .buddy { width:42px; right:0; bottom:8px; }
+    .podium-player svg.buddy-art { width:42px; height:42px; }
+    .leaderboard-own { display:flex; align-items:center; gap:16px; }
+    .own-details { min-width:0; overflow-wrap:anywhere; }
+    .own-appearance { flex-shrink:0; }.own-appearance>.cosmetic-figure { width:78px; height:88px; background-color:#121a22; }
+    .own-appearance .player-art { width:49px; height:66px; }
+    .own-appearance .buddy { width:29px; bottom:4px; right:0; }
+    @keyframes buddy-bob { 50% { transform:translateY(-2px); } }
+    @keyframes buddy-blink { 0%,43%,47%,100% { opacity:1; } 45% { opacity:.12; } }
+    @keyframes tail-wag { 50% { transform:rotate(-9deg); } }
+    @keyframes wing-flap { 50% { transform:rotate(12deg); } }
+    @keyframes antenna-glow { 50% { opacity:.35; } }
+    @keyframes buddy-jump { 45% { transform:translateY(-13px) rotate(-5deg); } 75% { transform:translateY(-5px) rotate(5deg); } }
+    @keyframes buddy-love { 0% { opacity:0;transform:translateY(6px) scale(.7); } 25% { opacity:1; } 100% { opacity:0;transform:translateY(-22px) scale(1.15); } }
+    @keyframes robot-wave { 50% { transform:rotate(-35deg); } }
+    @media(max-width:660px) { .hero-figure .buddy { width:48px; right:-2px; bottom:22px; }.hero-figure .buddy svg { width:48px; height:48px; }.leaderboard-character,.leaderboard-character>.cosmetic-figure { width:53px; height:65px; }.leaderboard-character .player-art { width:34px; height:45px; }.leaderboard-character .buddy,.leaderboard-character svg.buddy-art { width:22px; height:22px; }.podium-player>.cosmetic-figure { width:88px; height:110px; }.podium-player .player-art { width:55px; height:78px; }.podium-player .buddy,.podium-player svg.buddy-art { width:32px; height:32px; }.leaderboard-own { padding:12px; gap:12px; }.own-appearance>.cosmetic-figure { width:63px; height:76px; }.own-appearance .player-art { width:41px; height:56px; }.own-appearance .buddy,.own-appearance svg.buddy-art { width:25px; height:25px; }.companion-preview { width:110px; height:130px; }.companion-preview>svg.buddy-art { width:94px; height:94px; } }
+    @media(max-width:390px) { .hero-figure .buddy,.hero-figure .buddy svg { width:42px; height:42px; } }
+    @media(prefers-reduced-motion:reduce) { *,*::before,*::after { animation:none!important;transition:none!important;scroll-behavior:auto!important; }.buddy.is-cheering .buddy-heart { opacity:1; } }
   </style>
 </head>
 <body>
@@ -471,7 +527,7 @@
             <div class="coin-milestones" aria-label="Tägliche Coin-Stufen"><div><span>AB START</span><strong>1 <small>Coin / Tag</small></strong></div><div><span>AB 7 TAGEN</span><strong>2 <small>Coins / Tag</small></strong></div><div><span>AB 30 TAGEN</span><strong>3 <small>Coins / Tag</small></strong></div></div>
             <div class="focus-summary" id="focusSummary" role="status"></div><div id="focusList"></div>
           </section>
-          <section id="shopView" hidden aria-label="Kosmetik-Shop"><div class="shop-banner"><div><span class="overline">THE LOOT ROOM</span><h2>Dein Fortschritt. Dein Look.</h2><p>Einmal kaufen, dauerhaft behalten. Für alle fünf Klassen.</p></div><div class="shop-wallet"><span data-icon="coin"></span><strong id="shopBalance">0</strong><small>verfügbar</small></div></div><p class="shop-note" id="shopPending" role="status"></p><div class="shop-grid" id="shopGrid"></div><p class="hint">Coins bringen dir neue Looks. Dein Level wächst durch Quests. Deine gekauften Looks bleiben in deinem Inventar. Kombiniere Aura, Rahmen und Kulisse nach deinem Geschmack.</p></section>
+          <section id="shopView" hidden aria-label="Kosmetik-Shop"><div class="shop-banner"><div><span class="overline">THE LOOT ROOM</span><h2>Dein Fortschritt. Dein Look.</h2><p>Looks und Begleiter für alle fünf Klassen. Einmal kaufen, behalten.</p></div><div class="shop-wallet"><span data-icon="coin"></span><strong id="shopBalance">0</strong><small>verfügbar</small></div></div><p class="shop-note" id="shopPending" role="status"></p><div class="shop-tabs" role="group" aria-label="Shop-Kategorien"><button data-shop-filter="all" aria-pressed="true">Alles</button><button data-shop-filter="cosmetics" aria-pressed="false">Looks</button><button data-shop-filter="buddy" aria-pressed="false">Begleiter</button></div><div class="shop-grid" id="shopGrid"></div><p class="hint">Coins bringen dir neue Looks. Dein Level wächst durch Quests. Deine gekauften Looks bleiben in deinem Inventar. Kombiniere Aura, Rahmen, Kulisse und Begleiter. Dein Look ist auch in beiden Ranglisten sichtbar.</p></section>
           <div class="demo-bar" id="demoBar"><span>Du spielst gerade im Demo-Modus. Fortschritt bleibt in diesem Browser.</span><button id="demoLoginBtn">Konto verbinden →</button></div>
         </div>
         <aside class="stack right-column" aria-label="Level und Kalender">
@@ -619,15 +675,23 @@
         {id:'frame-neon',slot:'frame',name:'Neon-Rahmen',tag:'RAHMEN',price:6,color:'#65f2da',description:'Ein leuchtender Rahmen für deine Figur.'},
         {id:'frame-gold',slot:'frame',name:'Golden Hero',tag:'RAHMEN',price:12,color:'#ffda78',description:'Goldene Ecken. Ein Auftritt für Helden.'},
         {id:'scene-forest',slot:'scene',name:'Mystischer Wald',tag:'KULISSE',price:15,color:'#77efb1',description:'Dein Rückzugsort zwischen leuchtenden Bäumen.'},
-        {id:'scene-nebula',slot:'scene',name:'Neon-Galaxie',tag:'KULISSE',price:25,color:'#a8a0ff',description:'Ein kleines Universum für deinen Charakter.'}
+        {id:'scene-nebula',slot:'scene',name:'Neon-Galaxie',tag:'KULISSE',price:25,color:'#a8a0ff',description:'Ein kleines Universum für deinen Charakter.'},
+        {id:'buddy-robot',slot:'buddy',name:'Pixel-Bot',tag:'BEGLEITER',price:20,color:'#73ebdf',description:'Ein kleiner Roboter, der jeden Quest-Erfolg mit dir feiert.'},
+        {id:'buddy-fox',slot:'buddy',name:'Funkenfuchs',tag:'BEGLEITER',price:35,color:'#ffb277',description:'Ein neugieriger Fuchs mit wippendem Schweif.'},
+        {id:'buddy-dragon',slot:'buddy',name:'Mini-Drache',tag:'BEGLEITER',price:60,color:'#b79aff',description:'Dein eigener Drache mit flatternden Flügeln.'}
       ];
-      const empty=()=>({owned:[],equipped:{aura:'',frame:'',scene:''},earnedCoins:0,settledThrough:'1970-01-01',schemaVersion:1});
+      const slots=['aura','frame','scene','buddy'];
+      const defaultEquipment=()=>({aura:'',frame:'',scene:'',buddy:''});
+      const validEquipment=(equipped,owned=null,legacy=false)=>!!equipped&&typeof equipped==='object'&&!Array.isArray(equipped)&&Object.keys(equipped).length===(legacy?3:4)&&(legacy?slots.slice(0,3):slots).every(slot=>equipped[slot]===''||catalog.some(item=>item.id===equipped[slot]&&item.slot===slot)&&(!owned||owned.includes(equipped[slot])));
+      const equipment=equipped=>validEquipment(equipped)?{...equipped}:validEquipment(equipped,null,true)?{...equipped,buddy:''}:defaultEquipment();
+      const empty=()=>({owned:[],equipped:defaultEquipment(),earnedCoins:0,settledThrough:'1970-01-01',schemaVersion:2});
       const cost=owned=>catalog.filter(item=>owned.includes(item.id)).reduce((n,item)=>n+item.price,0);
-      const valid=s=>!!s&&s.schemaVersion===1&&Array.isArray(s.owned)&&new Set(s.owned).size===s.owned.length&&s.owned.every(id=>catalog.some(i=>i.id===id))&&Number.isInteger(s.earnedCoins)&&s.earnedCoins>=cost(s.owned)&&s.earnedCoins<=109575&&/^\d{4}-\d{2}-\d{2}$/.test(s.settledThrough)&&!!s.equipped&&Object.keys(s.equipped).length===3&&['aura','frame','scene'].every(slot=>s.equipped[slot]===''||s.owned.includes(s.equipped[slot])&&catalog.some(i=>i.id===s.equipped[slot]&&i.slot===slot));
+      const valid=s=>!!s&&[1,2].includes(s.schemaVersion)&&Array.isArray(s.owned)&&s.owned.length<=catalog.length&&new Set(s.owned).size===s.owned.length&&s.owned.every(id=>catalog.some(i=>i.id===id))&&Number.isInteger(s.earnedCoins)&&s.earnedCoins>=cost(s.owned)&&s.earnedCoins<=109575&&/^\d{4}-\d{2}-\d{2}$/.test(s.settledThrough)&&validEquipment(s.equipped,s.owned,s.schemaVersion===1);
+      const normalize=s=>{if(!valid(s))throw new Error('Dein Inventar hat ein ungültiges Format.');return {...s,schemaVersion:2,owned:[...s.owned],equipped:equipment(s.equipped)};};
       const balance=(s,days,today)=>s.earnedCoins+FocusCore.coins(days,today,s.settledThrough)-cost(s.owned);
       const settle=(s,days,today)=>{
         const dates=Object.keys(days).filter(d=>d<today&&d>s.settledThrough).sort();
-        return {...s,owned:[...s.owned],equipped:{...s.equipped},earnedCoins:s.earnedCoins+FocusCore.coins(days,today,s.settledThrough),settledThrough:dates.at(-1)||s.settledThrough};
+        return {...normalize(s),earnedCoins:s.earnedCoins+FocusCore.coins(days,today,s.settledThrough),settledThrough:dates.at(-1)||s.settledThrough};
       };
       const mutate=(s,days,today,action,id)=>{
         const item=catalog.find(i=>i.id===id);if(!item)throw new Error('Dieser Artikel ist nicht verfügbar.');
@@ -643,7 +707,7 @@
         if(!valid(next))throw new Error('Dein Inventar konnte nicht geprüft werden.');
         return next;
       };
-      return {catalog,empty,cost,valid,balance,settle,mutate};
+      return {catalog,slots,defaultEquipment,validEquipment,equipment,empty,cost,valid,normalize,balance,settle,mutate};
     })();
   </script>
   <script id="leaderboard-core">
@@ -652,13 +716,14 @@
       const PAGE_SIZE = 50;
       const validEntry = data => {
         if(!data || !PlayerCore.validUsername(data.username) || data.usernameKey!==PlayerCore.usernameKey(data.username) || !PlayerCore.validClass(data.characterClass) || !Number.isInteger(data.recordedDays) || data.recordedDays<0 || data.recordedDays>36525 || !Number.isInteger(data.totalXp) || data.totalXp<0)return false;
+        if(data.equipped!==undefined&&!ShopCore.validEquipment(data.equipped))return false;
         if(data.schemaVersion===1)return data.totalXp<=data.recordedDays*10&&data.level===Math.floor(data.totalXp/100)+1;
         return data.schemaVersion===2 && Number.isInteger(data.bonusDays) && data.bonusDays>=0 && data.bonusDays<=36525 && Number.isInteger(data.questXp) && data.questXp>=0 && data.questXp<=data.recordedDays*10 && Number.isInteger(data.bonusXp) && data.bonusXp>=0 && data.bonusXp<=data.bonusDays && data.totalXp===data.questXp+data.bonusXp && data.level===QuestCore.level(data.totalXp).number;
       };
-      const normalize = data => data.schemaVersion===1?{...data,schemaVersion:2,questXp:data.totalXp,bonusXp:0,bonusDays:0,level:QuestCore.level(data.totalXp).number}:data;
-      const summary = (profile,days,today,focusDays={}) => {
+      const normalize = data => ({...(data.schemaVersion===1?{...data,schemaVersion:2,questXp:data.totalXp,bonusXp:0,bonusDays:0,level:QuestCore.level(data.totalXp).number}:data),equipped:ShopCore.equipment(data.equipped)});
+      const summary = (profile,days,today,focusDays={},equipped=ShopCore.defaultEquipment()) => {
         const questXp=QuestCore.total(days,today),bonusXp=FocusCore.total(focusDays,today),totalXp=questXp+bonusXp;
-        return {username:profile.username,usernameKey:profile.usernameKey,characterClass:profile.characterClass,questXp,bonusXp,totalXp,level:QuestCore.level(totalXp).number,recordedDays:Object.keys(days).filter(date=>date<=today).length,bonusDays:Object.keys(focusDays).filter(date=>date<=today).length,schemaVersion:2};
+        return {username:profile.username,usernameKey:profile.usernameKey,characterClass:profile.characterClass,questXp,bonusXp,totalXp,level:QuestCore.level(totalXp).number,recordedDays:Object.keys(days).filter(date=>date<=today).length,bonusDays:Object.keys(focusDays).filter(date=>date<=today).length,schemaVersion:2,equipped:ShopCore.equipment(equipped)};
       };
       const weekly = (summary,days,focusDays,weekStart,today=QuestCore.key()) => {
         const end=QuestCore.shift(weekStart,6),filter=records=>Object.fromEntries(Object.entries(records).filter(([date])=>date>=weekStart&&date<=end&&date<=today));
@@ -666,7 +731,7 @@
         return {...summary,weekStart,weekQuestXp,weekBonusXp,weekXp:weekQuestXp+weekBonusXp};
       };
       const validWeekly = (data,weekStart) => validEntry(data)&&data.schemaVersion===2&&data.weekStart===weekStart&&Number.isInteger(data.weekQuestXp)&&data.weekQuestXp>=0&&data.weekQuestXp<=70&&Number.isInteger(data.weekBonusXp)&&data.weekBonusXp>=0&&data.weekBonusXp<=7&&data.weekXp===data.weekQuestXp+data.weekBonusXp&&data.weekQuestXp<=data.questXp&&data.weekBonusXp<=data.bonusXp;
-      const same = (a,b) => !!a && ['username','usernameKey','characterClass','questXp','bonusXp','totalXp','level','recordedDays','bonusDays','schemaVersion',...(b.weekStart?['weekStart','weekQuestXp','weekBonusXp','weekXp']:[])].every(key => a[key]===b[key]);
+      const same = (a,b) => !!a && ['username','usernameKey','characterClass','questXp','bonusXp','totalXp','level','recordedDays','bonusDays','schemaVersion',...(b.weekStart?['weekStart','weekQuestXp','weekBonusXp','weekXp']:[])].every(key => a[key]===b[key]) && (!b.equipped || ShopCore.validEquipment(a.equipped)&&ShopCore.slots.every(slot=>a.equipped[slot]===b.equipped[slot]));
       const ranked = (entries,field='totalXp') => {
         const unique = new Map();
         entries.filter(entry=>validEntry(entry)&&typeof entry.uid==='string').forEach(entry=>unique.set(entry.uid,normalize(entry)));
@@ -724,7 +789,8 @@
     let playerProfile = null, profileLoaded = false, pendingUsername = '', selectedCharacter = null, onboardingBusy = false, authBusy = false;
     let registerMode = false, editId = null, archiveId = null, questType = 'daily', selectedWeekdays = new Set([5]);
     let focusState={timers:[],days:{}},focusBusy=false;
-    let shopState=S.empty(),shopBusy=false,shopLoaded=false;
+    let shopState=S.empty(),shopBusy=false,shopLoaded=false,shopFilter='all';
+    let buddyReactionUntil=0,buddyReactionTimer;
     let toastTimer;
     let leaderboard = newLeaderboard();
     let publication = {running:false,pending:false,promise:null,lastKey:'',error:'',confirmed:false};
@@ -745,7 +811,7 @@
         rogue:'<path d="M17 16h28v23h-7V24H24v15h-7z" fill="#57354e"/><path d="M23 29h17v9H23z" fill="#3b2738"/><path d="M12 38h7v24h-7zm31 0h7v24h-7" fill="#57354e"/><path d="m4 38 5-3 9 21-5 3zm46 20-4-3 9-20 5 3" fill="#ff8dc6"/><path d="M24 43h16v4H24z" fill="#ff8dc6"/>',
         engineer:'<path d="M18 17h26v9H18z" fill="#475874"/><path d="M20 24h24v8H20z" fill="#1b2837"/><path d="M22 25h7v5h-7zm12 0h7v5h-7" fill="#7edbff"/><path d="M22 40h20v5H22z" fill="#d7eaf9"/><path d="M27 37h10v15H27z" fill="#304a65"/><path d="M52 30h5v30h-5zm-5 0h5v9h-5zm10 0h5v9h-5zm-5 24h5v7h-5" fill="#8faac4"/><path d="M9 43h9v13H9z" fill="#7edbff"/><path d="M11 46h5v7h-5z" fill="#304a65"/>'
       };
-      return `<svg viewBox="0 0 64 76" role="img" aria-label="${cls.name} · Level ${level} · Evolution ${evolution}" shape-rendering="crispEdges">${aura}${cape}<ellipse cx="32" cy="70" rx="22" ry="3" fill="${tone}" opacity=".18"/><path d="M21 40h22v18H21zM15 41h6v14h-6zm28 0h6v14h-6" fill="${color}"/><path d="M22 58h8v10h-8zm12 0h8v10h-8" fill="#364253"/><path d="M19 67h12v4H19zm14 0h12v4H33" fill="#1b2330"/><path d="M22 23h20v16H22z" fill="#dfb69a"/><path d="M25 28h3v3h-3zm11 0h3v3h-3" fill="#24202d"/><path d="M29 35h6v2h-6" fill="#a47464"/>${gear[cls.id]}${upgrade}${crest}</svg>`;
+      return `<svg class="player-art" viewBox="0 0 64 76" role="img" aria-label="${cls.name} · Level ${level} · Evolution ${evolution}" shape-rendering="crispEdges">${aura}${cape}<ellipse cx="32" cy="70" rx="22" ry="3" fill="${tone}" opacity=".18"/><path d="M21 40h22v18H21zM15 41h6v14h-6zm28 0h6v14h-6" fill="${color}"/><path d="M22 58h8v10h-8zm12 0h8v10h-8" fill="#364253"/><path d="M19 67h12v4H19zm14 0h12v4H33" fill="#1b2330"/><path d="M22 23h20v16H22z" fill="#dfb69a"/><path d="M25 28h3v3h-3zm11 0h3v3h-3" fill="#24202d"/><path d="M29 35h6v2h-6" fill="#a47464"/>${gear[cls.id]}${upgrade}${crest}</svg>`;
     }
     function demoProfile() {
       try { const data=JSON.parse(localStorage.getItem(DEMO_PROFILE_KEY));if(P.validProfile(data))return data; } catch {}
@@ -848,7 +914,7 @@
       try{localStorage.setItem(DEMO_FOCUS_KEY,JSON.stringify(focusState));}catch{showError('Deine Timer bleiben nur bis zum Schließen dieser Seite gespeichert.');}
     }
     function loadDemoShop() {
-      try{const data=JSON.parse(localStorage.getItem(DEMO_SHOP_KEY));if(S.valid(data))return data;}catch{}
+      try{const data=JSON.parse(localStorage.getItem(DEMO_SHOP_KEY));if(S.valid(data))return S.normalize(data);}catch{}
       return S.empty();
     }
     function saveDemoShop() {try{localStorage.setItem(DEMO_SHOP_KEY,JSON.stringify(shopState));}catch{showError('Deine Shop-Käufe bleiben nur bis zum Schließen dieser Seite gespeichert.');}}
@@ -941,8 +1007,23 @@
         return '<article class="card focus-card" data-status="'+timer.status+'" data-focus="'+esc(timer.id)+'"><div class="focus-card-head"><div><span class="focus-orb">'+icon(index%2?'flame':'clock')+'</span><h3>'+esc(timer.title)+'</h3></div>'+(planned?'<button class="icon-btn" data-action="stop-focus" data-id="'+esc(timer.id)+'" aria-label="Timer entfernen: '+esc(timer.title)+'" '+(blocked?'disabled':'')+'>'+icon('trash')+'</button>':'')+'</div><div class="focus-elapsed"><span class="overline">ZEIT FÜR DEINEN NEUSTART</span><div class="focus-days">'+p.completed+' '+(p.completed===1?'Tag':'Tage')+'</div><span class="focus-clock" data-timer-clock="'+esc(timer.id)+'">'+clockText(p.seconds)+'</span></div><button class="reset-button" data-action="reset-focus" data-id="'+esc(timer.id)+'" '+(blocked?'disabled':'')+'>'+icon('refresh')+'Reset</button><div class="focus-next"><span>Stufe '+p.stage+'</span><span>'+(p.next?'Nächste Stufe: '+p.next+' Tage':'Maximale Coin-Stufe')+'</span></div><div class="progress-track"><div class="progress-fill" style="width:'+percent+'%"></div></div><button class="btn full focus-confirm '+(timer.status==='done'?'secondary':'')+'" data-action="focus-status" data-id="'+esc(timer.id)+'" data-status="'+(timer.status==='done'?'open':'done')+'" aria-pressed="'+(timer.status==='done')+'" '+(disabled?'disabled':'')+'>'+icon('check')+(future?'Ab morgen im Tagesplan':timer.status==='failed'?'Heute neu gestartet':timer.status==='done'?'Bestätigt · Zurücknehmen':'Heute geschafft')+'</button>'+(!planned?'<small class="hint">Ab morgen entfernt. Heute bleibt der Timer im Coin-Plan.</small>':'')+'</article>';
       }).join(''):'<div class="card empty">'+icon('clock')+'<h3>Dein Neustart beginnt hier.</h3><p>Der Timer zählt hoch. Ein Reset beginnt wieder bei null.</p></div>';
     }
-    function cosmeticFigure(classId,level,equipped=shopState.equipped) {
-      return '<div class="cosmetic-figure" data-aura="'+equipped.aura+'" data-frame="'+equipped.frame+'" data-scene="'+equipped.scene+'">'+characterArt(classId,level)+'</div>';
+    function buddyArt(id) {
+      const item=S.catalog.find(item=>item.id===id&&item.slot==='buddy');if(!item)return '';
+      const shapes={
+        'buddy-robot':'<ellipse cx="32" cy="59" rx="22" ry="3" fill="#73ebdf" opacity=".2"/><g class="buddy-body"><path d="M19 49h8v9h-8zm18 0h8v9h-8" fill="#49657a"/><path d="M17 31h30v22H17z" fill="#567589"/><path d="M22 34h20v15H22z" fill="#c1e7eb"/><path d="M28 37h8v8h-8z" fill="#73ebdf"/><path d="M13 12h38v22H13z" fill="#9dbdcf"/><path d="M17 16h30v13H17z" fill="#142d43"/><g class="buddy-eyes"><path d="M21 20h6v5h-6zm16 0h6v5h-6" fill="#73ebdf"/></g><path d="M30 5h4v8h-4z" fill="#73889a"/><path class="buddy-signal" d="M28 2h8v6h-8z" fill="#c7fb68"/><path d="M8 33h7v15H8z" fill="#9dbdcf"/><g class="buddy-arm"><path d="M49 33h7v15h-7z" fill="#9dbdcf"/></g></g>',
+        'buddy-fox':'<ellipse cx="31" cy="59" rx="24" ry="3" fill="#ffb277" opacity=".2"/><g class="buddy-tail"><path d="M36 48h11V34h7V24h7v25l-8 7H36z" fill="#e9894e"/><path d="M54 24h7v14h-7z" fill="#fff1d0"/></g><g class="buddy-body"><path d="M20 35h25v19H20z" fill="#e9894e"/><path d="M26 37h12v15H26z" fill="#ffe3b0"/><path d="M20 51h7v8h-7zm16 0h7v8h-7" fill="#684640"/><path d="M12 16h36v23H12z" fill="#f9ad68"/><path d="M12 6h10v17H12zm26 0h10v17H38" fill="#ed9358"/><path d="M15 10h4v10h-4zm26 0h4v10h-4" fill="#63424d"/><path d="M13 28h34v7H13zM20 35h20v7H20z" fill="#fff1d0"/><g class="buddy-eyes"><path d="M19 23h5v5h-5zm17 0h5v5h-5" fill="#362c41"/></g><path d="M27 31h7v5h-7z" fill="#362c41"/></g>',
+        'buddy-dragon':'<ellipse cx="33" cy="59" rx="24" ry="3" fill="#b79aff" opacity=".2"/><g class="buddy-wing wing-left"><path d="m22 33-15-15-4 22 10-4 9 10z" fill="#815dbc"/><path d="m8 22 6 17" stroke="#c5a0ff" stroke-width="2"/></g><g class="buddy-wing wing-right"><path d="m42 33 15-15 4 22-10-4-9 10z" fill="#815dbc"/><path d="m56 22-6 17" stroke="#c5a0ff" stroke-width="2"/></g><path d="M44 45h8v-7h7v15H43z" fill="#9269ca"/><g class="buddy-body"><path d="M21 30h25v25H21z" fill="#ac80e1"/><path d="M28 36h12v16H28z" fill="#ebceff"/><path d="M21 51h9v8h-9zm17 0h9v8h-9" fill="#755497"/><path d="M17 10h32v24H17zM39 22h17v14H39z" fill="#b793ea"/><path d="M21 5h7v10h-7zm20 0h7v10h-7" fill="#ffdb83"/><g class="buddy-eyes"><path d="M23 20h5v6h-5zm17 0h5v6h-5" fill="#352541"/></g><path d="M48 29h5v3h-5" fill="#5d447a"/><path d="M28 5h7v7h-7z" fill="#d5b7fa"/></g>'
+      };
+      return '<svg class="buddy-art" viewBox="0 0 64 64" role="img" aria-label="Begleiter: '+item.name+'" shape-rendering="crispEdges">'+shapes[id]+'</svg>';
+    }
+    function cosmeticFigure(classId,level,equipped=shopState.equipped,react=false) {
+      const look=S.equipment(equipped),buddy=look.buddy;
+      return '<div class="cosmetic-figure" data-aura="'+look.aura+'" data-frame="'+look.frame+'" data-scene="'+look.scene+'" data-buddy="'+buddy+'">'+characterArt(classId,level)+(buddy?'<span class="buddy '+(react&&Date.now()<buddyReactionUntil?'is-cheering':'')+'" data-companion="'+buddy+'">'+buddyArt(buddy)+'<span class="buddy-heart" aria-hidden="true">'+(buddy==='buddy-robot'?'✦':'♥')+'</span></span>':'')+'</div>';
+    }
+    function reactBuddy() {
+      if(!shopState.equipped.buddy)return;
+      buddyReactionUntil=Date.now()+1800;clearTimeout(buddyReactionTimer);
+      const token=session;buddyReactionTimer=setTimeout(()=>{if(token!==session)return;buddyReactionUntil=0;document.querySelectorAll('.buddy.is-cheering').forEach(el=>el.classList.remove('is-cheering'));},1800);
     }
     function renderShop() {
       const balance=S.balance(shopState,focusState.days,today),pending=F.coinReward(focusState.days[today]),blocked=shopBusy||focusBusy||busy||(mode==='cloud'&&(!cloudReady||!publication.confirmed||!shopLoaded));
@@ -950,9 +1031,10 @@
       $('walletBtn').title=balance+' Coins verfügbar'+(pending?' · '+pending+' morgen':'');
       $('shopPending').textContent=pending?'Heute verdient: +'+pending+' '+(pending===1?'Coin':'Coins')+' · morgen ab 00:00 verfügbar.':'Bestätige deine Fokus-Timer täglich und sammle Coins für neue Looks.';
       const cls=playerProfile?.characterClass||'engineer',level=C.level(combinedXp()).number;
-      $('shopGrid').innerHTML=S.catalog.map(item=>{
-        const owned=shopState.owned.includes(item.id),equipped=shopState.equipped[item.slot]===item.id,preview={aura:'',frame:'',scene:'',[item.slot]:item.id};
-        return '<article class="shop-item" style="--item-color:'+item.color+'" data-item="'+item.id+'"><div class="shop-preview">'+cosmeticFigure(cls,level,preview)+'<span class="item-tag">'+item.tag+'</span>'+(owned?'<span class="owned-mark">'+icon('check')+'</span>':'')+'</div><div class="shop-item-copy"><h3>'+item.name+'</h3><p>'+item.description+'</p><button class="btn full '+(owned?'secondary':'')+'" data-action="'+(owned?'equip-item':'buy-item')+'" data-id="'+item.id+'" '+(blocked||!owned&&balance<item.price?'disabled':'')+'>'+(owned?(equipped?'Ablegen':'Ausrüsten'):icon('coin')+item.price+' Coins')+'</button></div></article>';
+      document.querySelectorAll('[data-shop-filter]').forEach(button=>button.setAttribute('aria-pressed',button.dataset.shopFilter===shopFilter));
+      $('shopGrid').innerHTML=S.catalog.filter(item=>shopFilter==='all'||(shopFilter==='buddy'?item.slot==='buddy':item.slot!=='buddy')).map(item=>{
+        const owned=shopState.owned.includes(item.id),equipped=shopState.equipped[item.slot]===item.id,preview={...S.defaultEquipment(),[item.slot]:item.id};
+        return '<article class="shop-item" style="--item-color:'+item.color+'" data-item="'+item.id+'"><div class="shop-preview">'+(item.slot==='buddy'?'<div class="companion-preview">'+buddyArt(item.id)+'</div>':cosmeticFigure(cls,level,preview))+'<span class="item-tag">'+item.tag+'</span>'+(owned?'<span class="owned-mark">'+icon('check')+'</span>':'')+'</div><div class="shop-item-copy"><h3>'+item.name+'</h3><p>'+item.description+'</p><button class="btn full '+(owned?'secondary':'')+'" data-action="'+(owned?'equip-item':'buy-item')+'" data-id="'+item.id+'" '+(blocked||!owned&&balance<item.price?'disabled':'')+'>'+(owned?(equipped?'Ablegen':'Ausrüsten'):icon('coin')+item.price+' Coins')+'</button></div></article>';
       }).join('');
     }
     async function shopAction(action,id) {
@@ -964,7 +1046,7 @@
           if(!cloudReady||!publication.confirmed||!shopLoaded)throw new Error('Warte kurz, bis dein Inventar mit der Cloud verbunden ist.');
           const owner=currentUser.uid,ref=sdk.doc(sdk.db,'users',owner,'settings','shop'),history=structuredClone(focusState.days);
           next=await sdk.runTransaction(sdk.db,async tx=>{
-            const stored=await tx.get(ref),inventory=stored.exists()?stored.data():S.empty();
+            const stored=await tx.get(ref),inventory=stored.exists()?S.normalize(stored.data()):S.empty();
             if(!S.valid(inventory))throw new Error('Dein Inventar hat ein ungültiges Format.');
             const dates=Object.keys(history).filter(d=>d<date&&d>inventory.settledThrough),days={};
             for(const day of dates){const record=await tx.get(sdk.doc(sdk.db,'users',owner,'focusDays',day));if(record.exists()){if(!F.validDay(day,record.data()))throw new Error('Deine Coin-Historie konnte nicht gelesen werden.');days[day]=record.data();}}
@@ -974,7 +1056,7 @@
           if(token===session)shopState=next;
         }
         if(token!==session)return;
-        toast(action==='buy'?'Neuer Look freigeschaltet und ausgerüstet!':'Dein Look wurde geändert.');if(action==='buy')celebrate('loot');
+        toast(action==='buy'?(S.catalog.find(item=>item.id===id).slot==='buddy'?'Dein Begleiter ist jetzt an deiner Seite!':'Neuer Look freigeschaltet und ausgerüstet!'):'Deine Ausrüstung wurde geändert.');scheduleLeaderboardSync();if(action==='buy')celebrate('loot');
       }catch(error){if(token===session)toast(errorMessage(error));}
       finally{if(token===session){shopBusy=false;render();}}
     }
@@ -983,9 +1065,9 @@
       burst.innerHTML=Array.from({length:16},(_,i)=>'<i style="--x:'+((i-7.5)*22)+'px;--y:'+(-90-Math.random()*140)+'px;--rotate:'+(i*43)+'deg;--delay:'+(i%4)*35+'ms">'+(kind==='coin'?'✦':'')+'</i>').join('');document.body.append(burst);setTimeout(()=>burst.remove(),1400);
     }
     function enterDemo() {
-      session++; unsubscribers.forEach(fn=>fn()); unsubscribers=[];
+      buddyReactionUntil=0;clearTimeout(buddyReactionTimer);session++; unsubscribers.forEach(fn=>fn()); unsubscribers=[];
       resetLeaderboard();
-      mode='demo'; currentUser=null; cloudReady=false; state=loadDemo();focusState=loadDemoFocus();shopState=loadDemoShop();shopLoaded=true;shopBusy=false;focusBusy=false; playerProfile=demoProfile(); profileLoaded=true;
+      mode='demo'; currentUser=null; cloudReady=false; state=loadDemo();focusState=loadDemoFocus();shopState=loadDemoShop();shopLoaded=true;shopBusy=false;focusBusy=false;busy=false; playerProfile=demoProfile(); profileLoaded=true;
       $('onboardingDialog').close();
       $('cloudError').hidden=true; $('syncStatus').dataset.error='false';
       selected=today; month=today.slice(0,7); weekStart=C.monday(today);
@@ -998,7 +1080,7 @@
     }
     function newLeaderboard(kind='total') { return {kind,week:C.monday(today),entries:[],cursor:null,hasMore:false,loaded:false,loading:false,error:'',rankError:'',ownRank:null,rankScore:null,request:0,loadedAt:null}; }
     function scoreField(board=leaderboard) { return board.kind==='week'?'weekXp':'totalXp'; }
-    function ownSummary() { return playerProfile?L.summary(playerProfile,state.days,today,focusState.days):null; }
+    function ownSummary() { return playerProfile?L.summary(playerProfile,state.days,today,focusState.days,shopState.equipped):null; }
     function ownWeekly() { const summary=ownSummary();return summary?L.weekly(summary,state.days,focusState.days,C.monday(today),today):null; }
     function combinedXp() { return C.total(state.days,today)+F.total(focusState.days,today); }
     function rankingCollection(board=leaderboard) { return board.kind==='week'?sdk.collection(sdk.db,'weeklyLeaderboards',board.week,'players'):sdk.collection(sdk.db,'leaderboard'); }
@@ -1011,11 +1093,11 @@
       const samples = [
         ['ByteKnight','warrior',730],['ArcaneCoder','mage',550],['PixelScout','ranger',470],
         ['NightShift','rogue',340],['BuildWizard','engineer',320],['DailyQuest','warrior',240],['DebugMage','mage',180]
-      ].map(([username,characterClass,totalXp],index) => ({uid:`demo-${index}`,username,usernameKey:P.usernameKey(username),characterClass,totalXp,questXp:totalXp,bonusXp:0,bonusDays:0,level:C.level(totalXp).number,recordedDays:Math.ceil(totalXp/10),schemaVersion:2,weekStart:C.monday(today),weekQuestXp:[43,64,17,28,62,9,35][index],weekBonusXp:0,weekXp:[43,64,17,28,62,9,35][index]}));
+      ].map(([username,characterClass,totalXp],index) => ({uid:`demo-${index}`,username,usernameKey:P.usernameKey(username),characterClass,totalXp,questXp:totalXp,bonusXp:0,bonusDays:0,level:C.level(totalXp).number,recordedDays:Math.ceil(totalXp/10),schemaVersion:2,weekStart:C.monday(today),weekQuestXp:[43,64,17,28,62,9,35][index],weekBonusXp:0,weekXp:[43,64,17,28,62,9,35][index],equipped:[{aura:'aura-ember',frame:'frame-gold',scene:'scene-forest',buddy:'buddy-dragon'},{aura:'aura-void',frame:'frame-neon',scene:'scene-nebula',buddy:'buddy-robot'},{aura:'',frame:'frame-neon',scene:'scene-forest',buddy:'buddy-fox'},S.defaultEquipment(),{aura:'aura-void',frame:'',scene:'scene-nebula',buddy:'buddy-robot'},S.defaultEquipment(),S.defaultEquipment()][index]}));
       const own=leaderboard.kind==='week'?ownWeekly():ownSummary();
       return L.ranked([...samples,{uid:'local-demo',...own}],scoreField());
     }
-    function leaderboardKey(summary,date) { return JSON.stringify([date,C.monday(date),summary.questXp,summary.bonusXp,summary.recordedDays,summary.bonusDays,summary.usernameKey,summary.characterClass]); }
+    function leaderboardKey(summary,date) { return JSON.stringify([date,C.monday(date),summary.questXp,summary.bonusXp,summary.recordedDays,summary.bonusDays,summary.usernameKey,summary.characterClass,...S.slots.map(slot=>summary.equipped[slot])]); }
     function scheduleLeaderboardSync() {
       if(mode !== 'cloud' || !cloudReady || !publication.confirmed)return;
       const desired=ownSummary();
@@ -1031,11 +1113,11 @@
       work.running=true;work.pending=false;
       const owner=currentUser.uid,token=session,date=C.key(),history=structuredClone(state.days),focusHistory=structuredClone(focusState.days),week=C.monday(date);
       const playerRef=sdk.doc(sdk.db,'players',owner),dayRef=sdk.doc(sdk.db,'users',owner,'days',date),scoreRef=sdk.doc(sdk.db,'leaderboard',owner);
-      const focusRef=sdk.doc(sdk.db,'users',owner,'focusDays',date),weekRef=sdk.doc(sdk.db,'weeklyLeaderboards',week,'players',owner);
+      const shopRef=sdk.doc(sdk.db,'users',owner,'settings','shop'),focusRef=sdk.doc(sdk.db,'users',owner,'focusDays',date),weekRef=sdk.doc(sdk.db,'weeklyLeaderboards',week,'players',owner);
       work.promise=(async()=>{
         try {
           const result=await sdk.runTransaction(sdk.db,async tx=>{
-            const player=await tx.get(playerRef),day=await tx.get(dayRef),focusDay=await tx.get(focusRef),previous=await tx.get(scoreRef),previousWeek=await tx.get(weekRef);
+            const player=await tx.get(playerRef),day=await tx.get(dayRef),focusDay=await tx.get(focusRef),previous=await tx.get(scoreRef),previousWeek=await tx.get(weekRef),shop=await tx.get(shopRef);
             if(token!==session || work!==publication || C.key()!==date)return null;
             if(!player.exists())throw new Error('Dein öffentliches Spielerprofil fehlt. Prüfe den players-Eintrag in Firebase.');
             // Past days are read-only in the app. Read today's record again inside
@@ -1046,7 +1128,8 @@
             const focusDays={...focusHistory};delete focusDays[date];
             if(focusDay.exists())focusDays[date]={...focusDay.data(),date};
             if(!F.validState({timers:[],days:focusDays}))throw new Error('Deine Timer-Historie hat ein ungültiges Format.');
-            const summary=L.summary(player.data(),days,date,focusDays),weekly=L.weekly(summary,days,focusDays,week,date);
+            const inventory=shop.exists()?S.normalize(shop.data()):S.empty();
+            const summary=L.summary(player.data(),days,date,focusDays,inventory.equipped),weekly=L.weekly(summary,days,focusDays,week,date);
             if(!L.validEntry(summary))throw new Error('Dein Ranglisten-Profil hat ein ungültiges Format.');
             const globalChanged=!L.same(previous.exists()?previous.data():null,summary),weeklyChanged=!L.same(previousWeek.exists()?previousWeek.data():null,weekly),changed=globalChanged||weeklyChanged;
             if(globalChanged)tx.set(scoreRef,{...summary,updatedAt:sdk.serverTimestamp()});
@@ -1111,12 +1194,12 @@
       $('leaderboardStatus').textContent=demo?'Demo · Beispielspieler':leaderboard.loading?'Rangliste wird geladen …':leaderboard.loaded?`${entries.length} Spieler geladen · ${leaderboard.loadedAt.toLocaleTimeString('de-DE',{hour:'2-digit',minute:'2-digit'})}`:'Globale Rangliste · angemeldete Spieler';
       $('refreshLeaderboardBtn').disabled=!demo&&(!cloudReady||leaderboard.loading);
       $('leaderboardOwn').hidden=!own || (mode==='cloud'&&!cloudReady);
-      if(own)$('leaderboardOwn').innerHTML=`<strong>${matchingOwn?`Dein Platz: #${ownRank}`:'Dein Spieler'}</strong> · ${esc(own.username)} · Level ${own.level} · ${own[field].toLocaleString('de-DE')} ${weekly?'Wochen-XP':'XP'}<small>${demo?'Dein Demo-Spieler nimmt nur an dieser Beispielrangliste teil.':leaderboard.rankError|| (matchingOwn?'Dein Rang zählt alle Spieler – auch auf noch nicht geladenen Seiten.':'Dein Rang erscheint nach der Synchronisierung und dem Aktualisieren.')}</small>`;
+      if(own)$('leaderboardOwn').innerHTML=`<div class="own-appearance">${cosmeticFigure(own.characterClass,own.level,own.equipped)}</div><div class="own-details"><strong>${matchingOwn?`Dein Platz: #${ownRank}`:'Dein Spieler'}</strong> · ${esc(own.username)} · Level ${own.level} · ${own[field].toLocaleString('de-DE')} ${weekly?'Wochen-XP':'XP'}<small>${demo?'Dein Demo-Spieler nimmt nur an dieser Beispielrangliste teil.':leaderboard.rankError|| (matchingOwn?'Dein Rang zählt alle Spieler – auch auf noch nicht geladenen Seiten.':'Dein Rang erscheint nach der Synchronisierung und dem Aktualisieren.')}</small></div>`;
       formError('leaderboardError',leaderboard.error);
-      $('leaderboardPodium').innerHTML=entries.slice(0,3).map(entry=>{const cls=P.classes.find(cls=>cls.id===entry.characterClass);return `<div class="podium-player" style="--class-color:${cls.color}"><span class="overline">RANG #${entry.rank}</span>${characterArt(cls.id,entry.level)}<strong>${esc(entry.username)}</strong><small>LEVEL ${entry.level} · ${cls.name}<br>${entry[field].toLocaleString('de-DE')} ${weekly?'WOCHEN-XP':'XP'}</small></div>`;}).join('');
+      $('leaderboardPodium').innerHTML=entries.slice(0,3).map(entry=>{const cls=P.classes.find(cls=>cls.id===entry.characterClass);return `<div class="podium-player" style="--class-color:${cls.color}"><span class="overline">RANG #${entry.rank}</span>${cosmeticFigure(cls.id,entry.level,entry.equipped)}<strong>${esc(entry.username)}</strong><small>LEVEL ${entry.level} · ${cls.name}<br>${entry[field].toLocaleString('de-DE')} ${weekly?'WOCHEN-XP':'XP'}</small></div>`;}).join('');
       $('leaderboardList').innerHTML=entries.map(entry=>{
         const cls=P.classes.find(cls=>cls.id===entry.characterClass),self=entry.uid===uid;
-        return `<li class="leaderboard-row" data-rank="${entry.rank}" data-self="${self}" data-player="${esc(entry.uid)}"><span class="leaderboard-place" aria-label="Rang ${entry.rank}">#${entry.rank}</span><div class="leaderboard-player"><span class="leaderboard-character" style="--class-color:${cls.color}">${characterArt(cls.id,entry.level)}</span><div class="leaderboard-name"><strong>${esc(entry.username)}${self?'<span class="you-tag">DU</span>':''}</strong><small>${cls.name}</small></div></div><span class="leaderboard-level" aria-label="Level ${entry.level}">LVL ${entry.level}</span><span class="leaderboard-xp">${entry[field].toLocaleString('de-DE')}<small>${weekly?'WOCHEN-XP':'GESAMT-XP'}</small></span></li>`;
+        return `<li class="leaderboard-row" data-rank="${entry.rank}" data-self="${self}" data-player="${esc(entry.uid)}"><span class="leaderboard-place" aria-label="Rang ${entry.rank}">#${entry.rank}</span><div class="leaderboard-player"><span class="leaderboard-character" style="--class-color:${cls.color}">${cosmeticFigure(cls.id,entry.level,entry.equipped)}</span><div class="leaderboard-name"><strong>${esc(entry.username)}${self?'<span class="you-tag">DU</span>':''}</strong><small>${cls.name}</small></div></div><span class="leaderboard-level" aria-label="Level ${entry.level}">LVL ${entry.level}</span><span class="leaderboard-xp">${entry[field].toLocaleString('de-DE')}<small>${weekly?'WOCHEN-XP':'GESAMT-XP'}</small></span></li>`;
       }).join('');
       $('leaderboardEmpty').hidden=entries.length>0;
       $('leaderboardEmpty').innerHTML=leaderboard.loading?`${icon('clock')}<h3>Die Spieler werden geladen …</h3><p>Gleich siehst du die Rangliste.</p>`:leaderboard.error?`${icon('refresh')}<h3>Rangliste gerade nicht erreichbar.</h3><p>Dein Quest-Fortschritt bleibt erhalten. Versuche es mit „Aktualisieren“ erneut.</p>`:`${icon('trophy')}<h3>${mode==='cloud'&&!cloudReady?'Richte zuerst deinen Charakter ein.':'Die erste Quest wartet.'}</h3><p>${mode==='cloud'&&!cloudReady?'Nach der Einrichtung wird dein Spieler in die Rangliste aufgenommen.':'Noch kein Spieler gelistet. Nach dem Login erscheint jeder eingerichtete Charakter automatisch.'}</p>`;
@@ -1150,7 +1233,7 @@
       const cls=P.classes.find(c=>c.id===playerProfile?.characterClass);
       $('playerName').textContent=playerProfile?.username || 'Profil einrichten';
       $('avatar').innerHTML=cls?characterArt(cls.id,level.number):icon('spark');
-      $('heroFigure').innerHTML=cls?cosmeticFigure(cls.id,level.number):icon('spark');
+      $('heroFigure').innerHTML=cls?cosmeticFigure(cls.id,level.number,shopState.equipped,true):icon('spark');
       $('heroWorld').dataset.scene=shopState.equipped.scene;
       $('heroName').innerHTML=esc(playerProfile?.username||'Dein Held')+' <span>LVL '+level.number+'</span>';
       const completed=currentTasks.filter(t=>t.status==='done').length;
@@ -1158,7 +1241,7 @@
       $('heroProgressText').textContent=completed+' / '+currentTasks.length+' Quests geschafft';
       $('heroProgressFill').style.width=(currentTasks.length?100*completed/currentTasks.length:0)+'%';
       $('characterStage').style.setProperty('--class-color',cls?.color||'#7edbff');
-      $('characterStage').innerHTML=cls?`${cosmeticFigure(cls.id,level.number)}<div><span class="overline">${evolution?`EVOLUTION ${evolution}`:'START-CHARAKTER'}</span><strong>${cls.name}</strong><small>${esc(playerProfile.username)}<br>${cls.description}</small></div>`:`${icon('spark')}<div><strong>Dein Charakter wartet.</strong><small>Wähle deine Klasse nach dem Login.</small></div>`;
+      $('characterStage').innerHTML=cls?`${cosmeticFigure(cls.id,level.number,shopState.equipped,true)}<div><span class="overline">${evolution?`EVOLUTION ${evolution}`:'START-CHARAKTER'}</span><strong>${cls.name}</strong><small>${esc(playerProfile.username)}<br>${cls.description}${shopState.equipped.buddy?'<br><span class="buddy-caption">Mit '+esc(S.catalog.find(item=>item.id===shopState.equipped.buddy).name)+'</span>':''}</small></div>`:`${icon('spark')}<div><strong>Dein Charakter wartet.</strong><small>Wähle deine Klasse nach dem Login.</small></div>`;
       $('previewCharacterBtn').hidden=mode!=='demo'&&!!cls;
       $('previewCharacterBtn').textContent=mode==='demo'?'Charakter-Auswahl testen →':'Profil einrichten →';
       $('accountMode').textContent=mode==='demo'?'Lokaler Demo-Modus':'Firebase-Konto';
@@ -1256,27 +1339,30 @@
     }
     async function setStatus(value,id,status) {
       if(busy || (mode==='cloud'&&!cloudReady))return;
-      const oldLevel=C.level(combinedXp()).number, oldXp=C.xp(C.tasksAt(state,value,today));
+      const token=session,oldTasks=C.tasksAt(state,value,today),oldStatus=oldTasks.find(task=>task.id===id)?.status,oldLevel=C.level(combinedXp()).number,oldXp=C.xp(oldTasks);
+      let questCompleted=false;
       busy=true; render();
       try {
-        if(mode==='demo') { state.days[value]=C.changeStatus(state,value,id,status,today); saveDemo(); }
+        if(mode==='demo') { state.days[value]=C.changeStatus(state,value,id,status,today);questCompleted=status==='done'&&oldStatus!=='done';saveDemo(); }
         else {
           const owner=currentUser.uid, planRef=sdk.doc(sdk.db,'users',owner,'settings','plan'), dayRef=sdk.doc(sdk.db,'users',owner,'days',value);
           const result=await sdk.runTransaction(sdk.db,async tx=>{
             const plan=await tx.get(planRef), day=await tx.get(dayRef);
             const latest={quests:plan.exists()?plan.data().quests:[],days:day.exists()?{[value]:day.data()}:{}}, record=C.changeStatus(latest,value,id,status,C.key());
-            tx.set(dayRef,{...record,updatedAt:sdk.serverTimestamp()}); return record;
+            if(token!==session)throw new Error('Dein Konto hat gewechselt.');
+            const completed=status==='done'&&C.tasksAt(latest,value,C.key()).find(task=>task.id===id)?.status!=='done';
+            tx.set(dayRef,{...record,updatedAt:sdk.serverTimestamp()});return {record,completed};
           });
-          if(currentUser?.uid===owner)state.days[value]=result;
+          if(token!==session)return;state.days[value]=result.record;questCompleted=result.completed;
         }
         const newXp=C.xp(state.days[value].tasks), newLevel=C.level(combinedXp()).number;
-        if(newXp>oldXp)celebrate();
+        if(questCompleted)reactBuddy();if(newXp>oldXp)celebrate();
         if(newLevel>oldLevel) { toast(`LEVEL UP! Du hast Level ${newLevel} erreicht.`); $('levelCard').classList.remove('level-up'); void $('levelCard').offsetWidth; $('levelCard').classList.add('level-up'); }
         else if(newXp>oldXp)toast(newXp===10?'Alle Quests geschafft! 10 / 10 XP für heute.':`+${newXp-oldXp} XP · ${newXp} / 10 XP heute`);
         else if(status==='skipped')toast('Quest übersprungen. Morgen ist ein neuer Spieltag.');
         else toast('Status aktualisiert. Deine XP wurden neu berechnet.');
-      } catch(error) { toast(errorMessage(error)); }
-      finally { busy=false; render(); }
+      } catch(error) { if(token===session)toast(errorMessage(error)); }
+      finally { if(token===session){busy=false;render();} }
     }
     const firebaseConfig={
       apiKey:'AIzaSyD9mEQPiHDtniuDbLGijbuoelpd6UUm7_s',
@@ -1302,8 +1388,8 @@
     function connectCloud(user) {
       if(!user)return;
       unsubscribers.forEach(fn=>fn()); unsubscribers=[]; const token=++session;
-      resetLeaderboard();
-      currentUser=user; mode='cloud'; cloudReady=false; state={quests:[],days:{}};focusState={timers:[],days:{}};shopState=S.empty();shopLoaded=false;shopBusy=false;focusBusy=false;playerProfile=null;profileLoaded=false;
+      resetLeaderboard();buddyReactionUntil=0;clearTimeout(buddyReactionTimer);
+      currentUser=user; mode='cloud'; cloudReady=false; state={quests:[],days:{}};focusState={timers:[],days:{}};shopState=S.empty();shopLoaded=false;shopBusy=false;focusBusy=false;busy=false;playerProfile=null;profileLoaded=false;
       $('authDialog').close(); $('cloudError').hidden=true; $('syncStatus').dataset.error='false';
       $('syncStatus').lastElementChild.textContent='Verbinde …'; render();
       let planLoaded=false,daysLoaded=false,focusLoaded=false,focusDaysLoaded=false,planCache=true,daysCache=true,daysPending=true,focusCache=true,focusDaysCache=true,focusPending=true,shopSnapshotCache=true,shopSnapshotPending=true,failed=false;
@@ -1345,7 +1431,7 @@
         if(token!==session)return;
         const data=snap.exists()?snap.data():S.empty();
         if(!S.valid(data)){fail(new Error('Dein Inventar hat ein ungültiges Format.'));return;}
-        shopState=data;shopLoaded=true;shopSnapshotCache=snap.metadata.fromCache;shopSnapshotPending=!!snap.metadata.hasPendingWrites;ready();
+        shopState=S.normalize(data);shopLoaded=true;shopSnapshotCache=snap.metadata.fromCache;shopSnapshotPending=!!snap.metadata.hasPendingWrites;ready();
       },fail));
       unsubscribers.push(sdk.onSnapshot(sdk.doc(sdk.db,'users',user.uid),{includeMetadataChanges:true},snap=>{
         if(token!==session)return;
@@ -1399,6 +1485,7 @@
     $('refreshLeaderboardBtn').onclick=()=>loadLeaderboard(true);
     $('leaderboardMoreBtn').onclick=()=>loadLeaderboard(false);
     document.querySelectorAll('[data-ranking]').forEach(button=>button.onclick=()=>selectRanking(button.dataset.ranking));
+    document.querySelectorAll('[data-shop-filter]').forEach(button=>button.onclick=()=>{shopFilter=button.dataset.shopFilter;renderShop();});
     $('focusForm').onsubmit=async event=>{
       event.preventDefault();if(focusBusy||busy)return;focusBusy=true;formError('focusError','');renderFocus();
       try{const result=await mutateFocusPlan({kind:'new',id:crypto.randomUUID(),title:$('focusName').value.trim()});$('focusName').value='';toast(`Timer gestartet · ${result.startDate>today?'Ab morgen in deinem Plan':'Dein erster Tag beginnt heute'}`);}
