@@ -8,6 +8,7 @@
         :root {
             --bg-color: #0f0f13;
             --surface-color: #181820;
+            --surface-hover: #22222d;
             --text-color: #e0e0e0;
             --primary: #00c3ff;
             --primary-glow: rgba(0, 195, 255, 0.4);
@@ -44,13 +45,13 @@
         }
 
         .auth-card {
-            background: rgba(24, 24, 32, 0.9);
+            background: var(--surface-color);
             border: 1px solid rgba(0, 195, 255, 0.2);
             padding: 40px;
             border-radius: 20px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.6), 0 0 20px var(--primary-glow);
             width: 100%;
-            max-width: 380px;
+            max-width: 420px;
             box-sizing: border-box;
             text-align: center;
         }
@@ -58,14 +59,14 @@
         .auth-card h1 {
             color: var(--primary);
             margin-bottom: 10px;
-            font-size: 1.8rem;
+            font-size: 2rem;
             letter-spacing: 1px;
             text-shadow: 0 0 10px var(--primary-glow);
         }
 
         .auth-card p {
             color: #888;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             margin-bottom: 30px;
         }
 
@@ -85,7 +86,7 @@
 
         .input-group input {
             width: 100%;
-            padding: 12px 15px;
+            padding: 14px 15px;
             background: #0f0f13;
             border: 1px solid #333;
             border-radius: 10px;
@@ -103,7 +104,7 @@
 
         .btn {
             width: 100%;
-            padding: 12px;
+            padding: 14px;
             background: linear-gradient(135deg, #00c3ff, #0077ff);
             border: none;
             border-radius: 10px;
@@ -122,7 +123,7 @@
         }
 
         .auth-switch {
-            margin-top: 20px;
+            margin-top: 25px;
             font-size: 0.9rem;
             color: #888;
         }
@@ -144,7 +145,7 @@
             display: none;
         }
 
-        /* --- Main App (Hidden by default) --- */
+        /* --- Haupt-App (PC & Mobile optimiertes Dashboard) --- */
         #mainApp {
             display: none;
             width: 100%;
@@ -154,57 +155,116 @@
 
         .app-bar {
             width: 100%;
-            max-width: 600px;
+            max-width: 900px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px;
+            padding: 20px 30px;
             box-sizing: border-box;
-            background: rgba(15, 15, 19, 0.8);
+            background: rgba(15, 15, 19, 0.9);
             backdrop-filter: blur(10px);
             position: sticky;
             top: 0;
             z-index: 50;
             border-bottom: 1px solid rgba(255,255,255,0.05);
+            border-radius: 0 0 15px 15px;
         }
 
-        .menu-btn, .logout-btn {
-            background: none;
-            border: none;
+        .user-info {
+            font-size: 0.95rem;
             color: var(--primary);
-            font-size: 1.5rem;
-            cursor: pointer;
-            padding: 0;
-            line-height: 1;
-            transition: 0.3s;
+            font-weight: 600;
         }
 
         .logout-btn {
-            font-size: 0.9rem;
-            color: #888;
+            background: none;
             border: 1px solid #333;
-            padding: 6px 12px;
-            border-radius: 6px;
+            color: #888;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 0.9rem;
         }
+
         .logout-btn:hover {
             color: var(--skipped);
             border-color: var(--skipped);
+            background: rgba(255, 68, 68, 0.05);
         }
 
-        .current-day-title {
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: var(--text-color);
-            text-align: center;
-        }
-
-        /* --- Placeholder für den nächsten Schritt --- */
-        .dashboard-content {
+        .dashboard-container {
             width: 90%;
-            max-width: 560px;
+            max-width: 900px;
             margin-top: 40px;
-            text-align: center;
-            color: #888;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        /* Auf PC zeigen wir es schön in zwei Spalten (Links Kalender/Stats, Rechts Quests) */
+        @media (min-width: 768px) {
+            .dashboard-container {
+                grid-template-columns: 350px 1fr;
+            }
+        }
+
+        .panel {
+            background: var(--surface-color);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+
+        .panel h3 {
+            margin-top: 0;
+            color: var(--primary);
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding-bottom: 12px;
+        }
+
+        .quest-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .quest-item {
+            background: #0f0f13;
+            padding: 15px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #222;
+        }
+
+        .add-quest-box {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .add-quest-box input {
+            flex: 1;
+            padding: 12px;
+            background: #0f0f13;
+            border: 1px solid #333;
+            border-radius: 8px;
+            color: #fff;
+        }
+
+        .add-quest-box select {
+            padding: 12px;
+            background: #0f0f13;
+            border: 1px solid #333;
+            border-radius: 8px;
+            color: #fff;
         }
     </style>
 </head>
@@ -213,8 +273,8 @@
     <!-- LOGIN / REGISTER SCREEN -->
     <div id="authScreen">
         <div class="auth-card">
-            <h1 id="authTitle">QuestLog</h1>
-            <p id="authSubtitle">Logge dich ein, um deine Quests zu starten</p>
+            <h1>QuestLog</h1>
+            <p>Dein persönlicher Daily & Weekly Tracker</p>
             
             <div class="input-group">
                 <label>E-Mail Adresse</label>
@@ -235,21 +295,45 @@
         </div>
     </div>
 
-    <!-- HAUPT-APP (Nach Login sichtbar) -->
+    <!-- HAUPT-APP (Dashboard für PC & Mobile) -->
     <div id="mainApp">
         <div class="app-bar">
-            <button class="menu-btn" onclick="toggleMenu()">☰</button>
-            <div class="current-day-title" id="currentDayTitle">Dashboard</div>
+            <div class="user-info" id="userDisplay">Lade Profil...</div>
             <button class="logout-btn" onclick="logoutUser()">Logout</button>
         </div>
 
-        <div class="dashboard-content">
-            <h2>Willkommen im QuestLog! 🔥</h2>
-            <p>Die Datenbank & Authentifizierung stehen. Als Nächstes bauen wir hier deinen dynamischen Quest-Editor ein, mit dem du deine eigenen täglichen und wöchentlichen Ziele anlegen kannst!</p>
+        <div class="dashboard-container">
+            <!-- Linke Spalte: Übersicht & Kalender -->
+            <div class="panel">
+                <h3>Übersicht</h3>
+                <p style="color: #888; font-size: 0.9rem;">Hier siehst du deinen aktuellen Fortschritt und Status.</p>
+                <div style="margin-top: 20px; background: #0f0f13; padding: 20px; border-radius: 10px; text-align: center;">
+                    <div style="font-size: 2rem; color: var(--success); font-weight: bold;" id="streakCount">🔥 0 Tage</div>
+                    <div style="font-size: 0.85rem; color: #888; margin-top: 5px;">Aktive Streak</div>
+                </div>
+            </div>
+
+            <!-- Rechte Spalte: Aktive Quests & Erstellung -->
+            <div class="panel">
+                <h3>Deine Quests</h3>
+                <div class="add-quest-box">
+                    <input type="text" id="questInput" placeholder="Neue Quest eingeben (z.B. Gym, F-Prog)...">
+                    <select id="questType">
+                        <option value="daily">Ttäglich</option>
+                        <option value="weekly">Wöchentlich</option>
+                    </select>
+                    <button class="btn" style="width: auto; margin-top: 0; padding: 0 20px;" onclick="addQuest()">+</button>
+                </div>
+
+                <div class="quest-list" id="questListContainer">
+                    <!-- Hier landen später dynamisch deine Quests -->
+                    <div style="text-align: center; color: #666; padding: 20px;">Noch keine Quests vorhanden. Erstelle deine erste!</div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- Firebase SDKs einbinden -->
+    <!-- Firebase SDKs -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { 
@@ -261,7 +345,6 @@
         } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
         import { getFirestore } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-        // Deine Config aus Firebase
         const firebaseConfig = {
             apiKey: "AIzaSyD9mEQPiHDtniuDbLGijbuoelpd6UUm7_s",
             authDomain: "planer-84a8f.firebaseapp.com",
@@ -272,7 +355,6 @@
             measurementId: "G-CBXT81XMZ2"
         };
 
-        // Firebase initialisieren
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
@@ -281,8 +363,8 @@
 
         window.toggleAuthMode = function() {
             isRegisterMode = !isRegisterMode;
-            document.getElementById('authTitle').innerText = isRegisterMode ? 'Registrierung' : 'QuestLog';
-            document.getElementById('authSubtitle').innerText = isRegisterMode ? 'Erstelle deinen Account' : 'Logge dich ein, um deine Quests zu starten';
+            document.querySelector('.auth-card h1').innerText = isRegisterMode ? 'Registrierung' : 'QuestLog';
+            document.querySelector('.auth-card p').innerText = isRegisterMode ? 'Erstelle deinen Account' : 'Dein persönlicher Daily & Weekly Tracker';
             document.getElementById('authBtn').innerText = isRegisterMode ? 'Account erstellen' : 'Einloggen';
             document.getElementById('switchText').innerText = isRegisterMode ? 'Bereits einen Account? Einloggen' : 'Noch keinen Account? Registrieren';
             document.getElementById('errorMsg').style.display = 'none';
@@ -311,15 +393,19 @@
             await signOut(auth);
         }
 
-        // Auth State Überwachung
+        window.addQuest = function() {
+            const val = document.getElementById('questInput').value;
+            if(!val) return;
+            alert("Quest '" + val + "' wird im nächsten Schritt mit der Datenbank verknüpft!");
+            document.getElementById('questInput').value = '';
+        }
+
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                // Eingeloggt
                 document.getElementById('authScreen').style.display = 'none';
                 document.getElementById('mainApp').style.display = 'flex';
-                console.log("Eingeloggt als:", user.email);
+                document.getElementById('userDisplay').innerText = `Eingeloggt als: ${user.email}`;
             } else {
-                // Ausgeloggt
                 document.getElementById('authScreen').style.display = 'flex';
                 document.getElementById('mainApp').style.display = 'none';
             }
