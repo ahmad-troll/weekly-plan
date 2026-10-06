@@ -1,0 +1,276 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isOwner(uid) {
+      return request.auth != null && request.auth.uid == uid;
+    }
+    function validIdentity(data) {
+      return data.username is string
+        && data.username.matches('^[A-Za-z][A-Za-z0-9_]{2,19}$')
+        && data.usernameKey == data.username.lower()
+        && data.characterClass in ['warrior', 'mage', 'ranger', 'rogue', 'engineer']
+        && data.schemaVersion == 2;
+    }
+    function levelThreshold(level) {
+      let rest = (level - 5) % 5;
+      let blocks = (level - 5 - rest) / 5;
+      return level <= 5 ? (level - 1) * 20
+        : 80 + 150 * blocks + 25 * blocks * (blocks - 1) + rest * (30 + 10 * blocks);
+    }
+    function validScore(data, uid) {
+      let player = get(/databases/$(database)/documents/players/$(uid)).data;
+      return data.username == player.username
+        && data.usernameKey == player.usernameKey
+        && data.characterClass == player.characterClass
+        && data.schemaVersion == 2
+        && publicEquipmentMatches(data.equipped, uid)
+        && data.recordedDays is int && data.recordedDays >= 0 && data.recordedDays <= 36525
+        && data.bonusDays is int && data.bonusDays >= 0 && data.bonusDays <= 36525
+        && data.questXp is int && data.questXp >= 0 && data.questXp <= 10 * data.recordedDays
+        && data.bonusXp is int && data.bonusXp >= 0 && data.bonusXp <= data.bonusDays
+        && data.totalXp is int && data.totalXp == data.questXp + data.bonusXp
+        && data.level is int && data.level >= 1 && data.level <= 1000
+        && levelThreshold(data.level) <= data.totalXp
+        && data.totalXp < levelThreshold(data.level + 1)
+        && data.updatedAt == request.time;
+    }
+    function validTimer(timer, withStatus) {
+      return timer.keys().hasAll(['id', 'title', 'startDate'])
+        && (withStatus ? timer.keys().hasOnly(['id', 'title', 'startDate', 'targetDays', 'startedAt', 'status', 'resetAt'])
+          && timer.status in ['open', 'done', 'failed']
+          && (!('resetAt' in timer) || (timer.resetAt is int && timer.resetAt >= 0 && timer.status == 'failed'))
+          : timer.keys().hasOnly(['id', 'title', 'startDate', 'targetDays', 'startedAt']))
+        && timer.id is string && timer.id.size() > 0 && timer.id.size() <= 80
+        && timer.title is string && timer.title.size() > 0 && timer.title.size() <= 80
+        && timer.startDate is string && timer.startDate.matches('^[0-9]{4}-[0-9]{2}-[0-9]{2}$')
+        && (('startedAt' in timer) ? timer.startedAt is int && timer.startedAt >= 0
+          : timer.targetDays is int && timer.targetDays >= 1 && timer.targetDays <= 365);
+    }
+    function cosmeticCost(owned) {
+      return ('aura-ember' in owned ? 8 : 0) + ('aura-void' in owned ? 18 : 0)
+        + ('frame-neon' in owned ? 6 : 0) + ('frame-gold' in owned ? 12 : 0)
+        + ('scene-forest' in owned ? 15 : 0) + ('scene-nebula' in owned ? 25 : 0)
+        + ('buddy-robot' in owned ? 20 : 0) + ('buddy-fox' in owned ? 35 : 0)
+        + ('buddy-dragon' in owned ? 60 : 0);
+    }
+    function validEquipment(equipped, legacy) {
+      return equipped is map && equipped.keys().hasAll(['aura', 'frame', 'scene'])
+        && (legacy ? equipped.keys().hasOnly(['aura', 'frame', 'scene'])
+          : equipped.keys().hasAll(['buddy']) && equipped.keys().hasOnly(['aura', 'frame', 'scene', 'buddy']))
+        && equipped.aura in ['', 'aura-ember', 'aura-void']
+        && equipped.frame in ['', 'frame-neon', 'frame-gold']
+        && equipped.scene in ['', 'scene-forest', 'scene-nebula']
+        && (legacy || equipped.buddy in ['', 'buddy-robot', 'buddy-fox', 'buddy-dragon']);
+    }
+    function publicEquipmentMatches(equipped, uid) {
+      let path = /databases/$(database)/documents/users/$(uid)/settings/shop;
+      return validEquipment(equipped, false) && (exists(path)
+        ? equipped.aura == get(path).data.equipped.aura
+          && equipped.frame == get(path).data.equipped.frame
+          && equipped.scene == get(path).data.equipped.scene
+          && equipped.buddy == get(path).data.equipped.get('buddy', '')
+        : equipped == {'aura': '', 'frame': '', 'scene': '', 'buddy': ''});
+    }
+    function validInventory(data) {
+      let equipped = data.equipped;
+      return data.keys().hasAll(['owned', 'equipped', 'earnedCoins', 'settledThrough', 'schemaVersion', 'updatedAt'])
+        && data.keys().hasOnly(['owned', 'equipped', 'earnedCoins', 'settledThrough', 'schemaVersion', 'updatedAt'])
+        && data.schemaVersion in [1, 2]
+        && data.owned is list && data.owned.size() <= 9 && data.owned.size() == data.owned.toSet().size()
+        && data.owned.hasOnly(['aura-ember', 'aura-void', 'frame-neon', 'frame-gold', 'scene-forest', 'scene-nebula', 'buddy-robot', 'buddy-fox', 'buddy-dragon'])
+        && validEquipment(equipped, data.schemaVersion == 1)
+        && (equipped.aura == '' || equipped.aura in data.owned)
+        && (equipped.frame == '' || equipped.frame in data.owned)
+        && (equipped.scene == '' || equipped.scene in data.owned)
+        && (data.schemaVersion == 1 || equipped.buddy == '' || equipped.buddy in data.owned)
+        && data.earnedCoins is int && data.earnedCoins >= cosmeticCost(data.owned) && data.earnedCoins <= 109575
+        && data.settledThrough is string && data.settledThrough.matches('^[0-9]{4}-[0-9]{2}-[0-9]{2}$')
+        && data.updatedAt == request.time;
+    }
+    function timerAt(timers, index, withStatus) {
+      return index >= timers.size() || validTimer(timers[index], withStatus);
+    }
+    function validTimers(timers, withStatus) {
+      return timers is list && timers.size() <= 10
+        && timerAt(timers, 0, withStatus) && timerAt(timers, 1, withStatus)
+        && timerAt(timers, 2, withStatus) && timerAt(timers, 3, withStatus)
+        && timerAt(timers, 4, withStatus) && timerAt(timers, 5, withStatus)
+        && timerAt(timers, 6, withStatus) && timerAt(timers, 7, withStatus)
+        && timerAt(timers, 8, withStatus) && timerAt(timers, 9, withStatus);
+    }
+    function validCounterPlan(data) {
+      return data.keys().hasAll(['timers', 'schemaVersion', 'automaticStartedOn', 'rewardDay', 'rewardTimers', 'blockedDate', 'firstDayLegacyCoins', 'updatedAt'])
+        && data.keys().hasOnly(['timers', 'schemaVersion', 'automaticStartedOn', 'rewardDay', 'rewardTimers', 'blockedDate', 'firstDayLegacyCoins', 'updatedAt'])
+        && data.schemaVersion == 2
+        && validTimers(data.timers, false)
+        && validTimers(data.rewardTimers, false)
+        && data.automaticStartedOn is string && data.automaticStartedOn.matches('^[0-9]{4}-[0-9]{2}-[0-9]{2}$')
+        && data.rewardDay is string && data.rewardDay.matches('^[0-9]{4}-[0-9]{2}-[0-9]{2}$')
+        && data.rewardDay >= data.automaticStartedOn
+        && data.blockedDate in ['', data.rewardDay]
+        && data.firstDayLegacyCoins is int && data.firstDayLegacyCoins >= 0 && data.firstDayLegacyCoins <= 3
+        && data.updatedAt == request.time;
+    }
+    match /users/{uid} {
+      allow get: if isOwner(uid);
+      allow list: if false;
+      allow create: if isOwner(uid)
+        && request.resource.data.keys().hasOnly(['username', 'usernameKey', 'characterClass', 'onboardingCompleted', 'schemaVersion', 'createdAt', 'updatedAt'])
+        && request.resource.data.keys().hasAll(['username', 'usernameKey', 'characterClass', 'onboardingCompleted', 'schemaVersion', 'createdAt', 'updatedAt'])
+        && validIdentity(request.resource.data)
+        && request.resource.data.onboardingCompleted == true
+        && request.resource.data.createdAt == request.time
+        && request.resource.data.updatedAt == request.time
+        && getAfter(/databases/$(database)/documents/usernames/$(request.resource.data.usernameKey)).data.uid == uid
+        && getAfter(/databases/$(database)/documents/players/$(uid)).data.username == request.resource.data.username
+        && getAfter(/databases/$(database)/documents/players/$(uid)).data.usernameKey == request.resource.data.usernameKey
+        && getAfter(/databases/$(database)/documents/players/$(uid)).data.characterClass == request.resource.data.characterClass
+        && getAfter(/databases/$(database)/documents/players/$(uid)).data.joinedAt == request.time;
+      // Identity and starting class are chosen once. Evolution can be derived later.
+      allow update, delete: if false;
+    }
+    match /usernames/{usernameKey} {
+      // Lookup is available only to authenticated onboarding transactions.
+      allow get: if request.auth != null;
+      allow list: if false;
+      allow create: if request.auth != null
+        && usernameKey.matches('^[a-z][a-z0-9_]{2,19}$')
+        && request.resource.data.keys().hasOnly(['uid', 'createdAt'])
+        && request.resource.data.keys().hasAll(['uid', 'createdAt'])
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.createdAt == request.time
+        && getAfter(/databases/$(database)/documents/users/$(request.auth.uid)).data.usernameKey == usernameKey
+        && getAfter(/databases/$(database)/documents/players/$(request.auth.uid)).data.usernameKey == usernameKey;
+      allow update, delete: if false;
+    }
+    match /players/{uid} {
+      // Public within QuestLog: username and avatar only, no email or password.
+      allow read: if request.auth != null;
+      allow create: if isOwner(uid)
+        && request.resource.data.keys().hasOnly(['username', 'usernameKey', 'characterClass', 'schemaVersion', 'joinedAt'])
+        && request.resource.data.keys().hasAll(['username', 'usernameKey', 'characterClass', 'schemaVersion', 'joinedAt'])
+        && validIdentity(request.resource.data)
+        && request.resource.data.joinedAt == request.time
+        && getAfter(/databases/$(database)/documents/users/$(uid)).data.username == request.resource.data.username
+        && getAfter(/databases/$(database)/documents/users/$(uid)).data.usernameKey == request.resource.data.usernameKey
+        && getAfter(/databases/$(database)/documents/users/$(uid)).data.characterClass == request.resource.data.characterClass
+        && getAfter(/databases/$(database)/documents/users/$(uid)).data.createdAt == request.time;
+      allow update, delete: if false;
+    }
+    match /playerStats/{uid} {
+      // Reserved for a future server-verified competition mode.
+      allow read: if request.auth != null;
+      allow write: if false;
+    }
+    match /leaderboard/{uid} {
+      // Spark-compatible, self-reported summaries. Private day records stay private.
+      // This validates ownership, identity and numeric consistency, not the sum of
+      // all private day records. It is not a server-verified competition score.
+      // Count queries use the same list permission as document queries. No limit
+      // here: the app pages by 50; counting ALL higher scores gives the exact rank.
+      allow read: if request.auth != null;
+      allow create, update: if isOwner(uid)
+        && request.resource.data.keys().hasOnly(['username', 'usernameKey', 'characterClass', 'questXp', 'bonusXp', 'totalXp', 'level', 'recordedDays', 'bonusDays', 'schemaVersion', 'updatedAt', 'equipped'])
+        && request.resource.data.keys().hasAll(['username', 'usernameKey', 'characterClass', 'questXp', 'bonusXp', 'totalXp', 'level', 'recordedDays', 'bonusDays', 'schemaVersion', 'updatedAt', 'equipped'])
+        && validScore(request.resource.data, uid);
+      allow delete: if false;
+    }
+    match /weeklyLeaderboards/{weekStart}/players/{uid} {
+      allow read: if request.auth != null;
+      allow create, update: if isOwner(uid)
+        && weekStart.matches('^[0-9]{4}-[0-9]{2}-[0-9]{2}$')
+        && request.resource.data.keys().hasOnly(['username', 'usernameKey', 'characterClass', 'questXp', 'bonusXp', 'totalXp', 'level', 'recordedDays', 'bonusDays', 'schemaVersion', 'updatedAt', 'equipped', 'weekStart', 'weekQuestXp', 'weekBonusXp', 'weekXp'])
+        && request.resource.data.keys().hasAll(['username', 'usernameKey', 'characterClass', 'questXp', 'bonusXp', 'totalXp', 'level', 'recordedDays', 'bonusDays', 'schemaVersion', 'updatedAt', 'equipped', 'weekStart', 'weekQuestXp', 'weekBonusXp', 'weekXp'])
+        && validScore(request.resource.data, uid)
+        && request.resource.data.weekStart == weekStart
+        && request.resource.data.weekQuestXp is int
+        && request.resource.data.weekQuestXp >= 0 && request.resource.data.weekQuestXp <= 70
+        && request.resource.data.weekQuestXp <= request.resource.data.questXp
+        && request.resource.data.weekBonusXp is int
+        && request.resource.data.weekBonusXp >= 0 && request.resource.data.weekBonusXp <= 7
+        && request.resource.data.weekBonusXp <= request.resource.data.bonusXp
+        && request.resource.data.weekXp is int
+        && request.resource.data.weekXp == request.resource.data.weekQuestXp + request.resource.data.weekBonusXp;
+      allow delete: if false;
+    }
+    match /loginAttempts/{attemptId} {
+      allow read, write: if false;
+    }
+    match /users/{uid}/settings/plan {
+      allow read: if isOwner(uid);
+      allow create, update: if isOwner(uid)
+        && request.resource.data.keys().hasOnly(['quests', 'updatedAt'])
+        && request.resource.data.keys().hasAll(['quests', 'updatedAt'])
+        && request.resource.data.quests is list
+        && request.resource.data.quests.size() <= 50
+        && request.resource.data.updatedAt == request.time;
+    }
+    match /users/{uid}/settings/tutorial {
+      // Private first-run preference. It never changes scores or inventory.
+      allow read: if isOwner(uid);
+      allow create, update: if isOwner(uid)
+        && request.resource.data.keys().hasAll(['schemaVersion', 'eligible', 'status', 'step', 'updatedAt'])
+        && request.resource.data.keys().hasOnly(['schemaVersion', 'eligible', 'status', 'step', 'updatedAt'])
+        && request.resource.data.schemaVersion == 1
+        && request.resource.data.eligible == true
+        && request.resource.data.status in ['pending', 'dismissed', 'complete']
+        && request.resource.data.step is int
+        && request.resource.data.step >= 0 && request.resource.data.step <= 5
+        && request.resource.data.updatedAt == request.time;
+      allow delete: if false;
+    }
+    match /users/{uid}/settings/focus {
+      allow read: if isOwner(uid);
+      // Automatic Counter rewards are settled together with settings/shop in a
+      // transaction. Older documents migrate once without crediting old open days.
+      allow create: if isOwner(uid) && validCounterPlan(request.resource.data);
+      allow update: if isOwner(uid) && validCounterPlan(request.resource.data)
+        && (resource.data.get('schemaVersion', 0) != 2 || (
+          request.resource.data.automaticStartedOn == resource.data.automaticStartedOn
+          && request.resource.data.firstDayLegacyCoins == resource.data.firstDayLegacyCoins
+          && request.resource.data.rewardDay >= resource.data.rewardDay));
+      allow delete: if false;
+    }
+    match /users/{uid}/settings/shop {
+      // Cosmetic economy is self-reported, like quests. This checks ownership,
+      // allowed items/prices and permanent purchases; it does not verify history.
+      allow read: if isOwner(uid);
+      allow create: if isOwner(uid) && validInventory(request.resource.data)
+        && request.resource.data.owned.size() <= 1;
+      allow update: if isOwner(uid) && validInventory(request.resource.data)
+        && request.resource.data.owned.hasAll(resource.data.owned)
+        && request.resource.data.owned.size() <= resource.data.owned.size() + 1
+        && request.resource.data.earnedCoins >= resource.data.earnedCoins
+        && request.resource.data.settledThrough >= resource.data.settledThrough;
+      allow delete: if false;
+    }
+    match /users/{uid}/focusDays/{dateId} {
+      allow read: if isOwner(uid);
+      allow create, update: if isOwner(uid)
+        && dateId.matches('^[0-9]{4}-[0-9]{2}-[0-9]{2}$')
+        && request.resource.data.keys().hasOnly(['date', 'timers', 'rewardVersion', 'rewardAt', 'legacyXp', 'updatedAt'])
+        && request.resource.data.keys().hasAll(['date', 'timers', 'updatedAt'])
+        && request.resource.data.date == dateId
+        && (!('rewardVersion' in request.resource.data) || (
+          request.resource.data.rewardVersion == 2
+          && request.resource.data.rewardAt is int && request.resource.data.rewardAt >= 0
+          && request.resource.data.legacyXp in [0, 1]))
+        && request.resource.data.timers.size() > 0
+        && validTimers(request.resource.data.timers, true)
+        && request.resource.data.updatedAt == request.time;
+    }
+    match /users/{uid}/days/{dateId} {
+      allow read: if isOwner(uid);
+      allow create, update: if isOwner(uid)
+        && dateId.matches('^[0-9]{4}-[0-9]{2}-[0-9]{2}$')
+        && request.resource.data.keys().hasOnly(['date', 'tasks', 'updatedAt'])
+        && request.resource.data.keys().hasAll(['date', 'tasks', 'updatedAt'])
+        && request.resource.data.date == dateId
+        && request.resource.data.tasks is list
+        && request.resource.data.tasks.size() > 0
+        && request.resource.data.tasks.size() <= 50
+        && request.resource.data.updatedAt == request.time;
+    }
+    // Other document paths are denied by default.
+  }
+}
