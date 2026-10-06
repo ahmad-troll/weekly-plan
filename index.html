@@ -3,13 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#101216">
+  <meta name="theme-color" content="#101020">
   <meta name="description" content="Mach deinen Alltag zur Quest. Plane tägliche und wöchentliche Aufgaben, sammle XP und erreiche dein nächstes Level.">
   <title>QuestLog · Dein Alltag. Dein nächstes Level.</title>
   <link rel="manifest" href="manifest.webmanifest">
-  <link rel="icon" type="image/svg+xml" href="icons/icon.svg">
-  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
+  <link rel="preload" href="fonts/PixelifySans.ttf" as="font" type="font/ttf" crossorigin>
+  <link rel="icon" type="image/svg+xml" href="icons/questlog-pixel.svg">
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/questlog-pixel-192.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="icons/questlog-pixel-apple-180.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="QuestLog">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -521,48 +522,44 @@
       .counter-explainer { font-size:11px; padding:11px 12px; }.focus-summary { padding:14px; font-size:11px; }
       .counter-reward-icon { width:34px; height:34px; border-radius:10px; }
     }
-    .tour-help { display:flex; align-items:center; justify-content:center; gap:6px; border:1px solid #ffffff17; border-radius:11px; color:#c6d0e2; background:#ffffff06; font:600 11px 'Segoe UI',sans-serif; padding:10px 12px; cursor:pointer; transition:background .2s,color .2s; }
-    .tour-help svg { width:15px; height:15px; color:var(--cyan); }.tour-help:hover { color:white; background:#ffffff0e; }
-    .tour-help[hidden] { display:none; }
-    #tutorialDialog { width:min(780px,calc(100vw - 28px)); max-width:780px; max-height:calc(100dvh - 28px); padding:0; border:1px solid #7986b737; border-radius:26px; background:#121624; color:#f3f6ff; box-shadow:0 35px 120px #000b,0 0 75px #7c5fe01a; overflow:auto; }
-    #tutorialDialog::backdrop { background:#080a15cf; backdrop-filter:blur(9px); }
-    .tour-top { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:24px 30px 16px; }
-    .tour-brand { display:flex; align-items:center; gap:8px; color:#d7c9ff; font:700 10px Consolas,monospace; letter-spacing:1.5px; }.tour-brand svg { width:18px; height:18px; }
-    .tour-skip { display:flex; align-items:center; gap:6px; padding:8px 0 8px 10px; background:none; color:#a4acc0; border:0; font:500 11px 'Segoe UI',sans-serif; cursor:pointer; }.tour-skip svg { width:13px; height:13px; }.tour-skip:hover { color:#fff; }
-    .tour-progress { display:flex; gap:6px; padding:0 30px; }.tour-progress i { height:3px; border-radius:8px; background:#2b3043; flex:1; transition:background .25s; }.tour-progress i.is-past { background:#7978bd; }.tour-progress i.is-current { background:#b8ff6c; box-shadow:0 0 12px #b8ff6c55; }
-    .tour-main { display:grid; grid-template-columns:1.04fr 1fr; min-height:370px; padding:25px 30px 15px; gap:28px; align-items:center; }
-    .tour-main.tour-enter .tour-copy { animation:tour-copy-in .35s both; }.tour-eyebrow { font:700 10px Consolas,monospace; color:#b9a2ff; letter-spacing:1.2px; display:block; margin-bottom:13px; }.tour-copy h2 { font-size:30px; letter-spacing:-1px; line-height:1.16; margin:0 0 14px; outline:none; }.tour-copy p { color:#b8c1d5; font-size:13px; line-height:1.75; margin:0 0 19px; }.tour-copy strong { color:#f3f6ff; font-weight:650; }
-    .tour-takeaway { display:flex; align-items:flex-start; gap:8px; padding:12px; border:1px solid #b8ff6c22; border-radius:11px; background:#b8ff6c07; color:#dceccc; font-size:11px; line-height:1.6; }.tour-takeaway svg { width:15px; height:15px; color:#b8ff6c; flex:none; margin-top:2px; }
-    .tour-stage { position:relative; min-width:0; height:290px; border-radius:20px; background:radial-gradient(ellipse at 50% 40%,#4c39793b,transparent 65%),linear-gradient(155deg,#20263a,#151a29); border:1px solid #ffffff0e; display:flex; align-items:center; justify-content:center; overflow:hidden; isolation:isolate; }.tour-main.tour-enter .tour-stage { animation:tour-stage-in .4s both; }
-    .tour-stage::before { content:''; position:absolute; inset:0; z-index:-1; opacity:.25; background-image:linear-gradient(#9696c918 1px,transparent 1px),linear-gradient(90deg,#9696c918 1px,transparent 1px); background-size:26px 26px; mask-image:linear-gradient(transparent,#000 60%); }
-    .tour-scene-label { position:absolute; top:17px; left:18px; font:700 8px Consolas,monospace; letter-spacing:1.3px; color:#7e8ba8; }
-    .tour-star { position:absolute; font-size:15px; color:#b8ff6c; animation:tour-star-pulse 3s ease-in-out infinite; }.tour-star.one { top:68px; left:32px; }.tour-star.two { right:37px; top:45px; color:#b9a2ff; animation-delay:.7s; }.tour-star.three { right:29px; bottom:70px; color:#65e8e1; animation-delay:1.5s; }
-    .tour-hero { position:relative; width:150px; height:195px; display:flex; align-items:center; justify-content:center; }.tour-hero::after { content:''; position:absolute; bottom:3px; width:150px; height:28px; border:1px solid #b9a2ff77; border-radius:50%; background:#9882ff15; box-shadow:0 0 28px #9e83ff20; z-index:-1; }.tour-hero>.player-art { height:160px; width:135px; filter:drop-shadow(0 0 20px #b9a2ff25); animation:tour-character-float 3s ease-in-out infinite; }
-    .tour-hero-name { position:absolute; bottom:22px; left:12px; right:12px; text-align:center; font-size:10px; color:#e3ddff; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }.tour-hero-name span { display:block; color:#b8ff6c; font:700 9px Consolas,monospace; margin-top:5px; letter-spacing:1px; }
-    .tour-float-chip { position:absolute; background:#0e1428d9; border:1px solid #7d8bb033; border-radius:9px; padding:8px 10px; display:flex; align-items:center; gap:5px; font:700 10px Consolas,monospace; box-shadow:0 8px 20px #0003; }.tour-float-chip svg { width:13px; height:13px; }.tour-float-chip.xp { left:18px; top:72px; color:#b8ff6c; animation:tour-chip-float 3s ease-in-out infinite; }.tour-float-chip.coins { right:15px; bottom:75px; color:#ffd17c; animation:tour-chip-float 3s ease-in-out 1s infinite; }
-    .tour-mini-stack { width:calc(100% - 36px); position:relative; }.tour-mini-card { border:1px solid #7787b333; border-radius:13px; padding:16px; background:#111828; box-shadow:0 10px 22px #0003; text-align:left; }.tour-mini-card+ .tour-mini-card { margin-top:11px; }.tour-mini-card .tour-mini-label { color:#75e8dd; font:700 8px Consolas,monospace; letter-spacing:1px; display:flex; align-items:center; gap:6px; margin-bottom:10px; }.tour-mini-label svg { width:12px; height:12px; }.tour-mini-card strong { font-size:12px; font-weight:600; display:block; }.tour-mini-card small { display:block; color:#95a4bc; font-size:9px; line-height:1.6; margin-top:6px; }.tour-mini-card.daily { animation:tour-card-glow 4.5s ease-in-out infinite; }.tour-mini-card.weekly { animation:tour-card-glow 4.5s ease-in-out 2.25s infinite; }.tour-mini-card.weekly .tour-mini-label { color:#bd9eff; }
-    .tour-weekdays { display:flex; gap:5px; margin-top:10px; }.tour-weekdays span { display:flex; width:22px; height:22px; border-radius:6px; align-items:center; justify-content:center; font-size:8px; background:#ffffff05; color:#5f6b83; }.tour-weekdays span.chosen { background:#bba0ff23; color:#dfd0ff; border:1px solid #bba0ff44; }
-    .tour-try { position:absolute; bottom:-29px; left:0; right:0; text-align:center; color:#8694b0; font-size:8px; letter-spacing:.2px; }.tour-quest-demo { width:calc(100% - 38px); position:relative; }.tour-demo-heading { display:flex; justify-content:space-between; color:#95a4bc; font:700 9px Consolas,monospace; margin:0 2px 12px; }
-    .tour-quest-row { width:100%; display:flex; align-items:center; gap:11px; padding:17px 12px; border:1px solid #68769944; border-radius:12px; background:#111828; color:#eff3ff; cursor:pointer; text-align:left; font:600 11px 'Segoe UI',sans-serif; transition:border .3s,background .3s; }.tour-quest-row .tour-check { display:flex; width:21px; height:21px; flex:none; align-items:center; justify-content:center; border:1px solid #647592; border-radius:7px; background:#253247; }.tour-check svg { width:14px; height:14px; opacity:0; }.tour-quest-row[aria-pressed="true"] { border-color:#b8ff6c66; background:#b8ff6c09; }.tour-quest-row[aria-pressed="true"] .tour-check { background:#b8ff6c; border-color:#b8ff6c; color:#182213; }.tour-quest-row[aria-pressed="true"] .tour-check svg { opacity:1; }.tour-quest-row[aria-pressed="true"] .tour-task-copy { color:#cfeab5; }
-    .tour-xp-box { border-radius:12px; margin-top:15px; padding:15px 14px; background:#ffffff03; border:1px solid #ffffff08; }.tour-xp-box header { display:flex; justify-content:space-between; font:700 10px Consolas,monospace; margin-bottom:10px; }.tour-xp-box header span { color:#b8ff6c; }.tour-xp-track { height:7px; background:#303a4b; border-radius:20px; overflow:hidden; }.tour-xp-fill { height:100%; width:50%; background:#b8ff6c; transition:width .55s; border-radius:20px; box-shadow:0 0 15px #b8ff6c; }.tour-xp-box footer { margin-top:9px; font-size:9px; color:#96a1b4; }.tour-demo-done .tour-xp-fill { width:100%; }.tour-xp-pop { height:22px; text-align:center; margin-top:12px; font:700 12px Consolas,monospace; color:#b8ff6c; opacity:0; }.tour-demo-done .tour-xp-pop { animation:tour-xp-pop .6s both; }
-    .tour-level-up .tour-xp-fill { width:0; }
-    .tour-counter-demo { width:calc(100% - 38px); border:1px solid #9477df39; border-radius:16px; padding:18px 16px; background:#111828; position:relative; text-align:center; }.tour-counter-demo h3 { font-size:12px; margin:0 0 19px; display:flex; align-items:center; justify-content:center; gap:7px; }.tour-counter-demo h3 svg { width:14px; height:14px; color:#bb9fff; }.tour-counter-demo .tour-counter-number { font:700 41px Consolas,monospace; color:#e6ddff; line-height:1; }.tour-counter-number small { font:600 12px 'Segoe UI',sans-serif; color:#a5a0bd; display:block; margin:6px 0 10px; }.tour-counter-time { color:#8f9cb9; font:12px Consolas,monospace; }.tour-counter-demo .tour-reset { border:0; background:#ffffff05; color:#9aa6bd; font:10px 'Segoe UI',sans-serif; padding:7px 13px; display:inline-flex; align-items:center; gap:5px; margin-top:12px; border-radius:7px; cursor:pointer; }.tour-reset svg { width:11px; height:11px; }
-    .tour-coin-stages { display:flex; gap:6px; margin-top:15px; }.tour-coin-stages div { flex:1; border-radius:8px; background:#ffffff04; padding:7px 2px; border:1px solid #ffffff06; }.tour-coin-stages strong { display:block; color:#d8ba85; font:700 10px Consolas,monospace; }.tour-coin-stages small { color:#747f98; font-size:7px; display:block; margin-top:4px; }.tour-coin-stages .active { background:#ffd17c12; border-color:#ffd17c4d; }.tour-coin-stages .active strong { color:#ffd17c; }.tour-counter-info { color:#b1b6c4; font-size:8px; line-height:1.5; min-height:12px; margin-top:10px; }
-    .tour-shop-scene { width:100%; height:100%; position:relative; display:flex; justify-content:center; align-items:center; }.tour-shop-scene>.cosmetic-figure { width:195px; height:223px; }.tour-shop-scene .player-art { width:130px; height:155px; }.tour-shop-caption { position:absolute; bottom:15px; text-align:center; width:100%; color:#c9badf; font-size:9px; }.tour-shop-price { top:18px; right:17px; color:#ffd17c; font:700 11px Consolas,monospace; position:absolute; display:flex; align-items:center; gap:5px; }.tour-shop-price svg { width:14px; height:14px; }.tour-shop-tags { position:absolute; left:15px; top:45px; display:flex; flex-direction:column; gap:7px; }.tour-shop-tags span { font:700 7px Consolas,monospace; padding:5px 7px; border-radius:6px; color:#b9b3d9; border:1px solid #9485bd23; background:#100f25b5; }.tour-shop-tags span:nth-child(2) { color:#ffcf84; }.tour-shop-tags span:nth-child(3) { color:#7be5df; }
-    .tour-ranking-demo { width:calc(100% - 32px); position:relative; }.tour-ranking-tabs { display:flex; background:#111828; padding:4px; border-radius:9px; gap:5px; margin-bottom:13px; }.tour-ranking-tabs span { flex:1; text-align:center; color:#8190ab; padding:7px 0; font-size:9px; border-radius:6px; }.tour-ranking-tabs .active { background:#afa0ff21; color:#d7caff; }.tour-ranking-row { display:flex; align-items:center; gap:10px; padding:10px; border-radius:10px; background:#111828; border:1px solid #ffffff07; margin-top:6px; }.tour-ranking-row.self { border-color:#b8ff6c44; background:#b8ff6c08; animation:tour-self-glow 3s infinite; }.tour-ranking-row .player-art { width:26px; height:33px; }.tour-ranking-row .cosmetic-figure { width:36px; height:40px; flex:none; border-radius:6px; }.tour-ranking-row .cosmetic-figure>.player-art { width:25px; height:31px; }.tour-ranking-row .buddy { width:12px; height:14px; right:-5px; bottom:4px; }.tour-ranking-row .buddy-art { width:12px; height:14px; }.tour-ranking-row .tour-rank { color:#95a4bc; font:700 10px Consolas,monospace; width:17px; }.tour-ranking-row:first-of-type .tour-rank { color:#ffd17c; }.tour-ranking-row .tour-rank-name { min-width:0; flex:1; color:#c4cfdf; font-size:10px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }.tour-ranking-row.self .tour-rank-name { color:#d6edbd; }.tour-ranking-row .tour-rank-lvl { color:#bb9fff; font:700 9px Consolas,monospace; }.tour-ranking-note { text-align:center; color:#7f8ea8; font-size:8px; line-height:1.7; margin-top:12px; }
-    .tour-footer { display:flex; align-items:center; justify-content:space-between; gap:14px; padding:19px 30px 0; border-top:1px solid #ffffff09; }.tour-back { border:0; background:none; color:#99a7c0; cursor:pointer; display:flex; gap:5px; align-items:center; padding:10px 0; font-size:11px; }.tour-back svg { width:14px; height:14px; }.tour-back:disabled { opacity:.25; cursor:default; }.tour-page { color:#7986a0; font:10px Consolas,monospace; }.tour-next { min-width:112px; gap:10px; justify-content:center; padding:11px 17px; font-size:12px; }.tour-next svg { width:14px; height:14px; }.tour-example-label { color:#5f6e88; font-size:9px; line-height:1.6; text-align:center; margin:13px 22px 17px; }
-    #tutorialDialog button:focus-visible { outline:2px solid #b8ff6c; outline-offset:4px; }
-    @keyframes tour-copy-in { from { opacity:0; transform:translateY(9px); } to { opacity:1; transform:translateY(0); } }
-    @keyframes tour-stage-in { from { opacity:0; transform:scale(.97); } to { opacity:1; transform:scale(1); } }
-    @keyframes tour-character-float { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-7px); } }
-    @keyframes tour-chip-float { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-5px); } }
-    @keyframes tour-star-pulse { 0%,100% { opacity:.3; transform:scale(.75); } 50% { opacity:.9; transform:scale(1.15); } }
-    @keyframes tour-card-glow { 0%,40%,100% { border-color:#7787b333; transform:translateX(0); } 10%,30% { border-color:#ae96ff88; transform:translateX(3px); } }
-    @keyframes tour-xp-pop { from { opacity:0; transform:translateY(6px) scale(.9); } to { opacity:1; transform:translateY(0) scale(1); } }
-    @keyframes tour-self-glow { 0%,100% { box-shadow:0 0 0 #b8ff6c00; } 50% { box-shadow:0 0 18px #b8ff6c12; } }
-    @media(max-width:660px) { .tour-help { width:31px; height:33px; padding:0; }.tour-help>span:last-child { display:none; }#tutorialDialog { border-radius:21px; width:calc(100vw - 20px); max-height:calc(100dvh - 20px); }.tour-top { padding:18px 21px 12px; }.tour-progress { padding:0 21px; }.tour-main { grid-template-columns:1fr; min-height:0; padding:18px 21px 18px; gap:21px; }.tour-stage { height:219px; }.tour-copy h2 { font-size:24px; letter-spacing:-.6px; margin-bottom:10px; }.tour-copy p { font-size:12px; line-height:1.7; margin-bottom:12px; }.tour-eyebrow { font-size:8px; margin-bottom:9px; }.tour-takeaway { padding:10px; font-size:10px; }.tour-footer { padding:15px 21px 0; }.tour-example-label { font-size:8px; margin:10px 18px 13px; }.tour-hero { height:161px; }.tour-hero>.player-art { height:134px; }.tour-hero-name { bottom:14px; font-size:9px; }.tour-float-chip.xp { top:54px; }.tour-float-chip.coins { bottom:58px; }.tour-mini-card { padding:11px 14px; }.tour-mini-card .tour-mini-label { margin-bottom:6px; font-size:7px; }.tour-mini-card strong { font-size:11px; }.tour-mini-card small { font-size:8px; margin-top:4px; }.tour-weekdays { margin-top:7px; }.tour-weekdays span { width:20px; height:18px; font-size:7px; }.tour-mini-card+.tour-mini-card { margin-top:8px; }.tour-quest-row { padding:13px 12px; }.tour-xp-box { margin-top:10px; padding:12px; }.tour-xp-pop { margin-top:9px; height:15px; font-size:10px; }.tour-try { bottom:-20px; font-size:7px; }.tour-counter-demo { padding:13px 14px; }.tour-counter-demo h3 { font-size:11px; margin-bottom:12px; }.tour-counter-demo .tour-counter-number { font-size:30px; }.tour-counter-number small { display:inline; font-size:10px; margin-left:6px; }.tour-counter-time { font-size:10px; margin-top:6px; }.tour-counter-demo .tour-reset { padding:5px 10px; margin-top:7px; }.tour-coin-stages { margin-top:10px; }.tour-coin-stages div { padding:6px 2px; }.tour-counter-info { margin-top:7px; font-size:7px; }.tour-shop-scene>.cosmetic-figure { width:165px; height:170px; }.tour-shop-scene .player-art { width:100px; height:121px; }.tour-shop-caption { bottom:9px; font-size:8px; }.tour-shop-tags { top:49px; }.tour-ranking-tabs { margin-bottom:8px; }.tour-ranking-tabs span { padding:5px 0; font-size:8px; }.tour-ranking-row { padding:7px 10px; gap:10px; }.tour-ranking-row .player-art { height:26px; width:22px; }.tour-ranking-row .cosmetic-figure { height:29px; width:27px; }.tour-ranking-row .cosmetic-figure>.player-art { height:24px; width:20px; }.tour-ranking-note { font-size:7px; margin-top:8px; }.tour-scene-label { top:11px; left:13px; font-size:7px; } }
-    @media(max-height:650px) and (max-width:660px) { .tour-stage { height:190px; }.tour-main { gap:15px; padding-top:13px; padding-bottom:13px; }.tour-copy h2 { font-size:22px; }.tour-copy p { font-size:11px; margin-bottom:10px; }.tour-takeaway { font-size:9px; padding:8px; }.tour-top { padding-top:13px; }.tour-footer { padding-top:12px; } }
-    @media(prefers-reduced-motion:reduce) { #tutorialDialog *,#tutorialDialog *::before,#tutorialDialog *::after { animation:none!important; transition:none!important; }.tour-demo-done .tour-xp-pop { opacity:1; } }
+    .tour-help { border:1px solid #69768747; background:#b89aff0b; color:#d8c5ff; border-radius:10px; min-height:44px; padding:8px 12px; display:inline-flex; align-items:center; gap:7px; font:600 11px 'Segoe UI',sans-serif; cursor:pointer; }.tour-help[hidden] { display:none; }.tour-help svg { width:16px; height:16px; }
+    #tutorialDialog { width:min(820px,calc(100vw - 24px)); max-width:820px; max-height:calc(100dvh - 24px); padding:0; border:1px solid #b294ff55; border-radius:26px; background:radial-gradient(ellipse at 0 35%,#41276555,transparent 58%),#121622; color:#f3f6ff; box-shadow:0 35px 120px #000b,0 0 90px #9170e826; overflow:auto; }
+    #tutorialDialog::backdrop { background:#080a15d4; backdrop-filter:blur(9px); }
+    #tutorialDialog .btn:hover:enabled { transform:none; }
+    #tutorialTitle:focus { outline:none; }
+    #tutorialDialog button { cursor:pointer; touch-action:manipulation; }#tutorialDialog button:focus-visible,#tutorialDialog input:focus-visible { outline:2px solid #b8ff6c; outline-offset:3px; }#tutorialDialog button:disabled { opacity:.45; cursor:wait; }
+    .tour-top { padding:15px 24px 8px; display:flex; align-items:center; justify-content:space-between; gap:8px; }.tour-brand { display:flex; align-items:center; gap:7px; font:700 10px Consolas,monospace; letter-spacing:1.1px; color:#ccbded; }.tour-brand svg { width:15px; height:15px; color:#c6a2ff; }.tour-skip { border:0; color:#acb5c6; background:none; font:12px 'Segoe UI',sans-serif; display:flex; align-items:center; justify-content:center; gap:7px; min-height:44px; padding:8px; white-space:nowrap; }.tour-skip svg { width:14px; height:14px; }
+    .tour-progress { display:flex; gap:6px; padding:0 24px; }.tour-progress i { height:3px; flex:1; border-radius:5px; background:#384056; transition:background .25s; }.tour-progress i.is-past { background:#a291c4; }.tour-progress i.is-current { background:#b8ff6c; box-shadow:0 0 14px #b8ff6c55; }
+    .tour-main { padding:25px 26px 23px; display:grid; grid-template-columns:195px minmax(0,1fr); gap:24px; min-height:385px; }.tour-content { min-width:0; }.tour-copy { padding:3px 0 17px; }.tour-eyebrow { display:block; color:#c9b4f8; font:700 10px Consolas,monospace; letter-spacing:1px; margin:0 0 8px; }.tour-copy h2 { margin:0 0 9px; font:700 27px/1.2 'Segoe UI',sans-serif; letter-spacing:-.8px; }.tour-copy p { margin:0; color:#c1c9da; font:14px/1.6 'Segoe UI',sans-serif; max-width:440px; }.tour-copy strong { color:#eff4ff; }
+    .tour-mentor { align-self:center; position:relative; min-height:306px; display:flex; flex-direction:column; align-items:center; justify-content:center; overflow:hidden; }.tour-wizard { position:relative; width:178px; height:221px; display:flex; align-items:center; justify-content:center; isolation:isolate; }.tour-wizard>.player-art { width:152px; height:180px; filter:drop-shadow(0 0 16px #b798ff55); animation:tour-wizard-float 3.8s ease-in-out infinite; }.tour-wizard::before { content:''; position:absolute; width:159px; height:159px; border-radius:50%; border:1px solid #b68eff36; background:radial-gradient(circle,#bb83ff22,transparent 68%); z-index:-1; box-shadow:0 0 42px #945dff1a; animation:tour-aura-breathe 4s ease-in-out infinite; }.tour-wizard::after { content:''; position:absolute; width:156px; height:30px; border:1px solid #b094ff82; border-radius:50%; bottom:5px; background:#b492ff14; box-shadow:0 0 24px #b493ff3b; }.tour-orbit { position:absolute; border:1px dashed #b7a2ee44; width:177px; height:177px; border-radius:50%; transform:rotate(-18deg); z-index:-1; animation:tour-orbit-spin 30s linear infinite; }.tour-orbit::before,.tour-orbit::after { content:'✦'; color:#e7d4ff; position:absolute; font-size:14px; text-shadow:0 0 15px #d2aaff; }.tour-orbit::before { left:13px; top:14px; }.tour-orbit::after { right:8px; bottom:27px; font-size:9px; }.tour-wizard-spark { position:absolute; top:39px; left:20px; color:#ead6ff; text-shadow:0 0 18px #ddaaff; font-size:22px; animation:tour-spark-pulse 2.5s ease-in-out infinite; }.tour-mentor-name { margin-top:13px; text-align:center; font:700 18px 'Segoe UI',sans-serif; }.tour-mentor-name small { display:block; font:11px 'Segoe UI',sans-serif; color:#ad9ec5; margin-top:4px; }.tour-max { display:inline-flex; align-items:center; gap:5px; font:800 10px Consolas,monospace; letter-spacing:1px; padding:5px 9px; border-radius:6px; background:#d0a2ff1a; color:#ead6ff; border:1px solid #d0a2ff3a; margin-top:10px; }.tour-max svg { width:12px; height:12px; }
+    .tour-stage { position:relative; background:#0c1220b3; border:1px solid #7385b331; border-radius:18px; padding:20px; overflow:hidden; min-height:183px; }.tour-scene-label { color:#8796b4; font:700 10px Consolas,monospace; letter-spacing:1px; display:block; margin-bottom:12px; }.tour-takeaway { color:#9eadc5; font:12px/1.5 'Segoe UI',sans-serif; margin-top:12px; min-height:18px; }.tour-takeaway strong { color:#d9e7c9; }.tour-hello-scene { display:flex; align-items:center; justify-content:center; gap:28px; min-height:144px; }.tour-start-hero { width:93px; height:127px; position:relative; display:flex; align-items:center; justify-content:center; }.tour-start-hero>.player-art { width:91px; height:114px; }.tour-start-hero::after { content:''; position:absolute; bottom:0; width:96px; height:18px; border:1px solid #b8ff6c44; border-radius:50%; box-shadow:0 0 22px #b8ff6c15; }.tour-route { display:flex; flex-direction:column; gap:9px; }.tour-route>span { display:flex; gap:10px; align-items:center; font:600 13px 'Segoe UI',sans-serif; }.tour-route svg { width:21px; height:21px; color:#b8ff6c; }.tour-route>span:nth-child(2) svg { color:#ffc66b; }.tour-route>span:nth-child(3) svg { color:#c2a2ff; }
+    .tour-quest-form label,.tour-form-label { display:block; font:600 12px 'Segoe UI',sans-serif; margin-bottom:8px; color:#d6e0ee; }.tour-quest-form input { width:100%; box-sizing:border-box; min-height:46px; padding:11px 12px; border:1px solid #64708d70; border-radius:10px; background:#171d2b; color:#f4f7ff; font:16px 'Segoe UI',sans-serif; }.tour-quest-form input::placeholder { color:#8290aa; }.tour-starters { display:flex; flex-wrap:wrap; gap:6px; margin:10px 0 15px; }.tour-starters button { border:1px solid #697aa039; border-radius:8px; color:#b6c4dc; background:#26304853; font:11px 'Segoe UI',sans-serif; min-height:44px; padding:8px; }.tour-starters button:hover { border-color:#b8ff6c66; color:#defbc0; }.tour-type-picker { display:grid; grid-template-columns:1fr 1fr; gap:8px; }.tour-type-picker button { display:flex; align-items:center; justify-content:center; gap:8px; background:#192130; border:1px solid #64759554; border-radius:10px; color:#b9c6dc; min-height:46px; font:600 13px 'Segoe UI',sans-serif; }.tour-type-picker button svg { width:16px; height:16px; }.tour-type-picker button[aria-pressed=true] { border-color:#b8ff6c88; color:#d6ffad; background:#b8ff6c10; }.tour-weekdays-field { margin-top:13px; }.tour-weekdays-picker { display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); gap:4px; }.tour-weekdays-picker button { min-height:44px; padding:4px 0; border:1px solid #69769250; background:#192130; color:#aebbd0; border-radius:8px; font:600 12px 'Segoe UI',sans-serif; }.tour-weekdays-picker button[aria-pressed=true] { background:#bca2ff18; border-color:#c1a6ff; color:#dfcfff; }.tour-quest-form fieldset { border:0; margin:0; padding:0; min-width:0; }.tour-create { width:100%; display:flex; align-items:center; justify-content:center; gap:8px; min-height:47px; margin-top:15px; font-size:14px!important; }.tour-quest-error { font:12px/1.5 'Segoe UI',sans-serif; color:#ffb3c7; margin:11px 0 0; }.tour-start-note { font:11px/1.5 'Segoe UI',sans-serif; margin-top:11px; color:#95a4bd; }
+    .tour-saved-quest { text-align:center; padding:10px 0; position:relative; }.tour-success-icon { display:flex; align-items:center; justify-content:center; width:46px; height:46px; margin:0 auto 13px; border-radius:50%; color:#182213; background:#b8ff6c; box-shadow:0 0 35px #b8ff6c25; animation:tour-success-pop .45s ease-out; }.tour-success-icon svg { width:23px; height:23px; }.tour-saved-quest strong { display:block; font:700 18px/1.4 'Segoe UI',sans-serif; overflow-wrap:anywhere; }.tour-saved-quest p { color:#aebcce; font:12px/1.5 'Segoe UI',sans-serif; margin:8px 0 0; }.tour-saved-meta { display:inline-flex; margin-top:12px; gap:6px; align-items:center; padding:7px 11px; background:#b8ff6c0c; border:1px solid #b8ff6c30; border-radius:9px; font:11px 'Segoe UI',sans-serif; color:#d5efbd; }.tour-saved-meta svg { width:13px; height:13px; }.tour-save-burst { position:absolute; left:50%; top:30px; width:9px; height:9px; border-radius:3px; pointer-events:none; background:#b8ff6c; opacity:0; animation:tour-burst .7s ease-out forwards; transform:rotate(var(--angle)); }
+    .tour-demo-heading { display:flex; align-items:center; justify-content:space-between; color:#9eacc3; font:700 10px Consolas,monospace; letter-spacing:.5px; margin-bottom:13px; }.tour-demo-heading>span:last-child { color:#bca5e4; font-size:9px; }.tour-quest-row { width:100%; display:flex; gap:11px; align-items:center; min-height:52px; text-align:left; padding:12px; border:1px solid #77839d66; border-radius:11px; background:#192231; color:#e9f1fc; font:600 14px 'Segoe UI',sans-serif; }.tour-check { width:24px; height:24px; flex:none; display:flex; align-items:center; justify-content:center; border:1px solid #71839e; border-radius:7px; }.tour-check svg { width:16px; height:16px; opacity:0; }.tour-quest-row[aria-pressed=true] { border-color:#b8ff6c77; background:#b8ff6c0a; }.tour-quest-row[aria-pressed=true] .tour-check { background:#b8ff6c; color:#1b2417; border-color:#b8ff6c; }.tour-quest-row[aria-pressed=true] .tour-check svg { opacity:1; }.tour-task-copy { overflow-wrap:anywhere; }.tour-xp-box { margin-top:16px; }.tour-xp-box header { display:flex; justify-content:space-between; gap:9px; font:11px Consolas,monospace; color:#c9d9e9; }.tour-xp-box strong { color:#c9e6b0; }.tour-xp-track { height:9px; border-radius:10px; background:#303a49; overflow:hidden; margin:9px 0; }.tour-xp-fill { width:50%; height:100%; background:linear-gradient(90deg,#8ee599,#b8ff6c); border-radius:10px; transition:width .6s; }.tour-demo-done .tour-xp-fill { width:100%; }.tour-level-up .tour-xp-fill { width:0; transition:none; }.tour-xp-box footer { color:#9aaac0; font:11px 'Segoe UI',sans-serif; }.tour-xp-pop { font:800 13px Consolas,monospace; text-align:center; height:18px; color:#b8ff6c; margin-top:13px; }.tour-try { display:block; font:11px 'Segoe UI',sans-serif; color:#a9bad0; text-align:center; margin-top:9px; }
+    .tour-counter-demo { text-align:center; }.tour-counter-demo h3 { margin:0 0 14px; font:600 13px 'Segoe UI',sans-serif; display:flex; gap:7px; justify-content:center; align-items:center; color:#bba6e2; }.tour-counter-demo h3 svg { width:15px; height:15px; }.tour-counter-number { color:#e3d7ff; font:700 37px/1 Consolas,monospace; }.tour-counter-number small { font:12px 'Segoe UI',sans-serif; color:#b6a8ce; margin-left:5px; }.tour-counter-time { font:14px Consolas,monospace; color:#ae9dc8; margin-top:8px; }.tour-reset { display:inline-flex; gap:7px; align-items:center; justify-content:center; min-height:44px; padding:8px 14px; border:1px solid #7783a13d; background:#26314655; border-radius:9px; color:#b1bfd2; font:12px 'Segoe UI',sans-serif; margin-top:10px; }.tour-reset svg { width:14px; height:14px; }.tour-coin-stages { display:grid; grid-template-columns:repeat(3,1fr); gap:7px; margin-top:15px; }.tour-coin-stages>div { border:1px solid #61719538; background:#171e2c; border-radius:10px; padding:9px 2px; }.tour-coin-stages .active { color:#ffd184; border-color:#ffca7866; background:#ffca780b; }.tour-coin-stages strong { display:block; font:700 13px 'Segoe UI',sans-serif; }.tour-coin-stages small { display:block; color:#95a2b7; font:9px Consolas,monospace; margin-top:5px; }.tour-counter-info { color:#a6b3c7; font:11px/1.5 'Segoe UI',sans-serif; margin-top:12px; }
+    .tour-shop-scene { position:relative; display:flex; flex-direction:column; align-items:center; }.tour-shop-scene>.cosmetic-figure { width:185px; height:178px; flex:none; }.tour-shop-scene .player-art { width:102px; height:128px; }.tour-shop-price { display:flex; align-items:center; gap:5px; font:700 14px Consolas,monospace; color:#ffd184; }.tour-shop-price svg { width:17px; height:17px; }.tour-shop-caption { font:12px 'Segoe UI',sans-serif; color:#b7c1d4; margin:9px 0 0; }.tour-shop-try { min-height:44px; padding:9px 14px; border:1px solid #a789db66; border-radius:10px; color:#dfcdff; background:#b69aff0d; font:600 12px 'Segoe UI',sans-serif; margin-top:11px; display:inline-flex; gap:7px; align-items:center; }.tour-shop-try svg { width:15px; height:15px; }
+    .tour-ranking-tabs { display:flex; gap:7px; margin-bottom:12px; }.tour-ranking-tabs>span { flex:1; text-align:center; padding:8px 2px; background:#27334a; color:#aebbd1; border-radius:8px; font:600 11px 'Segoe UI',sans-serif; }.tour-ranking-tabs .active { color:#d9ffb7; background:#b8ff6c12; border:1px solid #b8ff6c44; }.tour-ranking-row { display:flex; align-items:center; gap:11px; padding:9px; border:1px solid #63719130; background:#1b2433; border-radius:10px; margin-top:6px; }.tour-ranking-row.self { background:#b8ff6c09; border-color:#b8ff6c44; }.tour-rank { font:700 13px Consolas,monospace; color:#c7b0e8; width:21px; flex:none; }.tour-ranking-row>.player-art { width:26px; height:34px; flex:none; }.tour-ranking-row>.cosmetic-figure { width:31px; height:37px; flex:none; }.tour-ranking-row .cosmetic-figure>.player-art { width:26px; height:31px; }.tour-rank-name { flex:1; font:600 12px 'Segoe UI',sans-serif; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }.tour-rank-lvl { color:#a3b291; font:10px Consolas,monospace; white-space:nowrap; }.tour-ranking-note { color:#9baec5; font:11px/1.5 'Segoe UI',sans-serif; text-align:center; margin-top:12px; }
+    .tour-footer { position:sticky; bottom:0; z-index:3; padding:14px 24px 17px; background:#131725f5; border-top:1px solid #7a87a125; display:flex; align-items:center; justify-content:space-between; gap:8px; backdrop-filter:blur(8px); }.tour-back { min-height:44px; border:1px solid #75809637; border-radius:10px; color:#b7c3d5; background:#ffffff03; display:flex; gap:7px; align-items:center; justify-content:center; padding:8px 13px; font:12px 'Segoe UI',sans-serif; }.tour-back svg { width:14px; height:14px; }.tour-page { color:#8794ab; font:11px Consolas,monospace; white-space:nowrap; }.tour-next { min-height:44px; display:flex; gap:7px; justify-content:center; align-items:center; padding:10px 15px; font:600 13px 'Segoe UI',sans-serif!important; }.tour-next svg { width:14px; height:14px; }
+    .tour-enter .tour-content { animation:tour-content-enter .28s ease-out; }@keyframes tour-content-enter { from { opacity:0; transform:translateY(7px); }to { opacity:1; transform:translateY(0); } }@keyframes tour-wizard-float { 0%,100% { transform:translateY(0); }50% { transform:translateY(-7px); } }@keyframes tour-aura-breathe { 0%,100% { opacity:.7; transform:scale(.94); }50% { opacity:1; transform:scale(1.06); } }@keyframes tour-orbit-spin { to { transform:rotate(342deg); } }@keyframes tour-spark-pulse { 0%,100% { opacity:.4; transform:scale(.8); }50% { opacity:1; transform:scale(1.1); } }@keyframes tour-success-pop { from { opacity:0; transform:scale(.5); }to { opacity:1; transform:scale(1); } }@keyframes tour-burst { 0% { opacity:1; transform:rotate(var(--angle)) translateY(0); }100% { opacity:0; transform:rotate(var(--angle)) translateY(-83px) rotate(80deg); } }
+    @media(max-width:660px) { .tour-help { width:40px; height:40px; min-height:40px; padding:9px; justify-content:center; }.tour-help>span:last-child { display:none; }#tutorialDialog { width:calc(100vw - 16px); max-height:calc(100dvh - 16px); border-radius:20px; }.tour-top { padding:8px 14px 5px; }.tour-brand { font-size:9px; letter-spacing:.35px; gap:5px; }.tour-skip { font-size:11px; gap:4px; padding:5px; }.tour-progress { padding:0 14px; gap:5px; }.tour-main { display:block; padding:16px; min-height:0; }.tour-mentor { min-height:0; height:115px; flex-direction:row; gap:9px; margin:-3px 0 13px; border-bottom:1px solid #a890d21c; padding-bottom:8px; overflow:visible; }.tour-wizard { width:105px; height:103px; flex:none; }.tour-wizard>.player-art { width:83px; height:97px; }.tour-wizard::before { width:94px; height:94px; }.tour-wizard::after { width:83px; height:17px; bottom:0; }.tour-orbit { width:102px; height:102px; }.tour-orbit::before { left:7px; top:7px; font-size:10px; }.tour-orbit::after { right:6px; bottom:15px; font-size:7px; }.tour-wizard-spark { font-size:15px; left:8px; top:15px; }.tour-mentor-caption { text-align:left; }.tour-mentor-name { font-size:16px; text-align:left; margin:0; }.tour-mentor-name small { font-size:11px; margin-top:5px; }.tour-max { margin-top:7px; font-size:9px; padding:4px 7px; }.tour-copy { padding:0 0 14px; }.tour-copy h2 { font-size:23px; margin-bottom:7px; }.tour-copy p { font-size:13px; line-height:1.55; }.tour-eyebrow { font-size:9px; margin-bottom:6px; }.tour-stage { padding:16px; min-height:0; border-radius:14px; }.tour-takeaway { margin-top:10px; font-size:11px; }.tour-hello-scene { gap:20px; min-height:132px; }.tour-start-hero { width:81px; height:112px; }.tour-start-hero>.player-art { width:78px; height:99px; }.tour-route { gap:12px; }.tour-route>span { font-size:12px; }.tour-route svg { width:17px; height:17px; }.tour-starters { gap:5px; margin:9px 0 12px; }.tour-starters button { font-size:10px; padding:7px; }.tour-quest-form label,.tour-form-label { font-size:12px; }.tour-footer { padding:10px 14px 12px; }.tour-next { padding:9px 11px; font-size:12px!important; }.tour-back { padding:8px 10px; }.tour-shop-scene>.cosmetic-figure { height:155px; width:163px; }.tour-shop-scene .player-art { width:89px; height:113px; }.tour-ranking-row { gap:9px; }.tour-counter-number { font-size:32px; } }
+    @media(max-width:350px) { .tour-main { padding:14px; }.tour-copy h2 { font-size:21px; }.tour-copy p { font-size:12px; }.tour-stage { padding:13px; }.tour-brand { font-size:8px; }.tour-skip { font-size:10px; }.tour-starters button { padding:6px; font-size:9px; }.tour-footer { padding-left:11px; padding-right:11px; }.tour-next { padding:9px 9px; font-size:11px!important; }.tour-back { font-size:11px; padding:8px; }.tour-page { font-size:10px; }.tour-type-picker button { font-size:12px; }.tour-ranking-row { gap:7px; }.tour-rank-name { font-size:11px; } }
+    .tour-shop-scene #tutorialShopFigure>.cosmetic-figure { width:185px; height:178px; flex:none; }
+    @media(max-width:660px) { .tour-shop-scene #tutorialShopFigure>.cosmetic-figure { height:155px; width:163px; } }
+    @media(prefers-reduced-motion:reduce) { #tutorialDialog *,#tutorialDialog *::before,#tutorialDialog *::after { animation:none!important; transition:none!important; } }
+
+    /* The mentor's last chapter connects the weekly ranking to installation on a phone. */
+    .tour-final-ranking .tour-ranking-tabs { margin-bottom:8px; }
+    .tour-final-ranking .tour-ranking-row { padding:6px 9px; margin-top:5px; }
+    .tour-final-ranking .tour-ranking-note { margin-top:9px; }
+    .tour-app-install { margin-top:16px; padding:14px; border:1px solid #b5ff6c45; border-radius:13px; background:#b8ff6c08; }
+    .tour-app-install-head { display:flex; align-items:center; gap:11px; }
+    .tour-app-install-head img { width:43px; height:43px; border-radius:11px; flex:none; }
+    .tour-app-install h3 { font:700 14px/1.35 'Segoe UI',sans-serif; margin:0 0 5px; color:#e1f7cf; }
+    .tour-app-install p { font:12px/1.55 'Segoe UI',sans-serif; margin:0; color:#b3c0ce; }
+    .tour-app-install-btn { width:100%; min-height:44px; margin-top:12px; padding:9px 11px; display:flex; align-items:center; justify-content:center; gap:8px; border:1px solid #b8ff6c66; border-radius:9px; background:#b8ff6c15; color:#d6ffb2; font:600 12px 'Segoe UI',sans-serif; }
+    .tour-app-install-btn[hidden] { display:none; }
+    .tour-app-install-btn svg { width:15px; height:15px; }
+    @media(max-width:660px) { .tour-app-install { padding:12px; margin-top:13px; }.tour-app-install-head { gap:9px; }.tour-app-install-head img { width:38px; height:38px; border-radius:9px; }.tour-app-install h3 { font-size:13px; }.tour-app-install p { font-size:11px; }.tour-final-ranking .tour-ranking-note { font-size:10px; } }
     /* Daily work comes first; the character celebrates progress below it. */
     .daily-stack { gap:20px; }
     .stack { min-width:0; }
@@ -677,11 +674,170 @@
 
 
   </style>
+  <style id="questlog-pixel-world">
+    /* Pixelify Sans is bundled locally under the SIL Open Font License in fonts/OFL.txt. */
+    @font-face { font-family:QuestPixel; src:url('fonts/PixelifySans.ttf') format('truetype'); font-weight:400 700; font-style:normal; font-display:swap; }
+    :root { --bg:#101020; --panel:#1c2035; --line:#3c435f; --muted:#a7b1c8; --text:#f2f4ff; --lime:#c2fa73; --cyan:#7de9e0; --amber:#ffcf79; --pixel-font:QuestPixel,Consolas,monospace; }
+    body { background:radial-gradient(ellipse at 75% 0,#34306666,transparent 60%),linear-gradient(90deg,#b2acff03 1px,transparent 1px),linear-gradient(#b2acff03 1px,transparent 1px),var(--bg); background-size:auto,32px 32px,32px 32px,auto; }
+    .shell { background:#11132277; }
+    .sidebar { background:#17192b; border-right:2px solid #424864; }
+    .brand { font-family:var(--pixel-font); font-weight:700; font-size:30px; letter-spacing:0; }
+    .logo { border-radius:2px; transform:none; border:2px solid #e0ffad; box-shadow:3px 3px 0 #4c6a32; }
+    .logo svg { transform:none; }
+    .overline,.group-title,.hero-tag,.tour-brand,.tour-eyebrow { letter-spacing:1.1px; }
+    .nav button { position:relative; font-family:var(--pixel-font); font-size:17px; font-weight:600; border-radius:3px; border:1px solid transparent; }
+    .nav button[aria-current=page] { background:#c2fa7311; border-color:#a9cf6a69; box-shadow:inset 4px 0 #c2fa73,3px 3px 0 #0003; }
+    .sidebar-note { border-radius:3px; background:#21263c; border:2px solid #424a69; box-shadow:4px 4px 0 #090c18; }
+    .sidebar-note strong { font-family:var(--pixel-font); font-size:19px; }
+    .topbar { border-bottom:2px solid #424a66; }
+    .topbar>.overline { color:#afc48d; }
+    .btn { border-radius:3px; border:2px solid #defca6; box-shadow:0 4px 0 #526c35,0 5px 0 1px #101720; }
+    .btn:hover:enabled { transform:none; box-shadow:0 4px 0 #526c35,0 5px 0 1px #101720,0 0 18px #c2fa7322; }
+    .btn.secondary { border:2px solid #535d7d; background:#252a42; box-shadow:0 3px 0 #111527; }
+    .btn.secondary:hover { background:#303752; box-shadow:0 3px 0 #111527; }
+    .btn:active:enabled { transform:translateY(2px); box-shadow:0 1px 0 #526c35; }
+    .icon-btn,.tour-help,.pwa-install,.text-btn { border-radius:3px; }
+    .icon-btn,.tour-help,.pwa-install { background:#242940; border-color:#4a5372; }
+    .date-chip,.coin-hud { border-radius:3px; background:#232940; box-shadow:2px 2px 0 #101320; }
+    .coin-hud { border:2px solid #aa864d; }
+    .coin-hud strong { font-family:var(--pixel-font); font-size:19px; letter-spacing:.25px; }
+    .intro h1 { font-family:var(--pixel-font); font-size:39px; letter-spacing:0; font-weight:700; line-height:1.17; color:#f4f1ff; text-shadow:3px 3px 0 #514677; }
+    .card,.stat,.adventure-hero,.shop-banner,.shop-item,.podium-player,.leaderboard-own,.leaderboard-quote,.focus-start { border-radius:4px; border:2px solid #48516f; background:#1c2034; box-shadow:4px 4px 0 #090d1b; }
+    .card h2,.view-controls h2,.shop-banner h2,.leaderboard-hero h2,.empty h3 { font-family:var(--pixel-font); letter-spacing:0; font-weight:600; }
+    .card h2 { font-size:22px; }
+    .card-heading { flex-wrap:wrap; }
+    .day-summary { background:linear-gradient(90deg,#343051,#242c42); border-bottom:2px solid #48516f; }
+    .progress-track,.tour-xp-track { border-radius:0; height:10px; border:2px solid #0d1321; background:#353d55; }
+    .progress-fill,.tour-xp-fill { border-radius:0; background:repeating-linear-gradient(90deg,#c2fa73 0 13px,#8bab51 13px 15px); box-shadow:inset 0 2px 0 #e2ffb3; }
+    .hero-meter .progress-track { height:8px; }
+    .stat { background:#242b38; border-color:#536947; }
+    .stat:nth-child(2) { background:#202e3b; border-color:#3e7779; }
+    .stat:nth-child(3) { background:#302b3a; border-color:#756143; }
+    .stat-value { font-family:var(--pixel-font); font-size:33px; letter-spacing:0; }
+    .quest { background:#20273b; border:1px solid #47516c; border-radius:2px; margin:8px 0; padding:0 11px; min-height:70px; box-shadow:0 3px 0 #11172a; }
+    .quest:last-child { border-bottom:1px solid #47516c; }
+    .quest.done { background:#23322e; border-color:#55734d; }
+    .check-btn { border-radius:2px; border:2px solid #66789a; background:#141d30; box-shadow:2px 2px 0 #0b1020; }
+    .check-btn:hover { transform:none; background:#293c37; }
+    .quest-title { font-weight:600; }
+    .quest-group { padding-bottom:2px; }
+    .quest-footer { border-top:2px solid #394560; }
+    .template { background:#20263b; border-bottom:2px solid #394560; }
+    .template-icon,.cal-day,.week-day,.type-picker button,.weekday-picker button,.ranking-tabs button,.shop-tabs button { border-radius:2px; }
+    .week-day { background:#22283e; border-width:2px; }
+    .week-day.selected { background:#2e3a30; box-shadow:0 3px 0 #607d3e; }
+    .week-day strong { font-family:var(--pixel-font); font-size:23px; }
+    .level-card { background:#242e31; border-color:#6d8d54; }
+    .level-badge { clip-path:polygon(15% 0,85% 0,85% 10%,100% 10%,100% 85%,85% 85%,85% 100%,15% 100%,15% 85%,0 85%,0 10%,15% 10%); font-family:var(--pixel-font); }
+    .character-stage { border-radius:2px; background:#172337; border-width:2px; }
+    .character-stage strong { font-family:var(--pixel-font); font-size:20px; }
+    #adventureHero { border-radius:4px; background:#25233d; border-color:#756b9e; }
+    #adventureHero .hero-copy h2 { font-family:var(--pixel-font); font-size:29px; letter-spacing:0; }
+    .hero-world { background:#1b253d; border-left:2px solid #4c506f; }
+    .world-mountains { inset:0; clip-path:none; background-position:bottom; background-repeat:repeat-x; background-size:auto 100%; opacity:.95; z-index:-1; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='0 0 240 240' shape-rendering='crispEdges'%3E%3Crect width='240' height='240' fill='%231b253d'/%3E%3Cg fill='%237189a1'%3E%3Cpath d='M22 27h3v3h-3zm145 28h3v3h-3zM71 62h2v2h-2zm144 26h2v2h-2zM101 18h2v2h-2z'/%3E%3C/g%3E%3Cpath d='M184 30h22v5h5v22h-5v5h-22v-5h-5V35h5z' fill='%23e1d5a7'/%3E%3Cpath d='M200 35h6v22h-6z' fill='%23afa782'/%3E%3Cpath d='M0 146h22v-18h18v-18h22V96h24v24h16v18h24v-21h20v-17h22v18h18v22h26v-12h18v-16h20v111H0z' fill='%23303853'/%3E%3Cpath d='M0 188h18v-12h20v-17h17v-13h28v20h21v20h15v-12h25v-17h22v16h22v15h25v-17h17v-13h10v76H0z' fill='%233d4e61'/%3E%3Cpath d='M0 220h240v20H0z' fill='%23243340'/%3E%3C/svg%3E"); }
+    #adventureHero .world-orbit { border:0; box-shadow:none; width:3px; height:3px; top:35px; background:#a8bdc4; border-radius:0; transform:none; }
+    #adventureHero .world-platform { height:28px; bottom:39px; border-radius:0; transform:none; border:0; border-top:5px solid #8cd978; background:repeating-linear-gradient(90deg,#66506c 0 13px,#4a3c5a 13px 17px); box-shadow:0 5px 0 #221e37,0 -4px 0 #38604e; }
+    .hero-figure { animation-timing-function:steps(6,end); }
+    .hero-name { color:#eff3ff; text-shadow:2px 2px 0 #11162c; }
+    .hero-name span { border-radius:2px; border:1px solid #97b869; background:#233929; }
+    .focus-card::after { border-radius:0; width:100px; height:100px; transform:rotate(45deg); background:#7de9e005; }
+    .focus-days { font-family:var(--pixel-font); font-size:42px; letter-spacing:0; }
+    .focus-orb,.counter-reward-icon,.reset-button { border-radius:3px; }
+    .coin-milestones { border-radius:3px; border:2px solid #725d48; }
+    .shop-banner { background:#2c2843; border-color:#756791; }
+    .shop-banner>div:first-child { min-width:0; flex:1; }
+    .shop-banner h2,.shop-item-copy h3 { overflow-wrap:anywhere; }
+    .shop-wallet { flex-shrink:0; }
+    .shop-item { min-width:0; }
+    .shop-preview { background:linear-gradient(#25233c,#1a2638); border-bottom:2px solid #49516f; }
+    .shop-price,.shop-wallet { font-family:var(--pixel-font); }
+    .shop-item-copy h3 { font-family:var(--pixel-font); font-size:21px; letter-spacing:0; }
+    .podium-player { background:#252a41; }
+    .podium-player:first-child { border-color:#b69a55; }
+    .podium-rank { font-family:var(--pixel-font); }
+    .leaderboard-row { background:#20273b; }
+    .leaderboard-row[data-self=true] { background:#2c392f; }
+    .leaderboard-quote { background:#26233d; border-color:#605577; }
+    .leaderboard-quote .discipline-quote p { color:#ece7f5; }
+    dialog,#tutorialDialog,.pwa-dialog { border-radius:4px; border:2px solid #706891; background:#202238; box-shadow:6px 6px 0 #090d19,0 30px 100px #0008; }
+    .dialog-head h2,.pwa-dialog h2,.tour-copy h2 { font-family:var(--pixel-font); letter-spacing:0; font-size:30px; }
+    input,select,.type-picker button,.character-choice { border-radius:3px; }
+    input,select { background:#141c30; border-width:2px; }
+    #authDialog { max-height:calc(100dvh - 24px); overflow-y:auto; }
+    #authDialog::before { content:''; display:block; height:60px; margin:-4px 0 23px; border-bottom:4px solid #8cd978; background:#1b253d; background-image:linear-gradient(135deg,transparent 55%,#3d4e61 55%),linear-gradient(45deg,#303853 55%,transparent 55%); background-size:100px 60px,90px 60px; box-shadow:0 4px 0 #384754; }
+    .character-choice { background:#252a40; border-width:2px; box-shadow:3px 3px 0 #11172a; }
+    .character-choice strong { font-family:var(--pixel-font); font-size:21px; }
+    .character-option input:checked+.character-choice { background:#2b3542; }
+    #tutorialDialog .tour-mentor { overflow:visible; }
+    .tour-mentor-name { font-family:var(--pixel-font); font-size:25px; }
+    .tour-mentor-name small { font-family:'Segoe UI',sans-serif; }
+    .tour-max,.tour-stage,.tour-footer,.tour-quest-row,.tour-starters button,.tour-type-picker button,.tour-weekdays-picker button,.tour-ranking-row,.tour-back,.tour-shop-try,.tour-reset { border-radius:3px; }
+    .tour-stage { background:#171e32; border:2px solid #46506f; }
+    .tour-wizard::after { border-radius:0; height:13px; border:0; border-top:3px solid #a491d3; background:#54446e; box-shadow:0 4px 0 #29233f; }
+    .tour-footer { background:#1b2035f9; border-top:2px solid #484b68; }
+    .tour-content { background:transparent; }
+    .pwa-steps li,.pwa-steps li::before,.pwa-update,.toast { border-radius:3px; }
+    .pwa-steps li { border-color:#454d68; background:#252d42; }
+    .tour-app-install,.tour-app-install-btn,.tour-app-install-head img { border-radius:3px; }
+    .tour-app-install { border-width:2px; background:#24342e; }
+    .tour-app-install h3 { font-family:var(--pixel-font); font-size:21px; }
+    @media(max-width:900px) {
+      .nav { background:#191e33fc; border-top:2px solid #576083; padding-left:4px; padding-right:4px; }
+      .nav button { font-family:'Segoe UI',sans-serif; font-size:9px; border-radius:2px; min-width:0; }
+      .nav button[aria-current=page] { box-shadow:inset 0 3px #c2fa73; border-color:transparent; }
+      .topbar { background:#171c30f7; }
+      .topbar-brand { font-size:23px; min-width:28px; flex-shrink:1; }
+      .topbar-brand .logo { flex-shrink:0; }
+      .topbar-brand .brand-wordmark { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+      .topbar-right { flex-shrink:0; }
+    }
+    @media(max-width:660px) {
+      .intro h1,#appShell[data-active-view=today] .intro h1 { font-family:var(--pixel-font); font-size:30px; line-height:1.2; }
+      .card h2 { font-size:21px; }
+      .day-summary h2 { font-size:18px; }
+      .coin-hud { padding:7px 8px; }
+      .coin-hud strong { font-size:16px; }
+      .stat-value { font-size:28px; }
+      .stat-value span { font-family:'Segoe UI',sans-serif; font-size:12px; }
+      #adventureHero { grid-template-columns:minmax(0,1fr) 133px; border-radius:4px; }
+      #adventureHero .hero-copy { padding-left:15px; }
+      #adventureHero .hero-copy h2 { font-size:25px; line-height:1.22; }
+      .focus-days { font-size:41px; }
+      .shop-item-copy h3 { font-size:19px; }
+      .shop-wallet strong { font-family:var(--pixel-font); font-size:25px; }
+      .dialog-head h2,.pwa-dialog h2,.tour-copy h2 { font-size:28px; }
+      #tutorialDialog { border-radius:4px; }
+      .tour-mentor-name { font-size:22px; }
+      .tour-top { padding-left:12px; padding-right:12px; }
+      .tour-quest-form input { border-radius:3px; }
+      .quest { padding:0 8px; }
+      .btn { padding-top:10px; padding-bottom:10px; }
+      .pwa-install,.tour-help,#addTopBtn { border-radius:3px; }
+    }
+    @media(max-width:380px) {
+      .intro h1,#appShell[data-active-view=today] .intro h1 { font-size:26px; }
+      .day-summary .card-heading { gap:8px; }
+    }
+    @media(max-width:350px) {
+      .intro h1,#appShell[data-active-view=today] .intro h1 { font-size:24px; }
+      .day-summary h2 { font-size:17px; }
+      #adventureHero { grid-template-columns:minmax(0,1fr) 113px; }
+      #adventureHero .hero-copy h2 { font-size:23px; }
+      #adventureHero .hero-figure,#adventureHero .hero-figure>.cosmetic-figure { width:106px; }
+      .coin-hud strong { font-size:14px; }
+      .tour-copy h2 { font-size:25px; }
+    }
+    @media(hover:none) { .btn:hover:enabled,.check-btn:hover { transform:none; } }
+    @media(prefers-reduced-motion:reduce) { .btn:active:enabled,.hero-figure { transform:none; animation:none; } }
+    .logo { background:none; border:0; box-shadow:none; border-radius:0; padding:0; }
+    .logo img { width:100%; height:100%; display:block; image-rendering:pixelated; }
+    .pwa-dialog-header img,.tour-app-install-head img { image-rendering:pixelated; }
+  </style>
 </head>
 <body>
   <div class="shell" id="appShell" data-active-view="today" hidden>
     <aside class="sidebar">
-      <div class="brand"><span class="logo" data-icon="bolt"></span>QuestLog<span class="lime">.</span></div>
+      <div class="brand"><span class="logo" aria-hidden="true"><img src="icons/questlog-pixel.svg" width="37" height="37" alt=""></span>QuestLog<span class="lime">.</span></div>
       <div><p class="overline">Dein Spielplan</p><nav class="nav" aria-label="Hauptnavigation">
         <button data-view="today" aria-current="page"><span data-icon="grid"></span>Heute</button>
         <button data-view="week"><span data-icon="calendar"></span>Diese Woche</button>
@@ -694,7 +850,7 @@
       <div class="account"><div class="avatar" id="avatar">P</div><div class="account-name"><strong id="playerName">Dein Spieler</strong><span id="accountMode">Firebase-Konto</span></div><button class="icon-btn" id="accountBtn" aria-label="Konto öffnen"><span data-icon="logout"></span></button></div>
     </aside>
     <main>
-      <header class="topbar"><span class="overline">Persönliches Quest-Dashboard</span><div class="brand topbar-brand"><span class="logo" data-icon="bolt"></span><span class="brand-wordmark">QuestLog<span class="lime">.</span></span></div><div class="topbar-right"><button class="pwa-install" type="button" data-ql-install aria-label="QuestLog als App installieren" title="QuestLog installieren"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m-4-4 4 4 4-4M5 15v5h14v-5"/></svg><span>Installieren</span></button><button class="tour-help" id="tutorialHelpBtn" type="button" aria-label="Kurze Einführung öffnen" title="So funktioniert QuestLog" hidden><span data-icon="spark"></span><span>So geht’s</span></button><button class="coin-hud" id="walletBtn" aria-label="Coins und Shop öffnen"><span data-icon="coin"></span><strong id="coinBalance">0</strong></button><span class="status" id="syncStatus" role="status"><i class="status-dot"></i><span>Verbinde …</span></span><button class="btn" id="addTopBtn" aria-label="Neue Quest erstellen" title="Neue Quest"><span data-icon="plus"></span><span class="new-quest-label">Neue Quest</span></button></div></header>
+      <header class="topbar"><span class="overline">Persönliches Quest-Dashboard</span><div class="brand topbar-brand"><span class="logo" aria-hidden="true"><img src="icons/questlog-pixel.svg" width="37" height="37" alt=""></span><span class="brand-wordmark">QuestLog<span class="lime">.</span></span></div><div class="topbar-right"><button class="pwa-install" type="button" data-ql-install aria-label="QuestLog als App installieren" title="QuestLog installieren"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m-4-4 4 4 4-4M5 15v5h14v-5"/></svg><span>Installieren</span></button><button class="tour-help" id="tutorialHelpBtn" type="button" aria-label="Einführung mit dem Magier öffnen" title="So funktioniert QuestLog" hidden><span data-icon="spark"></span><span>So geht’s</span></button><button class="coin-hud" id="walletBtn" aria-label="Coins und Shop öffnen"><span data-icon="coin"></span><strong id="coinBalance">0</strong></button><span class="status" id="syncStatus" role="status"><i class="status-dot"></i><span>Verbinde …</span></span><button class="btn" id="addTopBtn" aria-label="Neue Quest erstellen" title="Neue Quest"><span data-icon="plus"></span><span class="new-quest-label">Neue Quest</span></button></div></header>
       <div class="banner" id="cloudError" role="alert" hidden></div>
       <section class="intro"><div><span class="overline" id="introLabel">Dein Spieltag</span><h1 id="introTitle">Deine Quests für heute.</h1><p id="introText">Eine Quest nach der anderen. Heute sind bis zu 10 XP drin.</p></div><span class="date-chip" id="dateChip"></span></section>
       <div class="grid">
@@ -743,19 +899,21 @@
     </main>
   </div>
   <dialog id="questDialog" aria-labelledby="questDialogTitle"><form id="questForm"><div class="dialog-head"><h2 id="questDialogTitle">Neue Quest</h2><button type="button" class="icon-btn" id="closeQuestBtn" aria-label="Schließen"><span data-icon="close"></span></button></div><p class="dialog-desc">Ein kleines Ziel. Ein klarer Plan. Dein nächster Schritt.</p><div class="field"><label for="questName">Was möchtest du schaffen?</label><input id="questName" name="title" placeholder="z. B. 20 Minuten programmieren" maxlength="100" required></div><span class="field-label" id="typeLabel">Wie oft?</span><div class="type-picker" role="group" aria-labelledby="typeLabel"><button type="button" data-type="daily" aria-pressed="true"><span data-icon="sun"></span>Täglich</button><button type="button" data-type="weekly" aria-pressed="false"><span data-icon="calendar"></span>Wöchentlich</button></div><div id="weekdayField" hidden><span class="field-label" id="weekdayLabel">An welchen Tagen?</span><div class="weekday-picker" id="weekdayPicker" role="group" aria-labelledby="weekdayLabel"></div></div><p class="hint" id="questStartHint"></p><p class="form-error" id="questError" role="alert" hidden></p><button type="submit" class="btn full" id="saveQuestBtn"><span data-icon="plus"></span>Quest erstellen</button></form></dialog>
-  <dialog id="authDialog" aria-labelledby="authTitle"><div class="brand auth-brand"><span class="logo" data-icon="bolt"></span>QuestLog<span class="lime">.</span></div><form id="authForm"><div class="dialog-head"><h2 id="authTitle">Dein Abenteuer beginnt.</h2></div><p class="dialog-desc" id="authDesc">Melde dich mit E-Mail und Passwort an und nimm deinen Fortschritt auf alle Geräte mit.</p><div class="field" id="registerUsernameField" hidden><label for="registerUsernameInput">Dein Spielername</label><input id="registerUsernameInput" autocomplete="nickname" placeholder="z. B. CodeKnight" minlength="3" maxlength="20" pattern="[A-Za-z][A-Za-z0-9_]{2,19}" aria-describedby="usernameFormatHint"><span class="hint" id="usernameFormatHint">3–20 Zeichen: Buchstaben, Zahlen und _. Beginnt mit einem Buchstaben.</span></div><div class="field"><label for="emailInput" id="loginIdentifierLabel">E-Mail-Adresse</label><input type="email" id="emailInput" autocomplete="email" inputmode="email" placeholder="name@example.com" required></div><div class="field"><label for="passwordInput">Passwort</label><input type="password" id="passwordInput" autocomplete="current-password" minlength="6" maxlength="256" required></div><p class="form-error" id="authError" role="alert" hidden></p><button class="btn full" id="authSubmitBtn" type="submit">Einloggen <span data-icon="right"></span></button><div class="auth-switch"><button class="text-btn" id="authSwitchBtn" type="button">Noch keinen Account? Registrieren</button></div><p class="hint">Deine Quests und dein Charakter werden in deinem Konto gespeichert.</p></form><button class="pwa-auth-install" type="button" data-ql-install><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m-4-4 4 4 4-4M5 15v5h14v-5"/></svg>QuestLog als App installieren</button></dialog>
-  <dialog id="onboardingDialog" aria-labelledby="onboardingTitle"><form id="onboardingForm"><div class="setup-header"><span class="logo" data-icon="bolt"></span><span class="overline">QuestLog // Create your character</span></div><div class="dialog-head"><h2 id="onboardingTitle">Wähle deinen Start-Charakter.</h2></div><p class="dialog-desc" id="onboardingDesc">Dein Konto steht. Jetzt beginnt dein Abenteuer: Gib deinem Spieler einen Namen und wähle deine Klasse.</p><div class="field setup-name"><label for="onboardingUsername">01 · Dein Spielername</label><input id="onboardingUsername" autocomplete="nickname" maxlength="20" minlength="3" pattern="[A-Za-z][A-Za-z0-9_]{2,19}" placeholder="CodeKnight" required><span class="hint">3–20 Zeichen · Buchstaben, Zahlen, _ · Groß- und Kleinschreibung gelten als derselbe Name.</span></div><fieldset class="character-grid"><legend class="field-label">02 · Deine Klasse</legend><div class="character-options" id="characterOptions"></div></fieldset><p class="form-error" id="onboardingError" role="alert" hidden></p><div class="setup-summary"><p id="characterSummary">Wähle eine Klasse für dein Abenteuer.<br>Alle starten mit den gleichen XP-Regeln.</p><button class="btn" id="savePlayerBtn" type="submit" disabled>Abenteuer starten <span data-icon="right"></span></button></div><div class="setup-exit"><button class="text-btn" id="exitOnboardingBtn" type="button">Später einrichten · Abmelden</button></div></form></dialog>
+  <dialog id="authDialog" aria-labelledby="authTitle"><div class="brand auth-brand"><span class="logo" aria-hidden="true"><img src="icons/questlog-pixel.svg" width="37" height="37" alt=""></span>QuestLog<span class="lime">.</span></div><form id="authForm"><div class="dialog-head"><h2 id="authTitle">Dein Abenteuer beginnt.</h2></div><p class="dialog-desc" id="authDesc">Melde dich mit E-Mail und Passwort an und nimm deinen Fortschritt auf alle Geräte mit.</p><div class="field" id="registerUsernameField" hidden><label for="registerUsernameInput">Dein Spielername</label><input id="registerUsernameInput" autocomplete="nickname" placeholder="z. B. CodeKnight" minlength="3" maxlength="20" pattern="[A-Za-z][A-Za-z0-9_]{2,19}" aria-describedby="usernameFormatHint"><span class="hint" id="usernameFormatHint">3–20 Zeichen: Buchstaben, Zahlen und _. Beginnt mit einem Buchstaben.</span></div><div class="field"><label for="emailInput" id="loginIdentifierLabel">E-Mail-Adresse</label><input type="email" id="emailInput" autocomplete="email" inputmode="email" placeholder="name@example.com" required></div><div class="field"><label for="passwordInput">Passwort</label><input type="password" id="passwordInput" autocomplete="current-password" minlength="6" maxlength="256" required></div><p class="form-error" id="authError" role="alert" hidden></p><button class="btn full" id="authSubmitBtn" type="submit">Einloggen <span data-icon="right"></span></button><div class="auth-switch"><button class="text-btn" id="authSwitchBtn" type="button">Noch keinen Account? Registrieren</button></div><p class="hint">Deine Quests und dein Charakter werden in deinem Konto gespeichert.</p></form><button class="pwa-auth-install" type="button" data-ql-install><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m-4-4 4 4 4-4M5 15v5h14v-5"/></svg>QuestLog als App installieren</button></dialog>
+  <dialog id="onboardingDialog" aria-labelledby="onboardingTitle"><form id="onboardingForm"><div class="setup-header"><span class="logo" aria-hidden="true"><img src="icons/questlog-pixel.svg" width="37" height="37" alt=""></span><span class="overline">QuestLog // Create your character</span></div><div class="dialog-head"><h2 id="onboardingTitle">Wähle deinen Start-Charakter.</h2></div><p class="dialog-desc" id="onboardingDesc">Dein Konto steht. Jetzt beginnt dein Abenteuer: Gib deinem Spieler einen Namen und wähle deine Klasse.</p><div class="field setup-name"><label for="onboardingUsername">01 · Dein Spielername</label><input id="onboardingUsername" autocomplete="nickname" maxlength="20" minlength="3" pattern="[A-Za-z][A-Za-z0-9_]{2,19}" placeholder="CodeKnight" required><span class="hint">3–20 Zeichen · Buchstaben, Zahlen, _ · Groß- und Kleinschreibung gelten als derselbe Name.</span></div><fieldset class="character-grid"><legend class="field-label">02 · Deine Klasse</legend><div class="character-options" id="characterOptions"></div></fieldset><p class="form-error" id="onboardingError" role="alert" hidden></p><div class="setup-summary"><p id="characterSummary">Wähle eine Klasse für dein Abenteuer.<br>Alle starten mit den gleichen XP-Regeln.</p><button class="btn" id="savePlayerBtn" type="submit" disabled>Abenteuer starten <span data-icon="right"></span></button></div><div class="setup-exit"><button class="text-btn" id="exitOnboardingBtn" type="button">Später einrichten · Abmelden</button></div></form></dialog>
   <dialog id="archiveDialog" aria-labelledby="archiveTitle"><div class="dialog-head"><h2 id="archiveTitle">Quest entfernen?</h2><button class="icon-btn" id="closeArchiveBtn" aria-label="Schließen"><span data-icon="close"></span></button></div><p class="dialog-desc" id="archiveDesc"></p><button class="btn full" id="confirmArchiveBtn">Quest entfernen</button><button class="btn secondary full" id="cancelArchiveBtn" style="margin-top:10px">Behalten</button></dialog>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <dialog id="tutorialDialog" aria-labelledby="tutorialTitle" aria-describedby="tutorialDescription">
-    <div class="tour-top"><span class="tour-brand"><span data-icon="bolt"></span>DEIN QUICKSTART</span><button type="button" class="tour-skip" id="tutorialSkipBtn">Überspringen <span data-icon="right"></span></button></div>
+    <div class="tour-top"><span class="tour-brand"><span data-icon="spark"></span>DEIN ERSTES ABENTEUER</span><button type="button" class="tour-skip" id="tutorialSkipBtn">Überspringen <span data-icon="right"></span></button></div>
     <div class="tour-progress" id="tutorialProgress" aria-label="Einführung, Schritt 1 von 6"></div>
-    <div class="tour-main" id="tutorialMain"><div class="tour-stage" id="tutorialScene"></div><div class="tour-copy"><span class="tour-eyebrow" id="tutorialEyebrow"></span><h2 id="tutorialTitle" tabindex="-1"></h2><p id="tutorialDescription"></p><div class="tour-takeaway" id="tutorialTakeaway"></div></div></div>
+    <div class="tour-main" id="tutorialMain">
+      <aside class="tour-mentor" id="tutorialMentor" aria-label="Auron, dein Magier als Begleiter"></aside>
+      <div class="tour-content"><div class="tour-copy"><span class="tour-eyebrow" id="tutorialEyebrow"></span><h2 id="tutorialTitle" tabindex="-1"></h2><p id="tutorialDescription"></p></div><div class="tour-stage" id="tutorialScene"></div><div class="tour-takeaway" id="tutorialTakeaway"></div></div>
+    </div>
     <div class="tour-footer"><button class="tour-back" id="tutorialBackBtn" type="button"><span data-icon="left"></span>Zurück</button><span class="tour-page" id="tutorialPage" aria-live="polite">1 / 6</span><button class="btn tour-next" id="tutorialNextBtn" type="button">Weiter <span data-icon="right"></span></button></div>
-    <p class="tour-example-label">Die Beispiele verändern deinen echten Spielstand nicht.</p>
   </dialog>
   <dialog class="pwa-dialog" id="pwaInstallDialog" aria-labelledby="pwaInstallTitle" aria-describedby="pwaInstallDescription">
-  <div class="pwa-dialog-header"><img src="icons/icon-192.png" width="55" height="55" alt=""><button class="icon-btn" id="pwaInstallClose" type="button" aria-label="Installationsanleitung schließen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
+  <div class="pwa-dialog-header"><img src="icons/questlog-pixel-192.png" width="55" height="55" alt=""><button class="icon-btn" id="pwaInstallClose" type="button" aria-label="Installationsanleitung schließen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
   <h2 id="pwaInstallTitle">Deine Quests. Immer dabei.</h2>
   <p id="pwaInstallDescription">Hol dir QuestLog auf deinen Startbildschirm. Ein Tippen — und dein Abenteuer geht weiter.</p>
   <ol class="pwa-steps" id="pwaInstallSteps"></ol>
@@ -1225,7 +1383,7 @@
     let leaderboard = newLeaderboard();
     let publication = {running:false,pending:false,promise:null,lastKey:'',error:'',confirmed:false};
     let publicationTimer;
-    window.QuestLogPWA?.setSafetyCheck(()=>busy||focusBusy||shopBusy||onboardingBusy||authBusy||publication.running||publication.pending||autoCoinSync.running);
+    window.QuestLogPWA?.setSafetyCheck(()=>busy||focusBusy||shopBusy||onboardingBusy||authBusy||publication.running||publication.pending||autoCoinSync.running||tutorialState.saving);
 
     // Editable SVG characters keep the complete frontend in one HTML file.
     function characterArt(classId,level=1) {
@@ -1705,30 +1863,42 @@
       $('weekdayField').hidden=questType!=='weekly';
       $('weekdayPicker').innerHTML=[1,2,3,4,5,6,0].map(d=>`<button type="button" data-weekday="${d}" aria-label="${longDays[d]}" aria-pressed="${selectedWeekdays.has(d)}">${shortDays[d]}</button>`).join('');
     }
-    function updatePlan(quests, days, operation) {
-      const startDate=C.startDate(days,today);
+    function updatePlan(quests, days, operation, date=today) {
+      if(!validState({quests,days}))throw new Error('Dein Spielplan konnte nicht sicher gelesen werden.');
+      const startDate=C.startDate(days,date);
+      if(operation.firstQuest) {
+        if(operation.kind!=='new')throw new Error('Die erste Quest konnte nicht angelegt werden.');
+        if(quests.length)return {quests,startDate:quests[0].startDate,firstQuestCreated:false,firstQuestId:quests[0].id};
+      }
       if(operation.kind==='archive') {
         if(!quests.some(q=>q.id===operation.id))throw new Error('Diese Quest wurde bereits entfernt.');
         return {quests:quests.filter(q=>q.id!==operation.id),startDate};
       }
-      const entry={id:operation.id,title:operation.title,type:operation.type,weekdays:operation.type==='weekly'?operation.weekdays:[],startDate};
+      const title=typeof operation.title==='string'?operation.title.trim():'';
+      if(!title||title.length>100)throw new Error('Gib deiner Quest einen Namen mit höchstens 100 Zeichen.');
+      if(!['daily','weekly'].includes(operation.type))throw new Error('Wähle täglich oder wöchentlich.');
+      if(operation.type==='weekly'&&(!Array.isArray(operation.weekdays)||!operation.weekdays.length||operation.weekdays.some(day=>!Number.isInteger(day)||day<0||day>6)))throw new Error('Wähle mindestens einen gültigen Wochentag.');
+      const entry={id:operation.firstQuest?'tutorial-first-v1':operation.id,title,type:operation.type,weekdays:operation.type==='weekly'?[...new Set(operation.weekdays)]:[],startDate};
       if(operation.kind==='edit') {
         if(!quests.some(q=>q.id===operation.id))throw new Error('Diese Quest wurde auf einem anderen Gerät entfernt.');
         return {quests:quests.map(q=>q.id===entry.id?entry:q),startDate};
       }
       if(quests.length>=50)throw new Error('Du kannst maximal 50 aktive Quests planen. Entferne zuerst eine Quest.');
-      return {quests:[...quests,entry],startDate};
+      if(quests.some(quest=>quest.id===entry.id))throw new Error('Diese Quest ist bereits in deinem Spielplan.');
+      return {quests:[...quests,entry],startDate,...(operation.firstQuest?{firstQuestCreated:true,firstQuestId:entry.id}:{})};
     }
     async function mutatePlan(operation) {
-      const owner=currentUser?.uid;
+      const owner=currentUser?.uid,token=session,date=C.key();
       if(!owner||!cloudReady)throw new Error('Dein Konto ist noch nicht verbunden.');
-      const planRef=sdk.doc(sdk.db,'users',owner,'settings','plan'), dayRef=sdk.doc(sdk.db,'users',owner,'days',today);
+      const planRef=sdk.doc(sdk.db,'users',owner,'settings','plan'), dayRef=sdk.doc(sdk.db,'users',owner,'days',date);
       const result=await sdk.runTransaction(sdk.db,async tx=>{
         const plan=await tx.get(planRef), day=await tx.get(dayRef);
-        const result=updatePlan(plan.exists()?plan.data().quests:[],day.exists()?{[today]:day.data()}:{},operation);
-        tx.set(planRef,{quests:result.quests,updatedAt:sdk.serverTimestamp()}); return result;
+        if(token!==session||currentUser?.uid!==owner||C.key()!==date)throw new Error('Dein Konto oder Tag hat gewechselt. Versuche es erneut.');
+        const result=updatePlan(plan.exists()?plan.data().quests:[],day.exists()?{[date]:day.data()}:{},operation,date);
+        if(!operation.firstQuest||result.firstQuestCreated)tx.set(planRef,{quests:result.quests,updatedAt:sdk.serverTimestamp()});
+        return result;
       });
-      if(currentUser?.uid===owner)state.quests=result.quests;
+      if(token===session&&currentUser?.uid===owner)state.quests=result.quests;
       return result;
     }
     async function setStatus(value,id,status) {
@@ -1836,24 +2006,28 @@
         ready();
       },fail));
     }
-    // The walkthrough uses illustrative UI only; it never awards XP or Coins.
-    let tutorialState={owner:null,token:0,loaded:false,record:null,started:false,replay:false,step:0,focusReturn:null,saveQueue:Promise.resolve(),timers:[]};
+    // Auron teaches with safe examples; only the explicit first-quest form writes to the real plan.
+    const tutorialInitial=()=>({owner:null,token:0,loaded:false,record:null,started:false,replay:false,step:0,focusReturn:null,saveQueue:Promise.resolve(),timers:[],saving:false,deferEnd:null,draft:null,justCreated:false});
+    let tutorialState=tutorialInitial();
     const tutorialMotion=()=>!window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const tutorialValid=data=>!!data&&data.schemaVersion===1&&data.eligible===true&&['pending','dismissed','complete'].includes(data.status)&&Number.isInteger(data.step)&&data.step>=0&&data.step<6;
     function tutorialLocal(owner) { try { const value=JSON.parse(localStorage.getItem('questlog.tutorial.'+owner)||'null');return tutorialValid(value)?value:null; } catch { return null; } }
     function tutorialStore(owner,data,unsynced=true) { try { localStorage.setItem('questlog.tutorial.'+owner,JSON.stringify({...data,unsynced})); } catch {} }
+    function tutorialReadDraft(owner) { try { const d=JSON.parse(localStorage.getItem('questlog.tutorial.draft.'+owner)||'null');if(d&&typeof d.title==='string'&&['daily','weekly'].includes(d.type)&&Array.isArray(d.weekdays)&&d.weekdays.every(v=>Number.isInteger(v)&&v>=0&&v<7))return {title:d.title.slice(0,100),type:d.type,weekdays:[...new Set(d.weekdays)]}; } catch {}return {title:'',type:'daily',weekdays:[5]}; }
+    function tutorialStoreDraft() { if(!tutorialState.owner||!tutorialState.draft)return;try { localStorage.setItem('questlog.tutorial.draft.'+tutorialState.owner,JSON.stringify(tutorialState.draft)); }catch {} }
+    function tutorialClearDraft(owner) { try { localStorage.removeItem('questlog.tutorial.draft.'+owner); }catch {} }
     function tutorialStopAnimations() { tutorialState.timers.forEach(id=>{clearTimeout(id);clearInterval(id);});tutorialState.timers=[]; }
     function tutorialLater(fn,delay) { const owner=tutorialState.owner,token=tutorialState.token,step=tutorialState.step;const id=setTimeout(()=>{if(tutorialState.owner===owner&&tutorialState.token===token&&tutorialState.step===step&&$('tutorialDialog').open)fn();},delay);tutorialState.timers.push(id); }
-    function tutorialReset() { tutorialStopAnimations();if($('tutorialDialog').open)$('tutorialDialog').close();$('tutorialHelpBtn').hidden=true;tutorialState={owner:null,token:0,loaded:false,record:null,started:false,replay:false,step:0,focusReturn:null,saveQueue:Promise.resolve(),timers:[]}; }
+    function tutorialReset() { tutorialStopAnimations();if($('tutorialDialog').open)$('tutorialDialog').close();$('tutorialHelpBtn').hidden=true;tutorialState=tutorialInitial(); }
     function tutorialConnect(user,token) {
-      tutorialReset();tutorialState.owner=user.uid;tutorialState.token=token;
+      tutorialReset();tutorialState.owner=user.uid;tutorialState.token=token;tutorialState.draft=tutorialReadDraft(user.uid);
       unsubscribers.push(sdk.onSnapshot(sdk.doc(sdk.db,'users',user.uid,'settings','tutorial'),{includeMetadataChanges:true},snap=>{
         if(token!==session||tutorialState.owner!==user.uid||tutorialState.token!==token)return;
         if(!snap.exists()&&snap.metadata.fromCache)return;
         const data=snap.exists()?snap.data():null,local=tutorialLocal(user.uid);
         tutorialState.loaded=true;tutorialState.record=tutorialValid(data)?data:null;
         if(tutorialState.record?.status==='pending'&&local?.unsynced)tutorialState.record={...tutorialState.record,status:local.status,step:local.step};
-        if(tutorialState.record&&tutorialState.record.status!=='pending'&&$('tutorialDialog').open&&!tutorialState.replay)tutorialClose();
+        if(tutorialState.record&&tutorialState.record.status!=='pending'&&$('tutorialDialog').open&&!tutorialState.replay){if(tutorialState.saving)tutorialState.deferEnd=tutorialState.record.status;else tutorialClose();}
         tutorialReady();
       },()=>{if(token!==session||tutorialState.owner!==user.uid)return;tutorialState.loaded=true;tutorialState.record=null;tutorialReady();}));
     }
@@ -1865,8 +2039,7 @@
     }
     function tutorialSave(status,step) {
       if(tutorialState.replay||!tutorialState.owner||!sdk||tutorialState.record?.eligible!==true)return;
-      const owner=tutorialState.owner,token=tutorialState.token;
-      const data={schemaVersion:1,eligible:true,status,step};
+      const owner=tutorialState.owner,token=tutorialState.token,data={schemaVersion:1,eligible:true,status,step};
       tutorialState.record={...data};tutorialStore(owner,data);
       tutorialState.saveQueue=tutorialState.saveQueue.catch(()=>{}).then(async()=>{
         if(token!==session||currentUser?.uid!==owner)return;
@@ -1875,78 +2048,98 @@
           const saved=await tx.get(ref);
           if(token!==session||currentUser?.uid!==owner)return;
           if(!saved.exists()||!tutorialValid(saved.data()))return;
-          // A completed walkthrough on another device must not become pending again.
           if(saved.data().status!=='pending'&&status==='pending')return;
           tx.set(ref,{...data,updatedAt:sdk.serverTimestamp()});
         });
         if(token!==session||currentUser?.uid!==owner)return;
         const local=tutorialLocal(owner);if(local?.status===status&&local?.step===step)tutorialStore(owner,data,false);
-      }).catch(()=>{}); // An unavailable help preference must never block the application.
+      }).catch(()=>{});
     }
     function tutorialOpen(replay=false,step=0) {
-      if(!cloudReady||!P.validProfile(playerProfile))return;
-      tutorialState.started=true;tutorialState.replay=replay;tutorialState.step=Math.max(0,Math.min(5,step));tutorialState.focusReturn=document.activeElement;
+      if(!cloudReady||!P.validProfile(playerProfile)||tutorialState.saving)return;
+      tutorialState.started=true;tutorialState.replay=replay;tutorialState.step=Math.max(0,Math.min(5,step));tutorialState.focusReturn=document.activeElement;tutorialState.justCreated=false;tutorialState.deferEnd=null;
+      if(!tutorialState.draft)tutorialState.draft=tutorialReadDraft(tutorialState.owner);
       $('tutorialSkipBtn').innerHTML=(replay?'Schließen':'Überspringen')+' '+icon('right');
       tutorialRender();if(!$('tutorialDialog').open)$('tutorialDialog').showModal();$('tutorialTitle').focus({preventScroll:true});
     }
-    function tutorialClose() {
-      tutorialStopAnimations();if($('tutorialDialog').open)$('tutorialDialog').close();
-      const back=tutorialState.focusReturn;if(back?.isConnected&&!back.hidden&&!back.disabled)back.focus({preventScroll:true});
+    function tutorialClose() { tutorialStopAnimations();if($('tutorialDialog').open)$('tutorialDialog').close();const back=tutorialState.focusReturn;if(back?.isConnected&&!back.hidden&&!back.disabled)back.focus({preventScroll:true}); }
+    function tutorialEnd(status='complete') {
+      if(tutorialState.saving){tutorialState.deferEnd=status;$('tutorialSkipBtn').textContent='Schließen nach Speichern';return;}
+      tutorialSave(status,tutorialState.step);tutorialClose();if(status==='complete'){setView('today');toast(tutorialQuest()?'Dein Abenteuer beginnt. Deine Quest wartet auf dich!':'Dein Abenteuer beginnt. Auron findest du unter „So geht’s“.');}
     }
-    function tutorialEnd(status='complete') { tutorialSave(status,tutorialState.step);tutorialClose();if(status==='complete'){setView('today');toast('Du bist bereit. Starte mit einer kleinen Quest!');} }
+    function tutorialQuest() { return state.quests?.find(q=>q.id==='tutorial-first-v1')||state.quests?.[0]||null; }
     function tutorialMove(direction) {
+      if(tutorialState.saving)return;
+      if(direction>0&&tutorialState.step===1&&!tutorialQuest()){tutorialQuestError('Erstelle dein erstes Ziel – oder überspringe die Einführung.');$('tutorialQuestName')?.focus({preventScroll:false});return;}
       if(direction>0&&tutorialState.step===5){tutorialEnd();return;}
       const next=Math.max(0,Math.min(5,tutorialState.step+direction));if(next===tutorialState.step)return;
       tutorialState.step=next;tutorialSave('pending',next);tutorialRender();$('tutorialTitle').focus({preventScroll:true});
     }
+    function tutorialQuestError(message='') { const target=$('tutorialQuestError');if(!target)return;target.textContent=message;target.hidden=!message; }
+    function tutorialMentorArt() {
+      const art=characterArt('mage',1000).replace(/aria-label="[^"]*"/,'aria-label="Auron · Magier auf MAX-Level"');
+      return '<div class="tour-wizard"><i class="tour-orbit" aria-hidden="true"></i><span class="tour-wizard-spark" aria-hidden="true">✦</span>'+art+'</div><div class="tour-mentor-caption"><div class="tour-mentor-name">Auron<small>Dein Erzmagier & Wegbegleiter</small></div><span class="tour-max">'+icon('spark')+'LEVEL MAX</span></div>';
+    }
     function tutorialRender() {
-      tutorialStopAnimations();
-      const step=tutorialState.step,cls=playerProfile?.characterClass||'engineer',name=esc(playerProfile?.username||'Held');
-      const look={aura:'aura-void',frame:'frame-neon',scene:'scene-nebula',buddy:'buddy-robot'};
-      const text=[
-        ['01 · DEIN ABENTEUER','Dein Alltag wird zum Abenteuer.','Willkommen, <strong>'+name+'</strong>! Du hast deinen Charakter gewählt. Jetzt wächst er mit den Dingen, die du im echten Leben schaffst.','Quests geben dir XP. Counter geben dir Coins.'],
-        ['02 · DEINE QUESTS','Einmal planen. Dranbleiben.','Über <strong>Neue Quest</strong> trägst du dein Ziel ein. Wähle <strong>Täglich</strong> oder <strong>Wöchentlich</strong> und die passenden Wochentage.','Zum Beispiel: jeden Tag lesen oder jeden Freitag programmieren.'],
-        ['03 · XP & LEVEL','Erledigt? Haken setzen.','Tippe auf die Quest, wenn du sie geschafft hast. Du sammelst bis zu <strong>10 XP am Tag</strong>. Am Anfang brauchst du <strong>20 XP pro Level</strong>.','Probiere den Haken im Beispiel aus. Alle 5 Level bekommt deine Figur einen neuen Look.'],
-        ['04 · DEINE COUNTER','Dein Neustart zählt hoch.','Gib einem Counter den Namen einer Gewohnheit, auf die du verzichten willst. Er zählt die Zeit seit deinem Start. <strong>Du musst keinen Tag bestätigen.</strong>','Alle Counter teilen eine Tagesbelohnung. Der jüngste Counter bestimmt die Coin-Stufe.'],
-        ['05 · DEIN SHOP','Mach deinen Helden zu deinem.','Mit Coins kaufst du <strong>Auren, Rahmen, Hintergründe</strong> und animierte <strong>Begleiter</strong>. Gekauftes bleibt bei dir; du kannst es jederzeit wechseln.','Roboter: 20 Coins · Fuchs: 35 · Drache: 60. Begleiter feiern erledigte Quests mit dir.'],
-        ['06 · GEMEINSAM WACHSEN','Zeig deinen Fortschritt.','Unter <strong>Rangliste</strong> siehst du andere Spieler mit ihrem Charakter und Look. <strong>Gesamt</strong> zählt alle XP. <strong>Diese Woche</strong> bietet jede Woche einen neuen Start.','Dein eigener Platz ist direkt sichtbar. Jetzt beginnt deine erste echte Quest.']
+      tutorialStopAnimations();const step=tutorialState.step,cls=playerProfile?.characterClass||'engineer',name=esc(playerProfile?.username||'Held'),quest=tutorialQuest(),look={aura:'aura-void',frame:'frame-neon',scene:'scene-nebula',buddy:'buddy-robot'};
+      const texts=[
+        ['DEIN MENTOR','Bereit, '+(playerProfile?.username||'Held')+'?','Ich bin Auron. Komm, wir starten mit <strong>einem kleinen Ziel</strong>.','Du wächst mit den Dingen, die du im echten Leben schaffst.'],
+        ['DEINE ERSTE QUEST',quest?'Dein erstes Ziel steht.':'Was ist dein erstes Ziel?',quest?(tutorialState.justCreated?'Perfekt! Deine Quest ist <strong>wirklich gespeichert</strong>.':'Deine Quest wartet schon. Machen wir gemeinsam weiter.'):'Nimm ein Beispiel oder schreib dein eigenes. <strong>Klein anfangen reicht.</strong>',quest?'Noch keine XP: Die bekommst du erst nach dem Erledigen.':'Das ist eine echte Quest, kein Beispiel.'],
+        ['XP & LEVEL','Geschafft? Haken setzen.','Erledige deine Quest im Alltag. Dann gibt’s XP. <strong>Teste den Haken!</strong>','Bis zu 10 XP täglich · anfangs 20 XP pro Level.'],
+        ['COUNTER & COINS','Lass deine Serie wachsen.','Weniger schlechte Gewohnheiten. <strong>Mehr Coins für deinen Look.</strong>','Gemeinsame Coins beim Tageswechsel · der jüngste Counter zählt.'],
+        ['DEIN LOOK','Ein Begleiter für dich.','Coins kaufen Looks und Freunde. <strong>Probier den Roboter aus!</strong>','Nur eine Vorschau · hier werden keine Coins ausgegeben.'],
+        ['RANGLISTE & HANDY-APP','Dein Abenteuer. Immer dabei.','Zeig deinen Fortschritt. Hol dir QuestLog <strong>auf deinen Startbildschirm</strong>.','Gesamt & diese Woche · dein Level bleibt erhalten.']
       ][step];
-      $('tutorialEyebrow').textContent=text[0];$('tutorialTitle').textContent=text[1];$('tutorialDescription').innerHTML=text[2];$('tutorialTakeaway').innerHTML=icon('spark')+'<span>'+text[3]+'</span>';
-      $('tutorialProgress').innerHTML=Array.from({length:6},(_,i)=>'<i class="'+(i===step?'is-current':i<step?'is-past':'')+'" aria-hidden="true"></i>').join('');$('tutorialProgress').setAttribute('aria-label','Einführung, Schritt '+(step+1)+' von 6');
-      $('tutorialPage').textContent=(step+1)+' / 6';$('tutorialBackBtn').disabled=step===0;$('tutorialNextBtn').innerHTML=(step===5?'Los geht’s':'Weiter')+' '+icon(step===5?'bolt':'right');
+      $('tutorialMentor').innerHTML=tutorialMentorArt();$('tutorialEyebrow').textContent=texts[0];$('tutorialTitle').textContent=texts[1];$('tutorialDescription').innerHTML=texts[2];$('tutorialTakeaway').textContent=texts[3];
+      $('tutorialProgress').innerHTML=Array.from({length:6},(_,i)=>'<i class="'+(i===step?'is-current':i<step?'is-past':'')+'" aria-hidden="true"></i>').join('');$('tutorialProgress').setAttribute('aria-label','Einführung, Schritt '+(step+1)+' von 6');$('tutorialPage').textContent=(step+1)+' / 6';
+      $('tutorialBackBtn').disabled=step===0||tutorialState.saving;$('tutorialNextBtn').disabled=tutorialState.saving||(step===1&&!quest);$('tutorialNextBtn').innerHTML=(step===5?'Zu meinen Quests':'Weiter')+' '+icon(step===5?'bolt':'right');
       const scene=$('tutorialScene');scene.dataset.step=step;scene.classList.remove('tour-demo-done','tour-level-up');
-      if(step===0)scene.innerHTML='<span class="tour-scene-label">DEIN START-CHARAKTER</span><i class="tour-star one" aria-hidden="true">✦</i><i class="tour-star two" aria-hidden="true">✧</i><i class="tour-star three" aria-hidden="true">✦</i><div class="tour-hero">'+characterArt(cls,1)+'</div><span class="tour-float-chip xp">'+icon('bolt')+'XP</span><span class="tour-float-chip coins">'+icon('coin')+'COINS</span><div class="tour-hero-name">'+name+'<span>LEVEL 1 · DEIN START</span></div>';
-      if(step===1)scene.innerHTML='<div class="tour-mini-stack"><div class="tour-mini-card daily"><span class="tour-mini-label">'+icon('sun')+'TÄGLICH</span><strong>10 Minuten lesen</strong><small>Wiederholt sich jeden Tag.</small></div><div class="tour-mini-card weekly"><span class="tour-mini-label">'+icon('calendar')+'WÖCHENTLICH</span><strong>Programmieren lernen</strong><div class="tour-weekdays" aria-label="Jeden Freitag">'+['Mo','Di','Mi','Do','Fr','Sa','So'].map(day=>'<span'+(day==='Fr'?' class="chosen"':'')+'>'+day+'</span>').join('')+'</div></div></div>';
-      if(step===2) {
-        scene.innerHTML='<div class="tour-quest-demo"><div class="tour-demo-heading"><span>DEINE LETZTE QUEST HEUTE</span><span>BEISPIEL</span></div><button class="tour-quest-row" id="tutorialCheckQuest" type="button" aria-label="Beispiel-Quest abhaken" aria-pressed="false"><span class="tour-check">'+icon('check')+'</span><span class="tour-task-copy">10 Minuten lesen</span></button><div class="tour-xp-box"><header><strong id="tutorialExampleLevel">LEVEL 1</strong><span id="tutorialExampleXp">10 / 20 XP</span></header><div class="tour-xp-track"><div class="tour-xp-fill"></div></div><footer id="tutorialExampleHint">Noch 10 XP bis Level 2.</footer></div><div class="tour-xp-pop" id="tutorialXpPop" aria-live="polite"></div><span class="tour-try">Tippe den Haken an · nur ein Beispiel</span></div>';
-        $('tutorialCheckQuest').onclick=tutorialCheckExample;
-        if(tutorialMotion())tutorialLater(tutorialCheckExample,2300);
+      if(step===0)scene.innerHTML='<div class="tour-hello-scene"><div class="tour-start-hero">'+characterArt(cls,1)+'</div><div class="tour-route"><span>'+icon('check')+'Quests → XP</span><span>'+icon('coin')+'Counter → Coins</span><span>'+icon('spark')+'Shop → dein Look</span></div></div>';
+      if(step===1)tutorialRenderQuest();
+      if(step===2){scene.innerHTML='<div class="tour-demo-heading"><span>TIPPE AUF DEN HAKEN</span><span>BEISPIEL</span></div><button class="tour-quest-row" id="tutorialCheckQuest" type="button" aria-label="Beispiel-Quest abhaken" aria-pressed="false"><span class="tour-check">'+icon('check')+'</span><span class="tour-task-copy">'+esc(quest?.title||'10 Minuten lesen')+'</span></button><div class="tour-xp-box"><header><strong id="tutorialExampleLevel">LEVEL 1</strong><span id="tutorialExampleXp">10 / 20 XP</span></header><div class="tour-xp-track"><div class="tour-xp-fill"></div></div><footer id="tutorialExampleHint">Noch 10 XP bis Level 2.</footer></div><div class="tour-xp-pop" id="tutorialXpPop" aria-live="polite"></div><span class="tour-try">Hier nur üben · deine echte Quest bleibt offen.</span>';$('tutorialCheckQuest').onclick=tutorialCheckExample;}
+      if(step===3){scene.innerHTML='<div class="tour-counter-demo"><div class="tour-demo-heading"><span>WENIGER ENDLOS SCROLLEN</span><span>BEISPIEL</span></div><div class="tour-counter-number"><span id="tutorialCounterDays">7</span><small>Tage</small></div><div class="tour-counter-time" id="tutorialCounterTime">03:24:08</div><button class="tour-reset" id="tutorialExampleReset" type="button" aria-label="Beispiel-Counter zurücksetzen">'+icon('refresh')+'Reset testen</button><div class="tour-coin-stages"><div id="tutorialStageOne"><strong>1 Coin</strong><small>AB START</small></div><div id="tutorialStageTwo" class="active"><strong>2 Coins</strong><small>AB 7 TAGEN</small></div><div><strong>3 Coins</strong><small>AB 30 TAGEN</small></div></div><div class="tour-counter-info" id="tutorialCounterInfo">Zählt automatisch hoch. Keine Bestätigung nötig.</div></div>';let seconds=3*3600+24*60+8;if(tutorialMotion()){const timer=setInterval(()=>{if(tutorialState.step!==3||!$('tutorialDialog').open)return;seconds++;$('tutorialCounterTime').textContent=[Math.floor(seconds/3600),Math.floor(seconds%3600/60),seconds%60].map(v=>String(v).padStart(2,'0')).join(':');},1000);tutorialState.timers.push(timer);}$('tutorialExampleReset').onclick=()=>{seconds=0;$('tutorialCounterDays').textContent='0';$('tutorialCounterTime').textContent='00:00:00';$('tutorialStageTwo').classList.remove('active');$('tutorialStageOne').classList.add('active');$('tutorialCounterInfo').textContent='Reset: zurück auf null · heute keine gemeinsamen Coins.';};}
+      if(step===4){scene.innerHTML='<div class="tour-shop-scene"><span class="tour-scene-label">DEIN LOOK · VORSCHAU</span><div id="tutorialShopFigure">'+cosmeticFigure(cls,1,look,true)+'</div><div class="tour-shop-price">'+icon('coin')+'20 Coins</div><p class="tour-shop-caption">Pixel-Bot · dein erster Begleiter</p><button class="tour-shop-try" id="tutorialTryLook" type="button" aria-pressed="true">'+icon('spark')+'Look wechseln</button></div>';let equipped=true;$('tutorialTryLook').onclick=()=>{equipped=!equipped;$('tutorialShopFigure').innerHTML=cosmeticFigure(cls,1,equipped?look:{aura:null,frame:null,scene:null,buddy:null},true);$('tutorialTryLook').setAttribute('aria-pressed',String(equipped));};}
+      if(step===5){
+        const appInstalled=window.matchMedia('(display-mode: standalone)').matches||window.matchMedia('(display-mode: fullscreen)').matches||navigator.standalone===true;
+        const onIPhone=/iPad|iPhone|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1),onAndroid=/Android/.test(navigator.userAgent);
+        const appHint=appInstalled?'Du nutzt QuestLog bereits als App.':onIPhone?'Safari → Teilen → Zum Home-Bildschirm':onAndroid?'Chrome → Menü ⋮ → App installieren':'iPhone: Safari → Teilen<br>Android: Chrome → Menü ⋮';
+        scene.innerHTML='<div class="tour-final-ranking"><div class="tour-ranking-tabs"><span>Gesamt</span><span class="active">Diese Woche</span></div>'+[{rank:1,name:'Nova',cls:'mage',level:5},{rank:2,name,cls,level:1,self:true}].map(entry=>'<div class="tour-ranking-row '+(entry.self?'self':'')+'"><span class="tour-rank">#'+entry.rank+'</span>'+(entry.self?cosmeticFigure(entry.cls,entry.level,look):characterArt(entry.cls,entry.level))+'<span class="tour-rank-name">'+entry.name+(entry.self?' · DU':'')+'</span><span class="tour-rank-lvl">LVL '+entry.level+'</span></div>').join('')+'<div class="tour-ranking-note">Beispiel · jede Woche eine neue Chance.</div></div><section class="tour-app-install" id="tutorialAppInstallCard" aria-labelledby="tutorialAppInstallTitle"><div class="tour-app-install-head"><img src="icons/questlog-pixel-192.png" width="43" height="43" alt=""><div><h3 id="tutorialAppInstallTitle">QuestLog als Handy-App</h3><p id="tutorialAppInstallHint">'+appHint+'</p></div></div><button class="tour-app-install-btn" id="tutorialInstallAppBtn" type="button" data-ql-install '+(appInstalled?'hidden':'')+'>'+icon('right')+'App-Anleitung öffnen</button></section>';
+        $('tutorialInstallAppBtn').onclick=()=>window.QuestLogPWA?.openInstallHelp();
       }
-      if(step===3) {
-        scene.innerHTML='<div class="tour-counter-demo"><h3>'+icon('clock')+'Weniger endlos scrollen</h3><div class="tour-counter-number"><span id="tutorialCounterDays">7</span><small>Tage</small></div><div class="tour-counter-time" id="tutorialCounterTime">03:24:08</div><button class="tour-reset" id="tutorialExampleReset" type="button" aria-label="Beispiel-Counter zurücksetzen">'+icon('refresh')+'Reset</button><div class="tour-coin-stages"><div id="tutorialStageOne"><strong>1 Coin</strong><small>AB START</small></div><div id="tutorialStageTwo" class="active"><strong>2 Coins</strong><small>AB 7 TAGEN</small></div><div><strong>3 Coins</strong><small>AB 30 TAGEN</small></div></div><div class="tour-counter-info" id="tutorialCounterInfo">Coins für abgeschlossene Tage · automatisch</div></div>';
-        let seconds=3*3600+24*60+8;
-        if(tutorialMotion()){const interval=setInterval(()=>{if(tutorialState.step!==3||!$('tutorialDialog').open)return;seconds++;const h=Math.floor(seconds/3600),m=Math.floor(seconds%3600/60),s=seconds%60;$('tutorialCounterTime').textContent=[h,m,s].map(v=>String(v).padStart(2,'0')).join(':');},1000);tutorialState.timers.push(interval);}
-        $('tutorialExampleReset').onclick=()=>{seconds=0;$('tutorialCounterDays').textContent='0';$('tutorialCounterTime').textContent='00:00:00';$('tutorialStageTwo').classList.remove('active');$('tutorialStageOne').classList.add('active');$('tutorialCounterInfo').textContent='Neustart · heute keine gemeinsamen Coins';};
-        $('tutorialDescription').innerHTML=text[2]+'<br><br><strong>1 / 2 / 3 Coins pro Tag</strong> ab Start / 7 / 30 vollen Tagen. Gutschrift nach Tageswechsel (Berliner Zeit).';
-        $('tutorialTakeaway').innerHTML=icon('refresh')+'<span><strong>Reset</strong> startet bei null und sperrt die gemeinsame Coin-Belohnung für heute. Der jüngste Counter bestimmt die Stufe.</span>';
-      }
-      if(step===4)scene.innerHTML='<div class="tour-shop-scene"><span class="tour-scene-label">DEIN LOOK · EIN BEISPIEL</span><div class="tour-shop-price">'+icon('coin')+'20</div><div class="tour-shop-tags" aria-hidden="true"><span>AURA</span><span>RAHMEN</span><span>KULISSE</span></div>'+cosmeticFigure(cls,1,look,true)+'<div class="tour-shop-caption">Pixel-Bot + dein persönlicher Look</div></div>';
-      if(step===5)scene.innerHTML='<div class="tour-ranking-demo"><div class="tour-ranking-tabs" aria-label="Zwei Ranglisten"><span>Gesamt</span><span class="active">Diese Woche</span></div>'+[{rank:1,name:'Nova',cls:'mage',level:5},{rank:2,name:name,cls,level:1,self:true},{rank:3,name:'PixelKnight',cls:'warrior',level:2}].map(entry=>'<div class="tour-ranking-row '+(entry.self?'self':'')+'"><span class="tour-rank">#'+entry.rank+'</span>'+(entry.self?cosmeticFigure(entry.cls,entry.level,look):characterArt(entry.cls,entry.level))+'<span class="tour-rank-name">'+entry.name+(entry.self?' · DU':'')+'</span><span class="tour-rank-lvl">LVL '+entry.level+'</span></div>').join('')+'<div class="tour-ranking-note">Die Wochenrangliste richtet sich nach Wochen-XP.<br>Dein Charakter-Level bleibt erhalten.</div></div>';
-      // Restart entry animations without restarting the actual application.
-      $('tutorialMain').classList.remove('tour-enter');void $('tutorialMain').offsetWidth;$('tutorialMain').classList.add('tour-enter');
-      $('tutorialDialog').scrollTop=0;
+      $('tutorialMain').classList.remove('tour-enter');void $('tutorialMain').offsetWidth;$('tutorialMain').classList.add('tour-enter');$('tutorialDialog').scrollTop=0;
+    }
+    function tutorialRenderQuest() {
+      const quest=tutorialQuest();
+      if(quest){const starts=quest.startDate>today?'Ab '+format(quest.startDate,{day:'numeric',month:'short'})+' in deinem Plan':'Ab heute in deinem Plan',frequency=quest.type==='daily'?'Täglich':quest.weekdays.slice().sort((a,b)=>(a+6)%7-(b+6)%7).map(d=>shortDays[d]).join(' · ');$('tutorialScene').innerHTML='<div class="tour-saved-quest" id="tutorialSavedQuest" role="status"><span class="tour-success-icon">'+icon('check')+'</span><strong>'+esc(quest.title)+'</strong><p>'+esc(frequency)+' · '+esc(starts)+'</p><span class="tour-saved-meta">'+icon('check')+'In deinem echten Spielplan</span>'+(tutorialState.justCreated&&tutorialMotion()?Array.from({length:10},(_,i)=>'<i class="tour-save-burst" style="--angle:'+(i*36)+'deg" aria-hidden="true"></i>').join(''):'')+'</div>';return;}
+      const d=tutorialState.draft||{title:'',type:'daily',weekdays:[5]};
+      $('tutorialScene').innerHTML='<form class="tour-quest-form" id="tutorialQuestForm"><fieldset id="tutorialQuestFields"><label for="tutorialQuestName">Dein kleines Ziel</label><input id="tutorialQuestName" name="title" placeholder="z. B. 10 Minuten lesen" maxlength="100" required autocomplete="off" value="'+esc(d.title)+'"><div class="tour-starters" aria-label="Ideen für deine erste Quest"><button type="button" data-tutorial-starter="10 Minuten lesen">📖 Lesen</button><button type="button" data-tutorial-starter="15 Minuten programmieren">💻 Programmieren</button><button type="button" data-tutorial-starter="10 Minuten bewegen">⚡ Bewegen</button></div><span class="tour-form-label" id="tutorialTypeLabel">Wie oft?</span><div class="tour-type-picker" role="group" aria-labelledby="tutorialTypeLabel"><button type="button" data-tutorial-type="daily" aria-pressed="'+(d.type==='daily')+'">'+icon('sun')+'Täglich</button><button type="button" data-tutorial-type="weekly" aria-pressed="'+(d.type==='weekly')+'">'+icon('calendar')+'Wöchentlich</button></div><div class="tour-weekdays-field" id="tutorialWeekdayField" '+(d.type==='weekly'?'':'hidden')+'><span class="tour-form-label" id="tutorialWeekdayLabel">An welchen Tagen?</span><div class="tour-weekdays-picker" role="group" aria-labelledby="tutorialWeekdayLabel">'+[1,2,3,4,5,6,0].map(day=>'<button type="button" data-tutorial-day="'+day+'" aria-label="'+longDays[day]+'" aria-pressed="'+d.weekdays.includes(day)+'">'+shortDays[day]+'</button>').join('')+'</div></div><p class="tour-start-note">'+(state.days[today]?'Dein heutiger Plan läuft schon: neue Quest ab morgen.':'Startet heute. Du kannst sie später jederzeit bearbeiten.')+'</p><p class="tour-quest-error" id="tutorialQuestError" role="alert" hidden></p><button type="submit" class="btn tour-create" id="tutorialCreateQuestBtn">'+icon('plus')+'Meine Quest erstellen</button></fieldset></form>';
+      $('tutorialQuestName').oninput=()=>{tutorialState.draft.title=$('tutorialQuestName').value;tutorialStoreDraft();tutorialQuestError();};
+      $('tutorialQuestForm').onsubmit=tutorialCreateQuest;
+      $('tutorialScene').querySelectorAll('[data-tutorial-starter]').forEach(b=>b.onclick=()=>{tutorialState.draft.title=b.dataset.tutorialStarter;$('tutorialQuestName').value=tutorialState.draft.title;tutorialStoreDraft();tutorialQuestError();$('tutorialQuestName').focus();});
+      $('tutorialScene').querySelectorAll('[data-tutorial-type]').forEach(b=>b.onclick=()=>{tutorialState.draft.type=b.dataset.tutorialType;tutorialStoreDraft();$('tutorialScene').querySelectorAll('[data-tutorial-type]').forEach(item=>item.setAttribute('aria-pressed',String(item.dataset.tutorialType===tutorialState.draft.type)));$('tutorialWeekdayField').hidden=tutorialState.draft.type!=='weekly';tutorialQuestError();});
+      $('tutorialScene').querySelectorAll('[data-tutorial-day]').forEach(b=>b.onclick=()=>{const day=Number(b.dataset.tutorialDay),days=new Set(tutorialState.draft.weekdays);days.has(day)?days.delete(day):days.add(day);tutorialState.draft.weekdays=[...days];b.setAttribute('aria-pressed',String(days.has(day)));tutorialStoreDraft();tutorialQuestError();});
+      $('tutorialQuestFields').disabled=tutorialState.saving;
+    }
+    async function tutorialCreateQuest(event) {
+      event.preventDefault();if(tutorialState.saving||busy)return;
+      const title=$('tutorialQuestName').value.trim(),d=tutorialState.draft;
+      if(!title){tutorialQuestError('Gib deinem Ziel einen Namen.');$('tutorialQuestName').focus();return;}
+      if(d.type==='weekly'&&!d.weekdays.length){tutorialQuestError('Wähle mindestens einen Tag.');return;}
+      const owner=tutorialState.owner,token=tutorialState.token;if(!owner||currentUser?.uid!==owner||token!==session){tutorialQuestError('Bitte melde dich erneut an.');return;}
+      tutorialState.saving=true;tutorialQuestError();$('tutorialQuestFields').disabled=true;$('tutorialNextBtn').disabled=true;$('tutorialBackBtn').disabled=true;$('tutorialCreateQuestBtn').innerHTML='Wird gespeichert …';
+      let saved=false;
+      try {const result=await mutatePlan({kind:'new',id:'tutorial-first-v1',title,type:d.type,weekdays:d.type==='weekly'?[...d.weekdays]:[],firstQuest:true});if(token!==session||currentUser?.uid!==owner||tutorialState.owner!==owner)return;if(!tutorialQuest()&&result?.quests?.length)state.quests=result.quests;if(!tutorialQuest())throw new Error('Deine Quest konnte noch nicht bestätigt werden. Bitte versuche es erneut.');tutorialState.justCreated=result.firstQuestCreated!==false;tutorialClearDraft(owner);saved=true;render();}
+      catch(error) {if(token===session&&currentUser?.uid===owner&&tutorialState.owner===owner)tutorialQuestError(errorMessage(error));}
+      finally {if(token===session&&currentUser?.uid===owner&&tutorialState.owner===owner){tutorialState.saving=false;const deferred=tutorialState.deferEnd;tutorialState.deferEnd=null;if(deferred)tutorialEnd(deferred);else if(saved){tutorialRender();$('tutorialNextBtn').focus({preventScroll:true});}else{$('tutorialQuestFields').disabled=false;$('tutorialNextBtn').disabled=!tutorialQuest();$('tutorialBackBtn').disabled=false;$('tutorialCreateQuestBtn').innerHTML=icon('plus')+'Erneut speichern';}}}
     }
     function tutorialCheckExample() {
       const button=$('tutorialCheckQuest');if(!button||button.getAttribute('aria-pressed')==='true')return;
-      button.setAttribute('aria-pressed','true');$('tutorialScene').classList.add('tour-demo-done');
-      $('tutorialExampleXp').textContent='20 / 20 XP';$('tutorialExampleHint').textContent='20 XP erreicht. Dein Level steigt!';$('tutorialXpPop').textContent='10 / 10 TAGES-XP · LEVEL UP!';
-      const nextLevel=()=>{$('tutorialScene').classList.add('tour-level-up');$('tutorialExampleLevel').textContent='LEVEL 2';$('tutorialExampleXp').textContent='0 / 20 XP';$('tutorialExampleHint').textContent='20 XP insgesamt · auf zum nächsten Level.';};
-      if(tutorialMotion())tutorialLater(nextLevel,700);else nextLevel();
+      button.setAttribute('aria-pressed','true');$('tutorialScene').classList.add('tour-demo-done');$('tutorialExampleXp').textContent='20 / 20 XP';$('tutorialExampleHint').textContent='20 XP erreicht. Dein Level steigt!';$('tutorialXpPop').textContent='+10 XP · LEVEL UP!';
+      const nextLevel=()=>{$('tutorialScene').classList.add('tour-level-up');$('tutorialExampleLevel').textContent='LEVEL 2';$('tutorialExampleXp').textContent='0 / 20 XP';$('tutorialExampleHint').textContent='20 XP insgesamt · auf zum nächsten Level.';};if(tutorialMotion())tutorialLater(nextLevel,700);else nextLevel();
     }
-    $('tutorialHelpBtn').onclick=()=>tutorialOpen(true,0);
-    $('tutorialNextBtn').onclick=()=>tutorialMove(1);$('tutorialBackBtn').onclick=()=>tutorialMove(-1);$('tutorialSkipBtn').onclick=()=>tutorialEnd('dismissed');
+    $('tutorialHelpBtn').onclick=()=>tutorialOpen(true,0);$('tutorialNextBtn').onclick=()=>tutorialMove(1);$('tutorialBackBtn').onclick=()=>tutorialMove(-1);$('tutorialSkipBtn').onclick=()=>tutorialEnd('dismissed');
     $('tutorialDialog').addEventListener('cancel',event=>{event.preventDefault();tutorialEnd('dismissed');});
-    $('tutorialDialog').addEventListener('keydown',event=>{if(event.key==='ArrowRight'){event.preventDefault();tutorialMove(1);}if(event.key==='ArrowLeft'){event.preventDefault();tutorialMove(-1);}});
+    $('tutorialDialog').addEventListener('keydown',event=>{if(event.target.closest('input,textarea,select,[contenteditable=true]'))return;if(event.key==='ArrowRight'){event.preventDefault();tutorialMove(1);}if(event.key==='ArrowLeft'){event.preventDefault();tutorialMove(-1);}});
 
     function errorMessage(error) {
       const code=error?.code||'';
