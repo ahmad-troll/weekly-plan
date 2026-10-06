@@ -1,12 +1,13 @@
 /* Public QuestLog files only. Account data and Firebase traffic never enter this cache. */
 'use strict';
-const VERSION = '2026-10-06-pwa-1';
+const VERSION = '2026-10-06-pwa-3';
 const APP_BASE = new URL('./', self.registration.scope);
 const CACHE_PREFIX = 'questlog-public-' + encodeURIComponent(APP_BASE.pathname) + '-';
 const CACHE_NAME = CACHE_PREFIX + VERSION;
 const LOCAL_FILES = [
-  'offline.html','manifest.webmanifest','icons/icon.svg',
-  'icons/icon-192.png','icons/icon-512.png','icons/maskable-512.png','icons/apple-touch-icon.png'
+  'offline.html','manifest.webmanifest','icons/questlog-pixel.svg',
+  'icons/questlog-pixel-192.png','icons/questlog-pixel-512.png','icons/questlog-pixel-maskable-512.png','icons/questlog-pixel-apple-180.png',
+  'fonts/PixelifySans.ttf'
 ].map(file => new URL(file, APP_BASE).href);
 const STATIC_FILES = new Set(LOCAL_FILES);
 const OFFLINE_PAGE = new URL('offline.html', APP_BASE).href;
