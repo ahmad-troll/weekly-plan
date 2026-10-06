@@ -388,7 +388,6 @@
     .focus-next { display:flex; justify-content:space-between; gap:8px; font-size:9px; color:var(--muted); margin-bottom:8px; }
     .focus-next span:first-child { color:var(--amber); }
     .focus-card .progress-track { height:4px; }
-    .focus-confirm { margin-top:18px; font-size:11px; padding:11px 7px; }
     .shop-banner { display:flex; justify-content:space-between; gap:20px; padding:24px; border-radius:20px; background:linear-gradient(125deg,#38304b,#232437); border:1px solid #b79aff40; align-items:center; }
     .shop-banner h2 { font-size:23px; margin:9px 0; }
     .shop-banner p { font-size:11px; color:var(--muted); line-height:1.6; margin:0; }
@@ -471,6 +470,92 @@
     @media(max-width:660px) { .hero-figure .buddy { width:48px; right:-2px; bottom:22px; }.hero-figure .buddy svg { width:48px; height:48px; }.leaderboard-character,.leaderboard-character>.cosmetic-figure { width:53px; height:65px; }.leaderboard-character .player-art { width:34px; height:45px; }.leaderboard-character .buddy,.leaderboard-character svg.buddy-art { width:22px; height:22px; }.podium-player>.cosmetic-figure { width:88px; height:110px; }.podium-player .player-art { width:55px; height:78px; }.podium-player .buddy,.podium-player svg.buddy-art { width:32px; height:32px; }.leaderboard-own { padding:12px; gap:12px; }.own-appearance>.cosmetic-figure { width:63px; height:76px; }.own-appearance .player-art { width:41px; height:56px; }.own-appearance .buddy,.own-appearance svg.buddy-art { width:25px; height:25px; }.companion-preview { width:110px; height:130px; }.companion-preview>svg.buddy-art { width:94px; height:94px; } }
     @media(max-width:390px) { .hero-figure .buddy,.hero-figure .buddy svg { width:42px; height:42px; } }
     @media(prefers-reduced-motion:reduce) { *,*::before,*::after { animation:none!important;transition:none!important;scroll-behavior:auto!important; }.buddy.is-cheering .buddy-heart { opacity:1; } }
+
+    /* A readable daily reminder and uncomplicated progress counters. */
+    .adventure-hero { grid-template-columns:minmax(0,1.35fr) minmax(230px,.9fr); }
+    .hero-copy { padding:30px 20px 28px 32px; min-width:0; }
+    .discipline-quote { margin:18px 0 22px; padding:0; }
+    .hero-copy .discipline-quote p { margin:0; max-width:none; font-size:clamp(19px,1.6vw,25px); font-weight:650; line-height:1.55; color:#f4f0ff; letter-spacing:-.4px; text-wrap:pretty; }
+    .discipline-quote p span { color:var(--lime); }
+    .discipline-quote footer { margin-top:13px; color:#c7bddb; font-size:12px; line-height:1.6; }
+    .discipline-quote cite { font-style:italic; }
+    .hero-copy>p { margin:0 0 17px; }
+    .counter-explainer { display:flex; gap:10px; align-items:flex-start; color:#d2d7d3; font-size:12px; line-height:1.7; margin:15px 0 0; padding:12px 14px; border:1px solid #c7fb6820; border-radius:12px; background:#c7fb6807; }
+    .counter-explainer svg { color:var(--lime); width:18px; height:18px; margin-top:2px; }
+    .counter-explainer p { margin:0; }
+    .focus-summary { display:flex; align-items:center; gap:14px; }
+    .counter-reward-icon { width:43px; height:43px; flex-shrink:0; display:grid; place-items:center; border-radius:13px; color:var(--amber); background:#ffcc7813; border:1px solid #ffcc7825; }
+    .counter-reward-icon svg { width:22px; height:22px; }
+    .focus-summary strong,.focus-summary span { display:block; }
+    .focus-summary span { color:var(--muted); line-height:1.6; }
+    .focus-card { position:relative; overflow:hidden; }
+    .focus-card::after { content:''; position:absolute; width:160px; height:160px; right:-95px; top:30px; background:#73ebdf08; border:1px solid #73ebdf13; border-radius:50%; pointer-events:none; }
+    .focus-card-head h3 { margin:0; }
+    .focus-card-head .counter-title { min-width:0; display:flex; align-items:center; gap:12px; }
+    .counter-card-status { color:var(--cyan); font:9px Consolas,monospace; display:inline-block; margin-top:6px; text-transform:uppercase; letter-spacing:1px; }
+    .counter-card-status::before { content:''; display:inline-block; width:5px; height:5px; background:currentColor; border-radius:50%; margin-right:6px; box-shadow:0 0 7px currentColor; }
+    .focus-card[data-status=failed] .counter-card-status { color:var(--amber); }
+    .focus-card[data-status=failed] .focus-days { color:var(--cyan); }
+    .focus-card .reset-button { margin:14px 0 16px; min-height:42px; }
+    .counter-note { margin:13px 0 0; color:var(--muted); font-size:11px; line-height:1.6; }
+    .counter-removed { padding:13px 16px; margin-top:9px; border:1px solid #ffffff0e; border-radius:12px; background:#ffffff03; color:var(--muted); font-size:11px; line-height:1.6; }
+    @media(max-width:660px) {
+      .adventure-hero { grid-template-columns:minmax(0,1fr); min-height:0; }
+      .hero-copy { padding:23px 23px 8px; }
+      .hero-copy .discipline-quote p { font-size:20px; line-height:1.5; letter-spacing:-.2px; }
+      .discipline-quote { margin:15px 0 19px; }.discipline-quote footer { font-size:11px; margin-top:11px; }
+      .hero-copy>p { font-size:11px; max-width:none; }
+      .hero-actions .secondary { display:inline-flex; }.hero-actions .btn { padding:11px 13px; font-size:11px; }
+      .hero-meter { max-width:none; margin-top:18px; }
+      .hero-world { min-height:215px; }.hero-figure { width:160px; height:175px; margin-top:-12px; }
+      .hero-figure .player-art { width:112px; height:138px; }.world-orbit { width:145px; height:145px; top:17px; }
+      .world-platform { width:170px; bottom:30px; }.hero-name { bottom:14px; left:10px; right:10px; font-size:11px; }
+      .hero-name span { display:inline; margin-left:8px; }.star-one { top:43px; left:19%; }.star-two { top:68px; right:17%; }
+      .counter-explainer { font-size:11px; padding:11px 12px; }.focus-summary { padding:14px; font-size:11px; }
+      .counter-reward-icon { width:34px; height:34px; border-radius:10px; }
+    }
+    .tour-help { display:flex; align-items:center; justify-content:center; gap:6px; border:1px solid #ffffff17; border-radius:11px; color:#c6d0e2; background:#ffffff06; font:600 11px 'Segoe UI',sans-serif; padding:10px 12px; cursor:pointer; transition:background .2s,color .2s; }
+    .tour-help svg { width:15px; height:15px; color:var(--cyan); }.tour-help:hover { color:white; background:#ffffff0e; }
+    .tour-help[hidden] { display:none; }
+    #tutorialDialog { width:min(780px,calc(100vw - 28px)); max-width:780px; max-height:calc(100dvh - 28px); padding:0; border:1px solid #7986b737; border-radius:26px; background:#121624; color:#f3f6ff; box-shadow:0 35px 120px #000b,0 0 75px #7c5fe01a; overflow:auto; }
+    #tutorialDialog::backdrop { background:#080a15cf; backdrop-filter:blur(9px); }
+    .tour-top { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:24px 30px 16px; }
+    .tour-brand { display:flex; align-items:center; gap:8px; color:#d7c9ff; font:700 10px Consolas,monospace; letter-spacing:1.5px; }.tour-brand svg { width:18px; height:18px; }
+    .tour-skip { display:flex; align-items:center; gap:6px; padding:8px 0 8px 10px; background:none; color:#a4acc0; border:0; font:500 11px 'Segoe UI',sans-serif; cursor:pointer; }.tour-skip svg { width:13px; height:13px; }.tour-skip:hover { color:#fff; }
+    .tour-progress { display:flex; gap:6px; padding:0 30px; }.tour-progress i { height:3px; border-radius:8px; background:#2b3043; flex:1; transition:background .25s; }.tour-progress i.is-past { background:#7978bd; }.tour-progress i.is-current { background:#b8ff6c; box-shadow:0 0 12px #b8ff6c55; }
+    .tour-main { display:grid; grid-template-columns:1.04fr 1fr; min-height:370px; padding:25px 30px 15px; gap:28px; align-items:center; }
+    .tour-main.tour-enter .tour-copy { animation:tour-copy-in .35s both; }.tour-eyebrow { font:700 10px Consolas,monospace; color:#b9a2ff; letter-spacing:1.2px; display:block; margin-bottom:13px; }.tour-copy h2 { font-size:30px; letter-spacing:-1px; line-height:1.16; margin:0 0 14px; outline:none; }.tour-copy p { color:#b8c1d5; font-size:13px; line-height:1.75; margin:0 0 19px; }.tour-copy strong { color:#f3f6ff; font-weight:650; }
+    .tour-takeaway { display:flex; align-items:flex-start; gap:8px; padding:12px; border:1px solid #b8ff6c22; border-radius:11px; background:#b8ff6c07; color:#dceccc; font-size:11px; line-height:1.6; }.tour-takeaway svg { width:15px; height:15px; color:#b8ff6c; flex:none; margin-top:2px; }
+    .tour-stage { position:relative; min-width:0; height:290px; border-radius:20px; background:radial-gradient(ellipse at 50% 40%,#4c39793b,transparent 65%),linear-gradient(155deg,#20263a,#151a29); border:1px solid #ffffff0e; display:flex; align-items:center; justify-content:center; overflow:hidden; isolation:isolate; }.tour-main.tour-enter .tour-stage { animation:tour-stage-in .4s both; }
+    .tour-stage::before { content:''; position:absolute; inset:0; z-index:-1; opacity:.25; background-image:linear-gradient(#9696c918 1px,transparent 1px),linear-gradient(90deg,#9696c918 1px,transparent 1px); background-size:26px 26px; mask-image:linear-gradient(transparent,#000 60%); }
+    .tour-scene-label { position:absolute; top:17px; left:18px; font:700 8px Consolas,monospace; letter-spacing:1.3px; color:#7e8ba8; }
+    .tour-star { position:absolute; font-size:15px; color:#b8ff6c; animation:tour-star-pulse 3s ease-in-out infinite; }.tour-star.one { top:68px; left:32px; }.tour-star.two { right:37px; top:45px; color:#b9a2ff; animation-delay:.7s; }.tour-star.three { right:29px; bottom:70px; color:#65e8e1; animation-delay:1.5s; }
+    .tour-hero { position:relative; width:150px; height:195px; display:flex; align-items:center; justify-content:center; }.tour-hero::after { content:''; position:absolute; bottom:3px; width:150px; height:28px; border:1px solid #b9a2ff77; border-radius:50%; background:#9882ff15; box-shadow:0 0 28px #9e83ff20; z-index:-1; }.tour-hero>.player-art { height:160px; width:135px; filter:drop-shadow(0 0 20px #b9a2ff25); animation:tour-character-float 3s ease-in-out infinite; }
+    .tour-hero-name { position:absolute; bottom:22px; left:12px; right:12px; text-align:center; font-size:10px; color:#e3ddff; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }.tour-hero-name span { display:block; color:#b8ff6c; font:700 9px Consolas,monospace; margin-top:5px; letter-spacing:1px; }
+    .tour-float-chip { position:absolute; background:#0e1428d9; border:1px solid #7d8bb033; border-radius:9px; padding:8px 10px; display:flex; align-items:center; gap:5px; font:700 10px Consolas,monospace; box-shadow:0 8px 20px #0003; }.tour-float-chip svg { width:13px; height:13px; }.tour-float-chip.xp { left:18px; top:72px; color:#b8ff6c; animation:tour-chip-float 3s ease-in-out infinite; }.tour-float-chip.coins { right:15px; bottom:75px; color:#ffd17c; animation:tour-chip-float 3s ease-in-out 1s infinite; }
+    .tour-mini-stack { width:calc(100% - 36px); position:relative; }.tour-mini-card { border:1px solid #7787b333; border-radius:13px; padding:16px; background:#111828; box-shadow:0 10px 22px #0003; text-align:left; }.tour-mini-card+ .tour-mini-card { margin-top:11px; }.tour-mini-card .tour-mini-label { color:#75e8dd; font:700 8px Consolas,monospace; letter-spacing:1px; display:flex; align-items:center; gap:6px; margin-bottom:10px; }.tour-mini-label svg { width:12px; height:12px; }.tour-mini-card strong { font-size:12px; font-weight:600; display:block; }.tour-mini-card small { display:block; color:#95a4bc; font-size:9px; line-height:1.6; margin-top:6px; }.tour-mini-card.daily { animation:tour-card-glow 4.5s ease-in-out infinite; }.tour-mini-card.weekly { animation:tour-card-glow 4.5s ease-in-out 2.25s infinite; }.tour-mini-card.weekly .tour-mini-label { color:#bd9eff; }
+    .tour-weekdays { display:flex; gap:5px; margin-top:10px; }.tour-weekdays span { display:flex; width:22px; height:22px; border-radius:6px; align-items:center; justify-content:center; font-size:8px; background:#ffffff05; color:#5f6b83; }.tour-weekdays span.chosen { background:#bba0ff23; color:#dfd0ff; border:1px solid #bba0ff44; }
+    .tour-try { position:absolute; bottom:-29px; left:0; right:0; text-align:center; color:#8694b0; font-size:8px; letter-spacing:.2px; }.tour-quest-demo { width:calc(100% - 38px); position:relative; }.tour-demo-heading { display:flex; justify-content:space-between; color:#95a4bc; font:700 9px Consolas,monospace; margin:0 2px 12px; }
+    .tour-quest-row { width:100%; display:flex; align-items:center; gap:11px; padding:17px 12px; border:1px solid #68769944; border-radius:12px; background:#111828; color:#eff3ff; cursor:pointer; text-align:left; font:600 11px 'Segoe UI',sans-serif; transition:border .3s,background .3s; }.tour-quest-row .tour-check { display:flex; width:21px; height:21px; flex:none; align-items:center; justify-content:center; border:1px solid #647592; border-radius:7px; background:#253247; }.tour-check svg { width:14px; height:14px; opacity:0; }.tour-quest-row[aria-pressed="true"] { border-color:#b8ff6c66; background:#b8ff6c09; }.tour-quest-row[aria-pressed="true"] .tour-check { background:#b8ff6c; border-color:#b8ff6c; color:#182213; }.tour-quest-row[aria-pressed="true"] .tour-check svg { opacity:1; }.tour-quest-row[aria-pressed="true"] .tour-task-copy { color:#cfeab5; }
+    .tour-xp-box { border-radius:12px; margin-top:15px; padding:15px 14px; background:#ffffff03; border:1px solid #ffffff08; }.tour-xp-box header { display:flex; justify-content:space-between; font:700 10px Consolas,monospace; margin-bottom:10px; }.tour-xp-box header span { color:#b8ff6c; }.tour-xp-track { height:7px; background:#303a4b; border-radius:20px; overflow:hidden; }.tour-xp-fill { height:100%; width:50%; background:#b8ff6c; transition:width .55s; border-radius:20px; box-shadow:0 0 15px #b8ff6c; }.tour-xp-box footer { margin-top:9px; font-size:9px; color:#96a1b4; }.tour-demo-done .tour-xp-fill { width:100%; }.tour-xp-pop { height:22px; text-align:center; margin-top:12px; font:700 12px Consolas,monospace; color:#b8ff6c; opacity:0; }.tour-demo-done .tour-xp-pop { animation:tour-xp-pop .6s both; }
+    .tour-level-up .tour-xp-fill { width:0; }
+    .tour-counter-demo { width:calc(100% - 38px); border:1px solid #9477df39; border-radius:16px; padding:18px 16px; background:#111828; position:relative; text-align:center; }.tour-counter-demo h3 { font-size:12px; margin:0 0 19px; display:flex; align-items:center; justify-content:center; gap:7px; }.tour-counter-demo h3 svg { width:14px; height:14px; color:#bb9fff; }.tour-counter-demo .tour-counter-number { font:700 41px Consolas,monospace; color:#e6ddff; line-height:1; }.tour-counter-number small { font:600 12px 'Segoe UI',sans-serif; color:#a5a0bd; display:block; margin:6px 0 10px; }.tour-counter-time { color:#8f9cb9; font:12px Consolas,monospace; }.tour-counter-demo .tour-reset { border:0; background:#ffffff05; color:#9aa6bd; font:10px 'Segoe UI',sans-serif; padding:7px 13px; display:inline-flex; align-items:center; gap:5px; margin-top:12px; border-radius:7px; cursor:pointer; }.tour-reset svg { width:11px; height:11px; }
+    .tour-coin-stages { display:flex; gap:6px; margin-top:15px; }.tour-coin-stages div { flex:1; border-radius:8px; background:#ffffff04; padding:7px 2px; border:1px solid #ffffff06; }.tour-coin-stages strong { display:block; color:#d8ba85; font:700 10px Consolas,monospace; }.tour-coin-stages small { color:#747f98; font-size:7px; display:block; margin-top:4px; }.tour-coin-stages .active { background:#ffd17c12; border-color:#ffd17c4d; }.tour-coin-stages .active strong { color:#ffd17c; }.tour-counter-info { color:#b1b6c4; font-size:8px; line-height:1.5; min-height:12px; margin-top:10px; }
+    .tour-shop-scene { width:100%; height:100%; position:relative; display:flex; justify-content:center; align-items:center; }.tour-shop-scene>.cosmetic-figure { width:195px; height:223px; }.tour-shop-scene .player-art { width:130px; height:155px; }.tour-shop-caption { position:absolute; bottom:15px; text-align:center; width:100%; color:#c9badf; font-size:9px; }.tour-shop-price { top:18px; right:17px; color:#ffd17c; font:700 11px Consolas,monospace; position:absolute; display:flex; align-items:center; gap:5px; }.tour-shop-price svg { width:14px; height:14px; }.tour-shop-tags { position:absolute; left:15px; top:45px; display:flex; flex-direction:column; gap:7px; }.tour-shop-tags span { font:700 7px Consolas,monospace; padding:5px 7px; border-radius:6px; color:#b9b3d9; border:1px solid #9485bd23; background:#100f25b5; }.tour-shop-tags span:nth-child(2) { color:#ffcf84; }.tour-shop-tags span:nth-child(3) { color:#7be5df; }
+    .tour-ranking-demo { width:calc(100% - 32px); position:relative; }.tour-ranking-tabs { display:flex; background:#111828; padding:4px; border-radius:9px; gap:5px; margin-bottom:13px; }.tour-ranking-tabs span { flex:1; text-align:center; color:#8190ab; padding:7px 0; font-size:9px; border-radius:6px; }.tour-ranking-tabs .active { background:#afa0ff21; color:#d7caff; }.tour-ranking-row { display:flex; align-items:center; gap:10px; padding:10px; border-radius:10px; background:#111828; border:1px solid #ffffff07; margin-top:6px; }.tour-ranking-row.self { border-color:#b8ff6c44; background:#b8ff6c08; animation:tour-self-glow 3s infinite; }.tour-ranking-row .player-art { width:26px; height:33px; }.tour-ranking-row .cosmetic-figure { width:36px; height:40px; flex:none; border-radius:6px; }.tour-ranking-row .cosmetic-figure>.player-art { width:25px; height:31px; }.tour-ranking-row .buddy { width:12px; height:14px; right:-5px; bottom:4px; }.tour-ranking-row .buddy-art { width:12px; height:14px; }.tour-ranking-row .tour-rank { color:#95a4bc; font:700 10px Consolas,monospace; width:17px; }.tour-ranking-row:first-of-type .tour-rank { color:#ffd17c; }.tour-ranking-row .tour-rank-name { min-width:0; flex:1; color:#c4cfdf; font-size:10px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }.tour-ranking-row.self .tour-rank-name { color:#d6edbd; }.tour-ranking-row .tour-rank-lvl { color:#bb9fff; font:700 9px Consolas,monospace; }.tour-ranking-note { text-align:center; color:#7f8ea8; font-size:8px; line-height:1.7; margin-top:12px; }
+    .tour-footer { display:flex; align-items:center; justify-content:space-between; gap:14px; padding:19px 30px 0; border-top:1px solid #ffffff09; }.tour-back { border:0; background:none; color:#99a7c0; cursor:pointer; display:flex; gap:5px; align-items:center; padding:10px 0; font-size:11px; }.tour-back svg { width:14px; height:14px; }.tour-back:disabled { opacity:.25; cursor:default; }.tour-page { color:#7986a0; font:10px Consolas,monospace; }.tour-next { min-width:112px; gap:10px; justify-content:center; padding:11px 17px; font-size:12px; }.tour-next svg { width:14px; height:14px; }.tour-example-label { color:#5f6e88; font-size:9px; line-height:1.6; text-align:center; margin:13px 22px 17px; }
+    #tutorialDialog button:focus-visible { outline:2px solid #b8ff6c; outline-offset:4px; }
+    @keyframes tour-copy-in { from { opacity:0; transform:translateY(9px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes tour-stage-in { from { opacity:0; transform:scale(.97); } to { opacity:1; transform:scale(1); } }
+    @keyframes tour-character-float { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-7px); } }
+    @keyframes tour-chip-float { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-5px); } }
+    @keyframes tour-star-pulse { 0%,100% { opacity:.3; transform:scale(.75); } 50% { opacity:.9; transform:scale(1.15); } }
+    @keyframes tour-card-glow { 0%,40%,100% { border-color:#7787b333; transform:translateX(0); } 10%,30% { border-color:#ae96ff88; transform:translateX(3px); } }
+    @keyframes tour-xp-pop { from { opacity:0; transform:translateY(6px) scale(.9); } to { opacity:1; transform:translateY(0) scale(1); } }
+    @keyframes tour-self-glow { 0%,100% { box-shadow:0 0 0 #b8ff6c00; } 50% { box-shadow:0 0 18px #b8ff6c12; } }
+    @media(max-width:660px) { .tour-help { width:31px; height:33px; padding:0; }.tour-help>span:last-child { display:none; }#tutorialDialog { border-radius:21px; width:calc(100vw - 20px); max-height:calc(100dvh - 20px); }.tour-top { padding:18px 21px 12px; }.tour-progress { padding:0 21px; }.tour-main { grid-template-columns:1fr; min-height:0; padding:18px 21px 18px; gap:21px; }.tour-stage { height:219px; }.tour-copy h2 { font-size:24px; letter-spacing:-.6px; margin-bottom:10px; }.tour-copy p { font-size:12px; line-height:1.7; margin-bottom:12px; }.tour-eyebrow { font-size:8px; margin-bottom:9px; }.tour-takeaway { padding:10px; font-size:10px; }.tour-footer { padding:15px 21px 0; }.tour-example-label { font-size:8px; margin:10px 18px 13px; }.tour-hero { height:161px; }.tour-hero>.player-art { height:134px; }.tour-hero-name { bottom:14px; font-size:9px; }.tour-float-chip.xp { top:54px; }.tour-float-chip.coins { bottom:58px; }.tour-mini-card { padding:11px 14px; }.tour-mini-card .tour-mini-label { margin-bottom:6px; font-size:7px; }.tour-mini-card strong { font-size:11px; }.tour-mini-card small { font-size:8px; margin-top:4px; }.tour-weekdays { margin-top:7px; }.tour-weekdays span { width:20px; height:18px; font-size:7px; }.tour-mini-card+.tour-mini-card { margin-top:8px; }.tour-quest-row { padding:13px 12px; }.tour-xp-box { margin-top:10px; padding:12px; }.tour-xp-pop { margin-top:9px; height:15px; font-size:10px; }.tour-try { bottom:-20px; font-size:7px; }.tour-counter-demo { padding:13px 14px; }.tour-counter-demo h3 { font-size:11px; margin-bottom:12px; }.tour-counter-demo .tour-counter-number { font-size:30px; }.tour-counter-number small { display:inline; font-size:10px; margin-left:6px; }.tour-counter-time { font-size:10px; margin-top:6px; }.tour-counter-demo .tour-reset { padding:5px 10px; margin-top:7px; }.tour-coin-stages { margin-top:10px; }.tour-coin-stages div { padding:6px 2px; }.tour-counter-info { margin-top:7px; font-size:7px; }.tour-shop-scene>.cosmetic-figure { width:165px; height:170px; }.tour-shop-scene .player-art { width:100px; height:121px; }.tour-shop-caption { bottom:9px; font-size:8px; }.tour-shop-tags { top:49px; }.tour-ranking-tabs { margin-bottom:8px; }.tour-ranking-tabs span { padding:5px 0; font-size:8px; }.tour-ranking-row { padding:7px 10px; gap:10px; }.tour-ranking-row .player-art { height:26px; width:22px; }.tour-ranking-row .cosmetic-figure { height:29px; width:27px; }.tour-ranking-row .cosmetic-figure>.player-art { height:24px; width:20px; }.tour-ranking-note { font-size:7px; margin-top:8px; }.tour-scene-label { top:11px; left:13px; font-size:7px; } }
+    @media(max-height:650px) and (max-width:660px) { .tour-stage { height:190px; }.tour-main { gap:15px; padding-top:13px; padding-bottom:13px; }.tour-copy h2 { font-size:22px; }.tour-copy p { font-size:11px; margin-bottom:10px; }.tour-takeaway { font-size:9px; padding:8px; }.tour-top { padding-top:13px; }.tour-footer { padding-top:12px; } }
+    @media(prefers-reduced-motion:reduce) { #tutorialDialog *,#tutorialDialog *::before,#tutorialDialog *::after { animation:none!important; transition:none!important; }.tour-demo-done .tour-xp-pop { opacity:1; } }
   </style>
 </head>
 <body>
@@ -481,19 +566,19 @@
         <button data-view="today" aria-current="page"><span data-icon="grid"></span>Heute</button>
         <button data-view="week"><span data-icon="calendar"></span>Diese Woche</button>
         <button data-view="quests"><span data-icon="layers"></span>Meine Quests</button>
-        <button data-view="leaderboard"><span data-icon="trophy"></span>Leaderboard</button>
-        <button data-view="focus"><span data-icon="clock"></span>Fokus-Timer</button>
+        <button data-view="leaderboard"><span data-icon="trophy"></span>Rangliste</button>
+        <button data-view="focus"><span data-icon="clock"></span>Counter</button>
         <button data-view="shop"><span data-icon="bag"></span>Shop</button>
       </nav></div>
-      <div class="sidebar-note"><span data-icon="spark"></span><strong>Jeder Schritt zählt.</strong><p>Quests geben XP. Fokus gibt Coins.<br>Dein Abenteuer wächst mit dir.</p></div>
+      <div class="sidebar-note"><span data-icon="spark"></span><strong>Jeder Schritt zählt.</strong><p>Quests geben XP. Counter geben Coins.<br>Dein Abenteuer wächst mit dir.</p></div>
       <div class="account"><div class="avatar" id="avatar">P</div><div class="account-name"><strong id="playerName">Dein Spieler</strong><span id="accountMode">Firebase-Konto</span></div><button class="icon-btn" id="accountBtn" aria-label="Konto öffnen"><span data-icon="logout"></span></button></div>
     </aside>
     <main>
-      <header class="topbar"><span class="overline">Persönliches Quest-Dashboard</span><div class="brand topbar-brand"><span class="logo" data-icon="bolt"></span>QuestLog<span class="lime">.</span></div><div class="topbar-right"><button class="coin-hud" id="walletBtn" aria-label="Coins und Shop öffnen"><span data-icon="coin"></span><strong id="coinBalance">0</strong></button><span class="status" id="syncStatus" role="status"><i class="status-dot"></i><span>Verbinde …</span></span><button class="btn" id="addTopBtn"><span data-icon="plus"></span>Neue Quest</button></div></header>
+      <header class="topbar"><span class="overline">Persönliches Quest-Dashboard</span><div class="brand topbar-brand"><span class="logo" data-icon="bolt"></span>QuestLog<span class="lime">.</span></div><div class="topbar-right"><button class="tour-help" id="tutorialHelpBtn" type="button" aria-label="Kurze Einführung öffnen" title="So funktioniert QuestLog" hidden><span data-icon="spark"></span><span>So geht’s</span></button><button class="coin-hud" id="walletBtn" aria-label="Coins und Shop öffnen"><span data-icon="coin"></span><strong id="coinBalance">0</strong></button><span class="status" id="syncStatus" role="status"><i class="status-dot"></i><span>Verbinde …</span></span><button class="btn" id="addTopBtn"><span data-icon="plus"></span>Neue Quest</button></div></header>
       <div class="banner" id="cloudError" role="alert" hidden></div>
       <section class="intro"><div><span class="overline" id="introLabel">Ready, player?</span><h1 id="introTitle">Dein Alltag. Dein nächstes Level.</h1><p id="introText">Kleine Schritte werden zu großen Erfolgen. Starte deine Quests.</p></div><span class="date-chip" id="dateChip"></span></section>
       <section class="adventure-hero" id="adventureHero" aria-label="Dein Abenteuer">
-        <div class="hero-copy"><span class="hero-tag"><i></i> DEIN NÄCHSTES ABENTEUER</span><h2>Small steps.<br><span>Big energy.</span></h2><p id="heroMessage">Deine nächste Quest wartet auf dich.</p><div class="hero-actions"><button class="btn" id="heroQuestBtn">Quest starten <span data-icon="right"></span></button><button class="btn secondary" id="heroFocusBtn">Fokus sammeln <span data-icon="clock"></span></button></div><div class="hero-meter"><span id="heroProgressText"></span><div class="progress-track"><div class="progress-fill" id="heroProgressFill"></div></div></div></div>
+        <div class="hero-copy"><span class="hero-tag"><i></i> DEIN WEG. DEINE DISZIPLIN.</span><blockquote class="discipline-quote"><p>„Es gibt keinen größeren Reichtum als die Vernunft, keine größere Armut als die Unwissenheit und kein mächtigeres Erbe als die <span>absolute Selbstdisziplin.</span>“</p><footer>– <cite>ʿAlī ibn Abī Ṭālib</cite></footer></blockquote><p id="heroMessage">Deine nächste Quest wartet auf dich.</p><div class="hero-actions"><button class="btn" id="heroQuestBtn">Quest starten <span data-icon="right"></span></button><button class="btn secondary" id="heroFocusBtn">Counter starten <span data-icon="clock"></span></button></div><div class="hero-meter"><span id="heroProgressText"></span><div class="progress-track"><div class="progress-fill" id="heroProgressFill"></div></div></div></div>
         <div class="hero-world" id="heroWorld"><div class="world-orbit" aria-hidden="true"></div><div class="world-mountains" aria-hidden="true"></div><div class="world-platform" aria-hidden="true"></div><div id="heroFigure" class="hero-figure"></div><div class="hero-name" id="heroName"></div><span class="world-star star-one" aria-hidden="true">✦</span><span class="world-star star-two" aria-hidden="true">✧</span><span class="world-star star-three" aria-hidden="true">+</span></div>
       </section>
       <div class="grid">
@@ -520,9 +605,9 @@
             <button class="btn secondary small" id="leaderboardMoreBtn" hidden>Weitere Spieler laden <span data-icon="down"></span></button>
             <p class="hint" id="leaderboardNote" role="status"></p>
           </section>
-          <section id="focusView" aria-label="Gewohnheits-Timer" hidden>
-            <div class="card focus-start"><span class="overline">BUILD YOUR STREAK</span><h2>Mehr Zeit für dich.</h2><form id="focusForm"><div class="focus-fields"><div class="field"><label for="focusName">Name deiner Gewohnheit</label><input id="focusName" maxlength="80" placeholder="z. B. kein endloses Scrollen" required></div><button class="btn" id="startFocusBtn" type="submit"><span data-icon="plus"></span>Starten</button></div><p class="form-error" id="focusError" role="alert" hidden></p><p class="hint" id="focusStartHint"></p></form></div>
-            <div class="coin-milestones" aria-label="Tägliche Coin-Stufen"><div><span>AB START</span><strong>1 <small>Coin / Tag</small></strong></div><div><span>AB 7 TAGEN</span><strong>2 <small>Coins / Tag</small></strong></div><div><span>AB 30 TAGEN</span><strong>3 <small>Coins / Tag</small></strong></div></div>
+          <section id="focusView" aria-label="Gewohnheits-Counter" hidden>
+            <div class="card focus-start"><span class="overline">DEIN NEUSTART ZÄHLT</span><h2>Deine Gewohnheits-Counter.</h2><form id="focusForm"><div class="focus-fields"><div class="field"><label for="focusName">Name deiner Gewohnheit</label><input id="focusName" maxlength="80" placeholder="z. B. kein endloses Scrollen" required></div><button class="btn" id="startFocusBtn" type="submit"><span data-icon="plus"></span>Starten</button></div><p class="form-error" id="focusError" role="alert" hidden></p><p class="hint" id="focusStartHint"></p></form></div>
+            <div class="counter-explainer"><span data-icon="spark"></span><p>Gib der Gewohnheit einen Namen und starte. Dein Counter zählt hoch; Coins erhältst du automatisch beim Tageswechsel. Der jüngste Counter bestimmt die gemeinsame Stufe.</p></div><div class="coin-milestones" aria-label="Gemeinsame tägliche Coin-Stufen"><div><span>AB START</span><strong>1 <small>Coin / Tag</small></strong></div><div><span>AB 7 TAGEN</span><strong>2 <small>Coins / Tag</small></strong></div><div><span>AB 30 TAGEN</span><strong>3 <small>Coins / Tag</small></strong></div></div>
             <div class="focus-summary" id="focusSummary" role="status"></div><div id="focusList"></div>
           </section>
           <section id="shopView" hidden aria-label="Kosmetik-Shop"><div class="shop-banner"><div><span class="overline">THE LOOT ROOM</span><h2>Dein Fortschritt. Dein Look.</h2><p>Looks und Begleiter für alle fünf Klassen. Einmal kaufen, behalten.</p></div><div class="shop-wallet"><span data-icon="coin"></span><strong id="shopBalance">0</strong><small>verfügbar</small></div></div><p class="shop-note" id="shopPending" role="status"></p><div class="shop-tabs" role="group" aria-label="Shop-Kategorien"><button data-shop-filter="all" aria-pressed="true">Alles</button><button data-shop-filter="cosmetics" aria-pressed="false">Looks</button><button data-shop-filter="buddy" aria-pressed="false">Begleiter</button></div><div class="shop-grid" id="shopGrid"></div><p class="hint">Coins bringen dir neue Looks. Dein Level wächst durch Quests. Deine gekauften Looks bleiben in deinem Inventar. Kombiniere Aura, Rahmen, Kulisse und Begleiter. Dein Look ist auch in beiden Ranglisten sichtbar.</p></section>
@@ -541,6 +626,13 @@
   <dialog id="onboardingDialog" aria-labelledby="onboardingTitle"><form id="onboardingForm"><div class="setup-header"><span class="logo" data-icon="bolt"></span><span class="overline">QuestLog // Create your character</span></div><div class="dialog-head"><h2 id="onboardingTitle">Wähle deinen Start-Charakter.</h2></div><p class="dialog-desc" id="onboardingDesc">Dein Konto steht. Jetzt beginnt dein Abenteuer: Gib deinem Spieler einen Namen und wähle deine Klasse.</p><div class="field setup-name"><label for="onboardingUsername">01 · Dein Spielername</label><input id="onboardingUsername" autocomplete="nickname" maxlength="20" minlength="3" pattern="[A-Za-z][A-Za-z0-9_]{2,19}" placeholder="CodeKnight" required><span class="hint">3–20 Zeichen · Buchstaben, Zahlen, _ · Groß- und Kleinschreibung gelten als derselbe Name.</span></div><fieldset class="character-grid"><legend class="field-label">02 · Deine Klasse</legend><div class="character-options" id="characterOptions"></div></fieldset><p class="form-error" id="onboardingError" role="alert" hidden></p><div class="setup-summary"><p id="characterSummary">Wähle eine Klasse für dein Abenteuer.<br>Alle starten mit den gleichen XP-Regeln.</p><button class="btn" id="savePlayerBtn" type="submit" disabled>Abenteuer starten <span data-icon="right"></span></button></div><div class="setup-exit"><button class="text-btn" id="exitOnboardingBtn" type="button">Später einrichten · Abmelden</button></div></form></dialog>
   <dialog id="archiveDialog" aria-labelledby="archiveTitle"><div class="dialog-head"><h2 id="archiveTitle">Quest entfernen?</h2><button class="icon-btn" id="closeArchiveBtn" aria-label="Schließen"><span data-icon="close"></span></button></div><p class="dialog-desc" id="archiveDesc"></p><button class="btn full" id="confirmArchiveBtn">Quest entfernen</button><button class="btn secondary full" id="cancelArchiveBtn" style="margin-top:10px">Behalten</button></dialog>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <dialog id="tutorialDialog" aria-labelledby="tutorialTitle" aria-describedby="tutorialDescription">
+    <div class="tour-top"><span class="tour-brand"><span data-icon="bolt"></span>DEIN QUICKSTART</span><button type="button" class="tour-skip" id="tutorialSkipBtn">Überspringen <span data-icon="right"></span></button></div>
+    <div class="tour-progress" id="tutorialProgress" aria-label="Einführung, Schritt 1 von 6"></div>
+    <div class="tour-main" id="tutorialMain"><div class="tour-stage" id="tutorialScene"></div><div class="tour-copy"><span class="tour-eyebrow" id="tutorialEyebrow"></span><h2 id="tutorialTitle" tabindex="-1"></h2><p id="tutorialDescription"></p><div class="tour-takeaway" id="tutorialTakeaway"></div></div></div>
+    <div class="tour-footer"><button class="tour-back" id="tutorialBackBtn" type="button"><span data-icon="left"></span>Zurück</button><span class="tour-page" id="tutorialPage" aria-live="polite">1 / 6</span><button class="btn tour-next" id="tutorialNextBtn" type="button">Weiter <span data-icon="right"></span></button></div>
+    <p class="tour-example-label">Die Beispiele verändern deinen echten Spielstand nicht.</p>
+  </dialog>
   <script id="quest-core">
     'use strict';
     // Pure domain functions. XP is derived from daily records, never incremented by clicks.
@@ -660,7 +752,61 @@
         const startAt=started(timer,days,today),seconds=Math.max(0,Math.floor((now-startAt)/1000)),elapsed=seconds*1000;
         return {startAt,seconds,completed:Math.floor(seconds/86400),stage:tier(elapsed),next:elapsed<7*DAY?7:elapsed<30*DAY?30:null};
       };
-      return {DAY,midnight,validTimer,validDay,validState,due,tasksAt,bonus,total,started,normalize,coinDay,changeStatus,tier,coinReward,coins,progress};
+
+      // Automatic shared daily coins. Old focusDays remain untouched for legacy XP.
+      const validDate = date => {try{return typeof date==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(date)&&QuestCore.shift(date,0)===date;}catch{return false;}};
+      const cleanTimers = timers => timers.map(t=>({id:t.id,title:t.title,startDate:t.startDate,startedAt:t.startedAt}));
+      const validPlan = plan => !!plan&&Array.isArray(plan.timers)&&plan.timers.length<=10&&plan.timers.every(t=>validTimer(t)&&(plan.schemaVersion!==2||validStamp(t.startedAt)))&&new Set(plan.timers.map(t=>t.id)).size===plan.timers.length&&(plan.schemaVersion===undefined||plan.schemaVersion===2&&validDate(plan.automaticStartedOn)&&validDate(plan.rewardDay)&&plan.rewardDay>=plan.automaticStartedOn&&Array.isArray(plan.rewardTimers)&&plan.rewardTimers.length<=10&&plan.rewardTimers.every(t=>validTimer(t)&&validStamp(t.startedAt)&&t.startDate<=plan.rewardDay)&&new Set(plan.rewardTimers.map(t=>t.id)).size===plan.rewardTimers.length&&(plan.blockedDate===''||plan.blockedDate===plan.rewardDay)&&Number.isInteger(plan.firstDayLegacyCoins)&&plan.firstDayLegacyCoins>=0&&plan.firstDayLegacyCoins<=3);
+      const copyPlan = plan => ({timers:cleanTimers(plan.timers),schemaVersion:2,automaticStartedOn:plan.automaticStartedOn,rewardDay:plan.rewardDay,rewardTimers:cleanTimers(plan.rewardTimers),blockedDate:plan.blockedDate,firstDayLegacyCoins:plan.firstDayLegacyCoins});
+      const preparePlan = (stored,days={},date=QuestCore.key(),now=Date.now()) => {
+        stored=stored||{timers:[]};
+        if(!validPlan(stored)||!validDate(date)||!validStamp(now))throw new Error('Deine Counter haben ein ungültiges Format.');
+        if(stored.schemaVersion===2)return copyPlan(stored);
+        const timers=stored.timers.map(t=>normalize(t,days,date));
+        const plan={timers,schemaVersion:2,automaticStartedOn:date,rewardDay:date,rewardTimers:timers.filter(t=>t.startDate<=date).map(t=>({...t})),blockedDate:days[date]?.timers.some(t=>t.status==='failed')?date:'',firstDayLegacyCoins:coinReward(days[date])};
+        return plan;
+      };
+      const currentReward = (plan,date=QuestCore.key()) => {
+        if(!plan||plan.schemaVersion!==2||!validPlan(plan)||date<plan.automaticStartedOn||date<plan.rewardDay||plan.blockedDate===date)return 0;
+        const participants=(date===plan.rewardDay?plan.rewardTimers:plan.timers).filter(t=>t.startDate<=date);
+        const automatic=participants.length?tier(Math.max(0,midnight(QuestCore.shift(date,1))-Math.max(...participants.map(t=>t.startedAt)))):0;
+        return date===plan.automaticStartedOn?Math.max(automatic,plan.firstDayLegacyCoins):automatic;
+      };
+      const advancePlan = (plan,date=QuestCore.key()) => {
+        if(!validPlan(plan)||plan.schemaVersion!==2||!validDate(date)||date<plan.rewardDay)throw new Error('Der Counter-Tag konnte nicht sicher abgerechnet werden.');
+        const count=QuestCore.distance(plan.rewardDay,date);
+        if(count>36525)throw new Error('Deine Counter-Historie überschreitet den unterstützten Zeitraum.');
+        let coins=0;
+        for(let offset=0;offset<count;offset++)coins+=currentReward(plan,QuestCore.shift(plan.rewardDay,offset));
+        const next=copyPlan(plan);
+        if(count){next.rewardDay=date;next.rewardTimers=next.timers.filter(t=>t.startDate<=date).map(t=>({...t}));next.blockedDate='';}
+        return {plan:next,coins,completedDays:count};
+      };
+      const mutatePlan = (plan,operation,date=QuestCore.key(),now=Date.now()) => {
+        if(!validPlan(plan)||plan.schemaVersion!==2||plan.rewardDay!==date||!validStamp(now))throw new Error('Deine Counter müssen zuerst synchronisiert werden.');
+        const next=copyPlan(plan),active=next.timers.find(t=>t.id===operation.id),participant=next.rewardTimers.find(t=>t.id===operation.id);
+        if(operation.kind==='reset'){
+          if(!active&&!participant)throw new Error('Dieser Counter existiert nicht mehr.');
+          if(active){active.startedAt=now;active.startDate=date;}
+          if(participant){participant.startedAt=now;participant.startDate=date;}
+          next.blockedDate=date;
+        }else if(operation.kind==='archive'){
+          if(!active)throw new Error('Dieser Counter wurde bereits entfernt.');
+          next.timers=next.timers.filter(t=>t.id!==operation.id);
+          // Retain today's participant: removing a reset/young counter cannot bypass the shared daily rule.
+        }else if(operation.kind==='new'){
+          if(next.timers.length>=10||next.rewardTimers.length>=10)throw new Error('Heute sind höchstens 10 Counter möglich. Entfernte Counter zählen heute noch mit.');
+          if(active||participant)throw new Error('Dieser Counter existiert bereits.');
+          const timer={id:operation.id,title:String(operation.title||'').trim(),startDate:date,startedAt:now};
+          if(!validTimer(timer))throw new Error('Gib deiner Gewohnheit einen Namen (höchstens 80 Zeichen).');
+          next.timers.push(timer);next.rewardTimers.push({...timer});
+        }else throw new Error('Diese Counter-Aktion ist nicht verfügbar.');
+        if(!validPlan(next))throw new Error('Deine Counter konnten nicht geprüft werden.');
+        return {plan:next,startDate:date};
+      };
+      const legacyCoins = (days,before,after='1970-01-01',plan=null) => coins(Object.fromEntries(Object.entries(days).filter(([date])=>!plan||plan.schemaVersion!==2||date<plan.automaticStartedOn)),before,after);
+      const planKey = plan => plan?.schemaVersion===2?JSON.stringify(copyPlan(plan)):JSON.stringify(plan?.timers||[]);
+      return {DAY,midnight,validTimer,validDay,validState,due,tasksAt,bonus,total,started,normalize,coinDay,changeStatus,tier,coinReward,coins,progress,validDate,validPlan,preparePlan,currentReward,advancePlan,mutatePlan,legacyCoins,planKey};
     })();
   </script>
   <script id="shop-core">
@@ -685,14 +831,19 @@
       const cost=owned=>catalog.filter(item=>owned.includes(item.id)).reduce((n,item)=>n+item.price,0);
       const valid=s=>!!s&&[1,2].includes(s.schemaVersion)&&Array.isArray(s.owned)&&s.owned.length<=catalog.length&&new Set(s.owned).size===s.owned.length&&s.owned.every(id=>catalog.some(i=>i.id===id))&&Number.isInteger(s.earnedCoins)&&s.earnedCoins>=cost(s.owned)&&s.earnedCoins<=109575&&/^\d{4}-\d{2}-\d{2}$/.test(s.settledThrough)&&validEquipment(s.equipped,s.owned,s.schemaVersion===1);
       const normalize=s=>{if(!valid(s))throw new Error('Dein Inventar hat ein ungültiges Format.');return {...s,schemaVersion:2,owned:[...s.owned],equipped:equipment(s.equipped)};};
-      const balance=(s,days,today)=>s.earnedCoins+FocusCore.coins(days,today,s.settledThrough)-cost(s.owned);
-      const settle=(s,days,today)=>{
-        const dates=Object.keys(days).filter(d=>d<today&&d>s.settledThrough).sort();
-        return {...normalize(s),earnedCoins:s.earnedCoins+FocusCore.coins(days,today,s.settledThrough),settledThrough:dates.at(-1)||s.settledThrough};
+      const balance=(s,days,today,plan=null)=>s.earnedCoins+FocusCore.legacyCoins(days,today,s.settledThrough,plan)+(plan?.schemaVersion===2&&plan.rewardDay<=today?FocusCore.advancePlan(plan,today).coins:0)-cost(s.owned);
+      const settle=(s,days,today,plan=null)=>{
+        const dates=Object.keys(days).filter(d=>d<today&&d>s.settledThrough&&(!plan||plan.schemaVersion!==2||d<plan.automaticStartedOn)).sort();
+        return {...normalize(s),earnedCoins:s.earnedCoins+FocusCore.legacyCoins(days,today,s.settledThrough,plan),settledThrough:dates.at(-1)||s.settledThrough};
       };
-      const mutate=(s,days,today,action,id)=>{
+      const credit=(s,coins)=>{
+        const next={...normalize(s),earnedCoins:s.earnedCoins+coins};
+        if(!Number.isSafeInteger(coins)||coins<0||!valid(next))throw new Error('Deine Coins konnten nicht geprüft werden.');
+        return next;
+      };
+      const mutate=(s,days,today,action,id,plan=null)=>{
         const item=catalog.find(i=>i.id===id);if(!item)throw new Error('Dieser Artikel ist nicht verfügbar.');
-        const next=settle(s,days,today);
+        const next=settle(s,days,today,plan);
         if(action==='buy') {
           if(next.owned.includes(id))throw new Error('Dieser Artikel gehört dir bereits.');
           if(next.earnedCoins-cost(next.owned)<item.price)throw new Error('Dir fehlen noch Coins für diesen Artikel.');
@@ -704,7 +855,7 @@
         if(!valid(next))throw new Error('Dein Inventar konnte nicht geprüft werden.');
         return next;
       };
-      return {catalog,slots,defaultEquipment,validEquipment,equipment,empty,cost,valid,normalize,balance,settle,mutate};
+      return {catalog,slots,defaultEquipment,validEquipment,equipment,empty,cost,valid,normalize,balance,settle,credit,mutate};
     })();
   </script>
   <script id="leaderboard-core">
@@ -782,6 +933,7 @@
     let playerProfile = null, profileLoaded = false, pendingUsername = '', selectedCharacter = null, onboardingBusy = false, authBusy = false;
     let registerMode = false, editId = null, archiveId = null, questType = 'daily', selectedWeekdays = new Set([5]);
     let focusState={timers:[],days:{}},focusBusy=false;
+    let focusPlan=null,autoCoinsTimer;const autoCoinSync={running:false,promise:null,token:-1,retryAt:0};
     let shopState=S.empty(),shopBusy=false,shopLoaded=false,shopFilter='all';
     let buddyReactionUntil=0,buddyReactionTimer;
     let toastTimer;
@@ -842,6 +994,7 @@
         tx.set(userRef,{...identity,createdAt:sdk.serverTimestamp(),updatedAt:sdk.serverTimestamp()});
         tx.set(playerRef,{username:identity.username,usernameKey:identity.usernameKey,characterClass:identity.characterClass,schemaVersion:2,joinedAt:sdk.serverTimestamp()});
         if(!name.exists())tx.set(nameRef,{uid:owner,createdAt:sdk.serverTimestamp()});
+        tx.set(sdk.doc(sdk.db,'users',owner,'settings','tutorial'),{schemaVersion:1,eligible:true,status:'pending',step:0,updatedAt:sdk.serverTimestamp()});
         return identity;
       });
       if(currentUser?.uid===owner)playerProfile=result;
@@ -864,59 +1017,83 @@
       const validTask = t => t && typeof t.id === 'string' && typeof t.title === 'string' && ['daily','weekly'].includes(t.type);
       return data.quests.length <= 50 && data.quests.every(q => validTask(q) && Array.isArray(q.weekdays) && /^\d{4}-\d{2}-\d{2}$/.test(q.startDate) && q.weekdays.every(d => Number.isInteger(d) && d>=0 && d<=6)) && Object.entries(data.days).every(([d,day]) => /^\d{4}-\d{2}-\d{2}$/.test(d) && Array.isArray(day?.tasks) && day.tasks.length<=50 && day.tasks.every(t => validTask(t) && ['open','done','skipped'].includes(t.status)));
     }
-    function updateFocusPlan(timers,days,operation,date=today,now=Date.now()) {
-      const normalized=timers.map(t=>F.normalize(t,days,date)),latest={timers:normalized,days};
-      if(operation.kind==='reset') {
-        const day=F.coinDay(latest,date,now),entry=day.timers.find(t=>t.id===operation.id),active=normalized.find(t=>t.id===operation.id);
-        if(!entry&&!active)throw new Error('Dieser Timer existiert nicht mehr.');
-        if(entry){entry.status='failed';entry.resetAt=now;}
-        if(active)active.startedAt=now;
-        return {timers:normalized,day:entry?day:null,startDate:date};
-      }
-      if(operation.kind==='archive') {
-        if(!normalized.some(t=>t.id===operation.id))throw new Error('Dieser Timer wurde bereits entfernt.');
-        return {timers:normalized.filter(t=>t.id!==operation.id),startDate:C.startDate(days,date)};
-      }
-      if(timers.length>=10)throw new Error('Du kannst höchstens 10 Timer gleichzeitig führen.');
-      const startDate=C.startDate(days,date),timer={id:operation.id,title:operation.title,startDate,startedAt:now};
-      if(!F.validTimer(timer))throw new Error('Gib deiner Gewohnheit einen Namen (höchstens 80 Zeichen).');
-      return {timers:[...normalized,timer],startDate};
+
+    // Read and credit fresh counter data inside each transaction before any writes.
+    async function readCounterLedger(tx,owner,date,now=Date.now()) {
+      const planRef=sdk.doc(sdk.db,'users',owner,'settings','focus'),shopRef=sdk.doc(sdk.db,'users',owner,'settings','shop');
+      const storedPlan=await tx.get(planRef),storedShop=await tx.get(shopRef),todayRecord=await tx.get(sdk.doc(sdk.db,'users',owner,'focusDays',date));
+      const originalPlan=storedPlan.exists()?storedPlan.data():{timers:[]},originalInventory=storedShop.exists()?storedShop.data():S.empty();
+      if(!F.validPlan(originalPlan)||!S.valid(originalInventory))throw new Error('Deine Counter oder dein Inventar haben ein ungültiges Format.');
+      const days={};
+      if(todayRecord.exists()){if(!F.validDay(date,todayRecord.data()))throw new Error('Deine frühere Coin-Historie konnte nicht gelesen werden.');days[date]=todayRecord.data();}
+      const prepared=F.preparePlan(originalPlan,days,date,now),inventory=S.normalize(originalInventory);
+      const dates=Object.keys(focusState.days).filter(d=>d<date&&d>inventory.settledThrough&&d<prepared.automaticStartedOn).sort();
+      for(const day of dates){const record=await tx.get(sdk.doc(sdk.db,'users',owner,'focusDays',day));if(record.exists()){if(!F.validDay(day,record.data()))throw new Error('Deine frühere Coin-Historie konnte nicht gelesen werden.');days[day]=record.data();}}
+      const settled=S.settle(inventory,days,date,prepared),advanced=F.advancePlan(prepared,date),nextInventory=S.credit(settled,advanced.coins);
+      return {planRef,shopRef,plan:advanced.plan,inventory:nextInventory,credited:nextInventory.earnedCoins-inventory.earnedCoins,planChanged:!storedPlan.exists()||originalPlan.schemaVersion!==2||F.planKey(originalPlan)!==F.planKey(advanced.plan),inventoryChanged:!storedShop.exists()||originalInventory.schemaVersion!==2||JSON.stringify(inventory)!==JSON.stringify(nextInventory)};
+    }
+    function applyCounterLedger(ledger,token) {
+      if(token!==session)return;
+      focusPlan=ledger.plan;focusState.timers=ledger.plan.timers;shopState=ledger.inventory;
+    }
+    function scheduleAutoCoins() {
+      if(mode!=='cloud'||!cloudReady||!publication.confirmed||!shopLoaded||Date.now()<autoCoinSync.retryAt)return;
+      const date=C.key(),legacy=S.settle(shopState,focusState.days,date,focusPlan);
+      if(focusPlan?.schemaVersion===2&&focusPlan.rewardDay===date&&shopState.schemaVersion===2&&legacy.earnedCoins===shopState.earnedCoins&&legacy.settledThrough===shopState.settledThrough)return;
+      clearTimeout(autoCoinsTimer);autoCoinsTimer=setTimeout(()=>syncAutoCoins(),90);
+    }
+    function syncAutoCoins() {
+      const token=session,date=C.key(),now=Date.now();
+      if(mode!=='cloud'||!currentUser||!cloudReady||!publication.confirmed||!shopLoaded)return Promise.resolve();
+      if(autoCoinSync.promise&&autoCoinSync.token===token)return autoCoinSync.promise;
+      autoCoinSync.token=token;autoCoinSync.running=true;
+      const owner=currentUser.uid;
+      let promise;promise=(async()=>{
+        try{
+          const result=await sdk.runTransaction(sdk.db,async tx=>{
+            const ledger=await readCounterLedger(tx,owner,date,now);
+            if(token!==session||C.key()!==date)throw new Error('Dein Tag oder Konto hat gewechselt. Versuche es erneut.');
+            if(ledger.planChanged)tx.set(ledger.planRef,{...ledger.plan,updatedAt:sdk.serverTimestamp()});
+            if(ledger.inventoryChanged)tx.set(ledger.shopRef,{...ledger.inventory,updatedAt:sdk.serverTimestamp()});
+            return ledger;
+          });
+          if(token!==session)return;
+          applyCounterLedger(result,token);autoCoinSync.retryAt=0;render();
+          if(result.credited>0){toast('Automatisch gesammelt: +'+result.credited+' '+(result.credited===1?'Coin':'Coins')+'.');celebrate('coin');}
+        }catch(error){if(token===session){autoCoinSync.retryAt=Date.now()+15000;toast('Coins noch nicht synchronisiert. '+errorMessage(error));}}
+        finally{if(autoCoinSync.token===token&&autoCoinSync.promise===promise){autoCoinSync.promise=null;autoCoinSync.running=false;if(token===session)render();}}
+      })();
+      autoCoinSync.promise=promise;return promise;
     }
     async function mutateFocusPlan(operation) {
-      const date=C.key(),now=Date.now(),token=session;
-      const owner=currentUser?.uid;if(!owner||!cloudReady)throw new Error('Dein Konto ist noch nicht verbunden.');
-      const planRef=sdk.doc(sdk.db,'users',owner,'settings','focus'),dayRef=sdk.doc(sdk.db,'users',owner,'focusDays',date);
+      const date=C.key(),now=Date.now(),token=session,owner=currentUser?.uid;
+      if(!owner||!cloudReady||!publication.confirmed)throw new Error('Warte kurz, bis deine Counter mit der Cloud verbunden sind.');
       const result=await sdk.runTransaction(sdk.db,async tx=>{
-        const plan=await tx.get(planRef),day=await tx.get(dayRef);
+        const ledger=await readCounterLedger(tx,owner,date,now),changed=F.mutatePlan(ledger.plan,operation,date,now);
         if(token!==session||C.key()!==date)throw new Error('Dein Tag oder Konto hat gewechselt. Versuche es erneut.');
-        const days={...focusState.days};delete days[date];if(day.exists())days[date]=day.data();
-        const result=updateFocusPlan(plan.exists()?plan.data().timers:[],days,operation,date,now);
-        tx.set(planRef,{timers:result.timers,updatedAt:sdk.serverTimestamp()});
-        if(result.day)tx.set(dayRef,{...result.day,updatedAt:sdk.serverTimestamp()});return result;
+        tx.set(ledger.planRef,{...changed.plan,updatedAt:sdk.serverTimestamp()});
+        if(ledger.inventoryChanged)tx.set(ledger.shopRef,{...ledger.inventory,updatedAt:sdk.serverTimestamp()});
+        return {...ledger,plan:changed.plan,timers:changed.plan.timers,startDate:changed.startDate};
       });
-      if(token===session){focusState.timers=result.timers;if(result.day)focusState.days[date]=result.day;}return result;
+      applyCounterLedger(result,token);return result;
     }
-    async function setFocusStatus(id,status) {
-      if(focusBusy||busy||(!cloudReady))return;
-      const date=C.key(),token=session,previous=F.coinReward(focusState.days[date]);focusBusy=true;render();
-      try {
-        {
-          const owner=currentUser.uid,planRef=sdk.doc(sdk.db,'users',owner,'settings','focus'),dayRef=sdk.doc(sdk.db,'users',owner,'focusDays',date);
-          const record=await sdk.runTransaction(sdk.db,async tx=>{
-            const plan=await tx.get(planRef),day=await tx.get(dayRef);
-            if(token!==session||C.key()!==date)throw new Error('Dein Tag oder Konto hat gewechselt. Versuche es erneut.');
-            const latest={timers:plan.exists()?plan.data().timers:[],days:{...focusState.days}};delete latest.days[date];if(day.exists())latest.days[date]=day.data();
-            const record=F.changeStatus(latest,date,id,status,date);tx.set(dayRef,{...record,updatedAt:sdk.serverTimestamp()});return record;
-          });
-          if(token===session)focusState.days[date]=record;
-        }
-        if(token!==session)return;
-        const coins=F.coinReward(focusState.days[date]);
-        if(coins>previous){toast('Alle Timer geschafft! +'+coins+' '+(coins===1?'Coin':'Coins')+' · morgen verfügbar.');celebrate('coin');}
-        else toast(coins<previous?'Bestätigung zurückgenommen. Tages-Coins korrigiert.':'Für heute bestätigt. Weiter so!');
+    async function shopAction(action,id) {
+      if(!currentUser||!cloudReady||shopBusy||focusBusy||busy)return;
+      const token=session,date=C.key(),now=Date.now(),owner=currentUser.uid;shopBusy=true;renderShop();
+      try{
+        if(!publication.confirmed||!shopLoaded)throw new Error('Warte kurz, bis dein Inventar mit der Cloud verbunden ist.');
+        const result=await sdk.runTransaction(sdk.db,async tx=>{
+          const ledger=await readCounterLedger(tx,owner,date,now),inventory=S.mutate(ledger.inventory,{},date,action,id,ledger.plan);
+          if(token!==session||C.key()!==date)throw new Error('Dein Tag oder Konto hat gewechselt. Versuche es erneut.');
+          if(ledger.planChanged)tx.set(ledger.planRef,{...ledger.plan,updatedAt:sdk.serverTimestamp()});
+          tx.set(ledger.shopRef,{...inventory,updatedAt:sdk.serverTimestamp()});return {...ledger,inventory};
+        });
+        if(token!==session)return;applyCounterLedger(result,token);
+        toast(action==='buy'?(S.catalog.find(item=>item.id===id).slot==='buddy'?'Dein Begleiter ist jetzt an deiner Seite!':'Neuer Look freigeschaltet und ausgerüstet!'):'Deine Ausrüstung wurde geändert.');scheduleLeaderboardSync();if(action==='buy')celebrate('loot');
       }catch(error){if(token===session)toast(errorMessage(error));}
-      finally{if(token===session){focusBusy=false;render();}}
+      finally{if(token===session){shopBusy=false;render();}}
     }
+
     async function resetFocus(id) {
       if(!currentUser||!cloudReady||focusBusy||busy)return;const token=session;focusBusy=true;render();
       try {await mutateFocusPlan({kind:'reset',id});if(token===session)toast('Neustart ab jetzt. Heute keine Coins, morgen eine neue Chance.');}
@@ -927,27 +1104,32 @@
       return [Math.floor(seconds/3600)%24,Math.floor(seconds/60)%60,seconds%60].map(n=>String(n).padStart(2,'0')).join(':');
     }
     function timerDisplay(timer) {return focusState.timers.find(t=>t.id===timer.id)||timer;}
+    function projectedCounterCoins() {
+  return focusPlan?.schemaVersion===2?F.currentReward(focusPlan,today):0;
+}
     function tickFocus() {
-      document.querySelectorAll('[data-timer-clock]').forEach(el=>{
-        const timer=[...focusState.timers,...F.tasksAt(focusState,today)].find(t=>t.id===el.dataset.timerClock);if(!timer)return;
-        const p=F.progress(timerDisplay(timer),focusState.days,today);el.textContent=clockText(p.seconds);
-        const card=el.closest('.focus-card'),days=card.querySelector('.focus-days');days.textContent=p.completed+' '+(p.completed===1?'Tag':'Tage');
-        card.querySelector('.focus-next').innerHTML='<span>Stufe '+p.stage+'</span><span>'+(p.next?'Nächste Stufe: '+p.next+' Tage':'Maximale Coin-Stufe')+'</span>';card.querySelector('.progress-fill').style.width=(p.next?Math.min(100,100*p.completed/p.next):100)+'%';
-      });
-    }
+  document.querySelectorAll('[data-counter-clock]').forEach(el=>{
+    const timer=focusState.timers.find(t=>t.id===el.dataset.counterClock);if(!timer)return;
+    const p=F.progress(timer,focusState.days,today);el.textContent=clockText(p.seconds);
+    const card=el.closest('.focus-card');card.querySelector('.focus-days').textContent=p.completed+' '+(p.completed===1?'Tag':'Tage');
+    card.querySelector('.focus-next').innerHTML='<span>Stufe '+p.stage+'</span><span>'+(p.next?'Nächste Stufe bei '+p.next+' Tagen':'Maximale Stufe erreicht')+'</span>';
+    card.querySelector('.progress-fill').style.width=(p.next?Math.min(100,100*p.completed/p.next):100)+'%';
+  });
+}
     function renderFocus() {
-      const blocked=focusBusy||busy||(!cloudReady),timers=F.tasksAt(focusState,today),done=timers.filter(t=>t.status==='done').length,failed=timers.some(t=>t.status==='failed'),coins=F.coinReward(focusState.days[today]);
-      $('startFocusBtn').disabled=blocked;
-      $('focusStartHint').textContent=focusState.days[today]?'Heutige Coin-Stufe festgelegt. Neue und entfernte Timer zählen ab morgen.':'Bis zu 10 Timer. Alle zusammen geben eine Tagesbelohnung.';
-      const record=focusState.days[today],point=record?.rewardVersion===2?record.rewardAt:Date.now(),oldestStart=timers.length?Math.max(...timers.map(t=>F.started(t,focusState.days,today))):point,stage=F.tier(Math.max(0,point-oldestStart));
-      $('focusSummary').innerHTML=coins?'<strong>+'+coins+' '+(coins===1?'Coin':'Coins')+' geschafft!</strong><span>Morgen verfügbar. Alle Timer heute bestätigt.</span>':failed?'<strong>Heute 0 Coins.</strong><span>Ein Timer wurde zurückgesetzt. Morgen geht’s weiter.</span>':'<strong>'+done+' / '+timers.length+' bestätigt</strong><span>'+(timers.length?'Alle geschafft = gemeinsam '+stage+' '+(stage===1?'Coin':'Coins')+'. Bestätige jeden Tag.':'Gib deiner Gewohnheit einen Namen und starte.')+'</span>';
-      if(!cloudReady){$('focusList').innerHTML='<div class="card empty"><p>Deine privaten Timer werden geladen …</p></div>';return;}
-      const cards=[...timers,...focusState.timers.filter(t=>t.startDate>today&&!timers.some(x=>x.id===t.id)).map(t=>({...t,status:'open'}))];
-      $('focusList').innerHTML=cards.length?cards.map((timer,index)=>{
-        const p=F.progress(timerDisplay(timer),focusState.days,today),future=timer.startDate>today,planned=focusState.timers.some(t=>t.id===timer.id),disabled=blocked||future||timer.status==='failed',percent=p.next?Math.min(100,100*p.completed/p.next):100;
-        return '<article class="card focus-card" data-status="'+timer.status+'" data-focus="'+esc(timer.id)+'"><div class="focus-card-head"><div><span class="focus-orb">'+icon(index%2?'flame':'clock')+'</span><h3>'+esc(timer.title)+'</h3></div>'+(planned?'<button class="icon-btn" data-action="stop-focus" data-id="'+esc(timer.id)+'" aria-label="Timer entfernen: '+esc(timer.title)+'" '+(blocked?'disabled':'')+'>'+icon('trash')+'</button>':'')+'</div><div class="focus-elapsed"><span class="overline">ZEIT FÜR DEINEN NEUSTART</span><div class="focus-days">'+p.completed+' '+(p.completed===1?'Tag':'Tage')+'</div><span class="focus-clock" data-timer-clock="'+esc(timer.id)+'">'+clockText(p.seconds)+'</span></div><button class="reset-button" data-action="reset-focus" data-id="'+esc(timer.id)+'" '+(blocked?'disabled':'')+'>'+icon('refresh')+'Reset</button><div class="focus-next"><span>Stufe '+p.stage+'</span><span>'+(p.next?'Nächste Stufe: '+p.next+' Tage':'Maximale Coin-Stufe')+'</span></div><div class="progress-track"><div class="progress-fill" style="width:'+percent+'%"></div></div><button class="btn full focus-confirm '+(timer.status==='done'?'secondary':'')+'" data-action="focus-status" data-id="'+esc(timer.id)+'" data-status="'+(timer.status==='done'?'open':'done')+'" aria-pressed="'+(timer.status==='done')+'" '+(disabled?'disabled':'')+'>'+icon('check')+(future?'Ab morgen im Tagesplan':timer.status==='failed'?'Heute neu gestartet':timer.status==='done'?'Bestätigt · Zurücknehmen':'Heute geschafft')+'</button>'+(!planned?'<small class="hint">Ab morgen entfernt. Heute bleibt der Timer im Coin-Plan.</small>':'')+'</article>';
-      }).join(''):'<div class="card empty">'+icon('clock')+'<h3>Dein Neustart beginnt hier.</h3><p>Der Timer zählt hoch. Ein Reset beginnt wieder bei null.</p></div>';
-    }
+  const blocked=focusBusy||busy||!cloudReady||autoCoinSync.running,active=focusState.timers,coins=projectedCounterCoins();
+  $('startFocusBtn').disabled=blocked;
+  $('focusStartHint').textContent='Bis zu 10 Counter. Sie laufen weiter, auch wenn du die App schließt.';
+  const resetToday=focusPlan?.schemaVersion===2&&focusPlan.blockedDate===today;
+  $('focusSummary').innerHTML='<div class="counter-reward-icon">'+icon(resetToday?'refresh':'coin')+'</div><div><strong>'+(resetToday?'Heute keine Coins':coins?'+'+coins+' '+(coins===1?'Coin':'Coins')+' beim Tageswechsel':'Deine erste Coin-Belohnung wartet')+'</strong><span>'+(resetToday?'Ein Counter wurde heute zurückgesetzt. Morgen beginnt eine neue Chance.':coins?'Automatisch ab 00:00 Uhr verfügbar. Du brauchst nichts zu bestätigen.':'Starte einen Counter. Gemeinsam bringen sie täglich Coins.')+'</span></div>';
+  if(!cloudReady){$('focusList').innerHTML='<div class="card empty"><p>Deine Counter werden geladen …</p></div>';return;}
+  $('focusList').innerHTML=active.length?active.map((timer,index)=>{
+    const p=F.progress(timer,focusState.days,today),percent=p.next?Math.min(100,100*p.completed/p.next):100;
+    const reset=resetToday&&C.key(new Date(p.startAt))===today;
+    return '<article class="card focus-card" data-status="'+(reset?'failed':'running')+'" data-focus="'+esc(timer.id)+'"><div class="focus-card-head"><div class="counter-title"><span class="focus-orb">'+icon(index%2?'flame':'clock')+'</span><div><h3>'+esc(timer.title)+'</h3><span class="counter-card-status">'+(reset?'Neuer Anfang':'Läuft automatisch')+'</span></div></div><button class="icon-btn" data-action="stop-focus" data-id="'+esc(timer.id)+'" aria-label="Counter entfernen: '+esc(timer.title)+'" '+(blocked?'disabled':'')+'>'+icon('trash')+'</button></div><div class="focus-elapsed"><span class="overline">DEINE ZEIT SEIT DEM NEUSTART</span><div class="focus-days">'+p.completed+' '+(p.completed===1?'Tag':'Tage')+'</div><span class="focus-clock" data-counter-clock="'+esc(timer.id)+'">'+clockText(p.seconds)+'</span></div><button class="reset-button" data-action="reset-focus" data-id="'+esc(timer.id)+'" '+(blocked?'disabled':'')+'>'+icon('refresh')+'Reset</button><div class="focus-next"><span>Stufe '+p.stage+'</span><span>'+(p.next?'Nächste Stufe bei '+p.next+' Tagen':'Maximale Stufe erreicht')+'</span></div><div class="progress-track"><div class="progress-fill" style="width:'+percent+'%"></div></div><p class="counter-note">Reset startet diesen Counter bei null. Die gemeinsame Coin-Belohnung für heute entfällt.</p></article>';
+  }).join(''):'<div class="card empty">'+icon('clock')+'<h3>Dein Neustart beginnt hier.</h3><p>Name eingeben und starten. Dein Counter zählt ab jetzt hoch.</p></div>';
+  if(!active.length&&resetToday)$('focusList').innerHTML+='<div class="counter-removed">Die heutige Reset-Sperre bleibt auch nach dem Entfernen eines Counters bestehen.</div>';
+}
     function buddyArt(id) {
       const item=S.catalog.find(item=>item.id===id&&item.slot==='buddy');if(!item)return '';
       const shapes={
@@ -967,38 +1149,16 @@
       const token=session;buddyReactionTimer=setTimeout(()=>{if(token!==session)return;buddyReactionUntil=0;document.querySelectorAll('.buddy.is-cheering').forEach(el=>el.classList.remove('is-cheering'));},1800);
     }
     function renderShop() {
-      const balance=S.balance(shopState,focusState.days,today),pending=F.coinReward(focusState.days[today]),blocked=shopBusy||focusBusy||busy||!cloudReady||!publication.confirmed||!shopLoaded;
+      const balance=S.balance(shopState,focusState.days,today,focusPlan),pending=projectedCounterCoins(),blocked=shopBusy||focusBusy||busy||!cloudReady||!publication.confirmed||!shopLoaded;
       $('coinBalance').textContent=balance;$('shopBalance').textContent=balance;
       $('walletBtn').title=balance+' Coins verfügbar'+(pending?' · '+pending+' morgen':'');
-      $('shopPending').textContent=pending?'Heute verdient: +'+pending+' '+(pending===1?'Coin':'Coins')+' · morgen ab 00:00 verfügbar.':'Bestätige deine Fokus-Timer täglich und sammle Coins für neue Looks.';
+      $('shopPending').textContent=pending?'Beim Tageswechsel: +'+pending+' '+(pending===1?'Coin':'Coins')+' · morgen ab 00:00 verfügbar.':'Deine Counter sammeln automatisch Coins. Starte einen Counter und schalte neue Looks frei.';
       const cls=playerProfile?.characterClass||'engineer',level=C.level(combinedXp()).number;
       document.querySelectorAll('[data-shop-filter]').forEach(button=>button.setAttribute('aria-pressed',button.dataset.shopFilter===shopFilter));
       $('shopGrid').innerHTML=S.catalog.filter(item=>shopFilter==='all'||(shopFilter==='buddy'?item.slot==='buddy':item.slot!=='buddy')).map(item=>{
         const owned=shopState.owned.includes(item.id),equipped=shopState.equipped[item.slot]===item.id,preview={...S.defaultEquipment(),[item.slot]:item.id};
         return '<article class="shop-item" style="--item-color:'+item.color+'" data-item="'+item.id+'"><div class="shop-preview">'+(item.slot==='buddy'?'<div class="companion-preview">'+buddyArt(item.id)+'</div>':cosmeticFigure(cls,level,preview))+'<span class="item-tag">'+item.tag+'</span>'+(owned?'<span class="owned-mark">'+icon('check')+'</span>':'')+'</div><div class="shop-item-copy"><h3>'+item.name+'</h3><p>'+item.description+'</p><button class="btn full '+(owned?'secondary':'')+'" data-action="'+(owned?'equip-item':'buy-item')+'" data-id="'+item.id+'" '+(blocked||!owned&&balance<item.price?'disabled':'')+'>'+(owned?(equipped?'Ablegen':'Ausrüsten'):icon('coin')+item.price+' Coins')+'</button></div></article>';
       }).join('');
-    }
-    async function shopAction(action,id) {
-      if(!currentUser||!cloudReady||shopBusy||focusBusy||busy)return;const token=session,date=C.key();shopBusy=true;renderShop();
-      try {
-        let next;
-        {
-          if(!cloudReady||!publication.confirmed||!shopLoaded)throw new Error('Warte kurz, bis dein Inventar mit der Cloud verbunden ist.');
-          const owner=currentUser.uid,ref=sdk.doc(sdk.db,'users',owner,'settings','shop'),history=structuredClone(focusState.days);
-          next=await sdk.runTransaction(sdk.db,async tx=>{
-            const stored=await tx.get(ref),inventory=stored.exists()?S.normalize(stored.data()):S.empty();
-            if(!S.valid(inventory))throw new Error('Dein Inventar hat ein ungültiges Format.');
-            const dates=Object.keys(history).filter(d=>d<date&&d>inventory.settledThrough),days={};
-            for(const day of dates){const record=await tx.get(sdk.doc(sdk.db,'users',owner,'focusDays',day));if(record.exists()){if(!F.validDay(day,record.data()))throw new Error('Deine Coin-Historie konnte nicht gelesen werden.');days[day]=record.data();}}
-            if(token!==session||C.key()!==date)throw new Error('Dein Tag oder Konto hat gewechselt. Versuche es erneut.');
-            const result=S.mutate(inventory,days,date,action,id);tx.set(ref,{...result,updatedAt:sdk.serverTimestamp()});return result;
-          });
-          if(token===session)shopState=next;
-        }
-        if(token!==session)return;
-        toast(action==='buy'?(S.catalog.find(item=>item.id===id).slot==='buddy'?'Dein Begleiter ist jetzt an deiner Seite!':'Neuer Look freigeschaltet und ausgerüstet!'):'Deine Ausrüstung wurde geändert.');scheduleLeaderboardSync();if(action==='buy')celebrate('loot');
-      }catch(error){if(token===session)toast(errorMessage(error));}
-      finally{if(token===session){shopBusy=false;render();}}
     }
     function celebrate(kind='xp') {
       const burst=document.createElement('div');burst.className='reward-burst';burst.setAttribute('aria-hidden','true');
@@ -1009,6 +1169,7 @@
       unsubscribers.forEach(fn=>fn());unsubscribers=[];resetLeaderboard();
       mode='signed-out';currentUser=null;cloudReady=false;
       state={quests:[],days:{}};focusState={timers:[],days:{}};shopState=S.empty();
+      focusPlan=null;autoCoinSync.retryAt=0;autoCoinSync.running=false;clearTimeout(autoCoinsTimer);tutorialReset();
       shopLoaded=false;shopBusy=false;focusBusy=false;busy=false;
       playerProfile=null;profileLoaded=false;pendingUsername='';selectedCharacter=null;
       editId=null;archiveId=null;shopFilter='all';
@@ -1065,7 +1226,7 @@
             if(!validState({quests:[],days}))throw new Error('Dein Fortschritt kann nicht für die Rangliste gelesen werden.');
             const focusDays={...focusHistory};delete focusDays[date];
             if(focusDay.exists())focusDays[date]={...focusDay.data(),date};
-            if(!F.validState({timers:[],days:focusDays}))throw new Error('Deine Timer-Historie hat ein ungültiges Format.');
+            if(!F.validState({timers:[],days:focusDays}))throw new Error('Deine Counter-Historie hat ein ungültiges Format.');
             const inventory=shop.exists()?S.normalize(shop.data()):S.empty();
             const summary=L.summary(player.data(),days,date,focusDays,inventory.equipped),weekly=L.weekly(summary,days,focusDays,week,date);
             if(!L.validEntry(summary))throw new Error('Dein Ranglisten-Profil hat ein ungültiges Format.');
@@ -1148,16 +1309,16 @@
       document.querySelectorAll('[data-view]').forEach(el => { if(el.dataset.view===view) el.setAttribute('aria-current','page'); else el.removeAttribute('aria-current'); });
       $('todayView').hidden=view!=='today'; $('weekView').hidden=view!=='week'; $('questsView').hidden=view!=='quests';$('leaderboardView').hidden=view!=='leaderboard';$('focusView').hidden=view!=='focus';$('shopView').hidden=view!=='shop';$('adventureHero').hidden=view!=='today';
       document.querySelector('.stats').hidden=['leaderboard','focus','shop'].includes(view);
-      const titles={today:['Ready, player?','Dein Alltag. Dein nächstes Level.','Kleine Schritte werden zu großen Erfolgen. Starte deine Quests.'],week:['Dein Wochenplan','Eine Woche. Viele Möglichkeiten.','Deine Routinen und wiederkehrenden Quests auf einen Blick.'],quests:['Dein Spielplan','Gute Gewohnheiten beginnen hier.','Stell dir einen Alltag zusammen, der zu dir passt.'],leaderboard:['Globales Leaderboard','Gemeinsam auf das nächste Level.','Entdecke die Charaktere und den Fortschritt der QuestLog-Community.'],shop:['Dein Inventar','Looks, die du dir verdient hast.','Sammle Coins. Schalte deinen nächsten Look frei.'],focus:['Deine Fokus-Timer','Mehr Freiraum. Tag für Tag.','Halte Abstand von alten Gewohnheiten und mach deinen Fortschritt sichtbar.']};
+      const titles={today:['Ready, player?','Dein Alltag. Dein nächstes Level.','Kleine Schritte werden zu großen Erfolgen. Starte deine Quests.'],week:['Dein Wochenplan','Eine Woche. Viele Möglichkeiten.','Deine Routinen und wiederkehrenden Quests auf einen Blick.'],quests:['Dein Spielplan','Gute Gewohnheiten beginnen hier.','Stell dir einen Alltag zusammen, der zu dir passt.'],leaderboard:['Globale Rangliste','Gemeinsam auf das nächste Level.','Entdecke die Charaktere und den Fortschritt der QuestLog-Community.'],shop:['Dein Inventar','Looks, die du dir verdient hast.','Sammle Coins. Schalte deinen nächsten Look frei.'],focus:['Deine Counter','Mehr Freiraum. Tag für Tag.','Starte einmal. Sieh deinen Fortschritt wachsen. Coins kommen automatisch.']};
       const [label,title,text]=titles[view]; $('introLabel').textContent=label; $('introTitle').textContent=title; $('introText').textContent=text;
       render();
       if(view==='leaderboard'&&mode==='cloud'&&!leaderboard.loaded)loadLeaderboard();
     }
     function render() {
       $('appShell').hidden=mode!=='cloud';
-      const currentTasks=C.tasksAt(state,today,today),dailyXp=C.xp(currentTasks),totalXp=combinedXp(),level=C.level(totalXp),bonus=F.coinReward(focusState.days[today]);
+      const currentTasks=C.tasksAt(state,today,today),dailyXp=C.xp(currentTasks),totalXp=combinedXp(),level=C.level(totalXp),bonus=projectedCounterCoins();
       $('dateChip').textContent=format(today,{weekday:'short',day:'2-digit',month:'short',year:'numeric'});
-      $('todayXp').innerHTML=`${dailyXp} <span>/ 10 XP</span><small class="daily-bonus">${bonus?'+'+bonus+' Fokus-Coins heute':'Quests bringen dich weiter'}</small>`;
+      $('todayXp').innerHTML=`${dailyXp} <span>/ 10 XP</span><small class="daily-bonus">${bonus?'+'+bonus+' Coins beim Tageswechsel':'Quests bringen dich weiter'}</small>`;
       $('todayCount').innerHTML=`${currentTasks.filter(t=>t.status==='done').length} <span>/ ${currentTasks.length}</span>`;
       const streak=C.streak(state.days,today);
       $('streakCount').innerHTML=`${streak} <span>${streak===1?'Tag':'Tage'}</span>`;
@@ -1323,18 +1484,20 @@
       if(!user)return;
       unsubscribers.forEach(fn=>fn()); unsubscribers=[]; const token=++session;
       resetLeaderboard();buddyReactionUntil=0;clearTimeout(buddyReactionTimer);
+      focusPlan=null;autoCoinSync.retryAt=0;autoCoinSync.running=false;clearTimeout(autoCoinsTimer);
       currentUser=user; mode='cloud'; cloudReady=false; state={quests:[],days:{}};focusState={timers:[],days:{}};shopState=S.empty();shopLoaded=false;shopBusy=false;focusBusy=false;busy=false;playerProfile=null;profileLoaded=false;
+      tutorialConnect(user,token);
       $('authDialog').close(); $('cloudError').hidden=true; $('syncStatus').dataset.error='false';
       $('syncStatus').lastElementChild.textContent='Verbinde …'; render();
-      let planLoaded=false,daysLoaded=false,focusLoaded=false,focusDaysLoaded=false,planCache=true,daysCache=true,daysPending=true,focusCache=true,focusDaysCache=true,focusPending=true,shopSnapshotCache=true,shopSnapshotPending=true,failed=false;
+      let planLoaded=false,daysLoaded=false,focusLoaded=false,focusDaysLoaded=false,focusPlanPending=true,planCache=true,daysCache=true,daysPending=true,focusCache=true,focusDaysCache=true,focusPending=true,shopSnapshotCache=true,shopSnapshotPending=true,failed=false;
       const fail=error=>{ if(token!==session)return; failed=true; cloudReady=false; $('syncStatus').lastElementChild.textContent='Cloud prüfen'; showError(errorMessage(error)); render(); };
       const ready=()=>{
         if(token!==session)return;
         cloudReady=planLoaded&&daysLoaded&&focusLoaded&&focusDaysLoaded&&shopLoaded&&profileLoaded&&P.validProfile(playerProfile)&&!failed;
         if(cloudReady) $('syncStatus').lastElementChild.textContent=planCache||daysCache?'Cache · verbinde':'Cloud · synchron';
-        publication.confirmed=cloudReady&&!daysCache&&!daysPending&&!planCache&&!focusCache&&!focusDaysCache&&!focusPending&&!shopSnapshotCache&&!shopSnapshotPending;
-        render();
-        scheduleLeaderboardSync();
+        publication.confirmed=cloudReady&&!daysCache&&!daysPending&&!planCache&&!focusCache&&!focusDaysCache&&!focusPending&&!focusPlanPending&&!shopSnapshotCache&&!shopSnapshotPending;
+        render();tutorialReady();
+        scheduleLeaderboardSync();scheduleAutoCoins();
         if(view==='leaderboard'&&cloudReady&&!leaderboard.loaded&&!leaderboard.loading)loadLeaderboard();
       };
       unsubscribers.push(sdk.onSnapshot(sdk.doc(sdk.db,'users',user.uid,'settings','plan'),{includeMetadataChanges:true},snap=>{
@@ -1351,14 +1514,12 @@
       },fail));
       unsubscribers.push(sdk.onSnapshot(sdk.doc(sdk.db,'users',user.uid,'settings','focus'),{includeMetadataChanges:true},snap=>{
         if(token!==session)return;
-        const timers=snap.exists()?snap.data().timers:[];
-        if(!F.validState({timers,days:{}})){fail(new Error('Deine Timer haben ein ungültiges Format.'));return;}
-        focusState.timers=timers;focusLoaded=true;focusCache=snap.metadata.fromCache;ready();
+        const plan=snap.exists()?snap.data():{timers:[]};if(!F.validPlan(plan)){fail(new Error('Deine Counter haben ein ungültiges Format.'));return;}focusPlan=plan;focusState.timers=plan.timers;focusLoaded=true;focusCache=snap.metadata.fromCache;focusPlanPending=!!snap.metadata.hasPendingWrites;ready();
       },fail));
       unsubscribers.push(sdk.onSnapshot(sdk.collection(sdk.db,'users',user.uid,'focusDays'),{includeMetadataChanges:true},snap=>{
         if(token!==session)return;
         const days={};snap.forEach(doc=>days[doc.id]={...doc.data(),date:doc.id});
-        if(!F.validState({timers:[],days})){fail(new Error('Deine Timer-Historie hat ein ungültiges Format.'));return;}
+        if(!F.validState({timers:[],days})){fail(new Error('Deine Counter-Historie hat ein ungültiges Format.'));return;}
         focusState.days=days;focusDaysLoaded=true;focusDaysCache=snap.metadata.fromCache;focusPending=!!snap.metadata.hasPendingWrites;ready();
       },fail));
       unsubscribers.push(sdk.onSnapshot(sdk.doc(sdk.db,'users',user.uid,'settings','shop'),{includeMetadataChanges:true},snap=>{
@@ -1377,6 +1538,118 @@
         ready();
       },fail));
     }
+    // The walkthrough uses illustrative UI only; it never awards XP or Coins.
+    let tutorialState={owner:null,token:0,loaded:false,record:null,started:false,replay:false,step:0,focusReturn:null,saveQueue:Promise.resolve(),timers:[]};
+    const tutorialMotion=()=>!window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const tutorialValid=data=>!!data&&data.schemaVersion===1&&data.eligible===true&&['pending','dismissed','complete'].includes(data.status)&&Number.isInteger(data.step)&&data.step>=0&&data.step<6;
+    function tutorialLocal(owner) { try { const value=JSON.parse(localStorage.getItem('questlog.tutorial.'+owner)||'null');return tutorialValid(value)?value:null; } catch { return null; } }
+    function tutorialStore(owner,data,unsynced=true) { try { localStorage.setItem('questlog.tutorial.'+owner,JSON.stringify({...data,unsynced})); } catch {} }
+    function tutorialStopAnimations() { tutorialState.timers.forEach(id=>{clearTimeout(id);clearInterval(id);});tutorialState.timers=[]; }
+    function tutorialLater(fn,delay) { const owner=tutorialState.owner,token=tutorialState.token,step=tutorialState.step;const id=setTimeout(()=>{if(tutorialState.owner===owner&&tutorialState.token===token&&tutorialState.step===step&&$('tutorialDialog').open)fn();},delay);tutorialState.timers.push(id); }
+    function tutorialReset() { tutorialStopAnimations();if($('tutorialDialog').open)$('tutorialDialog').close();$('tutorialHelpBtn').hidden=true;tutorialState={owner:null,token:0,loaded:false,record:null,started:false,replay:false,step:0,focusReturn:null,saveQueue:Promise.resolve(),timers:[]}; }
+    function tutorialConnect(user,token) {
+      tutorialReset();tutorialState.owner=user.uid;tutorialState.token=token;
+      unsubscribers.push(sdk.onSnapshot(sdk.doc(sdk.db,'users',user.uid,'settings','tutorial'),{includeMetadataChanges:true},snap=>{
+        if(token!==session||tutorialState.owner!==user.uid||tutorialState.token!==token)return;
+        if(!snap.exists()&&snap.metadata.fromCache)return;
+        const data=snap.exists()?snap.data():null,local=tutorialLocal(user.uid);
+        tutorialState.loaded=true;tutorialState.record=tutorialValid(data)?data:null;
+        if(tutorialState.record?.status==='pending'&&local?.unsynced)tutorialState.record={...tutorialState.record,status:local.status,step:local.step};
+        if(tutorialState.record&&tutorialState.record.status!=='pending'&&$('tutorialDialog').open&&!tutorialState.replay)tutorialClose();
+        tutorialReady();
+      },()=>{if(token!==session||tutorialState.owner!==user.uid)return;tutorialState.loaded=true;tutorialState.record=null;tutorialReady();}));
+    }
+    function tutorialReady() {
+      const available=mode==='cloud'&&cloudReady&&P.validProfile(playerProfile);
+      $('tutorialHelpBtn').hidden=!available;
+      if(!available||!tutorialState.loaded||tutorialState.started||tutorialState.record?.status!=='pending'||onboardingBusy||$('onboardingDialog').open||$('authDialog').open)return;
+      tutorialOpen(false,tutorialState.record.step);
+    }
+    function tutorialSave(status,step) {
+      if(tutorialState.replay||!tutorialState.owner||!sdk||tutorialState.record?.eligible!==true)return;
+      const owner=tutorialState.owner,token=tutorialState.token;
+      const data={schemaVersion:1,eligible:true,status,step};
+      tutorialState.record={...data};tutorialStore(owner,data);
+      tutorialState.saveQueue=tutorialState.saveQueue.catch(()=>{}).then(async()=>{
+        if(token!==session||currentUser?.uid!==owner)return;
+        const ref=sdk.doc(sdk.db,'users',owner,'settings','tutorial');
+        await sdk.runTransaction(sdk.db,async tx=>{
+          const saved=await tx.get(ref);
+          if(token!==session||currentUser?.uid!==owner)return;
+          if(!saved.exists()||!tutorialValid(saved.data()))return;
+          // A completed walkthrough on another device must not become pending again.
+          if(saved.data().status!=='pending'&&status==='pending')return;
+          tx.set(ref,{...data,updatedAt:sdk.serverTimestamp()});
+        });
+        if(token!==session||currentUser?.uid!==owner)return;
+        const local=tutorialLocal(owner);if(local?.status===status&&local?.step===step)tutorialStore(owner,data,false);
+      }).catch(()=>{}); // An unavailable help preference must never block the application.
+    }
+    function tutorialOpen(replay=false,step=0) {
+      if(!cloudReady||!P.validProfile(playerProfile))return;
+      tutorialState.started=true;tutorialState.replay=replay;tutorialState.step=Math.max(0,Math.min(5,step));tutorialState.focusReturn=document.activeElement;
+      $('tutorialSkipBtn').innerHTML=(replay?'Schließen':'Überspringen')+' '+icon('right');
+      tutorialRender();if(!$('tutorialDialog').open)$('tutorialDialog').showModal();$('tutorialTitle').focus({preventScroll:true});
+    }
+    function tutorialClose() {
+      tutorialStopAnimations();if($('tutorialDialog').open)$('tutorialDialog').close();
+      const back=tutorialState.focusReturn;if(back?.isConnected&&!back.hidden&&!back.disabled)back.focus({preventScroll:true});
+    }
+    function tutorialEnd(status='complete') { tutorialSave(status,tutorialState.step);tutorialClose();if(status==='complete'){setView('today');toast('Du bist bereit. Starte mit einer kleinen Quest!');} }
+    function tutorialMove(direction) {
+      if(direction>0&&tutorialState.step===5){tutorialEnd();return;}
+      const next=Math.max(0,Math.min(5,tutorialState.step+direction));if(next===tutorialState.step)return;
+      tutorialState.step=next;tutorialSave('pending',next);tutorialRender();$('tutorialTitle').focus({preventScroll:true});
+    }
+    function tutorialRender() {
+      tutorialStopAnimations();
+      const step=tutorialState.step,cls=playerProfile?.characterClass||'engineer',name=esc(playerProfile?.username||'Held');
+      const look={aura:'aura-void',frame:'frame-neon',scene:'scene-nebula',buddy:'buddy-robot'};
+      const text=[
+        ['01 · DEIN ABENTEUER','Dein Alltag wird zum Abenteuer.','Willkommen, <strong>'+name+'</strong>! Du hast deinen Charakter gewählt. Jetzt wächst er mit den Dingen, die du im echten Leben schaffst.','Quests geben dir XP. Counter geben dir Coins.'],
+        ['02 · DEINE QUESTS','Einmal planen. Dranbleiben.','Über <strong>Neue Quest</strong> trägst du dein Ziel ein. Wähle <strong>Täglich</strong> oder <strong>Wöchentlich</strong> und die passenden Wochentage.','Zum Beispiel: jeden Tag lesen oder jeden Freitag programmieren.'],
+        ['03 · XP & LEVEL','Erledigt? Haken setzen.','Tippe auf die Quest, wenn du sie geschafft hast. Du sammelst bis zu <strong>10 XP am Tag</strong>. Am Anfang brauchst du <strong>20 XP pro Level</strong>.','Probiere den Haken im Beispiel aus. Alle 5 Level bekommt deine Figur einen neuen Look.'],
+        ['04 · DEINE COUNTER','Dein Neustart zählt hoch.','Gib einem Counter den Namen einer Gewohnheit, auf die du verzichten willst. Er zählt die Zeit seit deinem Start. <strong>Du musst keinen Tag bestätigen.</strong>','Alle Counter teilen eine Tagesbelohnung. Der jüngste Counter bestimmt die Coin-Stufe.'],
+        ['05 · DEIN SHOP','Mach deinen Helden zu deinem.','Mit Coins kaufst du <strong>Auren, Rahmen, Hintergründe</strong> und animierte <strong>Begleiter</strong>. Gekauftes bleibt bei dir; du kannst es jederzeit wechseln.','Roboter: 20 Coins · Fuchs: 35 · Drache: 60. Begleiter feiern erledigte Quests mit dir.'],
+        ['06 · GEMEINSAM WACHSEN','Zeig deinen Fortschritt.','Unter <strong>Rangliste</strong> siehst du andere Spieler mit ihrem Charakter und Look. <strong>Gesamt</strong> zählt alle XP. <strong>Diese Woche</strong> bietet jede Woche einen neuen Start.','Dein eigener Platz ist direkt sichtbar. Jetzt beginnt deine erste echte Quest.']
+      ][step];
+      $('tutorialEyebrow').textContent=text[0];$('tutorialTitle').textContent=text[1];$('tutorialDescription').innerHTML=text[2];$('tutorialTakeaway').innerHTML=icon('spark')+'<span>'+text[3]+'</span>';
+      $('tutorialProgress').innerHTML=Array.from({length:6},(_,i)=>'<i class="'+(i===step?'is-current':i<step?'is-past':'')+'" aria-hidden="true"></i>').join('');$('tutorialProgress').setAttribute('aria-label','Einführung, Schritt '+(step+1)+' von 6');
+      $('tutorialPage').textContent=(step+1)+' / 6';$('tutorialBackBtn').disabled=step===0;$('tutorialNextBtn').innerHTML=(step===5?'Los geht’s':'Weiter')+' '+icon(step===5?'bolt':'right');
+      const scene=$('tutorialScene');scene.dataset.step=step;scene.classList.remove('tour-demo-done','tour-level-up');
+      if(step===0)scene.innerHTML='<span class="tour-scene-label">DEIN START-CHARAKTER</span><i class="tour-star one" aria-hidden="true">✦</i><i class="tour-star two" aria-hidden="true">✧</i><i class="tour-star three" aria-hidden="true">✦</i><div class="tour-hero">'+characterArt(cls,1)+'</div><span class="tour-float-chip xp">'+icon('bolt')+'XP</span><span class="tour-float-chip coins">'+icon('coin')+'COINS</span><div class="tour-hero-name">'+name+'<span>LEVEL 1 · DEIN START</span></div>';
+      if(step===1)scene.innerHTML='<div class="tour-mini-stack"><div class="tour-mini-card daily"><span class="tour-mini-label">'+icon('sun')+'TÄGLICH</span><strong>10 Minuten lesen</strong><small>Wiederholt sich jeden Tag.</small></div><div class="tour-mini-card weekly"><span class="tour-mini-label">'+icon('calendar')+'WÖCHENTLICH</span><strong>Programmieren lernen</strong><div class="tour-weekdays" aria-label="Jeden Freitag">'+['Mo','Di','Mi','Do','Fr','Sa','So'].map(day=>'<span'+(day==='Fr'?' class="chosen"':'')+'>'+day+'</span>').join('')+'</div></div></div>';
+      if(step===2) {
+        scene.innerHTML='<div class="tour-quest-demo"><div class="tour-demo-heading"><span>DEINE LETZTE QUEST HEUTE</span><span>BEISPIEL</span></div><button class="tour-quest-row" id="tutorialCheckQuest" type="button" aria-label="Beispiel-Quest abhaken" aria-pressed="false"><span class="tour-check">'+icon('check')+'</span><span class="tour-task-copy">10 Minuten lesen</span></button><div class="tour-xp-box"><header><strong id="tutorialExampleLevel">LEVEL 1</strong><span id="tutorialExampleXp">10 / 20 XP</span></header><div class="tour-xp-track"><div class="tour-xp-fill"></div></div><footer id="tutorialExampleHint">Noch 10 XP bis Level 2.</footer></div><div class="tour-xp-pop" id="tutorialXpPop" aria-live="polite"></div><span class="tour-try">Tippe den Haken an · nur ein Beispiel</span></div>';
+        $('tutorialCheckQuest').onclick=tutorialCheckExample;
+        if(tutorialMotion())tutorialLater(tutorialCheckExample,2300);
+      }
+      if(step===3) {
+        scene.innerHTML='<div class="tour-counter-demo"><h3>'+icon('clock')+'Weniger endlos scrollen</h3><div class="tour-counter-number"><span id="tutorialCounterDays">7</span><small>Tage</small></div><div class="tour-counter-time" id="tutorialCounterTime">03:24:08</div><button class="tour-reset" id="tutorialExampleReset" type="button" aria-label="Beispiel-Counter zurücksetzen">'+icon('refresh')+'Reset</button><div class="tour-coin-stages"><div id="tutorialStageOne"><strong>1 Coin</strong><small>AB START</small></div><div id="tutorialStageTwo" class="active"><strong>2 Coins</strong><small>AB 7 TAGEN</small></div><div><strong>3 Coins</strong><small>AB 30 TAGEN</small></div></div><div class="tour-counter-info" id="tutorialCounterInfo">Coins für abgeschlossene Tage · automatisch</div></div>';
+        let seconds=3*3600+24*60+8;
+        if(tutorialMotion()){const interval=setInterval(()=>{if(tutorialState.step!==3||!$('tutorialDialog').open)return;seconds++;const h=Math.floor(seconds/3600),m=Math.floor(seconds%3600/60),s=seconds%60;$('tutorialCounterTime').textContent=[h,m,s].map(v=>String(v).padStart(2,'0')).join(':');},1000);tutorialState.timers.push(interval);}
+        $('tutorialExampleReset').onclick=()=>{seconds=0;$('tutorialCounterDays').textContent='0';$('tutorialCounterTime').textContent='00:00:00';$('tutorialStageTwo').classList.remove('active');$('tutorialStageOne').classList.add('active');$('tutorialCounterInfo').textContent='Neustart · heute keine gemeinsamen Coins';};
+        $('tutorialDescription').innerHTML=text[2]+'<br><br><strong>1 / 2 / 3 Coins pro Tag</strong> ab Start / 7 / 30 vollen Tagen. Gutschrift nach Tageswechsel (Berliner Zeit).';
+        $('tutorialTakeaway').innerHTML=icon('refresh')+'<span><strong>Reset</strong> startet bei null und sperrt die gemeinsame Coin-Belohnung für heute. Der jüngste Counter bestimmt die Stufe.</span>';
+      }
+      if(step===4)scene.innerHTML='<div class="tour-shop-scene"><span class="tour-scene-label">DEIN LOOK · EIN BEISPIEL</span><div class="tour-shop-price">'+icon('coin')+'20</div><div class="tour-shop-tags" aria-hidden="true"><span>AURA</span><span>RAHMEN</span><span>KULISSE</span></div>'+cosmeticFigure(cls,1,look,true)+'<div class="tour-shop-caption">Pixel-Bot + dein persönlicher Look</div></div>';
+      if(step===5)scene.innerHTML='<div class="tour-ranking-demo"><div class="tour-ranking-tabs" aria-label="Zwei Ranglisten"><span>Gesamt</span><span class="active">Diese Woche</span></div>'+[{rank:1,name:'Nova',cls:'mage',level:5},{rank:2,name:name,cls,level:1,self:true},{rank:3,name:'PixelKnight',cls:'warrior',level:2}].map(entry=>'<div class="tour-ranking-row '+(entry.self?'self':'')+'"><span class="tour-rank">#'+entry.rank+'</span>'+(entry.self?cosmeticFigure(entry.cls,entry.level,look):characterArt(entry.cls,entry.level))+'<span class="tour-rank-name">'+entry.name+(entry.self?' · DU':'')+'</span><span class="tour-rank-lvl">LVL '+entry.level+'</span></div>').join('')+'<div class="tour-ranking-note">Die Wochenrangliste richtet sich nach Wochen-XP.<br>Dein Charakter-Level bleibt erhalten.</div></div>';
+      // Restart entry animations without restarting the actual application.
+      $('tutorialMain').classList.remove('tour-enter');void $('tutorialMain').offsetWidth;$('tutorialMain').classList.add('tour-enter');
+      $('tutorialDialog').scrollTop=0;
+    }
+    function tutorialCheckExample() {
+      const button=$('tutorialCheckQuest');if(!button||button.getAttribute('aria-pressed')==='true')return;
+      button.setAttribute('aria-pressed','true');$('tutorialScene').classList.add('tour-demo-done');
+      $('tutorialExampleXp').textContent='20 / 20 XP';$('tutorialExampleHint').textContent='20 XP erreicht. Dein Level steigt!';$('tutorialXpPop').textContent='10 / 10 TAGES-XP · LEVEL UP!';
+      const nextLevel=()=>{$('tutorialScene').classList.add('tour-level-up');$('tutorialExampleLevel').textContent='LEVEL 2';$('tutorialExampleXp').textContent='0 / 20 XP';$('tutorialExampleHint').textContent='20 XP insgesamt · auf zum nächsten Level.';};
+      if(tutorialMotion())tutorialLater(nextLevel,700);else nextLevel();
+    }
+    $('tutorialHelpBtn').onclick=()=>tutorialOpen(true,0);
+    $('tutorialNextBtn').onclick=()=>tutorialMove(1);$('tutorialBackBtn').onclick=()=>tutorialMove(-1);$('tutorialSkipBtn').onclick=()=>tutorialEnd('dismissed');
+    $('tutorialDialog').addEventListener('cancel',event=>{event.preventDefault();tutorialEnd('dismissed');});
+    $('tutorialDialog').addEventListener('keydown',event=>{if(event.key==='ArrowRight'){event.preventDefault();tutorialMove(1);}if(event.key==='ArrowLeft'){event.preventDefault();tutorialMove(-1);}});
+
     function errorMessage(error) {
       const code=error?.code||'';
       const messages={
@@ -1417,7 +1690,7 @@
     document.querySelectorAll('[data-shop-filter]').forEach(button=>button.onclick=()=>{shopFilter=button.dataset.shopFilter;renderShop();});
     $('focusForm').onsubmit=async event=>{
       event.preventDefault();if(focusBusy||busy)return;focusBusy=true;formError('focusError','');renderFocus();
-      try{const result=await mutateFocusPlan({kind:'new',id:crypto.randomUUID(),title:$('focusName').value.trim()});$('focusName').value='';toast(`Timer gestartet · ${result.startDate>today?'Ab morgen in deinem Plan':'Dein erster Tag beginnt heute'}`);}
+      try{const result=await mutateFocusPlan({kind:'new',id:crypto.randomUUID(),title:$('focusName').value.trim()});$('focusName').value='';toast('Counter gestartet. Er zählt ab jetzt hoch.');}
       catch(error){formError('focusError',errorMessage(error));}
       finally{focusBusy=false;render();}
     };
@@ -1437,7 +1710,7 @@
       onboardingBusy=true;$('exitOnboardingBtn').disabled=true;updateCharacterSummary();formError('onboardingError','');
       try{const result=await completeOnboarding($('onboardingUsername').value,selectedCharacter);pendingUsername='';$('onboardingDialog').close();toast(`Willkommen, ${result.username}! Dein Charakter ist bereit.`);}
       catch(error){formError('onboardingError',errorMessage(error));}
-      finally{onboardingBusy=false;$('exitOnboardingBtn').disabled=false;updateCharacterSummary();render();}
+      finally{onboardingBusy=false;$('exitOnboardingBtn').disabled=false;updateCharacterSummary();render();tutorialReady();}
     };
     $('closeArchiveBtn').onclick=()=>$('archiveDialog').close(); $('cancelArchiveBtn').onclick=()=>$('archiveDialog').close();
     $('prevDayBtn').onclick=()=>selectDate(C.shift(selected,-1)); $('nextDayBtn').onclick=()=>selectDate(C.shift(selected,1)); $('goTodayBtn').onclick=()=>selectDate(today);
@@ -1452,13 +1725,13 @@
       if(action==='new')openQuest();
       if(action==='onboarding')openOnboarding(false);
       if(action==='status')setStatus(date,id,status);
-      if(action==='focus-status')setFocusStatus(id,status);
+      
       if(action==='reset-focus')resetFocus(id);
       if(action==='buy-item')shopAction('buy',id);
       if(action==='equip-item')shopAction('equip',id);
       if(action==='stop-focus'){
         if(focusBusy||busy)return;focusBusy=true;render();
-        mutateFocusPlan({kind:'archive',id}).then(()=>toast(focusState.days[today]?'Timer für morgen entfernt. Dein heutiger Plan bleibt erhalten.':'Timer entfernt.')).catch(error=>toast(errorMessage(error))).finally(()=>{focusBusy=false;render();});
+        mutateFocusPlan({kind:'archive',id}).then(()=>toast(focusState.days[today]?'Counter entfernt. Die heutige Coin-Belohnung bleibt gemeinsam geregelt.':'Counter entfernt.')).catch(error=>toast(errorMessage(error))).finally(()=>{focusBusy=false;render();});
       }
       if(action==='select-calendar')selectDate(date,'today');
       if(action==='select-week'){selected=date;render();}
@@ -1513,7 +1786,13 @@
       finally{authBusy=false;$('authSubmitBtn').disabled=false;$('authSwitchBtn').disabled=false;}
     };
     setInterval(tickFocus,1000);
-    setInterval(()=>{const next=C.key();if(next!==today){today=next;selected=next;weekStart=C.monday(next);month=next.slice(0,7);if(leaderboard.week!==C.monday(next))leaderboard=newLeaderboard(leaderboard.kind);render();scheduleLeaderboardSync();if(view==='leaderboard'&&mode==='cloud')loadLeaderboard();toast('Ein neuer Tag. Deine Quests warten auf dich.');}},30000);
+    setInterval(()=>{
+      const next=C.key();
+      if(next!==today){today=next;selected=next;weekStart=C.monday(next);month=next.slice(0,7);if(leaderboard.week!==C.monday(next))leaderboard=newLeaderboard(leaderboard.kind);render();scheduleLeaderboardSync();if(view==='leaderboard'&&mode==='cloud')loadLeaderboard();if(mode==='cloud')toast('Ein neuer Tag. Deine Quests warten auf dich.');}
+      scheduleAutoCoins();
+    },30000);
+    document.addEventListener('visibilitychange',()=>{if(!document.hidden)scheduleAutoCoins();});
+    window.addEventListener('online',()=>scheduleAutoCoins());
     enterSignedOut();
     ensureFirebase().catch(error=>{if(mode==='signed-out')formError('authError',errorMessage(error));});
   </script>
