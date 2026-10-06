@@ -2,10 +2,17 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#101216">
   <meta name="description" content="Mach deinen Alltag zur Quest. Plane tägliche und wöchentliche Aufgaben, sammle XP und erreiche dein nächstes Level.">
   <title>QuestLog · Dein Alltag. Dein nächstes Level.</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/svg+xml" href="icons/icon.svg">
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="QuestLog">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <style>
     :root { color-scheme:dark; --bg:#101216; --panel:#191c22; --line:#2b3039; --muted:#979fac; --text:#f2f4f7; --lime:#c3f75f; --cyan:#6fdaec; --amber:#f3bb67; --red:#ff9393; }
     * { box-sizing:border-box; }
@@ -556,10 +563,123 @@
     @media(max-width:660px) { .tour-help { width:31px; height:33px; padding:0; }.tour-help>span:last-child { display:none; }#tutorialDialog { border-radius:21px; width:calc(100vw - 20px); max-height:calc(100dvh - 20px); }.tour-top { padding:18px 21px 12px; }.tour-progress { padding:0 21px; }.tour-main { grid-template-columns:1fr; min-height:0; padding:18px 21px 18px; gap:21px; }.tour-stage { height:219px; }.tour-copy h2 { font-size:24px; letter-spacing:-.6px; margin-bottom:10px; }.tour-copy p { font-size:12px; line-height:1.7; margin-bottom:12px; }.tour-eyebrow { font-size:8px; margin-bottom:9px; }.tour-takeaway { padding:10px; font-size:10px; }.tour-footer { padding:15px 21px 0; }.tour-example-label { font-size:8px; margin:10px 18px 13px; }.tour-hero { height:161px; }.tour-hero>.player-art { height:134px; }.tour-hero-name { bottom:14px; font-size:9px; }.tour-float-chip.xp { top:54px; }.tour-float-chip.coins { bottom:58px; }.tour-mini-card { padding:11px 14px; }.tour-mini-card .tour-mini-label { margin-bottom:6px; font-size:7px; }.tour-mini-card strong { font-size:11px; }.tour-mini-card small { font-size:8px; margin-top:4px; }.tour-weekdays { margin-top:7px; }.tour-weekdays span { width:20px; height:18px; font-size:7px; }.tour-mini-card+.tour-mini-card { margin-top:8px; }.tour-quest-row { padding:13px 12px; }.tour-xp-box { margin-top:10px; padding:12px; }.tour-xp-pop { margin-top:9px; height:15px; font-size:10px; }.tour-try { bottom:-20px; font-size:7px; }.tour-counter-demo { padding:13px 14px; }.tour-counter-demo h3 { font-size:11px; margin-bottom:12px; }.tour-counter-demo .tour-counter-number { font-size:30px; }.tour-counter-number small { display:inline; font-size:10px; margin-left:6px; }.tour-counter-time { font-size:10px; margin-top:6px; }.tour-counter-demo .tour-reset { padding:5px 10px; margin-top:7px; }.tour-coin-stages { margin-top:10px; }.tour-coin-stages div { padding:6px 2px; }.tour-counter-info { margin-top:7px; font-size:7px; }.tour-shop-scene>.cosmetic-figure { width:165px; height:170px; }.tour-shop-scene .player-art { width:100px; height:121px; }.tour-shop-caption { bottom:9px; font-size:8px; }.tour-shop-tags { top:49px; }.tour-ranking-tabs { margin-bottom:8px; }.tour-ranking-tabs span { padding:5px 0; font-size:8px; }.tour-ranking-row { padding:7px 10px; gap:10px; }.tour-ranking-row .player-art { height:26px; width:22px; }.tour-ranking-row .cosmetic-figure { height:29px; width:27px; }.tour-ranking-row .cosmetic-figure>.player-art { height:24px; width:20px; }.tour-ranking-note { font-size:7px; margin-top:8px; }.tour-scene-label { top:11px; left:13px; font-size:7px; } }
     @media(max-height:650px) and (max-width:660px) { .tour-stage { height:190px; }.tour-main { gap:15px; padding-top:13px; padding-bottom:13px; }.tour-copy h2 { font-size:22px; }.tour-copy p { font-size:11px; margin-bottom:10px; }.tour-takeaway { font-size:9px; padding:8px; }.tour-top { padding-top:13px; }.tour-footer { padding-top:12px; } }
     @media(prefers-reduced-motion:reduce) { #tutorialDialog *,#tutorialDialog *::before,#tutorialDialog *::after { animation:none!important; transition:none!important; }.tour-demo-done .tour-xp-pop { opacity:1; } }
+    /* Daily work comes first; the character celebrates progress below it. */
+    .daily-stack { gap:20px; }
+    .stack { min-width:0; }
+    .daily-stack>#todayView { order:0; }
+    #adventureHero { margin:0; min-height:215px; grid-template-columns:minmax(0,1.2fr) minmax(155px,.8fr); }
+    #adventureHero .hero-copy { padding:25px 0 24px 25px; }
+    #adventureHero .hero-copy h2 { font-size:25px; letter-spacing:-.7px; line-height:1.2; margin:11px 0 10px; }
+    #adventureHero .hero-copy>p { max-width:300px; font-size:11px; line-height:1.7; }
+    #adventureHero .hero-world { min-height:215px; }
+    #adventureHero .hero-figure { width:145px; height:175px; margin-top:-8px; }
+    #adventureHero .hero-figure>.cosmetic-figure { width:145px; height:175px; }
+    #adventureHero .hero-figure .player-art { width:100px; height:132px; }
+    #adventureHero .world-orbit { width:145px; height:145px; top:19px; }
+    #adventureHero .world-platform { width:155px; bottom:37px; }
+    #adventureHero .hero-name { bottom:15px; font-size:10px; }
+    #adventureHero .hero-actions { flex-wrap:wrap; gap:7px; }
+    #adventureHero .hero-actions .btn { font-size:10px; padding:10px 12px; }
+    #adventureHero .hero-meter { margin-top:17px; max-width:260px; }
+    #adventureHero .star-one { top:44px; left:9%; }.star-two { top:36px; }
+    .leaderboard-quote { position:relative; padding:24px; margin:20px 0; border:1px solid #a899ed22; border-radius:18px; background:radial-gradient(ellipse at 100% 0,#8f75e012,transparent 75%),#ffffff03; }
+    .leaderboard-quote .quote-kicker { display:flex; align-items:center; gap:8px; color:#ab9cd5; font:9px Consolas,monospace; letter-spacing:1.4px; }
+    .leaderboard-quote .quote-kicker svg { width:15px; height:15px; }
+    .leaderboard-quote .discipline-quote { margin:15px 0 0; }
+    .leaderboard-quote .discipline-quote p { margin:0; color:#e5dfef; font-size:17px; line-height:1.75; letter-spacing:-.2px; text-wrap:pretty; }
+    .leaderboard-quote .discipline-quote footer { font-size:11px; }
+    button { -webkit-tap-highlight-color:transparent; touch-action:manipulation; }
+    .nav button,.btn,.icon-btn,.check-btn,.skip-btn,.quest,.shop-item { transition:background .18s ease,border-color .18s ease,color .18s ease,box-shadow .18s ease; }
+    .check-btn:active,.btn:active,.icon-btn:active { transform:scale(.96); }
+    .check-btn { min-width:37px; min-height:37px; }
+    .quest-title { overflow-wrap:anywhere; }
+    .view-controls { scroll-margin-top:85px; }
+    @media(max-width:900px) {
+      main { padding-top:max(15px,env(safe-area-inset-top)); padding-bottom:calc(105px + env(safe-area-inset-bottom)); }
+      .topbar { position:sticky; top:0; z-index:25; min-height:58px; padding:8px 0; background:#111420f5; backdrop-filter:blur(16px); }
+      .intro { margin-top:20px; margin-bottom:18px; }
+      .nav { z-index:30; }.nav button { min-height:51px; }
+      .toast { bottom:calc(88px + env(safe-area-inset-bottom)); }
+      .tour-help { min-width:40px; min-height:40px; }
+    }
+    @media(max-width:660px) {
+      main { padding-left:15px; padding-right:15px; }
+      .topbar { gap:8px; }.topbar-right { gap:6px; }
+      .topbar-brand { font-size:19px; gap:7px; }.topbar-brand .logo { width:28px; height:28px; }
+      #addTopBtn { width:40px; height:40px; padding:0; border-radius:12px; }#addTopBtn svg { width:18px; height:18px; }
+      #addTopBtn .new-quest-label { display:none; }
+      .tour-help { width:40px; height:40px; border-radius:12px; }
+      .coin-hud { min-height:40px; padding:8px 10px; }
+      #appShell[data-active-view=today] .intro { margin:18px 0 16px; }
+      #appShell[data-active-view=today] .intro .overline,#appShell[data-active-view=today] #introText { display:none; }
+      #appShell[data-active-view=today] .intro h1 { font-size:24px; margin:0; line-height:1.25; }
+      .daily-stack { gap:17px; }.view-controls { margin-bottom:12px; }
+      .grid { grid-template-columns:minmax(0,1fr); }
+      .week-strip { grid-template-columns:repeat(7,minmax(0,1fr)); gap:4px; }
+      .week-day { min-width:0; padding-left:2px; padding-right:2px; }
+      .week-day>span { font-size:9px; }
+      .view-controls .controls .icon-btn { min-width:38px; height:38px; }.view-controls .controls .btn { min-height:38px; }
+      .day-summary { padding-top:18px; padding-bottom:17px; }.quest-group { padding-top:15px; }
+      .quest { min-height:71px; }.check-btn { min-width:40px; min-height:40px; }
+      .skip-btn { min-height:40px; }.quest-footer { line-height:1.6; }
+      .stat { padding:13px 10px; }.stat-label { margin-bottom:9px; }.stat-value { font-size:24px; }
+      #adventureHero { grid-template-columns:minmax(0,1fr) 133px; min-height:235px; border-radius:18px; }
+      #adventureHero .hero-copy { padding:19px 0 18px 19px; }
+      #adventureHero .hero-tag { font-size:6px; letter-spacing:.6px; }
+      #adventureHero .hero-copy h2 { font-size:20px; line-height:1.2; margin:10px 0; }
+      #adventureHero .hero-copy>p { font-size:10px; margin:0 0 11px; }
+      #adventureHero .hero-actions .btn { padding:9px 10px; min-height:35px; font-size:9px; }
+      #adventureHero .hero-actions .btn svg { width:13px; height:13px; }
+      #adventureHero .hero-actions .secondary { display:inline-flex; }
+      #adventureHero .hero-meter { margin-top:13px; font-size:8px; }
+      #adventureHero .hero-world { min-height:235px; }
+      #adventureHero .hero-figure,#adventureHero .hero-figure>.cosmetic-figure { width:120px; height:170px; }
+      #adventureHero .hero-figure .player-art { width:90px; height:120px; }
+      #adventureHero .world-orbit { width:115px; height:115px; top:45px; }.world-platform { width:120px; }
+      #adventureHero .hero-name { bottom:25px; font-size:8px; left:5px; right:5px; }
+      #adventureHero .hero-name span { display:block; margin:5px auto 0; font-size:7px; width:max-content; }
+      #adventureHero .star-one { left:3px; top:33px; }.star-two { right:9px; }
+      .leaderboard-quote { padding:19px; margin:18px 0; }.leaderboard-quote .discipline-quote p { font-size:15px; line-height:1.8; }
+    }
+    @media(max-width:380px) {
+      .topbar-brand .brand-wordmark { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
+    }
+    .tour-footer button { min-height:44px; }
+    .pwa-dialog .btn.full { min-height:44px; }
+    @media(prefers-reduced-motion:reduce) { .check-btn:active,.btn:active,.icon-btn:active { transform:none; } }
+
+.pwa-install { display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:38px;padding:8px 12px;border:1px solid var(--line);border-radius:10px;background:#ffffff04;color:var(--text);font-weight:650;font-size:11px;flex-shrink:0; }
+.pwa-install:hover { border-color:#c3f75f66;background:#c3f75f08; }
+.pwa-install svg { width:17px;height:17px; }
+.pwa-auth-install { display:flex;margin:16px auto 0;background:transparent;border:0;color:var(--cyan);font-size:12px;font-weight:650;gap:7px;align-items:center;padding:9px 12px; }
+.pwa-auth-install svg { width:16px;height:16px; }
+.pwa-dialog { width:min(440px,calc(100vw - 30px));padding:27px;border:1px solid #3d4850;border-radius:23px;background:linear-gradient(145deg,#222b24,#171b22 60%);box-shadow:0 26px 100px #0008;max-height:calc(100dvh - 30px);overflow:auto; }
+.pwa-dialog::backdrop { background:#090b12c9;backdrop-filter:blur(7px); }
+.pwa-dialog-header { display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:22px; }
+.pwa-dialog-header img { width:55px;height:55px;border-radius:15px; }
+.pwa-dialog h2 { font-size:25px;line-height:1.25;letter-spacing:-.7px;margin:0 0 12px; }
+.pwa-dialog p { font-size:13px;line-height:1.6;color:var(--muted);margin:0 0 20px; }
+.pwa-steps { display:grid;gap:9px;margin:0 0 20px;padding:0;list-style:none;counter-reset:install; }
+.pwa-steps li { counter-increment:install;display:flex;gap:12px;align-items:flex-start;background:#ffffff04;border:1px solid #ffffff09;border-radius:12px;padding:13px 12px;font-size:12px;line-height:1.55;color:#d6dde5; }
+.pwa-steps li::before { content:counter(install);display:grid;place-items:center;flex:0 0 25px;height:25px;border-radius:8px;background:#c3f75f16;color:var(--lime);font-weight:750; }
+.pwa-steps strong { color:var(--text); }
+.pwa-note { font-size:11px!important;line-height:1.6!important;margin-bottom:15px!important; }
+.pwa-feedback { margin:0 0 14px!important;color:var(--cyan)!important;font-size:12px!important; }
+.pwa-update { position:fixed;z-index:40;bottom:24px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:13px;max-width:calc(100vw - 32px);padding:12px 13px 12px 17px;background:#253125;border:1px solid #c3f75f55;box-shadow:0 12px 42px #0006;border-radius:14px; }
+.pwa-update-copy { min-width:0; }
+.pwa-update strong { display:block;font-size:12px; }
+.pwa-update p { color:#b8c5b0;font-size:10px;line-height:1.45;margin:4px 0 0;max-width:270px; }
+.pwa-update .btn { min-height:36px; }
+.pwa-update .icon-btn { border:0; }
+@media(max-width:900px) { .pwa-update { bottom:calc(90px + env(safe-area-inset-bottom)); } }
+@media(max-width:660px) { .pwa-install { width:40px;min-height:40px;height:40px;padding:8px;border-radius:10px; }.pwa-install>span { display:none; }.pwa-dialog { padding:23px; }.pwa-update { gap:9px;padding:12px; }.pwa-update .btn { font-size:10px;padding:9px 10px; }.pwa-update p { font-size:9px; } }
+@media(display-mode:standalone),(display-mode:fullscreen) { [data-ql-install] { display:none!important; } }
+
+
   </style>
 </head>
 <body>
-  <div class="shell" id="appShell" hidden>
+  <div class="shell" id="appShell" data-active-view="today" hidden>
     <aside class="sidebar">
       <div class="brand"><span class="logo" data-icon="bolt"></span>QuestLog<span class="lime">.</span></div>
       <div><p class="overline">Dein Spielplan</p><nav class="nav" aria-label="Hauptnavigation">
@@ -574,24 +694,24 @@
       <div class="account"><div class="avatar" id="avatar">P</div><div class="account-name"><strong id="playerName">Dein Spieler</strong><span id="accountMode">Firebase-Konto</span></div><button class="icon-btn" id="accountBtn" aria-label="Konto öffnen"><span data-icon="logout"></span></button></div>
     </aside>
     <main>
-      <header class="topbar"><span class="overline">Persönliches Quest-Dashboard</span><div class="brand topbar-brand"><span class="logo" data-icon="bolt"></span>QuestLog<span class="lime">.</span></div><div class="topbar-right"><button class="tour-help" id="tutorialHelpBtn" type="button" aria-label="Kurze Einführung öffnen" title="So funktioniert QuestLog" hidden><span data-icon="spark"></span><span>So geht’s</span></button><button class="coin-hud" id="walletBtn" aria-label="Coins und Shop öffnen"><span data-icon="coin"></span><strong id="coinBalance">0</strong></button><span class="status" id="syncStatus" role="status"><i class="status-dot"></i><span>Verbinde …</span></span><button class="btn" id="addTopBtn"><span data-icon="plus"></span>Neue Quest</button></div></header>
+      <header class="topbar"><span class="overline">Persönliches Quest-Dashboard</span><div class="brand topbar-brand"><span class="logo" data-icon="bolt"></span><span class="brand-wordmark">QuestLog<span class="lime">.</span></span></div><div class="topbar-right"><button class="pwa-install" type="button" data-ql-install aria-label="QuestLog als App installieren" title="QuestLog installieren"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m-4-4 4 4 4-4M5 15v5h14v-5"/></svg><span>Installieren</span></button><button class="tour-help" id="tutorialHelpBtn" type="button" aria-label="Kurze Einführung öffnen" title="So funktioniert QuestLog" hidden><span data-icon="spark"></span><span>So geht’s</span></button><button class="coin-hud" id="walletBtn" aria-label="Coins und Shop öffnen"><span data-icon="coin"></span><strong id="coinBalance">0</strong></button><span class="status" id="syncStatus" role="status"><i class="status-dot"></i><span>Verbinde …</span></span><button class="btn" id="addTopBtn" aria-label="Neue Quest erstellen" title="Neue Quest"><span data-icon="plus"></span><span class="new-quest-label">Neue Quest</span></button></div></header>
       <div class="banner" id="cloudError" role="alert" hidden></div>
-      <section class="intro"><div><span class="overline" id="introLabel">Ready, player?</span><h1 id="introTitle">Dein Alltag. Dein nächstes Level.</h1><p id="introText">Kleine Schritte werden zu großen Erfolgen. Starte deine Quests.</p></div><span class="date-chip" id="dateChip"></span></section>
-      <section class="adventure-hero" id="adventureHero" aria-label="Dein Abenteuer">
-        <div class="hero-copy"><span class="hero-tag"><i></i> DEIN WEG. DEINE DISZIPLIN.</span><blockquote class="discipline-quote"><p>„Es gibt keinen größeren Reichtum als die Vernunft, keine größere Armut als die Unwissenheit und kein mächtigeres Erbe als die <span>absolute Selbstdisziplin.</span>“</p><footer>– <cite>ʿAlī ibn Abī Ṭālib</cite></footer></blockquote><p id="heroMessage">Deine nächste Quest wartet auf dich.</p><div class="hero-actions"><button class="btn" id="heroQuestBtn">Quest starten <span data-icon="right"></span></button><button class="btn secondary" id="heroFocusBtn">Counter starten <span data-icon="clock"></span></button></div><div class="hero-meter"><span id="heroProgressText"></span><div class="progress-track"><div class="progress-fill" id="heroProgressFill"></div></div></div></div>
-        <div class="hero-world" id="heroWorld"><div class="world-orbit" aria-hidden="true"></div><div class="world-mountains" aria-hidden="true"></div><div class="world-platform" aria-hidden="true"></div><div id="heroFigure" class="hero-figure"></div><div class="hero-name" id="heroName"></div><span class="world-star star-one" aria-hidden="true">✦</span><span class="world-star star-two" aria-hidden="true">✧</span><span class="world-star star-three" aria-hidden="true">+</span></div>
-      </section>
+      <section class="intro"><div><span class="overline" id="introLabel">Dein Spieltag</span><h1 id="introTitle">Deine Quests für heute.</h1><p id="introText">Eine Quest nach der anderen. Heute sind bis zu 10 XP drin.</p></div><span class="date-chip" id="dateChip"></span></section>
       <div class="grid">
-        <div class="stack">
+        <div class="stack daily-stack">
+          <section id="todayView">
+            <div class="view-controls"><span class="muted" id="selectedDateLabel"></span><div class="controls"><button class="icon-btn" id="prevDayBtn" aria-label="Vorheriger Tag"><span data-icon="left"></span></button><button class="btn secondary small" id="goTodayBtn">Heute</button><button class="icon-btn" id="nextDayBtn" aria-label="Nächster Tag"><span data-icon="right"></span></button></div></div>
+            <div class="card" id="dayCard"></div>
+          </section>
           <section class="stats" aria-label="Dein Fortschritt">
             <div class="stat"><div class="stat-label"><span data-icon="bolt"></span>XP heute</div><div class="stat-value lime" id="todayXp">0 <span>/ 10 XP</span></div></div>
             <div class="stat"><div class="stat-label"><span data-icon="check"></span>Quests heute</div><div class="stat-value" id="todayCount">0 <span>/ 0</span></div></div>
             <div class="stat"><div class="stat-label"><span data-icon="flame"></span>Aktive Serie</div><div class="stat-value" id="streakCount">0 <span>Tage</span></div></div>
           </section>
-          <section id="todayView">
-            <div class="view-controls"><span class="muted" id="selectedDateLabel"></span><div class="controls"><button class="icon-btn" id="prevDayBtn" aria-label="Vorheriger Tag"><span data-icon="left"></span></button><button class="btn secondary small" id="goTodayBtn">Heute</button><button class="icon-btn" id="nextDayBtn" aria-label="Nächster Tag"><span data-icon="right"></span></button></div></div>
-            <div class="card" id="dayCard"></div>
-          </section>
+      <section class="adventure-hero" id="adventureHero" aria-label="Dein Abenteuer">
+        <div class="hero-copy"><span class="hero-tag"><i></i> DEIN WEG. DEINE DISZIPLIN.</span><h2>Dein Held wächst mit dir.</h2><p id="heroMessage">Deine nächste Quest wartet auf dich.</p><div class="hero-actions"><button class="btn" id="heroQuestBtn">Quest starten <span data-icon="right"></span></button><button class="btn secondary" id="heroFocusBtn">Counter starten <span data-icon="clock"></span></button></div><div class="hero-meter"><span id="heroProgressText"></span><div class="progress-track"><div class="progress-fill" id="heroProgressFill"></div></div></div></div>
+        <div class="hero-world" id="heroWorld"><div class="world-orbit" aria-hidden="true"></div><div class="world-mountains" aria-hidden="true"></div><div class="world-platform" aria-hidden="true"></div><div id="heroFigure" class="hero-figure"></div><div class="hero-name" id="heroName"></div><span class="world-star star-one" aria-hidden="true">✦</span><span class="world-star star-two" aria-hidden="true">✧</span><span class="world-star star-three" aria-hidden="true">+</span></div>
+      </section>
           <section id="weekView" hidden><div class="view-controls"><strong id="weekLabel"></strong><div class="controls"><button class="icon-btn" id="prevWeekBtn" aria-label="Vorherige Woche"><span data-icon="left"></span></button><button class="icon-btn" id="nextWeekBtn" aria-label="Nächste Woche"><span data-icon="right"></span></button></div></div><div class="week-strip" id="weekStrip"></div><div class="card" id="weekDayCard"></div></section>
           <section id="questsView" hidden><div class="view-controls"><h2>Dein wiederkehrender Spielplan</h2><span class="muted" id="templateCount"></span></div><div class="card" id="templateList"></div><p class="hint">Tägliche Quests erscheinen jeden Tag. Wöchentliche Quests erscheinen an deinen ausgewählten Wochentagen.</p></section>
           <section id="leaderboardView" aria-label="Globale Spieler-Rangliste" hidden>
@@ -601,6 +721,7 @@
             <div class="leaderboard-own" id="leaderboardOwn" hidden></div>
             <p class="form-error" id="leaderboardError" role="alert" hidden></p>
             <div class="podium" id="leaderboardPodium" aria-label="Die ersten drei Spieler"></div>
+            <aside class="leaderboard-quote" aria-label="Gedanke zur Selbstdisziplin"><span class="quote-kicker"><span data-icon="spark"></span> DEIN WEG. DEINE DISZIPLIN.</span><blockquote class="discipline-quote"><p>„Es gibt keinen größeren Reichtum als die Vernunft, keine größere Armut als die Unwissenheit und kein mächtigeres Erbe als die <span>absolute Selbstdisziplin.</span>“</p><footer>– <cite>ʿAlī ibn Abī Ṭālib</cite></footer></blockquote></aside>
             <div class="card"><div class="leaderboard-columns" aria-hidden="true"><span>RANG</span><span>SPIELER / KLASSE</span><span>LEVEL</span><span>XP</span></div><ol class="leaderboard-list" id="leaderboardList" aria-label="Spieler nach Gesamt-XP"></ol><div id="leaderboardEmpty" class="empty" hidden></div></div>
             <button class="btn secondary small" id="leaderboardMoreBtn" hidden>Weitere Spieler laden <span data-icon="down"></span></button>
             <p class="hint" id="leaderboardNote" role="status"></p>
@@ -622,7 +743,7 @@
     </main>
   </div>
   <dialog id="questDialog" aria-labelledby="questDialogTitle"><form id="questForm"><div class="dialog-head"><h2 id="questDialogTitle">Neue Quest</h2><button type="button" class="icon-btn" id="closeQuestBtn" aria-label="Schließen"><span data-icon="close"></span></button></div><p class="dialog-desc">Ein kleines Ziel. Ein klarer Plan. Dein nächster Schritt.</p><div class="field"><label for="questName">Was möchtest du schaffen?</label><input id="questName" name="title" placeholder="z. B. 20 Minuten programmieren" maxlength="100" required></div><span class="field-label" id="typeLabel">Wie oft?</span><div class="type-picker" role="group" aria-labelledby="typeLabel"><button type="button" data-type="daily" aria-pressed="true"><span data-icon="sun"></span>Täglich</button><button type="button" data-type="weekly" aria-pressed="false"><span data-icon="calendar"></span>Wöchentlich</button></div><div id="weekdayField" hidden><span class="field-label" id="weekdayLabel">An welchen Tagen?</span><div class="weekday-picker" id="weekdayPicker" role="group" aria-labelledby="weekdayLabel"></div></div><p class="hint" id="questStartHint"></p><p class="form-error" id="questError" role="alert" hidden></p><button type="submit" class="btn full" id="saveQuestBtn"><span data-icon="plus"></span>Quest erstellen</button></form></dialog>
-  <dialog id="authDialog" aria-labelledby="authTitle"><div class="brand auth-brand"><span class="logo" data-icon="bolt"></span>QuestLog<span class="lime">.</span></div><form id="authForm"><div class="dialog-head"><h2 id="authTitle">Dein Abenteuer beginnt.</h2></div><p class="dialog-desc" id="authDesc">Melde dich mit E-Mail und Passwort an und nimm deinen Fortschritt auf alle Geräte mit.</p><div class="field" id="registerUsernameField" hidden><label for="registerUsernameInput">Dein Spielername</label><input id="registerUsernameInput" autocomplete="nickname" placeholder="z. B. CodeKnight" minlength="3" maxlength="20" pattern="[A-Za-z][A-Za-z0-9_]{2,19}" aria-describedby="usernameFormatHint"><span class="hint" id="usernameFormatHint">3–20 Zeichen: Buchstaben, Zahlen und _. Beginnt mit einem Buchstaben.</span></div><div class="field"><label for="emailInput" id="loginIdentifierLabel">E-Mail-Adresse</label><input type="email" id="emailInput" autocomplete="email" inputmode="email" placeholder="name@example.com" required></div><div class="field"><label for="passwordInput">Passwort</label><input type="password" id="passwordInput" autocomplete="current-password" minlength="6" maxlength="256" required></div><p class="form-error" id="authError" role="alert" hidden></p><button class="btn full" id="authSubmitBtn" type="submit">Einloggen <span data-icon="right"></span></button><div class="auth-switch"><button class="text-btn" id="authSwitchBtn" type="button">Noch keinen Account? Registrieren</button></div><p class="hint">Deine Quests und dein Charakter werden in deinem Konto gespeichert.</p></form></dialog>
+  <dialog id="authDialog" aria-labelledby="authTitle"><div class="brand auth-brand"><span class="logo" data-icon="bolt"></span>QuestLog<span class="lime">.</span></div><form id="authForm"><div class="dialog-head"><h2 id="authTitle">Dein Abenteuer beginnt.</h2></div><p class="dialog-desc" id="authDesc">Melde dich mit E-Mail und Passwort an und nimm deinen Fortschritt auf alle Geräte mit.</p><div class="field" id="registerUsernameField" hidden><label for="registerUsernameInput">Dein Spielername</label><input id="registerUsernameInput" autocomplete="nickname" placeholder="z. B. CodeKnight" minlength="3" maxlength="20" pattern="[A-Za-z][A-Za-z0-9_]{2,19}" aria-describedby="usernameFormatHint"><span class="hint" id="usernameFormatHint">3–20 Zeichen: Buchstaben, Zahlen und _. Beginnt mit einem Buchstaben.</span></div><div class="field"><label for="emailInput" id="loginIdentifierLabel">E-Mail-Adresse</label><input type="email" id="emailInput" autocomplete="email" inputmode="email" placeholder="name@example.com" required></div><div class="field"><label for="passwordInput">Passwort</label><input type="password" id="passwordInput" autocomplete="current-password" minlength="6" maxlength="256" required></div><p class="form-error" id="authError" role="alert" hidden></p><button class="btn full" id="authSubmitBtn" type="submit">Einloggen <span data-icon="right"></span></button><div class="auth-switch"><button class="text-btn" id="authSwitchBtn" type="button">Noch keinen Account? Registrieren</button></div><p class="hint">Deine Quests und dein Charakter werden in deinem Konto gespeichert.</p></form><button class="pwa-auth-install" type="button" data-ql-install><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m-4-4 4 4 4-4M5 15v5h14v-5"/></svg>QuestLog als App installieren</button></dialog>
   <dialog id="onboardingDialog" aria-labelledby="onboardingTitle"><form id="onboardingForm"><div class="setup-header"><span class="logo" data-icon="bolt"></span><span class="overline">QuestLog // Create your character</span></div><div class="dialog-head"><h2 id="onboardingTitle">Wähle deinen Start-Charakter.</h2></div><p class="dialog-desc" id="onboardingDesc">Dein Konto steht. Jetzt beginnt dein Abenteuer: Gib deinem Spieler einen Namen und wähle deine Klasse.</p><div class="field setup-name"><label for="onboardingUsername">01 · Dein Spielername</label><input id="onboardingUsername" autocomplete="nickname" maxlength="20" minlength="3" pattern="[A-Za-z][A-Za-z0-9_]{2,19}" placeholder="CodeKnight" required><span class="hint">3–20 Zeichen · Buchstaben, Zahlen, _ · Groß- und Kleinschreibung gelten als derselbe Name.</span></div><fieldset class="character-grid"><legend class="field-label">02 · Deine Klasse</legend><div class="character-options" id="characterOptions"></div></fieldset><p class="form-error" id="onboardingError" role="alert" hidden></p><div class="setup-summary"><p id="characterSummary">Wähle eine Klasse für dein Abenteuer.<br>Alle starten mit den gleichen XP-Regeln.</p><button class="btn" id="savePlayerBtn" type="submit" disabled>Abenteuer starten <span data-icon="right"></span></button></div><div class="setup-exit"><button class="text-btn" id="exitOnboardingBtn" type="button">Später einrichten · Abmelden</button></div></form></dialog>
   <dialog id="archiveDialog" aria-labelledby="archiveTitle"><div class="dialog-head"><h2 id="archiveTitle">Quest entfernen?</h2><button class="icon-btn" id="closeArchiveBtn" aria-label="Schließen"><span data-icon="close"></span></button></div><p class="dialog-desc" id="archiveDesc"></p><button class="btn full" id="confirmArchiveBtn">Quest entfernen</button><button class="btn secondary full" id="cancelArchiveBtn" style="margin-top:10px">Behalten</button></dialog>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
@@ -633,6 +754,170 @@
     <div class="tour-footer"><button class="tour-back" id="tutorialBackBtn" type="button"><span data-icon="left"></span>Zurück</button><span class="tour-page" id="tutorialPage" aria-live="polite">1 / 6</span><button class="btn tour-next" id="tutorialNextBtn" type="button">Weiter <span data-icon="right"></span></button></div>
     <p class="tour-example-label">Die Beispiele verändern deinen echten Spielstand nicht.</p>
   </dialog>
+  <dialog class="pwa-dialog" id="pwaInstallDialog" aria-labelledby="pwaInstallTitle" aria-describedby="pwaInstallDescription">
+  <div class="pwa-dialog-header"><img src="icons/icon-192.png" width="55" height="55" alt=""><button class="icon-btn" id="pwaInstallClose" type="button" aria-label="Installationsanleitung schließen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
+  <h2 id="pwaInstallTitle">Deine Quests. Immer dabei.</h2>
+  <p id="pwaInstallDescription">Hol dir QuestLog auf deinen Startbildschirm. Ein Tippen — und dein Abenteuer geht weiter.</p>
+  <ol class="pwa-steps" id="pwaInstallSteps"></ol>
+  <p class="pwa-note">Kostenlos. Dein Konto und dein Fortschritt bleiben dieselben. Zum Anmelden und Speichern brauchst du Internet.</p>
+  <p class="pwa-feedback" id="pwaInstallFeedback" role="status" hidden></p>
+  <button class="btn full" id="pwaNativeInstall" type="button" hidden>QuestLog installieren</button>
+  <button class="btn secondary full" id="pwaInstallDone" type="button">Alles klar</button>
+</dialog>
+<aside class="pwa-update" id="pwaUpdate" role="status" aria-live="polite" hidden>
+  <div class="pwa-update-copy"><strong>Neue Version bereit</strong><p id="pwaUpdateMessage">Aktualisiere, sobald du mit deiner Quest fertig bist.</p></div>
+  <button class="btn small" type="button" id="pwaUpdateApply">Aktualisieren</button>
+  <button class="icon-btn" type="button" id="pwaUpdateDismiss" aria-label="Update-Hinweis ausblenden"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+</aside>
+
+  <script id="questlog-pwa">
+(function () {
+  'use strict';
+  const byId=id=>document.getElementById(id);
+  const dialog=byId('pwaInstallDialog'), feedback=byId('pwaInstallFeedback');
+  const nativeButton=byId('pwaNativeInstall'), installButtons=[...document.querySelectorAll('[data-ql-install]')];
+  const updateBanner=byId('pwaUpdate'), updateMessage=byId('pwaUpdateMessage');
+  const standaloneQuery=matchMedia('(display-mode: standalone)'), fullscreenQuery=matchMedia('(display-mode: fullscreen)');
+  const iOS=/iPad|iPhone|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+  const android=/Android/.test(navigator.userAgent);
+  let installPrompt=null,installing=false,installed=false,returnFocus=null,registration=null,waitingWorker=null;
+  let reloadArmed=false,refreshReady=false,updateDismissed=false,isSaving=()=>false;
+  const standalone=()=>installed||standaloneQuery.matches||fullscreenQuery.matches||navigator.standalone===true;
+  const safeToUpdate=()=>{
+    try { return !isSaving()&&!document.querySelector('dialog[open]:not(#pwaInstallDialog)'); }
+    catch { return false; }
+  };
+  function updateInstallControls() {
+    const hide=standalone();
+    installButtons.forEach(button=>button.hidden=hide);
+    nativeButton.hidden=!installPrompt||hide;
+    nativeButton.disabled=installing;
+    if(hide&&dialog.open)dialog.close();
+  }
+  function setFeedback(message) { feedback.textContent=message;feedback.hidden=!message; }
+  function renderSteps() {
+    const steps=iOS?[
+      'Öffne QuestLog in <strong>Safari</strong>.',
+      'Tippe auf <strong>Teilen</strong> (das Quadrat mit dem Pfeil nach oben).',
+      'Wähle <strong>Zum Home-Bildschirm</strong>. Aktiviere <strong>Als Web-App öffnen</strong>, falls angezeigt, und tippe auf <strong>Hinzufügen</strong>.'
+    ]:android?[
+      'Öffne QuestLog in <strong>Chrome</strong>.',
+      'Tippe rechts oben auf das <strong>Menü ⋮</strong>.',
+      'Wähle <strong>App installieren</strong> oder <strong>Zum Startbildschirm hinzufügen</strong> und bestätige.'
+    ]:[
+      'Öffne QuestLog in <strong>Chrome</strong> oder <strong>Edge</strong>.',
+      'Wähle im Browser-Menü <strong>QuestLog installieren</strong> oder die Option, diese Seite als App zu installieren.',
+      'Bestätige. Du findest QuestLog anschließend bei deinen Apps.'
+    ];
+    byId('pwaInstallSteps').innerHTML=steps.map(step=>'<li><span>'+step+'</span></li>').join('');
+    updateInstallControls();
+  }
+  function openHelp(message='') {
+    if(standalone())return;
+    if(!dialog.open)returnFocus=document.activeElement;
+    renderSteps();setFeedback(message);
+    if(!dialog.open)dialog.showModal();
+  }
+  async function requestInstall() {
+    if(standalone()||installing)return;
+    if(!installPrompt){openHelp();return;}
+    const prompt=installPrompt;
+    installPrompt=null;installing=true;updateInstallControls();
+    try {
+      // Invoke immediately from the user's tap; the browser requires this gesture.
+      const result=await prompt.prompt();
+      const choice=result?.outcome?result:await prompt.userChoice;
+      if(choice?.outcome==='accepted') {
+        // Acceptance can precede the actual OS installation. appinstalled confirms completion.
+        if(dialog.open)dialog.close();
+      } else openHelp('Du kannst QuestLog jederzeit später über das Browser-Menü installieren.');
+    } catch {
+      openHelp('Öffne das Browser-Menü und wähle die Installationsoption.');
+    } finally { installing=false;updateInstallControls(); }
+  }
+  window.addEventListener('beforeinstallprompt',event=>{
+    if(standalone())return;
+    event.preventDefault();installPrompt=event;updateInstallControls();
+  });
+  window.addEventListener('appinstalled',()=>{
+    installed=true;installPrompt=null;updateInstallControls();
+  });
+  standaloneQuery.addEventListener?.('change',updateInstallControls);
+  fullscreenQuery.addEventListener?.('change',updateInstallControls);
+  installButtons.forEach(button=>button.addEventListener('click',requestInstall));
+  nativeButton.addEventListener('click',requestInstall);
+  byId('pwaInstallClose').onclick=()=>dialog.close();
+  byId('pwaInstallDone').onclick=()=>dialog.close();
+  dialog.addEventListener('close',()=>{if(returnFocus?.isConnected&&!returnFocus.hidden)returnFocus.focus();returnFocus=null;});
+  dialog.addEventListener('click',event=>{
+    if(event.target!==dialog)return;
+    const rect=dialog.getBoundingClientRect();
+    if(event.clientX<rect.left||event.clientX>rect.right||event.clientY<rect.top||event.clientY>rect.bottom)dialog.close();
+  });
+
+  function offerUpdate(worker) {
+    if(!worker)return;
+    waitingWorker=worker;updateDismissed=false;updateBanner.hidden=false;
+    updateMessage.textContent='Aktualisiere, sobald du mit deiner Quest fertig bist.';
+  }
+  byId('pwaUpdateDismiss').onclick=()=>{updateDismissed=true;updateBanner.hidden=true;};
+  byId('pwaUpdateApply').onclick=()=>{
+    if(!safeToUpdate()) {
+      updateMessage.textContent='Schließe offene Eingaben und warte kurz, bis alles gespeichert ist. Tippe dann erneut auf „Aktualisieren“.';
+      return;
+    }
+    if(refreshReady){location.reload();return;}
+    if(!waitingWorker||waitingWorker.state!=='installed')return;
+    reloadArmed=true;byId('pwaUpdateApply').disabled=true;
+    updateMessage.textContent='QuestLog wird aktualisiert …';
+    waitingWorker.postMessage({type:'QUESTLOG_APPLY_UPDATE'});
+  };
+  window.QuestLogPWA=Object.freeze({
+    setSafetyCheck(check) { if(typeof check==='function')isSaving=check; },
+    openInstallHelp:openHelp
+  });
+  updateInstallControls();
+  const secure=(location.protocol==='https:'||location.hostname==='localhost'||location.hostname==='127.0.0.1'||location.hostname==='[::1]');
+  if(!secure||!('serviceWorker'in navigator))return;
+  navigator.serviceWorker.addEventListener('controllerchange',()=>{
+    if(!reloadArmed) {
+      // Another tab can accept the shared worker update. This tab stays open until its own tap.
+      if(waitingWorker) {
+        refreshReady=true;waitingWorker=null;
+        if(!updateDismissed)updateBanner.hidden=false;
+      }
+      return;
+    }
+    reloadArmed=false;byId('pwaUpdateApply').disabled=false;
+    if(safeToUpdate())location.reload();
+    else {
+      refreshReady=true;updateBanner.hidden=false;
+      updateMessage.textContent='Die neue Version ist bereit. Speichere deine Eingaben und tippe erneut auf „Aktualisieren“.';
+    }
+  });
+  const manifestLink=document.querySelector('link[rel="manifest"]');
+  const appBase=new URL('./',manifestLink?.href||location.href);
+  navigator.serviceWorker.register(new URL('sw.js',appBase).href,{scope:appBase.href,updateViaCache:'none'}).then(result=>{
+    registration=result;
+    if(result.waiting&&navigator.serviceWorker.controller)offerUpdate(result.waiting);
+    result.addEventListener('updatefound',()=>{
+      const candidate=result.installing;
+      if(!candidate)return;
+      candidate.addEventListener('statechange',()=>{
+        if(candidate.state==='installed'&&navigator.serviceWorker.controller)offerUpdate(result.waiting||candidate);
+      });
+    });
+  }).catch(()=>{
+    // Installation help still works when a browser declines service-worker registration.
+  });
+  document.addEventListener('visibilitychange',()=>{
+    if(!document.hidden&&registration&&navigator.onLine)registration.update().catch(()=>{});
+    if(!document.hidden&&waitingWorker&&!updateDismissed)updateBanner.hidden=false;
+  });
+  window.addEventListener('online',()=>registration?.update().catch(()=>{}));
+})();
+
+  </script>
   <script id="quest-core">
     'use strict';
     // Pure domain functions. XP is derived from daily records, never incremented by clicks.
@@ -940,6 +1225,7 @@
     let leaderboard = newLeaderboard();
     let publication = {running:false,pending:false,promise:null,lastKey:'',error:'',confirmed:false};
     let publicationTimer;
+    window.QuestLogPWA?.setSafetyCheck(()=>busy||focusBusy||shopBusy||onboardingBusy||authBusy||publication.running||publication.pending||autoCoinSync.running);
 
     // Editable SVG characters keep the complete frontend in one HTML file.
     function characterArt(classId,level=1) {
@@ -1304,16 +1590,28 @@
       $('leaderboardMoreBtn').hidden=!leaderboard.hasMore;$('leaderboardMoreBtn').disabled=leaderboard.loading;
       $('leaderboardNote').textContent=publication.error||(weekly?`Woche ${format(leaderboard.week,{day:'numeric',month:'short'})} – ${format(C.shift(leaderboard.week,6),{day:'numeric',month:'short'})} · bis zu 70 neue Quest-XP pro Woche. Frühere Fokus-XP bleiben erhalten. Das Charakter-Level bleibt bestehen.`:'Gesamt-XP inklusive früherer Fokus-XP · Coins zählen separat · bei gleichen XP gleicher Rang. „Aktualisieren“ lädt den aktuellen Stand.');
     }
+    let viewAnimation=null;
     function setView(next) {
-      view=next;
+      const changed=next!==view;
+      view=next;$('appShell').dataset.activeView=view;
       document.querySelectorAll('[data-view]').forEach(el => { if(el.dataset.view===view) el.setAttribute('aria-current','page'); else el.removeAttribute('aria-current'); });
       $('todayView').hidden=view!=='today'; $('weekView').hidden=view!=='week'; $('questsView').hidden=view!=='quests';$('leaderboardView').hidden=view!=='leaderboard';$('focusView').hidden=view!=='focus';$('shopView').hidden=view!=='shop';$('adventureHero').hidden=view!=='today';
       document.querySelector('.stats').hidden=['leaderboard','focus','shop'].includes(view);
-      const titles={today:['Ready, player?','Dein Alltag. Dein nächstes Level.','Kleine Schritte werden zu großen Erfolgen. Starte deine Quests.'],week:['Dein Wochenplan','Eine Woche. Viele Möglichkeiten.','Deine Routinen und wiederkehrenden Quests auf einen Blick.'],quests:['Dein Spielplan','Gute Gewohnheiten beginnen hier.','Stell dir einen Alltag zusammen, der zu dir passt.'],leaderboard:['Globale Rangliste','Gemeinsam auf das nächste Level.','Entdecke die Charaktere und den Fortschritt der QuestLog-Community.'],shop:['Dein Inventar','Looks, die du dir verdient hast.','Sammle Coins. Schalte deinen nächsten Look frei.'],focus:['Deine Counter','Mehr Freiraum. Tag für Tag.','Starte einmal. Sieh deinen Fortschritt wachsen. Coins kommen automatisch.']};
+      const titles={today:['Dein Spieltag','Deine Quests für heute.','Eine Quest nach der anderen. Heute sind bis zu 10 XP drin.'],week:['Dein Wochenplan','Eine Woche. Viele Möglichkeiten.','Deine Routinen und wiederkehrenden Quests auf einen Blick.'],quests:['Dein Spielplan','Gute Gewohnheiten beginnen hier.','Stell dir einen Alltag zusammen, der zu dir passt.'],leaderboard:['Globale Rangliste','Gemeinsam auf das nächste Level.','Entdecke die Charaktere und den Fortschritt der QuestLog-Community.'],shop:['Dein Inventar','Looks, die du dir verdient hast.','Sammle Coins. Schalte deinen nächsten Look frei.'],focus:['Deine Counter','Mehr Freiraum. Tag für Tag.','Starte einmal. Sieh deinen Fortschritt wachsen. Coins kommen automatisch.']};
       const [label,title,text]=titles[view]; $('introLabel').textContent=label; $('introTitle').textContent=title; $('introText').textContent=text;
       render();
+      if(changed&&mode==='cloud') {
+        window.scrollTo({top:0,behavior:'instant'});
+        viewAnimation?.cancel();
+        if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          const panel=$(view==='focus'?'focusView':view+'View');
+          viewAnimation=panel.animate([{opacity:0,transform:'translateY(8px)'},{opacity:1,transform:'translateY(0)'}],{duration:180,easing:'cubic-bezier(.2,.8,.2,1)'});
+        }
+      }
       if(view==='leaderboard'&&mode==='cloud'&&!leaderboard.loaded)loadLeaderboard();
     }
+    const paintedHTML=new WeakMap();
+    function paint(id,html) {const element=$(id);if(paintedHTML.get(element)===html)return;element.innerHTML=html;paintedHTML.set(element,html);}
     function render() {
       $('appShell').hidden=mode!=='cloud';
       const currentTasks=C.tasksAt(state,today,today),dailyXp=C.xp(currentTasks),totalXp=combinedXp(),level=C.level(totalXp),bonus=projectedCounterCoins();
@@ -1331,16 +1629,16 @@
       $('upgradeHint').textContent=`Nächstes Figuren-Upgrade: Level ${upgradeLevel} · noch ${C.threshold(upgradeLevel)-totalXp} XP`;
       const cls=P.classes.find(c=>c.id===playerProfile?.characterClass);
       $('playerName').textContent=playerProfile?.username || 'Profil einrichten';
-      $('avatar').innerHTML=cls?characterArt(cls.id,level.number):icon('spark');
-      $('heroFigure').innerHTML=cls?cosmeticFigure(cls.id,level.number,shopState.equipped,true):icon('spark');
+      paint('avatar',cls?characterArt(cls.id,level.number):icon('spark'));
+      paint('heroFigure',cls?cosmeticFigure(cls.id,level.number,shopState.equipped,true):icon('spark'));
       $('heroWorld').dataset.scene=shopState.equipped.scene;
-      $('heroName').innerHTML=esc(playerProfile?.username||'Dein Held')+' <span>LVL '+level.number+'</span>';
+      paint('heroName',esc(playerProfile?.username||'Dein Held')+' <span>LVL '+level.number+'</span>');
       const completed=currentTasks.filter(t=>t.status==='done').length;
       $('heroMessage').textContent=currentTasks.length&&completed===currentTasks.length?'Alle Quests geschafft. Zeit, deinen Erfolg zu feiern!':'Jede kleine Quest bringt deinen Charakter weiter.';
       $('heroProgressText').textContent=completed+' / '+currentTasks.length+' Quests geschafft';
       $('heroProgressFill').style.width=(currentTasks.length?100*completed/currentTasks.length:0)+'%';
       $('characterStage').style.setProperty('--class-color',cls?.color||'#7edbff');
-      $('characterStage').innerHTML=cls?`${cosmeticFigure(cls.id,level.number,shopState.equipped,true)}<div><span class="overline">${evolution?`EVOLUTION ${evolution}`:'START-CHARAKTER'}</span><strong>${cls.name}</strong><small>${esc(playerProfile.username)}<br>${cls.description}${shopState.equipped.buddy?'<br><span class="buddy-caption">Mit '+esc(S.catalog.find(item=>item.id===shopState.equipped.buddy).name)+'</span>':''}</small></div>`:`${icon('spark')}<div><strong>Dein Charakter wartet.</strong><small>Wähle deine Klasse nach dem Login.</small></div>`;
+      paint('characterStage',cls?`${cosmeticFigure(cls.id,level.number,shopState.equipped,true)}<div><span class="overline">${evolution?`EVOLUTION ${evolution}`:'START-CHARAKTER'}</span><strong>${cls.name}</strong><small>${esc(playerProfile.username)}<br>${cls.description}${shopState.equipped.buddy?'<br><span class="buddy-caption">Mit '+esc(S.catalog.find(item=>item.id===shopState.equipped.buddy).name)+'</span>':''}</small></div>`:`${icon('spark')}<div><strong>Dein Charakter wartet.</strong><small>Wähle deine Klasse nach dem Login.</small></div>`);
       $('previewCharacterBtn').hidden=!!cls;
       $('previewCharacterBtn').textContent='Profil einrichten →';
       $('accountMode').textContent='Firebase-Konto';
@@ -1348,8 +1646,8 @@
       $('addTopBtn').disabled=busy || (!cloudReady);
       if(mode!=='cloud')$('syncStatus').lastElementChild.textContent='Anmelden';
       $('selectedDateLabel').textContent=format(selected,{weekday:'long',day:'numeric',month:'long'});
-      $('dayCard').innerHTML=dayMarkup(selected);
-      $('weekDayCard').innerHTML=dayMarkup(selected);
+      paint('dayCard',dayMarkup(selected));
+      paint('weekDayCard',dayMarkup(selected));
       renderWeek(); renderTemplates(); renderCalendar(); renderUpcoming();renderLeaderboard();renderFocus();renderShop();
     }
     function dayMarkup(value) {
@@ -1436,7 +1734,7 @@
     async function setStatus(value,id,status) {
       if(busy || (!cloudReady))return;
       const token=session,oldTasks=C.tasksAt(state,value,today),oldStatus=oldTasks.find(task=>task.id===id)?.status,oldLevel=C.level(combinedXp()).number,oldXp=C.xp(oldTasks);
-      let questCompleted=false;
+      let questCompleted=false;const focusAfterSave=document.activeElement?.matches('[data-action="status"][data-id="'+CSS.escape(id)+'"]'),savingView=view;
       busy=true; render();
       try {
         {
@@ -1457,7 +1755,7 @@
         else if(status==='skipped')toast('Quest übersprungen. Morgen ist ein neuer Spieltag.');
         else toast('Status aktualisiert. Deine XP wurden neu berechnet.');
       } catch(error) { if(token===session)toast(errorMessage(error)); }
-      finally { if(token===session){busy=false;render();} }
+      finally { if(token===session){busy=false;render();if(focusAfterSave&&view===savingView){const panel=$(view==='week'?'weekView':'todayView');panel.querySelector('[data-action="status"][data-id="'+CSS.escape(id)+'"][data-date="'+value+'"]')?.focus({preventScroll:true});}} }
     }
     const firebaseConfig={
       apiKey:'AIzaSyD9mEQPiHDtniuDbLGijbuoelpd6UUm7_s',
