@@ -1,6 +1,6 @@
 /* Public QuestLog files only. Account data and Firebase traffic never enter this cache. */
 'use strict';
-const VERSION = '2026-10-06-pwa-3';
+const VERSION = '2026-11-04-pwa-4';
 const APP_BASE = new URL('./', self.registration.scope);
 const CACHE_PREFIX = 'questlog-public-' + encodeURIComponent(APP_BASE.pathname) + '-';
 const CACHE_NAME = CACHE_PREFIX + VERSION;
