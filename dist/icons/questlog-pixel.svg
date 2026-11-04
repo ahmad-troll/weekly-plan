@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" shape-rendering="crispEdges">
+  <title>QuestLog Pixel-Questbuch</title>
+  <rect width="64" height="64" fill="#101020"/>
+  <path d="M10 4h44v2h4v4h2v44h-2v4h-4v2H10v-2H6v-4H4V10h2V6h4z" fill="#433b64"/>
+  <path d="M11 7h42v2h3v3h1v40h-1v3h-3v2H11v-2H8v-3H7V12h1V9h3z" fill="#20243a"/>
+  <path d="M12 8h40v2H12zM8 12h2v40H8z" fill="#777097"/>
+  <path d="M54 12h2v40h-2zM12 54h40v2H12z" fill="#12162a"/>
+  <path d="M17 20h30v2h3v25h-3v4H17v-2h-3V22h3z" fill="#0c1020"/>
+  <path d="M17 19h28v25H17zM15 22h2v23h-2zM17 44h28v4H17zM45 21h3v25h-3z" fill="#c5bedb"/>
+  <path d="M19 45h26v2H19z" fill="#f1e8ff"/>
+  <path d="M22 46h20v1H22z" fill="#8c809f"/>
+  <path d="M16 16h29v2h3v25h-3v2H16v-2h-2V18h2z" fill="#8c6ac3"/>
+  <path d="M16 18h5v24h-5zM21 42h24v3H21zM45 20h3v23h-3z" fill="#604981"/>
+  <path d="M21 18h22v2H21zM43 20h2v5h-2z" fill="#c9a5f0"/>
+  <path d="M23 16h5v9h-2v-2h-3z" fill="#ffce78"/>
+  <path d="M23 17h2v5h-2z" fill="#fff0b9"/>
+  <path d="M21 32h6v4h4v4h4v-4h4v-4h4v-4h4v-4h6v6h-4v4h-4v4h-4v4h-4v4h-8v-4h-4v-4h-4z" fill="#2e2845"/>
+  <g fill="#c2fa73">
+    <rect x="21" y="30" width="6" height="6"/><rect x="25" y="34" width="6" height="6"/><rect x="29" y="38" width="6" height="6"/>
+    <rect x="33" y="34" width="6" height="6"/><rect x="37" y="30" width="6" height="6"/><rect x="41" y="26" width="6" height="6"/><rect x="45" y="22" width="6" height="6"/>
+  </g>
+  <path d="M21 30h6v2h-6zM45 22h6v2h-6z" fill="#eeffba"/>
+  <path d="M12 12h2v-2h2v2h2v2h-2v2h-2v-2h-2z" fill="#7de9e0"/>
+  <path d="M47 48h2v-2h2v2h2v2h-2v2h-2v-2h-2z" fill="#ffcf79"/>
+  <rect x="46" y="12" width="2" height="2" fill="#a593d6"/>
+  <rect x="11" y="45" width="2" height="2" fill="#59657e"/>
+</svg>
